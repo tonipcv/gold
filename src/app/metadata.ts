@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Página Inicial',
-  description: 'Bem-vindo à página inicial do nosso site',
-  keywords: ['página inicial', 'bem-vindo', 'home'],
+  title: 'Futuros Tech Business - Página Inicial',
+  description: 'Bem-vindo à plataforma Futuros Tech Business - a sua porta de entrada para o sucesso financeiro',
+  keywords: ['Futuros Tech Business', 'educação financeira', 'investimentos', 'criptomoedas', 'parceria'],
 };

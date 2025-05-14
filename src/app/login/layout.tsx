@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Renda IA - Maquina para Ganhar 6 dígitos por mês com IA',
-  description: 'Faça login na plataforma Renda IA e descubra como gerar renda usando Inteligência Artificial',
+  title: 'Futuros Tech Business - A melhor plataforma de educação financeira',
+  description: 'Faça login na plataforma Futuros Tech Business e descubra como gerar renda com nossos treinamentos exclusivos',
 };
 
 export default function LoginLayout({

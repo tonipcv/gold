@@ -26,7 +26,7 @@ export default function SeriesPage() {
   const episodes: Episode[] = [
     {
       id: 1,
-      title: "Por que se tornar um parceiro do FuturosTech?",
+      title: "Inicialização no Futuros Tech Business?",
       description: "Descubra por que ser parceiro do FuturosTech pode ser a forma mais inteligente de aumentar sua banca e começar a gerar uma renda extra com o mercado de criptoativos. Nesta aula, você entende o papel estratégico do programa e como isso impacta diretamente sua liberdade financeira.",
       duration: "10:00",
       thumbnail: "",
@@ -35,7 +35,7 @@ export default function SeriesPage() {
     },
     {
       id: 2,
-      title: "Como funciona o programa de parceria na prática",
+      title: "Como funciona o programa de Business na prática",
       description: "Conheça os dois níveis do programa (VIP e Super VIP), quais comissões você pode receber, e quais os benefícios reais que cada parceiro tem acesso. Tudo explicado de forma clara, com números reais e exemplos práticos.",
       duration: "12:00",
       thumbnail: "",
@@ -171,12 +171,12 @@ export default function SeriesPage() {
             </section>
 
             <section className="bg-gray-900/50 p-4 rounded-lg">
-              <h2 className="text-lg font-bold mb-3">Acesso VIP</h2>
+              <h2 className="text-lg font-bold mb-3">Solicite entrar no grupo</h2>
               <p className="text-sm text-gray-300 mb-4">
                 Torne-se um parceiro VIP e tenha acesso a benefícios exclusivos, comissões maiores e suporte dedicado.
               </p>
               <a 
-                href="/informacao"
+                href="https://ai.k17.com.br/parceiro"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center px-4 py-2.5 border border-[#5a96f4] text-[#5a96f4] text-sm font-medium rounded-lg hover:bg-[#5a96f4] hover:text-black transition-all duration-200"

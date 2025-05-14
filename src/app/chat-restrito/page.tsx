@@ -26,7 +26,7 @@ export default function SeriesPage() {
   const episodes: Episode[] = [
     {
       id: 1,
-      title: "Por que se tornar um parceiro do FuturosTech?",
+      title: "Inicialização no Futuros Tech Business?",
       description: "Descubra por que ser parceiro do FuturosTech pode ser a forma mais inteligente de aumentar sua banca e começar a gerar uma renda extra com o mercado de criptoativos. Nesta aula, você entende o papel estratégico do programa e como isso impacta diretamente sua liberdade financeira.",
       duration: "10:00",
       thumbnail: "",
@@ -35,7 +35,7 @@ export default function SeriesPage() {
     },
     {
       id: 2,
-      title: "Como funciona o programa de parceria na prática",
+      title: "Como funciona o programa de Business na prática",
       description: "Conheça os dois níveis do programa (VIP e Super VIP), quais comissões você pode receber, e quais os benefícios reais que cada parceiro tem acesso. Tudo explicado de forma clara, com números reais e exemplos práticos.",
       duration: "12:00",
       thumbnail: "",
@@ -136,7 +136,7 @@ export default function SeriesPage() {
             <h2 className="text-lg font-bold mb-2 lg:mb-3">Aulas Disponíveis</h2>
             <div className="space-y-1 lg:space-y-2">
               {episodes.map((episode) => (
-          <button
+                <button
                   key={episode.id}
                   onClick={() => setActiveEpisode(episode.id)}
                   className={`w-full flex items-center gap-2 lg:gap-3 p-2 rounded-lg transition-colors ${
@@ -151,10 +151,10 @@ export default function SeriesPage() {
                     <p className="text-xs text-gray-200">{episode.title}</p>
                     <p className="text-xs text-gray-400 mt-1">{episode.duration}</p>
                   </div>
-          </button>
+                </button>
               ))}
             </div>
-        </div>
+          </div>
 
           {/* Content and Materials */}
           <div className="space-y-3 md:space-y-4 lg:space-y-4 px-4 md:p-4 lg:p-4">
@@ -167,16 +167,16 @@ export default function SeriesPage() {
                 <p className="text-xs text-[#5a96f4]">
                   Este é um treinamento exclusivo para parceiros oficiais.
                 </p>
-                </div>
+              </div>
             </section>
 
             <section className="bg-gray-900/50 p-4 rounded-lg">
-              <h2 className="text-lg font-bold mb-3">Acesso VIP</h2>
+              <h2 className="text-lg font-bold mb-3">Solicite entrar no grupo</h2>
               <p className="text-sm text-gray-300 mb-4">
                 Torne-se um parceiro VIP e tenha acesso a benefícios exclusivos, comissões maiores e suporte dedicado.
               </p>
               <a 
-                href="/informacao"
+                href="https://ai.k17.com.br/parceiro"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center px-4 py-2.5 border border-[#5a96f4] text-[#5a96f4] text-sm font-medium rounded-lg hover:bg-[#5a96f4] hover:text-black transition-all duration-200"
@@ -191,4 +191,4 @@ export default function SeriesPage() {
       <Navigation />
     </div>
   )
-}
+} 

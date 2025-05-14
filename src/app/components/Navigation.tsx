@@ -8,6 +8,7 @@ import {
   BookOpenIcon,
   ChartBarSquareIcon,
   ArrowRightOnRectangleIcon,
+  CurrencyDollarIcon
 } from '@heroicons/react/24/outline';
 
 export function Navigation() {
@@ -20,6 +21,11 @@ export function Navigation() {
       href: '/series-restrito',
       icon: BookOpenIcon,
       label: 'Tutoriais'
+    },
+    {
+      href: '/crypto',
+      icon: CurrencyDollarIcon,
+      label: 'Crypto'
     },
     {
       href: '/ranking',

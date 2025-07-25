@@ -6,9 +6,7 @@ import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import {
   BookOpenIcon,
-  ChartBarSquareIcon,
   ArrowRightOnRectangleIcon,
-  CurrencyDollarIcon
 } from '@heroicons/react/24/outline';
 
 export function Navigation() {
@@ -20,17 +18,6 @@ export function Navigation() {
     {
       href: '/series-restrito',
       icon: BookOpenIcon,
-      label: 'Tutoriais'
-    },
-    {
-      href: '/crypto',
-      icon: CurrencyDollarIcon,
-      label: 'Crypto'
-    },
-    {
-      href: '/ranking',
-      icon: ChartBarSquareIcon,
-      label: 'Ranking'
     }
   ];
 
@@ -60,7 +47,6 @@ export function Navigation() {
                 } transition-colors hover:text-[#5a96f4]`}
               >
                 <item.icon className="w-6 h-6" />
-                <span className="text-xs mt-1">{item.label}</span>
               </Link>
             ))}
             
@@ -69,7 +55,6 @@ export function Navigation() {
               className="flex flex-col items-center text-gray-400 transition-colors hover:text-[#5a96f4]"
             >
               <ArrowRightOnRectangleIcon className="w-6 h-6" />
-              <span className="text-xs mt-1">Sair</span>
             </button>
           </div>
         </div>

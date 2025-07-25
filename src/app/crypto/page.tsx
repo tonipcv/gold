@@ -31,7 +31,7 @@ export default function CryptoPage() {
           {/* Título e Descrição */}
           <div className="w-full md:w-1/2 lg:w-1/2 md:mx-auto lg:mx-auto mt-4 px-4">
             <div className="bg-gray-900/50 backdrop-blur-sm p-4 rounded-lg border-l-4 border-[#5a96f4]">
-              <h1 className="text-xl md:text-2xl font-bold mb-2 text-white">5 CRIPTOMOEDAS PARA COMPRAR EM MAIO</h1>
+              <h1 className="text-xl md:text-2xl font-bold mb-2 text-white">4 CRIPTOMOEDAS PARA COMPRAR EM MAIO</h1>
               <div className="flex items-center mb-4">
                 <span className="bg-[#5a96f4]/20 text-[#5a96f4] text-xs px-2 py-0.5 rounded-full border border-[#5a96f4]/30">
                   ANÁLISE EXCLUSIVA
@@ -39,7 +39,7 @@ export default function CryptoPage() {
                 <span className="ml-2 text-xs text-gray-400">Futuros Tech Business</span>
               </div>
               <p className="text-sm text-gray-300 leading-relaxed">
-                Nesta aula exclusiva, apresentamos uma análise completa das 5 criptomoedas com maior potencial para o mês de maio. 
+                Nesta aula exclusiva, apresentamos uma análise completa das 4 criptomoedas com maior potencial para o mês de maio. 
                 Você vai descobrir quais são os melhores ativos para investir e por que eles podem valorizar nas próximas semanas.
               </p>
             </div>

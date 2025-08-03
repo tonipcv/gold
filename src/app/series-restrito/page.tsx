@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
 import { PlayCircleIcon } from '@heroicons/react/24/outline'
 import { OptimizedImage } from '../components/OptimizedImage'
 import { Navigation } from '../components/Navigation'
 import { PandaPlayer } from '../components/PandaPlayer'
 import { BottomNavigation } from '../../components/BottomNavigation'
+import { useSession } from 'next-auth/react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { Suspense, useEffect, useState } from 'react'
 
 interface Episode {
   id: number
@@ -19,8 +19,63 @@ interface Episode {
   section: string
 }
 
-export default function SeriesPage() {
-  const [activeEpisode, setActiveEpisode] = useState<number | null>(1)
+// Componente interno que usa useSearchParams
+function SeriesPageContent() {
+  const searchParams = useSearchParams()
+  const { data: session, status } = useSession()
+  const router = useRouter()
+  const [hasAccess, setHasAccess] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Verificar acesso ao produto quando a sessão estiver carregada
+    if (status === 'loading') return
+    
+    if (!session) {
+      router.push('/api/auth/signin')
+      return
+    }
+
+    // Verificar acesso ao produto
+    fetch('/api/check-product-access?product=futurostech')
+      .then(res => res.json())
+      .then(data => {
+        setHasAccess(data.hasAccess)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.error('Erro ao verificar acesso:', err)
+        setLoading(false)
+      })
+  }, [session, status, router])
+
+  // Mostrar carregando enquanto verifica acesso
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <p>Carregando...</p>
+      </div>
+    )
+  }
+
+  // Redirecionar se não tiver acesso
+  if (!hasAccess) {
+    return (
+      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
+        <h1 className="text-2xl font-bold mb-4">Acesso Restrito</h1>
+        <p className="mb-4">Você não tem acesso a este conteúdo.</p>
+        <Link href="/produtos" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+          Ver Produtos Disponíveis
+        </Link>
+      </div>
+    )
+  }
+
+  // Determinar episódio ativo com base no parâmetro da URL
+  const episodeParam = searchParams?.get('episode')
+  const activeEpisodeId = episodeParam 
+    ? parseInt(episodeParam, 10) 
+    : 1
 
   const episodes: Episode[] = [
     // AULAS FIP - Formação Investidor Profissional
@@ -28,7 +83,7 @@ export default function SeriesPage() {
       id: 1,
       title: "BEM VINDO",
       description: "Bem-vindo à Formação Investidor Profissional. Nesta aula inicial, você conhecerá a estrutura completa do curso e como aproveitar ao máximo todo o conteúdo.",
-      duration: "10:00",
+      duration: "",
       videoId: "558152a1-90c5-4552-b98a-35fd559cf9fe",
       section: "FIP"
     },
@@ -36,7 +91,7 @@ export default function SeriesPage() {
       id: 2,
       title: "CRONOGRAMA",
       description: "Conheça o cronograma completo das aulas e como organizar seus estudos para obter os melhores resultados na sua formação como investidor profissional.",
-      duration: "8:00",
+      duration: "",
       videoId: "a393bcfb-b27e-4c37-91b2-f6eec8f4a5fd",
       section: "FIP"
     },
@@ -44,7 +99,7 @@ export default function SeriesPage() {
       id: 3,
       title: "CADASTRANDO NA PLATAFORMA",
       description: "Aprenda o passo a passo completo para se cadastrar na plataforma de trading e começar a operar de forma profissional.",
-      duration: "12:00",
+      duration: "",
       videoId: "d7c6eb78-755c-487a-af6a-da788c4dcd40",
       section: "FIP"
     },
@@ -52,7 +107,7 @@ export default function SeriesPage() {
       id: 4,
       title: "DEPOSITAR E SACAR",
       description: "Entenda como fazer depósitos e saques na plataforma de forma segura e eficiente, conhecendo todas as opções disponíveis.",
-      duration: "15:00",
+      duration: "",
       videoId: "640887b2-4ad7-4753-aecf-f14eb5b31b2a",
       section: "FIP"
     },
@@ -60,7 +115,7 @@ export default function SeriesPage() {
       id: 5,
       title: "INFORMAÇÕES DE ORDEM",
       description: "Domine as informações essenciais sobre ordens de compra e venda, tipos de ordem e como executá-las corretamente.",
-      duration: "18:00",
+      duration: "",
       videoId: "6499b129-6385-4a95-a6e4-6a67d6ac71bf",
       section: "FIP"
     },
@@ -68,7 +123,7 @@ export default function SeriesPage() {
       id: 6,
       title: "ALAVANCAGEM",
       description: "Compreenda o conceito de alavancagem, seus riscos e benefícios, e como utilizá-la de forma inteligente em suas operações.",
-      duration: "20:00",
+      duration: "",
       videoId: "e3134edf-2cc1-40ac-9524-4e72a5679305",
       section: "FIP"
     },
@@ -76,7 +131,7 @@ export default function SeriesPage() {
       id: 7,
       title: "TP - STPS - MARGEM",
       description: "Aprenda sobre Take Profit, Stop Loss e gerenciamento de margem para proteger seu capital e maximizar seus lucros.",
-      duration: "22:00",
+      duration: "",
       videoId: "546b9cee-079d-417f-96f4-1ade4c57335e",
       section: "FIP"
     },
@@ -84,7 +139,7 @@ export default function SeriesPage() {
       id: 8,
       title: "Utilizando o Celular para TP, SL e Margem",
       description: "Tutorial completo sobre como configurar Take Profit, Stop Loss e gerenciar margem usando apenas seu smartphone.",
-      duration: "16:00",
+      duration: "",
       videoId: "a2965bc0-9071-4ef5-89ab-c28b40b786ea",
       section: "FIP"
     },
@@ -92,7 +147,7 @@ export default function SeriesPage() {
       id: 9,
       title: "INTRODUÇÃO À ANÁLISE GRÁFICA",
       description: "Fundamentos da análise técnica e como interpretar gráficos para tomar decisões de investimento mais assertivas.",
-      duration: "25:00",
+      duration: "",
       videoId: "04018176-ac80-47c3-9d45-a3d2c03c8fce",
       section: "FIP"
     },
@@ -188,7 +243,7 @@ export default function SeriesPage() {
       id: 21,
       title: "COMO OPERAR COM O.C.O",
       description: "One Cancels Other - Aprenda a usar ordens OCO para automatizar suas estratégias de trading.",
-      duration: "18:00",
+      duration: "",
       videoId: "901cc088-469a-4ba6-8a18-10c395de32a4",
       section: "FIP"
     },
@@ -236,7 +291,7 @@ export default function SeriesPage() {
       id: 27,
       title: "COMO NÃO FICAR DE FORA DAS ESTICADAS",
       description: "Estratégias para não perder grandes movimentos do mercado e aproveitar extensões de tendência.",
-      duration: "25:00",
+      duration: "",
       videoId: "52b15efc-d62c-4c28-bda8-e0c7eec53f12",
       section: "FIP"
     },
@@ -278,7 +333,7 @@ export default function SeriesPage() {
       id: 32,
       title: "Futuros Tech Sinais",
       description: "Como utilizar os sinais do Futuros Tech para maximizar seus resultados no mercado de criptomoedas.",
-      duration: "20:00",
+      duration: "",
       videoId: "35186692-adde-4280-819f-e35af9ece710",
       section: "FUTUROS TECH"
     },
@@ -286,7 +341,7 @@ export default function SeriesPage() {
       id: 33,
       title: "Como usar o APP",
       description: "Tutorial completo sobre como utilizar o aplicativo Futuros Tech para acompanhar sinais e análises.",
-      duration: "15:00",
+      duration: "",
       videoId: "c3a2d1bf-0e47-44cd-b361-937ea9f0242b",
       section: "FUTUROS TECH"
     },
@@ -294,7 +349,7 @@ export default function SeriesPage() {
       id: 34,
       title: "Alavancagem Futuros Tech",
       description: "Como utilizar alavancagem de forma inteligente seguindo as estratégias do Futuros Tech.",
-      duration: "22:00",
+      duration: "",
       videoId: "5cdfb2bc-df6a-4ae0-a2d5-2aded0f5a295",
       section: "FUTUROS TECH"
     },
@@ -309,7 +364,7 @@ export default function SeriesPage() {
     }
   ]
 
-  const currentEpisode = episodes.find(ep => ep.id === activeEpisode)
+  const currentEpisode = episodes.find(ep => ep.id === activeEpisodeId)
 
   // Group episodes by section
   const groupedEpisodes = episodes.reduce((acc, episode) => {
@@ -334,7 +389,7 @@ export default function SeriesPage() {
       {/* Main Content */}
       <main className="pt-14 pb-20">
         {/* Video Player Section */}
-        {activeEpisode && currentEpisode && (
+        {activeEpisodeId && currentEpisode && (
           <div className="bg-black">
             <div className="w-full md:w-1/2 lg:w-1/2 md:mx-auto lg:mx-auto bg-black">
               <PandaPlayer videoId={currentEpisode.videoId} />
@@ -367,11 +422,11 @@ export default function SeriesPage() {
                   </h3>
                   <div className="space-y-1">
                     {sectionEpisodes.map((episode) => (
-                      <button
+                      <Link
                         key={episode.id}
-                        onClick={() => setActiveEpisode(episode.id)}
+                        href={`/series-restrito?episode=${episode.id}`}
                         className={`w-full flex items-center gap-2 lg:gap-3 p-2 rounded-lg transition-colors ${
-                          activeEpisode === episode.id 
+                          activeEpisodeId === episode.id 
                             ? 'bg-gray-400/30 border-l-4 border-[#5a96f4]' 
                             : 'hover:bg-gray-800'
                         }`}
@@ -384,7 +439,7 @@ export default function SeriesPage() {
                           <p className="text-xs text-gray-200 line-clamp-2">{episode.title}</p>
                           <p className="text-xs text-gray-400">{episode.duration}</p>
                         </div>
-                      </button>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -396,5 +451,14 @@ export default function SeriesPage() {
 
       <Navigation />
     </div>
+  )
+}
+
+// Componente principal envolvido em Suspense
+export default function SeriesPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black text-white flex items-center justify-center"><p>Carregando...</p></div>}>
+      <SeriesPageContent />
+    </Suspense>
   )
 } 

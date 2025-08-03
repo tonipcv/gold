@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     const checkUser = async () => {
       if (session) {
-        router.push('/chat');
+        router.push('/produtos');
       } else {
         router.push('/login');
       }

@@ -16,7 +16,7 @@ export function Navigation() {
 
   const navigationItems = [
     {
-      href: '/series-restrito',
+      href: '/produtos',
       icon: BookOpenIcon,
     }
   ];

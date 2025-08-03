@@ -45,9 +45,9 @@ export default function Login() {
       
       // Forçar um hard redirect se o router.push não funcionar
       if (result?.ok) {
-        window.location.href = '/series-restrito';
+        window.location.href = '/produtos';
       } else {
-        router.push('/series-restrito');
+        router.push('/produtos');
       }
     } catch (err) {
       console.error('Login error:', err);

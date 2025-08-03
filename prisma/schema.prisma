@@ -25,6 +25,7 @@ model User {
   passwordResetExpires DateTime? @map("password_reset_expires")
   accounts             Account[]
   sessions             Session[]
+  purchases            Purchase[]
 }
 
 model Account {
@@ -59,4 +60,43 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Product {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  pages       Page[]
+  accessDurationDays Int       @default(365) 
+  purchases          Purchase[]
+}
+
+model Page {
+  id          String    @id @default(cuid())
+  title       String
+  content     String?
+  slug        String    @unique
+  isExclusive Boolean   @default(true)
+  product     Product   @relation(fields: [productId], references: [id])
+  productId   String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  daysSincePurchase Int?   // Days after purchase when this lesson becomes available
+}
+
+model Purchase {
+  id             String   @id @default(cuid())
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String
+  product        Product  @relation(fields: [productId], references: [id])
+  productId      String
+  purchaseDate   DateTime @default(now())
+  expirationDate DateTime
+  status         String   @default("PENDING")
+  startDate      DateTime?
+  endDate        DateTime?
+
+  @@unique([userId, productId])
 }

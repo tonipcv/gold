@@ -17,7 +17,10 @@ export async function GET(request: Request) {
         id: true,
         name: true,
         description: true,
-        accessDurationDays: true
+        guruProductId: true,
+        accessDurationDays: true,
+        createdAt: true,
+        updatedAt: true
       },
       orderBy: {
         name: 'asc'

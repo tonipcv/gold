@@ -84,7 +84,7 @@ function CopyTradePageContent() {
     {
       id: 1,
       title: "BEM-VINDO",
-      description: "Bem-vindo ao curso de Copy Trading com BH. Nesta aula inicial, você conhecerá a estrutura completa do curso.",
+      description: "Bem-vindo ao curso de Copy Trading com Gustavo Mutta. Nesta aula inicial, você conhecerá a estrutura completa do curso.",
       duration: "",
       videoId: "acd3b5c4-8536-485d-af5c-a32e1bcf1bfc",
       section: "COPY TRADE"
@@ -283,8 +283,8 @@ function CopyTradePageContent() {
     },
     {
       id: 27,
-      title: "GERENCIAMENTO BH",
-      description: "Estratégias de gerenciamento de risco para operações com BH.",
+      title: "GERENCIAMENTO Gustavo Mutta ",
+      description: "Estratégias de gerenciamento de risco para operações com Gustavo Mutta.",
       duration: "",
       videoId: "96eedd4e-a766-4fe3-813a-132fd7e04f80",
       section: "COPY TRADE"
@@ -364,7 +364,7 @@ function CopyTradePageContent() {
               {Object.entries(groupedEpisodes).map(([section, sectionEpisodes]) => (
                 <div key={section}>
                   <h3 className="text-md font-semibold text-[#5a96f4] mb-2 border-b border-gray-700 pb-1">
-                    {section === 'COPY TRADE' ? 'COPY TRADING COM BH' : section}
+                    {section === 'COPY TRADE' ? 'COPY TRADING COM MUTTA' : section}
                   </h3>
                   <div className="space-y-1">
                     {sectionEpisodes.map((episode) => (

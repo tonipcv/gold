@@ -352,6 +352,13 @@ function CopyTradePageContent() {
               </div>
               <h2 className="text-xl font-bold">{currentEpisode.title}</h2>
               <p className="text-sm text-gray-400 mt-2">{currentEpisode.description}</p>
+              
+              <div className="mt-4">
+                <p className="text-sm font-medium text-[#5a96f4] mb-1">Link para conexão:</p>
+                <a href="https://i.bybit.com/tabULOJ?action=inviteToCopy" target="_blank" rel="noopener noreferrer" className="text-sm text-white hover:text-[#5a96f4] transition-colors">
+                  https://i.bybit.com/tabULOJ?action=inviteToCopy
+                </a>
+              </div>
             </div>
           </div>
         )}

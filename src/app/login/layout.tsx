@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Futuros Tech Business - A melhor plataforma de educação financeira',
-  description: 'Faça login na plataforma Futuros Tech Business e descubra como gerar renda com nossos treinamentos exclusivos',
+  title: 'Automação Gold - A melhor plataforma de automação de estratégias',
+  description: 'Faça login na plataforma Automação Gold e descubra como automatizar suas estratégias com alta performance',
 };
 
 export default function LoginLayout({
@@ -11,4 +11,4 @@ export default function LoginLayout({
   children: React.ReactNode;
 }) {
   return <>{children}</>;
-} 
+}

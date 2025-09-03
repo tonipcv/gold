@@ -8,7 +8,7 @@ export default function LoadingScreen() {
       <div className="relative w-16 h-16 mb-4">
         <Image
           src="/ft-icone.png"
-          alt="Futuros Tech Logo"
+          alt="Automação Gold Logo"
           width={64}
           height={64}
           className="animate-pulse"

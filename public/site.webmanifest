@@ -1,6 +1,6 @@
 {
-  "name": "Futuros Tech",
-  "short_name": "Futuros Tech",
+  "name": "Automação Gold",
+  "short_name": "Automação Gold",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -16,4 +16,4 @@
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "display": "standalone"
-} 
+}

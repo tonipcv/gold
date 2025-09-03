@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Futuros Tech Business - Página Inicial',
-  description: 'Bem-vindo à plataforma Futuros Tech Business - a sua porta de entrada para o sucesso financeiro',
-  keywords: ['Futuros Tech Business', 'educação financeira', 'investimentos', 'criptomoedas', 'parceria'],
+  title: 'Automação Gold - Página Inicial',
+  description: 'Bem-vindo à plataforma Automação Gold — sua tecnologia para estratégias automatizadas e alto desempenho.',
+  keywords: ['Automação Gold', 'automação', 'estratégias 10x', 'investimentos', 'mercado financeiro'],
 };

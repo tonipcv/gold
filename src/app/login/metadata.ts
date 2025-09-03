@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Futuros Tech Business - Login',
-  description: 'Faça login na sua conta Futuros Tech Business',
+  title: 'Automação Gold - Login',
+  description: 'Faça login na sua conta Automação Gold',
   robots: {
     index: false,
   },

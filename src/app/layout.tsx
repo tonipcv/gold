@@ -9,8 +9,8 @@ import { Providers } from './providers'
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Futuros Tech Business',
-  description: 'Descubra como ganhar de 10 mil a 100 mil reais por mês com a Futuros Tech Business',
+  title: 'Automação Gold 10X',
+  description: 'Tecnologia de estratégia automatizada para automatizar suas operações.',
 };
 
 export default function RootLayout({

@@ -9,11 +9,11 @@ const XLogo = () => {
         alt="FT Logo"
         width={80}
         height={80}
-        className="h-auto"
+        className="h-auto invert brightness-0"
         priority
       />
     </div>
   );
 };
 
-export default XLogo; 
+export default XLogo;

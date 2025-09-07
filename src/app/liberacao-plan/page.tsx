@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { ChevronDown, ChevronRight, ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 import * as fbq from '@/lib/fpixel';
-import XLogo from '@/components/XLogo';
 
 export default function Page() {
   const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
@@ -147,7 +146,14 @@ export default function Page() {
         <div className="relative h-full flex items-center justify-center p-4">
           <div className="bg-black border border-neutral-800 rounded-2xl p-8 max-w-md w-full">
             <div className="flex justify-center mb-8">
-              <XLogo />
+              <Image
+                src="/logo.jpg"
+                alt="Automação Gold"
+                width={120}
+                height={120}
+                className="mx-auto"
+                priority
+              />
             </div>
 
             <div className="text-center mb-8">
@@ -228,7 +234,14 @@ export default function Page() {
       <div className="relative z-10">
         {/* Logo Section */}
         <div className="w-full flex justify-center pt-8">
-          <XLogo />
+          <Image
+            src="/logo.jpg"
+            alt="Automação Gold"
+            width={120}
+            height={120}
+            className="mx-auto"
+            priority
+          />
         </div>
 
         {/* Countdown and Warning Section */}
@@ -245,7 +258,7 @@ export default function Page() {
           <div className="text-center">
             <p className="text-sm md:text-base text-neutral-300 leading-relaxed max-w-3xl mx-auto">
               <span className="text-green-400 font-medium">Esse link é único</span> e sua liberação está garantida com{' '}
-              <span className="text-white font-medium">encontro de Mentoria em Grupo com Daniel Katsu</span>. 
+              <span className="text-white font-medium">2 encontros de Mentoria em Grupo com Daniel Katsu</span>. 
               Ao sair da página não nos responsabilizamos em liberar mais vagas e você terá que assistir o vídeo todo de novo e não terá os bônus ou alguns planos.
             </p>
           </div>
@@ -256,98 +269,100 @@ export default function Page() {
           <div className="max-w-5xl mx-auto">
             {/* Grid de Planos */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Plano Vitalício (transformado do antigo Mensal) */}
-              <div className="order-3 md:order-3 border border-neutral-800/50 rounded-2xl p-8 bg-black/30 backdrop-blur-sm hover:border-neutral-700 transition-all duration-300">
+              {/* Plano 3 Anos (transformado do antigo Mensal) */}
+              <div className="order-2 md:order-1 border border-neutral-800/50 rounded-2xl p-8 bg-black/30 backdrop-blur-sm hover:border-neutral-700 transition-all duration-300">
                 <div className="text-center mb-6">
-                  <h3 className="text-lg font-medium text-white">PLANO VITALÍCIO (Exclusivo)</h3>
-                  <div className="mt-2 text-xs text-neutral-400">5 vagas</div>
+                  <h3 className="text-lg font-medium text-white">PLANO 3 ANOS (Exclusivo)</h3>
+                  <div className="mt-2 text-xs text-neutral-400">Liberdade por 3 anos</div>
                   <ProgressBar percentage={65} />
                 </div>
                 
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso vitalício à Automação Gold X (10x)</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso por 3 anos à Automação Gold X (10x)</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso ao Automatizador para Sempre.</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">2 encontros de mentoria em grupo</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">3 meses de acompanhamento individualizado</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Suporte prioritário direto com Daniel Katsu.</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Comunidade exclusiva dos vitalícios</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Suporte prioritário direto comigo</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Comunidade exclusiva dos 3 anos</span></li>
                 </ul>
 
                 <div className="text-center pt-6 border-t border-neutral-800/30">
-                  <div className="text-2xl font-light text-white">12x R$1.578,50</div>
+                  <div className="text-2xl font-light text-white">12x R$297</div>
+                  <div className="mt-2 text-2xl md:text-3xl font-semibold text-green-400">Equivalente a 97 por mês</div>
                   
                   <div className="mt-6">
                     <a 
-                      href="https://checkout.k17.com.br/pay/vitalicio-10x"
+                      href="#"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => handleSubscribeClick('lifetime')}
-                      className="w-full inline-flex justify-center px-6 py-3 bg-green-500 hover:bg-green-600 rounded-xl text-white font-medium transition-all duration-200"
+                      onClick={() => handleSubscribeClick('3years')}
+                      className="w-full inline-flex justify-center px-6 py-3 bg-yellow-500 hover:bg-yellow-600 rounded-xl text-black font-medium transition-all duration-200"
                     >
-                      PEGAR MINHA VAGA VITALÍCIA
+                      PEGAR MINHA VAGA (3 ANOS)
                     </a>
                   </div>
                 </div>
               </div>
 
-              {/* Plano Semestral */}
-              <div className="order-1 md:order-1 relative border border-neutral-800/50 rounded-2xl p-8 bg-black/30 backdrop-blur-sm hover:border-neutral-700 transition-all duration-300">
-                {/* Badge Recomendado */}
-                <span className="absolute -top-3 right-4 text-[10px] px-2 py-1 rounded-full bg-green-600 text-white border border-green-500/70 shadow">Recomendado</span>
+              {/* Plano Anual */
+              }
+              <div className="order-1 md:order-2 border border-neutral-800/50 rounded-2xl p-8 bg-black/30 backdrop-blur-sm hover:border-neutral-700 transition-all duration-300">
                 <div className="text-center mb-6">
-                  <h3 className="text-lg font-medium text-white">PLANO SEMESTRAL</h3>
-                  <div className="mt-2 text-xs text-neutral-400">43 vagas</div>
-                  <ProgressBar percentage={85} />
+                  <h3 className="text-lg font-medium text-white">PLANO ANUAL</h3>
+                  <div className="mt-2 text-xs text-neutral-400">Melhor Custo-Benefício</div>
+                  <ProgressBar percentage={92} />
                 </div>
                 
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Gold X (10x) por 6 meses</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">1 ano de acesso à Automação Gold X (10x)</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">2 meses de acompanhamento individual</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Suporte dedicado</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">2 encontros de mentoria em grupo</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">3 meses de acompanhamento individual</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Suporte premium</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Atualizações automáticas inclusas</span></li>
                 </ul>
 
                 <div className="text-center pt-6 border-t border-neutral-800/30">
-                  <div className="text-2xl font-light text-white">6x R$263,99</div>
+                  <div className="text-2xl font-light text-white">12x R$197</div>
                   
                   <div className="mt-6">
                     <a 
-                      href="https://checkout.k17.com.br/subscribe/semetral10x"
+                      href="https://checkout.k17.com.br/subscribe/9ef5b01e-4b63-40b0-bfe7-5acf051cfbc6"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => handleSubscribeClick('semiannual')}
+                      onClick={() => handleSubscribeClick('annual')}
                       className="w-full inline-flex justify-center px-6 py-3 bg-green-500 hover:bg-green-600 rounded-xl text-white font-medium transition-all duration-200"
                     >
-                      COMEÇAR AGORA
+                      GARANTIR MINHA VAGA
                     </a>
                   </div>
+
+                  <p className="text-sm text-green-400 font-medium mt-2">Economia de até 67%</p>
                 </div>
               </div>
 
               {/* Plano Trimestral */}
-              <div className="order-2 md:order-2 border border-neutral-800/50 rounded-2xl p-8 bg-black/30 backdrop-blur-sm hover:border-neutral-700 transition-all duration-300">
+              <div className="order-3 border border-neutral-800/50 rounded-2xl p-8 bg-black/30 backdrop-blur-sm hover:border-neutral-700 transition-all duration-300">
                 <div className="text-center mb-6">
                   <h3 className="text-lg font-medium text-white">PLANO TRIMESTRAL</h3>
-                  <div className="mt-2 text-xs text-neutral-400">80 vagas</div>
+                  <div className="mt-2 text-xs text-neutral-400">Compromisso Médio</div>
                   <ProgressBar percentage={73} />
                 </div>
                 
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Gold X (10x) por 3 meses</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">2 encontros de mentoria em grupo</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">1 mês de acompanhamento individual</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Suporte especializado</span></li>
                 </ul>
 
                 <div className="text-center pt-6 border-t border-neutral-800/30">
-                  <div className="text-2xl font-light text-white">3x R$319,71</div>
+                  <div className="text-2xl font-light text-white">3x de R$347</div>
                   
                   <div className="mt-6">
                     <a 
-                      href="https://checkout.k17.com.br/subscribe/trimestral10x"
+                      href="https://checkout.k17.com.br/subscribe/ft-trimestral"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSubscribeClick('quarterly')}

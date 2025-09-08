@@ -320,8 +320,7 @@ export async function POST(req: Request) {
                 <li>Entre com seu e-mail: <strong>${user.email}</strong></li>
                 <li>Se ainda não definiu uma senha, use "Esqueci minha senha": <a href="${resetUrl}">${resetUrl}</a></li>
               </ol>
-              <p><strong>Período de acesso:</strong> ${startDate.toISOString()} até ${endDate.toISOString()}</p>
-              <p>Qualquer dúvida, responda este e-mail.</p>
+              <p>Qualquer dúvida, envia mensagem no Whatsapp +55 11 95807-2826.</p>
             </div>
           `,
         });
@@ -356,9 +355,10 @@ export async function POST(req: Request) {
               <p>Olá${user.name ? `, ${user.name}` : ''}! Recebemos seu pedido para <strong>${localProduct.name}</strong>, mas o pagamento ainda está <strong>pendente</strong>.</p>
               <p>Para concluir:</p>
               <ol>
-                <li>Finalize o pagamento pelo link (se disponível): <a href="${checkoutUrl}">${checkoutUrl}</a></li>
-                <li>Após a confirmação, seu acesso será liberado automaticamente e você receberá outro e-mail.</li>
+                <li>Finalize o pagamento no seu checkout.</li>
+                <li>Após a confirmação, seu acesso será liberado automaticamente e você receberá outro e‑mail.</li>
               </ol>
+              <p style="margin-top:8px;">Dúvidas? Fale no WhatsApp: <strong>(11) 95807-2826</strong></p>
               ${pixUrl || pixSignature ? `
                 <div style="margin-top:16px;padding:12px;border:1px solid #eee;border-radius:8px;">
                   <p><strong>Pagar via PIX</strong></p>

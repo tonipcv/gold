@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { sendEmail } from '@/lib/email';
 
 // Tipos para o corpo da requisição da plataforma de pagamento
 interface CreditCard {
@@ -58,7 +59,7 @@ export async function POST(req: Request) {
     const rawBody = await req.text();
     console.log("Raw body:", rawBody);
     
-    let body: PaymentWebhookBody;
+    let body: PaymentWebhookBody | any;
     try {
       body = JSON.parse(rawBody);
       console.log("Dados recebidos (parsed):", JSON.stringify(body, null, 2));
@@ -70,11 +71,19 @@ export async function POST(req: Request) {
       );
     }
 
-    // Extrair informações relevantes
-    const { last_status, subscriber, product, current_invoice, dates } = body;
+    // Extrair informações relevantes de forma resiliente para diferentes esquemas (subscription / transaction)
+    const last_status: string | undefined = body?.last_status;
+    // Alguns payloads usam "invoice" ao invés de "current_invoice"
+    const current_invoice: any = body?.current_invoice || body?.invoice;
+    const dates: any = body?.dates;
+    const product: any = body?.product;
+
+    // Email pode vir em subscriber.email (formato antigo) ou contact.email (Digital Guru transaction)
+    const email: string | undefined = body?.subscriber?.email || body?.contact?.email;
+    const subscriber: any = body?.subscriber || body?.contact;
     
     // Verificar se os campos necessários existem
-    if (!subscriber || !subscriber.email) {
+    if (!email) {
       console.error('Dados do assinante ausentes ou inválidos');
       return NextResponse.json(
         { error: 'Dados do assinante ausentes ou inválidos' },
@@ -82,38 +91,61 @@ export async function POST(req: Request) {
       );
     }
     
-    const { email } = subscriber;
     console.log(`Processando webhook para o email: ${email}`);
     
-    // Determinar o status do pagamento
+    // Determinar o status do pagamento considerando múltiplas fontes
+    const rootStatus: string | undefined = body?.status; // Ex.: "waiting_payment" no payload de transaction
+    const normalize = (s?: string) => (s || '').toLowerCase();
     let paymentStatus = 'pending';
     
-    // Verificar o status do pagamento
-    if (last_status === 'active' || (current_invoice && current_invoice.status === 'paid')) {
+    if (
+      normalize(last_status) === 'active' ||
+      normalize(last_status) === 'approved' ||
+      normalize(last_status) === 'paid' ||
+      normalize(current_invoice?.status) === 'paid' ||
+      normalize(rootStatus) === 'paid' ||
+      normalize(rootStatus) === 'approved' ||
+      normalize(rootStatus) === 'confirmed' ||
+      normalize(rootStatus) === 'active'
+    ) {
       paymentStatus = 'paid';
       console.log('Status do pagamento: PAGO');
-    } else if (last_status === 'canceled' || last_status === 'cancelled') {
+    } else if (
+      normalize(last_status) === 'canceled' ||
+      normalize(last_status) === 'cancelled' ||
+      normalize(rootStatus) === 'canceled' ||
+      normalize(rootStatus) === 'cancelled' ||
+      normalize(rootStatus) === 'refunded' ||
+      normalize(rootStatus) === 'chargeback'
+    ) {
       paymentStatus = 'cancelled';
       console.log('Status do pagamento: CANCELADO');
-    } else if (last_status === 'expired') {
+    } else if (normalize(last_status) === 'expired' || normalize(rootStatus) === 'expired') {
       paymentStatus = 'expired';
       console.log('Status do pagamento: EXPIRADO');
     } else {
-      console.log(`Status do pagamento: PENDENTE (last_status: ${last_status}, invoice status: ${current_invoice?.status || 'N/A'})`);
+      paymentStatus = 'pending';
+      console.log(`Status do pagamento: PENDENTE (last_status: ${last_status}, invoice status: ${current_invoice?.status || 'N/A'}, root status: ${rootStatus || 'N/A'})`);
     }
     
     // Determinar datas de início e fim
     let startDate = new Date();
     let endDate = new Date();
     
-    if (dates) {
-      // Usar datas do payload
+    if (dates?.cycle_start_date && dates?.cycle_end_date) {
+      // Usar datas de ciclo (assinaturas)
       startDate = new Date(dates.cycle_start_date);
       endDate = new Date(dates.cycle_end_date);
-    } else if (current_invoice) {
-      // Alternativa: usar datas da fatura atual
+    } else if (current_invoice?.period_start && current_invoice?.period_end) {
+      // Usar datas da fatura
       startDate = new Date(current_invoice.period_start);
       endDate = new Date(current_invoice.period_end);
+    } else if (dates?.created_at) {
+      // Payload de transaction: usar created_at como início
+      startDate = new Date(dates.created_at);
+      if (dates?.expires_at) {
+        endDate = new Date(dates.expires_at);
+      }
     }
 
     // Verificar se o usuário existe ou criar um novo
@@ -136,19 +168,22 @@ export async function POST(req: Request) {
       console.log(`Novo usuário criado com ID: ${user.id}`);
     }
 
-    // Buscar o produto pelo ID externo (guruProductId)
-    if (!product || (!product.marketplace_id && !product.id)) {
+    // Buscar o produto pelo ID externo (guruProductId). Em payload de transaction, pode vir em product.marketplace_id ou items[0].marketplace_id
+    const guruProductId =
+      product?.marketplace_id ||
+      product?.id ||
+      body?.items?.[0]?.marketplace_id ||
+      body?.items?.[0]?.id;
+
+    if (!guruProductId) {
       console.error('ID do produto ausente ou inválido');
       return NextResponse.json(
         { error: 'ID do produto ausente ou inválido' },
         { status: 400 }
       );
     }
-    
-    // Preferir o marketplace_id como guruProductId, mas usar o id como fallback
-    const guruProductId = product.marketplace_id || product.id;
     console.log(`Buscando produto com guruProductId: ${guruProductId}`);
-    console.log(`Detalhes do produto: marketplace_id=${product.marketplace_id}, id=${product.id}`);
+    console.log(`Detalhes do produto (se disponíveis): marketplace_id=${product?.marketplace_id || 'N/A'}, id=${product?.id || 'N/A'}`);
 
     
     // Listar todos os produtos disponíveis para debug
@@ -181,10 +216,17 @@ export async function POST(req: Request) {
     
     console.log(`Produto encontrado: ${localProduct.name} (ID: ${localProduct.id})`);
 
-    // Fallback: usar data atual + duração padrão do produto
-    if (!dates && !current_invoice && localProduct) {
-      // Adicionar a duração padrão do produto (em dias) à data atual
-      endDate.setDate(endDate.getDate() + localProduct.accessDurationDays);
+    // Fallback ampliado: se não houver fim explícito (nem em dates, nem em current_invoice),
+    // calcular endDate a partir de startDate + accessDurationDays do produto
+    const hasExplicitEnd = Boolean(
+      (dates?.cycle_end_date) ||
+      (dates?.expires_at) ||
+      (current_invoice?.period_end)
+    );
+    if (!hasExplicitEnd && localProduct) {
+      const base = startDate instanceof Date && !isNaN(startDate.getTime()) ? new Date(startDate) : new Date();
+      base.setDate(base.getDate() + (localProduct.accessDurationDays || 365));
+      endDate = base;
     }
 
     // Preparar dados para atualização ou criação do registro de compra
@@ -198,21 +240,129 @@ export async function POST(req: Request) {
     console.log(`Atualizando registro de compra com status: ${paymentStatus}`);
     console.log('Dados da compra:', JSON.stringify(purchaseData, null, 2));
 
-    // Atualizar ou criar registro na tabela Purchase
-    await prisma.purchase.upsert({
-      where: {
-        userId_productId: {
-          userId: user.id,
-          productId: localProduct.id,
+    // Atualizar ou criar registro na tabela Purchase (resiliente a condições de corrida)
+    const upsertOnce = async () => {
+      return prisma.purchase.upsert({
+        where: {
+          userId_productId: {
+            userId: user.id,
+            productId: localProduct.id,
+          },
         },
-      },
-      update: purchaseData,
-      create: {
-        ...purchaseData,
-        user: { connect: { id: user.id } },
-        product: { connect: { id: localProduct.id } },
-      },
-    });
+        update: purchaseData,
+        create: {
+          ...purchaseData,
+          user: { connect: { id: user.id } },
+          product: { connect: { id: localProduct.id } },
+        },
+      });
+    };
+
+    try {
+      await upsertOnce();
+    } catch (e: any) {
+      // Prisma P2002 => Unique constraint failed (provável corrida entre 2 requisições simultâneas)
+      const code = e?.code || e?.meta?.code;
+      if (code === 'P2002') {
+        console.warn('P2002 em upsert(Purchase). Tentando atualizar registro existente...');
+        // Fallback: forçar UPDATE no registro existente
+        await prisma.purchase.update({
+          where: {
+            userId_productId: {
+              userId: user.id,
+              productId: localProduct.id,
+            },
+          },
+          data: purchaseData,
+        });
+      } else {
+        // Pequeno retry único em caso de outra falha transitória
+        console.warn('Falha no upsert. Retentando uma vez...', e?.message || e);
+        await upsertOnce();
+      }
+    }
+
+    // Enviar emails transacionais conforme o status
+    try {
+      const appUrl = process.env.APP_URL || `https://${req.headers.get('host') || 'app.seudominio.com'}`;
+      // Extrair dados de PIX (se existirem) para mensagens de pagamento pendente
+      const pixSignature: string | undefined = body?.payment?.pix?.qrcode?.signature;
+      const pixUrl: string | undefined = body?.payment?.pix?.qrcode?.url;
+      const pixExpiration: string | undefined = body?.payment?.pix?.expiration_date;
+      if (paymentStatus === 'paid') {
+        const accessUrl = `${appUrl}/login`;
+        const resetUrl = `${appUrl}/forgot-password`;
+        const mailRes = await sendEmail({
+          to: user.email,
+          subject: `Acesso liberado: ${localProduct.name}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; line-height:1.5;">
+              <h2>Seu acesso foi liberado 🎉</h2>
+              <p>Olá${user.name ? `, ${user.name}` : ''}! Confirmamos o pagamento do seu produto <strong>${localProduct.name}</strong>.</p>
+              <p><strong>Como acessar:</strong></p>
+              <ol>
+                <li>Acesse: <a href="${accessUrl}">${accessUrl}</a></li>
+                <li>Entre com seu e-mail: <strong>${user.email}</strong></li>
+                <li>Se ainda não definiu uma senha, use "Esqueci minha senha": <a href="${resetUrl}">${resetUrl}</a></li>
+              </ol>
+              <p><strong>Período de acesso:</strong> ${startDate.toISOString()} até ${endDate.toISOString()}</p>
+              <p>Qualquer dúvida, responda este e-mail.</p>
+            </div>
+          `,
+        });
+        console.log('Email (paid) result:', JSON.stringify(mailRes));
+      } else if (normalize(rootStatus) === 'analysis') {
+        const checkoutUrl = body?.checkout_url || appUrl;
+        const brand = body?.payment?.credit_card?.brand;
+        const last4 = body?.payment?.credit_card?.last_digits;
+        const mailRes = await sendEmail({
+          to: user.email,
+          subject: `Pagamento em análise: ${localProduct.name}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; line-height:1.5;">
+              <h2>Seu pagamento está em análise</h2>
+              <p>Olá${user.name ? `, ${user.name}` : ''}! Recebemos o seu pedido para <strong>${localProduct.name}</strong> e o pagamento está <strong>em análise</strong> pela operadora.</p>
+              ${brand || last4 ? `<p>Forma de pagamento: ${brand ? brand.toUpperCase() : 'cartão'} ${last4 ? '•••• ' + last4 : ''}</p>` : ''}
+              <p>Isso é normal e pode levar alguns minutos. Assim que for aprovado, seu acesso será liberado automaticamente e você receberá outro e‑mail.</p>
+              <p>Se preferir acompanhar ou refazer o pagamento, acesse: <a href="${checkoutUrl}">${checkoutUrl}</a></p>
+              <p>Qualquer dúvida, responda este e‑mail.</p>
+            </div>
+          `,
+        });
+        console.log('Email (analysis) result:', JSON.stringify(mailRes));
+      } else if (paymentStatus === 'pending') {
+        const checkoutUrl = body?.checkout_url || appUrl;
+        const mailRes = await sendEmail({
+          to: user.email,
+          subject: `Pagamento pendente: ${localProduct.name}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; line-height:1.5;">
+              <h2>Estamos aguardando a confirmação do seu pagamento</h2>
+              <p>Olá${user.name ? `, ${user.name}` : ''}! Recebemos seu pedido para <strong>${localProduct.name}</strong>, mas o pagamento ainda está <strong>pendente</strong>.</p>
+              <p>Para concluir:</p>
+              <ol>
+                <li>Finalize o pagamento pelo link (se disponível): <a href="${checkoutUrl}">${checkoutUrl}</a></li>
+                <li>Após a confirmação, seu acesso será liberado automaticamente e você receberá outro e-mail.</li>
+              </ol>
+              ${pixUrl || pixSignature ? `
+                <div style="margin-top:16px;padding:12px;border:1px solid #eee;border-radius:8px;">
+                  <p><strong>Pagar via PIX</strong></p>
+                  ${pixUrl ? `<p>QR Code: <a href="${pixUrl}" target="_blank" rel="noopener noreferrer">Abrir QR Code</a></p>` : ''}
+                  ${pixSignature ? `<p style="word-break:break-all;"><strong>Copia e Cola:</strong><br/><code>${pixSignature}</code></p>` : ''}
+                  ${pixExpiration ? `<p>Expira em: ${pixExpiration}</p>` : ''}
+                </div>
+              ` : ''}
+              <p>Se já pagou, aguarde alguns minutos — o sistema atualizará automaticamente.</p>
+              <p>Qualquer dúvida, responda este e-mail.</p>
+            </div>
+          `,
+        });
+        console.log('Email (pending) result:', JSON.stringify(mailRes));
+      }
+    } catch (mailErr) {
+      const mailErrMsg = mailErr instanceof Error ? `${mailErr.name}: ${mailErr.message}` : String(mailErr ?? 'unknown mail error');
+      console.error(`Falha ao enviar e-mail transacional: ${mailErrMsg}`);
+    }
 
     // Mensagem de sucesso com informações sobre o acesso
     const accessGranted = paymentStatus === 'paid';
@@ -222,25 +372,44 @@ export async function POST(req: Request) {
     
     console.log(`Registro de compra atualizado com sucesso! Acesso liberado: ${accessGranted}`);
     
-    return NextResponse.json(
-      { 
-        message, 
-        status: paymentStatus,
-        accessGranted,
-        product: localProduct.name,
-        user: user.email
-      },
-      { status: 200 }
-    );
+    // Incluir dados de PIX no retorno quando pendente, para facilitar testes/integrações
+    const baseResponse: any = {
+      message,
+      status: paymentStatus,
+      accessGranted,
+      product: localProduct.name,
+      user: user.email,
+    };
+    if (paymentStatus === 'pending') {
+      baseResponse.payment = {
+        method: body?.payment?.method || 'unknown',
+        checkoutUrl: body?.checkout_url || null,
+        pix: body?.payment?.pix ? {
+          qrcodeUrl: body?.payment?.pix?.qrcode?.url || null,
+          qrcodeSignature: body?.payment?.pix?.qrcode?.signature || null,
+          expirationDate: body?.payment?.pix?.expiration_date || null,
+        } : null,
+      };
+      if (normalize(rootStatus) === 'analysis') {
+        baseResponse.statusDetail = 'analysis';
+        baseResponse.payment.card = {
+          brand: body?.payment?.credit_card?.brand || null,
+          last4: body?.payment?.credit_card?.last_digits || null,
+        };
+      }
+    }
+
+    return NextResponse.json(baseResponse, { status: 200 });
   } catch (error) {
-    console.error('Erro ao processar webhook:', error);
+    const errMsg = error instanceof Error ? `${error.name}: ${error.message}` : String(error ?? 'unknown error');
+    console.error(`Erro ao processar webhook: ${errMsg}`);
     
     // Fornecer mais detalhes sobre o erro
     const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
     const errorStack = error instanceof Error ? error.stack : '';
     
-    console.error('Detalhes do erro:', errorMessage);
-    console.error('Stack trace:', errorStack);
+    console.error(`Detalhes do erro: ${errorMessage}`);
+    console.error(`Stack trace: ${errorStack}`);
     
     return NextResponse.json(
       { 

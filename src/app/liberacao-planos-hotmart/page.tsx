@@ -189,6 +189,16 @@ export default function Page() {
           </div>
         </section>
 
+        {/* Floating WhatsApp Link */}
+        <a
+          href="https://wa.me/5511958072826"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-6 right-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-600 hover:bg-green-500 text-white text-sm font-medium shadow-lg border border-green-500/60"
+        >
+          WhatsApp
+        </a>
+
         {/* Depoimentos e FAQ removidos nesta versão Hotmart */}
 
         <footer className="py-8 px-4 text-center bg-black">

@@ -5,6 +5,7 @@ import { ChevronDown, ChevronRight, ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 import * as fbq from '@/lib/fpixel';
 import XLogo from '@/components/XLogo';
+import { OptimizedImage } from '@/app/components/OptimizedImage';
 
 export default function Page() {
   const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
@@ -75,12 +76,28 @@ export default function Page() {
     </div>
   );
 
+  // Ensure VTurb player script is loaded
+  useEffect(() => {
+    const id = 'vturb-player-script-68bf26e08b8411c0246b6aff'
+    const existing = document.getElementById(id) as HTMLScriptElement | null
+    if (!existing) {
+      const s = document.createElement('script')
+      s.id = id
+      s.src = 'https://scripts.converteai.net/17e2196c-5794-49ef-bd61-857538a02fa6/players/68bf26e08b8411c0246b6aff/v4/player.js'
+      s.async = true
+      document.head.appendChild(s)
+    }
+  }, [])
+
+  // Typed alias to allow using the custom web component in TSX
+  const VturbSmartPlayer = 'vturb-smartplayer' as unknown as React.ElementType
+
   return (
     <div className="font-montserrat bg-black text-white min-h-screen relative overflow-hidden">
       <div className="relative z-10">
-        {/* Logo */}
+        {/* Logo (smaller on mobile) */}
         <div className="w-full flex justify-center pt-8">
-          <XLogo />
+          <OptimizedImage src="/ft-icone.png" alt="FT Logo" width={56} height={56} className="invert brightness-0 md:w-20 md:h-20" />
         </div>
 
         {/* Countdown */}
@@ -93,6 +110,15 @@ export default function Page() {
           </div>
           <div className="text-center">
             
+          </div>
+        </div>
+
+        {/* VTurb Player */}
+        <div className="px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="w-full mx-auto">
+              <VturbSmartPlayer id="vid-68bf26e08b8411c0246b6aff" style={{ display: 'block', margin: '0 auto', width: '100%' }} />
+            </div>
           </div>
         </div>
 
@@ -202,7 +228,9 @@ export default function Page() {
         {/* Depoimentos e FAQ removidos nesta versão Hotmart */}
 
         <footer className="py-8 px-4 text-center bg-black">
-          <p className="text-neutral-500 text-xs">Automação Gold - Todos os direitos reservados</p>
+          <p className="text-neutral-400 text-[12px] max-w-3xl mx-auto">
+            Assista o vídeo e libere seu acesso a instalação do GOLD X
+          </p>
         </footer>
       </div>
     </div>

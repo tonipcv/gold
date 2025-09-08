@@ -244,7 +244,7 @@ export default function Page() {
           {/* Warning Text */}
           <div className="text-center">
             <p className="text-sm md:text-base text-neutral-300 leading-relaxed max-w-3xl mx-auto">
-              Este link é único e garante sua vaga com os bônus da Mentoria com Daniel Katsu. Se sair da página, poderá perder os bônus e terá que assistir o vídeo novamente para tentar acessar a Automação Gold 10x.
+              Este link é único e garante sua vaga com os bônus e acesso a versão mais completa da Automação Gold 10X. Se sair da página, poderá perder os bônus e terá que assistir o vídeo novamente.
             </p>
           </div>
         </div>

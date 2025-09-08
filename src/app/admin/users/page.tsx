@@ -54,6 +54,10 @@ export default function AdminUsers() {
   const [selectedProduct, setSelectedProduct] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isNewUserModalOpen, setIsNewUserModalOpen] = useState(false);
+  const [isSetPasswordOpen, setIsSetPasswordOpen] = useState(false);
+  const [setPwdUser, setSetPwdUser] = useState<User | null>(null);
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
@@ -247,6 +251,51 @@ export default function AdminUsers() {
     setIsModalOpen(true);
   };
 
+  const openSetPasswordModal = (user: User) => {
+    setSetPwdUser(user);
+    setNewPassword('');
+    setConfirmPassword('');
+    setIsSetPasswordOpen(true);
+  };
+
+  const handleSetPassword = async (useDefault = false) => {
+    if (!setPwdUser) return;
+    if (!useDefault) {
+      if (!newPassword || newPassword.length < 6) {
+        setError('A senha deve ter pelo menos 6 caracteres');
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        setError('As senhas não conferem');
+        return;
+      }
+    }
+    try {
+      setError(null);
+      const body = useDefault
+        ? { userId: setPwdUser.id, useDefault: true }
+        : { userId: setPwdUser.id, password: newPassword };
+      const res = await fetch('/api/admin/set-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Falha ao definir senha');
+      }
+      setSuccess('Senha atualizada com sucesso!');
+      setIsSetPasswordOpen(false);
+      setSetPwdUser(null);
+      setNewPassword('');
+      setConfirmPassword('');
+      setTimeout(() => setSuccess(null), 3000);
+    } catch (err: any) {
+      setError(err.message || 'Erro ao definir senha');
+      setTimeout(() => setError(null), 4000);
+    }
+  };
+
   const filteredUsers = users.filter(user => 
     user.email.toLowerCase().includes(searchTerm.toLowerCase()) || 
     (user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -409,6 +458,15 @@ export default function AdminUsers() {
                               Reenviar acesso por e-mail
                             </button>
                           </div>
+                          <div className="mt-2">
+                            <button
+                              onClick={() => openSetPasswordModal(user)}
+                              className="text-yellow-300 hover:text-yellow-200 text-sm underline"
+                              title="Definir/alterar senha do usuário"
+                            >
+                              Definir senha
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -533,6 +591,79 @@ export default function AdminUsers() {
                       className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
                     >
                       Criar Usuário
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Modal para definir senha do usuário */}
+            {isSetPasswordOpen && setPwdUser && (
+              <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+                <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md">
+                  <h2 className="text-xl font-bold mb-4 text-[#5a96f4]">
+                    Definir senha para {setPwdUser.email}
+                  </h2>
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="newPassword" className="block text-sm font-medium mb-1">Nova senha</label>
+                      <input
+                        id="newPassword"
+                        type="password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        className="w-full p-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#5a96f4]"
+                        placeholder={process.env.NEXT_PUBLIC_DEFAULT_USER_PASSWORD ? `Padrão: ${process.env.NEXT_PUBLIC_DEFAULT_USER_PASSWORD}` : 'Mínimo 6 caracteres'}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="confirmPassword" className="block text-sm font-medium mb-1">Confirmar senha</label>
+                      <input
+                        id="confirmPassword"
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="w-full p-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#5a96f4]"
+                      />
+                    </div>
+                    {process.env.NEXT_PUBLIC_DEFAULT_USER_PASSWORD && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const pwd = process.env.NEXT_PUBLIC_DEFAULT_USER_PASSWORD as string
+                          setNewPassword(pwd)
+                          setConfirmPassword(pwd)
+                        }}
+                        className="text-xs text-yellow-300 hover:text-yellow-200 underline"
+                      >
+                        Usar senha padrão
+                      </button>
+                    )}
+                  </div>
+                  <div className="flex justify-end space-x-2 mt-6">
+                    <button
+                      onClick={() => {
+                        setIsSetPasswordOpen(false)
+                        setSetPwdUser(null)
+                        setNewPassword('')
+                        setConfirmPassword('')
+                      }}
+                      className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      onClick={() => handleSetPassword(false)}
+                      className="px-4 py-2 bg-yellow-500 text-black rounded-md hover:bg-yellow-400 transition-colors"
+                    >
+                      Salvar
+                    </button>
+                    <button
+                      onClick={() => handleSetPassword(true)}
+                      className="px-4 py-2 bg-gray-200 text-black rounded-md hover:bg-white transition-colors"
+                      title="Usar a senha padrão configurada no servidor"
+                    >
+                      Usar senha padrão do servidor
                     </button>
                   </div>
                 </div>

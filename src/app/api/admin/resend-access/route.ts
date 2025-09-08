@@ -59,15 +59,18 @@ export async function POST(req: Request) {
     const throttle = (globalThis as any).__resendThrottle as Map<string, number>
     const now = Date.now()
     const last = throttle.get(email) || 0
-    const minIntervalMs = 30_000 // 30s between attempts per email on this instance
-    if (now - last < minIntervalMs) {
+    const envInterval = Number(process.env.MIN_EMAIL_INTERVAL_MS)
+    const minIntervalMs = Number.isFinite(envInterval) && envInterval > 0 ? envInterval : 30_000
+    if (minIntervalMs > 0 && now - last < minIntervalMs) {
       const wait = Math.ceil((minIntervalMs - (now - last)) / 1000)
       return NextResponse.json({
         error: `Muitas tentativas para ${email}. Aguarde ${wait}s e tente novamente.`,
         retryAfterSeconds: wait,
       }, { status: 429 })
     }
-    throttle.set(email, now)
+    if (minIntervalMs > 0) {
+      throttle.set(email, now)
+    }
 
     const result = await sendEmail({
       to: email,

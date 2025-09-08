@@ -60,6 +60,23 @@ const handler = NextAuth({
         session.user.isPremium = token.isPremium as boolean
       }
       return session
+    },
+    async redirect({ url, baseUrl }) {
+      try {
+        const isRelative = url.startsWith('/')
+        const isSameOrigin = url.startsWith(baseUrl)
+        const finalUrl = isRelative ? new URL(url, baseUrl).toString() : (isSameOrigin ? url : baseUrl)
+
+        const parsed = new URL(finalUrl)
+        // Normalize legacy destinations to the automatizador
+        if (parsed.pathname === '/produtos' || parsed.pathname === '/' || parsed.pathname === '/login') {
+          return `${baseUrl}/automatizador-gold-10x`
+        }
+
+        return parsed.toString()
+      } catch {
+        return `${baseUrl}/automatizador-gold-10x`
+      }
     }
   },
   session: {

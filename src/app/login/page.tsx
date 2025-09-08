@@ -43,9 +43,9 @@ export default function Login() {
       
       // Forçar um hard redirect se o router.push não funcionar
       if (result?.ok) {
-        window.location.href = '/produtos';
+        window.location.href = '/automatizador-gold-10x';
       } else {
-        router.push('/produtos');
+        router.push('/automatizador-gold-10x');
       }
     } catch (err) {
       console.error('Login error:', err);

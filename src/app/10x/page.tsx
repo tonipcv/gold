@@ -7,14 +7,14 @@ import { OptimizedImage } from '@/app/components/OptimizedImage';
 export default function Page() {
   useEffect(() => {
     const existing = document.getElementById(
-      'vturb-player-script-68bf26e08b8411c0246b6aff'
+      'vturb-player-script-68bf4a22f63660aafd297e8e'
     ) as HTMLScriptElement | null;
 
     if (!existing) {
       const s = document.createElement('script');
-      s.id = 'vturb-player-script-68bf26e08b8411c0246b6aff';
+      s.id = 'vturb-player-script-68bf4a22f63660aafd297e8e';
       s.src =
-        'https://scripts.converteai.net/17e2196c-5794-49ef-bd61-857538a02fa6/players/68bf26e08b8411c0246b6aff/v4/player.js';
+        'https://scripts.converteai.net/17e2196c-5794-49ef-bd61-857538a02fa6/players/68bf4a22f63660aafd297e8e/v4/player.js';
       s.async = true;
       document.head.appendChild(s);
     }
@@ -42,7 +42,7 @@ export default function Page() {
         <div className="max-w-4xl mx-auto">
           <div className="w-full mx-auto">
             <VturbSmartPlayer
-              id="vid-68bf26e08b8411c0246b6aff"
+              id="vid-68bf4a22f63660aafd297e8e"
               style={{ display: 'block', margin: '0 auto', width: '100%' }}
             />
           </div>

@@ -81,22 +81,23 @@ export default function AutomatizadorGold10xClient() {
   }, [])
 
   const episodes: Episode[] = [
-    { id: 1,  number: 1,  title: 'Começando do Absoluto Zero e Instalando a Automação pelo Celular', playerId: '68af32d1c3d8b7bced8ce3db', linkYouTube: 'https://youtu.be/DL5W6ML54K4' },
-    { id: 2,  number: 2,  title: 'Instalando a Estratégia da Automação do Zero',                       playerId: '68aeeb36040f0b0ec4ad980e', linkYouTube: 'https://youtu.be/r3t6RRTJKI4' },
-    { id: 3,  number: 3,  title: 'Ativando a Automação no Celular',                                     playerId: '68aeeb15d03165f25f444b0b', linkYouTube: 'https://youtu.be/I1grTqIoTN8' },
-    { id: 4,  number: 4,  title: 'Como aumentar a performance da Automação',                            playerId: '68af0480d92b07c6d4ea02b0', linkYouTube: 'https://youtu.be/sBESNmxQzTs' },
-    { id: 5,  number: 5,  title: 'Gerenciamento por banca por conta Cent x Standard (tabela lote x banca)', playerId: '' },
-    { id: 6,  number: 6,  title: 'Como trocar de conta Cent e Standard + VPS',                          playerId: '' },
-    { id: 7,  number: 7,  title: 'Como não pagar VPS',                                                   playerId: '' },
-    { id: 8,  number: 8,  title: 'Horário de funcionamento do mercado',                                 playerId: '' },
-    { id: 9,  number: 9,  title: 'Não fechar operação na mão (por que o resultado muda e o que acontece se fizer isso em várias operações)', playerId: '' },
-    { id: 10, number: 10, title: 'Explicação da estratégia no Ouro (foco em resultado mensal + mostrar resultados mensais)', playerId: '' },
-    { id: 11, number: 11, title: 'VPS + PC (como saber se instalou correto: primeira operação abre sozinha; ajuste de lote via migrar ou botão AlgoTrading verde; como ativar e desativar a automação)', playerId: '', locked: true },
-    { id: 12, number: 12, title: 'Correlação da estratégia com cenário de guerra e macroeconomia',      playerId: '' },
-    { id: 13, number: 13, title: 'Risco zero + alavancagem 10x (retirar valor investido, operar com lucro, aumentar/diminuir lote, estratégia de saque)', playerId: '' },
-    { id: 14, number: 14, title: 'Liberação oficial (formulário, planos e turmas)',                      playerId: '' },
-    { id: 15, number: 15, title: 'Liberação do arquivo oficial', playerId: '', locked: true },
-    { id: 16, number: 16, title: 'Termo de responsabilidade (alerta sobre ganância, lucros passados não garantem futuros, aceitação de riscos da renda variável)', playerId: '' },
+    { id: 0,  number: 0,  title: 'Boas-Vindas e Cronograma',                                             playerId: '', linkYouTube: 'https://youtu.be/HXLRf22xvms' },
+    { id: 1,  number: 1,  title: 'Configuração da Corretora',                                            playerId: '68af32d1c3d8b7bced8ce3db', linkYouTube: 'https://youtu.be/DL5W6ML54K4' },
+    { id: 2,  number: 2,  title: 'Instalação da Estratégia',                                             playerId: '68aeeb36040f0b0ec4ad980e', linkYouTube: 'https://youtu.be/r3t6RRTJKI4' },
+    { id: 3,  number: 3,  title: 'Ativação do VPS',                                                      playerId: '68aeeb15d03165f25f444b0b', linkYouTube: 'https://youtu.be/I1grTqIoTN8' },
+    { id: 4,  number: 4,  title: 'Relatório da Estratégia',                                              playerId: '68af0480d92b07c6d4ea02b0', linkYouTube: 'https://youtu.be/sBESNmxQzTs' },
+    { id: 5,  number: 5,  title: 'Gerenciamento de Operações',                                           playerId: '', linkYouTube: 'https://youtu.be/dmZQZ6yW3MY' },
+    { id: 6,  number: 6,  title: 'Conversão de Conta Standard para Cent',                                playerId: '', linkYouTube: 'https://youtu.be/HSBoeTM8Imc' },
+    { id: 7,  number: 7,  title: 'VPS Gratuito',                                                          playerId: '', linkYouTube: 'https://youtu.be/pfkpXTyl-q4' },
+    { id: 8,  number: 8,  title: 'Erros Comuns a Evitar',                                                playerId: '', linkYouTube: 'https://youtu.be/gigwxpE5vLA' },
+    { id: 9,  number: 9,  title: 'Funcionamento da Estratégia',                                          playerId: '', linkYouTube: 'https://youtu.be/L9p8r6b-_vs' },
+    { id: 10, number: 10, title: 'Horário de Funcionamento da Estratégia',                               playerId: '', linkYouTube: 'https://youtu.be/0en9ZEuX-3Q' },
+    { id: 11, number: 11, title: 'Formulário de Liberação Oficial',                                      playerId: '', linkYouTube: 'https://youtu.be/kmaDYhUQ6fg' },
+    { id: 12, number: 12, title: 'Suporte via WhatsApp',                                                 playerId: '', linkYouTube: 'https://youtu.be/WVs3iEGkumM' },
+    { id: 13, number: 13, title: 'Liberação Oficial',                                                    playerId: '', locked: true },
+    { id: 14, number: 14, title: '',                                                                     playerId: '', locked: true },
+    { id: 15, number: 15, title: '',                                                                     playerId: '', locked: true },
+    { id: 16, number: 16, title: '',                                                                     playerId: '', locked: true },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!
@@ -153,10 +154,10 @@ export default function AutomatizadorGold10xClient() {
             </div>
           )}
           <div className="px-0 py-4">
-            {activeEpisode === 1 && aula1CtaVisible && (
+            {activeEpisode === 1 && (
               <div className="mt-4 flex flex-col items-center gap-4">
                 <a
-                  href="https://one.exnesstrack.org/a/jo986i1iel?platform=mobile"
+                  href="https://one.exnesstrack.org/intl/pt/a/jo986i1iel"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border border-green-500 bg-green-700 text-white text-base font-semibold shadow-[0_0_28px_rgba(34,197,94,0.35)] hover:bg-green-600 transition-colors"
@@ -164,7 +165,7 @@ export default function AutomatizadorGold10xClient() {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                     <path d="M5 20h14v-2H5v2Zm7-3 5-5h-3V4h-4v8H7l5 5Z" />
                   </svg>
-                  BAIXAR APP
+                  CORRETORA
                 </a>
               </div>
             )}
@@ -172,7 +173,7 @@ export default function AutomatizadorGold10xClient() {
               <div className="mt-4 flex flex-col items-center gap-4">
                 {/* Filled green MT5 button (neon) */}
                 <a
-                  href="https://www.exness.com/pt/metatrader-5/?utm_source=partners&campaign=34785&track1=Baixar&ex_ol=1"
+                  href="https://one.exnesstrack.org/metatrader-5/a/tcnv1es7kk/?campaign=34785&track1=Baixar"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border border-green-500 bg-green-700 text-white text-base font-semibold shadow-[0_0_28px_rgba(34,197,94,0.35)] hover:bg-green-600 transition-colors"
@@ -182,17 +183,42 @@ export default function AutomatizadorGold10xClient() {
                   </svg>
                   BAIXAR MT5
                 </a>
-                {/* Outlined green GOLD SYSTEM button (neon outline) */}
-                <button
-                  type="button"
-                  onClick={() => setShowDownloadModal(true)}
+                {/* Outlined green GOLD X button (neon outline) */}
+                <a
+                  href="https://drive.google.com/drive/folders/10Kz1FHj6m9Ys1AgW2JGPhcNIXQYR2trK?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border-2 border-green-500 text-green-200 text-base font-semibold hover:bg-green-600/10 shadow-[0_0_28px_rgba(34,197,94,0.25)] transition-colors"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                     <path d="M8 5v14l11-7L8 5Z" />
                   </svg>
-                  BAIXAR GOLD SYSTEM
-                </button>
+                  GOLD X
+                </a>
+              </div>
+            )}
+            {activeEpisode === 11 && (
+              <div className="mt-4 flex flex-col items-center gap-4">
+                <a
+                  href="https://gold.k17.com.br/formulario"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border border-blue-500 text-blue-200 text-base font-semibold hover:bg-blue-600/10 transition-colors"
+                >
+                  FORMULÁRIO
+                </a>
+              </div>
+            )}
+            {activeEpisode === 12 && (
+              <div className="mt-4 flex flex-col items-center gap-4">
+                <a
+                  href="https://wa.me/5573991778075"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border border-emerald-500 text-emerald-200 text-base font-semibold hover:bg-emerald-600/10 transition-colors"
+                >
+                  SUPORTE
+                </a>
               </div>
             )}
           </div>
@@ -205,6 +231,9 @@ export default function AutomatizadorGold10xClient() {
               {episodes.map((episode) => {
                 const isLocked = !!episode.locked
                 const isActive = activeEpisode === episode.id
+                const hasTitle = !!episode.title && episode.title.trim().length > 0
+                const displayTitle = hasTitle ? episode.title : (isLocked ? 'Em breve' : '')
+                const label = `AULA ${episode.number}${displayTitle ? ' - ' + displayTitle : ''}`
                 return (
                 <button
                   key={episode.id}
@@ -225,7 +254,7 @@ export default function AutomatizadorGold10xClient() {
                     </svg>
                   )}
                   <div className="flex-1 text-left">
-                    <h3 className={`font-medium ${isLocked ? 'text-gray-300' : 'text-white'} text-sm md:text-base tracking-tight`}>AULA {episode.number} - {episode.title}</h3>
+                    <h3 className={`font-medium ${isLocked ? 'text-gray-300' : 'text-white'} text-sm md:text-base tracking-tight`}>{label}</h3>
                     {episode.duration && <p className="text-xs text-gray-400 mt-1">{episode.duration}</p>}
                   </div>
                 </button>

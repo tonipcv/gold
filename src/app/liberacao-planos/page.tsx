@@ -124,15 +124,15 @@ export default function Page() {
   };
 
   // Função para renderizar a barra de progresso
-  const ProgressBar = ({ percentage }: { percentage: number }) => (
+  const ProgressBar = ({ percentage, color = 'green' }: { percentage: number, color?: 'green' | 'red' | 'white' }) => (
     <div className="mt-4 mb-2">
       <div className="flex justify-between text-xs text-neutral-400 mb-1">
         <span>{percentage}% preenchido</span>
         <span>Vagas restantes</span>
       </div>
       <div className="h-2 bg-neutral-800 rounded-full overflow-hidden">
-        <div 
-          className="h-full bg-green-500 rounded-full transition-all duration-500"
+        <div
+          className={`h-full ${color === 'red' ? 'bg-red-500' : color === 'white' ? 'bg-white' : 'bg-green-500'} rounded-full transition-all duration-500`}
           style={{ width: `${percentage}%` }}
         />
       </div>
@@ -244,9 +244,7 @@ export default function Page() {
           {/* Warning Text */}
           <div className="text-center">
             <p className="text-sm md:text-base text-neutral-300 leading-relaxed max-w-3xl mx-auto">
-              <span className="text-green-400 font-medium">Esse link é único</span> e sua liberação está garantida com{' '}
-              <span className="text-white font-medium">encontro de Mentoria em Grupo com Daniel Katsu</span>. 
-              Ao sair da página não nos responsabilizamos em liberar mais vagas e você terá que assistir o vídeo todo de novo e não terá os bônus ou alguns planos.
+              Este link é único e garante sua vaga com os bônus da Mentoria com Daniel Katsu. Se sair da página, poderá perder os bônus e terá que assistir o vídeo novamente para tentar acessar a Automação Gold 10x.
             </p>
           </div>
         </div>
@@ -261,29 +259,28 @@ export default function Page() {
                 <div className="text-center mb-6">
                   <h3 className="text-lg font-medium text-white">PLANO VITALÍCIO (Exclusivo)</h3>
                   <div className="mt-2 text-xs text-neutral-400">5 vagas</div>
-                  <ProgressBar percentage={65} />
+                  <ProgressBar percentage={65} color="white" />
                 </div>
                 
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso vitalício à Automação Gold X (10x)</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso ao Automatizador para Sempre.</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">3 meses de acompanhamento individualizado</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Suporte prioritário direto com Daniel Katsu.</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Comunidade exclusiva dos vitalícios</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Acesso vitalício à Automação Gold X (10x)</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Acesso ao Automatizador para Sempre.</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Suporte prioritário direto com Daniel Katsu.</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Comunidade exclusiva dos vitalícios</span></li>
                 </ul>
 
                 <div className="text-center pt-6 border-t border-neutral-800/30">
                   <div className="text-2xl font-light text-white">12x R$1.578,50</div>
                   
                   <div className="mt-6">
-                    <a 
+                    <a
                       href="https://checkout.k17.com.br/pay/vitalicio-10x"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSubscribeClick('lifetime')}
-                      className="w-full inline-flex justify-center px-6 py-3 bg-green-500 hover:bg-green-600 rounded-xl text-white font-medium transition-all duration-200"
+                      className="w-full inline-flex justify-center px-6 py-3 bg-white hover:bg-neutral-200 rounded-xl text-black font-medium transition-all duration-200"
                     >
                       PEGAR MINHA VAGA VITALÍCIA
                     </a>
@@ -298,14 +295,13 @@ export default function Page() {
                 <div className="text-center mb-6">
                   <h3 className="text-lg font-medium text-white">PLANO SEMESTRAL</h3>
                   <div className="mt-2 text-xs text-neutral-400">43 vagas</div>
-                  <ProgressBar percentage={85} />
+                  <ProgressBar percentage={85} color="red" />
                 </div>
                 
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Gold X (10x) por 6 meses</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">2 meses de acompanhamento individual</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Suporte dedicado</span></li>
                 </ul>
 
@@ -331,14 +327,13 @@ export default function Page() {
                 <div className="text-center mb-6">
                   <h3 className="text-lg font-medium text-white">PLANO TRIMESTRAL</h3>
                   <div className="mt-2 text-xs text-neutral-400">80 vagas</div>
-                  <ProgressBar percentage={73} />
+                  <ProgressBar percentage={73} color="red" />
                 </div>
                 
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Gold X (10x) por 3 meses</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">1 mês de acompanhamento individual</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Suporte especializado</span></li>
                 </ul>
 
@@ -362,126 +357,9 @@ export default function Page() {
           </div>
         </section>
 
-        {/* Depoimentos */}
-        <section className="py-24 px-4 bg-black/30">
-          <div className="max-w-7xl mx-auto">
-            <div className="relative">
-              <div className="overflow-hidden rounded-xl">
-                <div 
-                  className="flex transition-transform duration-500 ease-out" 
-                  style={{ 
-                    transform: `translateX(-${currentTestimonial * (windowWidth <= 768 ? 50 : 33.333)}%)`
-                  }}
-                >
-                  {[1, 2, 3, 4, 5, 6].map((num) => (
-                    <div 
-                      key={num} 
-                      className="w-1/2 md:w-1/3 flex-shrink-0 px-3"
-                    >
-                      <Image
-                        src={`/depoimento${num}.webp`}
-                        alt={`Depoimento ${num}`}
-                        width={600}
-                        height={450}
-                        className="w-full h-auto rounded-xl shadow-lg transform hover:scale-[1.02] transition-transform duration-300"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
+        {/* Depoimentos removidos */}
 
-              {/* Navigation Buttons */}
-              <button
-                onClick={() => setCurrentTestimonial((prev) => (prev > 0 ? prev - 1 : windowWidth <= 768 ? 4 : 3))}
-                className="absolute -left-4 md:left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              <button
-                onClick={() => setCurrentTestimonial((prev) => (prev < (windowWidth <= 768 ? 4 : 3) ? prev + 1 : 0))}
-                className="absolute -right-4 md:right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-
-              {/* Dots Navigation */}
-              <div className="flex justify-center gap-2 mt-8">
-                {Array.from({ length: windowWidth <= 768 ? 5 : 4 }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentTestimonial(index)}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      currentTestimonial === index ? 'bg-white' : 'bg-white/30'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className="py-16 px-4 bg-black">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-light text-center mb-12 bg-gradient-to-r from-neutral-400 to-white bg-clip-text text-transparent">
-              Perguntas Frequentes
-            </h2>
-
-            <div className="space-y-4">
-              {[
-                {
-                  question: 'O que é o FIP?',
-                  answer: 'O FIP (Formação para Investidor Profissional) é um curso completo que leva o aluno do zero até a certificação, com conteúdo didático e liberado por etapas baseado na metodologia de investimentos de Daniel Katsu. Será revelado tudo que ele utilizou para ganhar milhões com mercado do zero ao avançado.'
-                },
-                {
-                  question: 'O que está incluído no bônus de 1 ano do Futuros Tech?',
-                  answer: 'O bônus de 1 ano do Futuros Tech oferece acesso à tecnologia exclusiva que ajuda no acompanhamento e análise de mercados futuros, facilitando a tomada de decisão nas operações financeiras. A mensalidade avulsa do Futuros Tech é 500 reais ou o plano anual é 2997 e fazendo a inscrição você ganhar 1 ano de bônus. Como os membros gostam de falar – com apenas um sinal você já paga a mensalidade com lucro.'
-                },
-                {
-                  question: 'O que é o Black Book?',
-                  answer: 'O Black Book é um livro exclusivo que compila estratégias e insights valiosos sobre análise gráfica em mais de 274 páginas. É realmente um manual para quem quer se especializar no mercado e está a venda avulso por 1.500 reais (k17.com.br/blackbook) mas ao fazer a inscrição no FIP você recebe a versão digital de graça.'
-                },
-                {
-                  question: 'Qual o suporte que eu recebo durante o curso?',
-                  answer: 'Ao se inscrever no FIP, você terá suporte dedicado através do nosso portal de suporte e e-mail. Ao longo das semanas serão liberados conteúdos e você poderá tirar dúvida quando quiser.'
-                },
-                {
-                  question: 'Os sinais no Futuros Tech são de Segunda a Sexta?',
-                  answer: 'Não, é todos os dias da semana, em média 5 sinais de operações, essa tecnologia é uma verdadeira máquina de fazer dinheiro.'
-                },
-                {
-                  question: 'Poderei conhecer o Escritório da K17?',
-                  answer: 'Com certeza, quando você lucrar mais de 50 mil, uma meta básica, você poderá vim para o escritório para ter o seu reconhecimento pessoalmente e poder conhecer os nossos profissionais pessoalmente.'
-                },
-                {
-                  question: 'E se eu não gostar do FIP?',
-                  answer: 'Se você não ficar completamente satisfeito em 7 dias, garantimos a devolução total do seu investimento. Basta enviar um e-mail para contato@k17.com.br e faremos o resto.'
-                }
-              ].map((item, index) => (
-                <div key={index} className="border-b border-neutral-800">
-                  <button
-                    onClick={() => toggleQuestion(index)}
-                    className="w-full flex justify-between items-center py-4 text-left group"
-                  >
-                    <span className="text-sm bg-gradient-to-r from-neutral-200 to-white bg-clip-text text-transparent font-medium group-hover:from-white group-hover:to-white transition-all duration-300">
-                      {item.question}
-                    </span>
-                    <ChevronDown 
-                      className={`w-4 h-4 text-neutral-400 transition-transform duration-300 ${
-                        activeQuestion === index ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  {activeQuestion === index && (
-                    <p className="text-neutral-400 text-sm pb-4 leading-relaxed">
-                      {item.answer}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* FAQ removido */}
 
         {/* Footer */}
         <footer className="py-8 px-4 text-center bg-black">

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import XLogo from "@/components/XLogo";
+import { useSearchParams } from "next/navigation";
 
 export default function FormularioLiberacaoPage() {
   const [form, setForm] = useState({
@@ -13,6 +14,9 @@ export default function FormularioLiberacaoPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [autoSubmitted, setAutoSubmitted] = useState(false);
+  const searchParams = useSearchParams();
+  const hasAttemptedAuto = useRef(false);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -49,6 +53,47 @@ export default function FormularioLiberacaoPage() {
     }
   };
 
+  // Auto-preencher e enviar caso todos os parâmetros estejam presentes na URL
+  useEffect(() => {
+    if (!searchParams || hasAttemptedAuto.current) return;
+
+    const qp = {
+      name: searchParams.get("name")?.toString() || "",
+      purchaseEmail: searchParams.get("purchaseEmail")?.toString() || "",
+      whatsapp: searchParams.get("whatsapp")?.toString() || "",
+      accountNumber: searchParams.get("accountNumber")?.toString() || "",
+    };
+
+    const allPresent = qp.name && qp.purchaseEmail && qp.whatsapp && qp.accountNumber;
+    // Preenche o formulário com os dados recebidos
+    setForm(qp);
+
+    async function autoSubmit() {
+      try {
+        setLoading(true);
+        setError(null);
+        const res = await fetch("/api/formulario-liberacao", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(qp),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data?.error || "Erro ao enviar.");
+        setSuccess(true);
+        setAutoSubmitted(true);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Erro ao enviar.");
+      } finally {
+        setLoading(false);
+        hasAttemptedAuto.current = true;
+      }
+    }
+
+    if (allPresent) {
+      autoSubmit();
+    }
+  }, [searchParams]);
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center px-4 py-10">
       {/* Logo branca no topo (mesma do login) */}
@@ -57,6 +102,12 @@ export default function FormularioLiberacaoPage() {
       </div>
 
       <div className="w-full max-w-md">
+        {/* Mensagem de confirmação em destaque se enviado com sucesso */}
+        {success && (
+          <div className="mb-4 rounded-lg border border-green-700 bg-green-950/40 text-green-300 px-4 py-3 text-sm">
+            Obrigado! Seus dados foram recebidos com sucesso. Nossa equipe entrará em contato em breve.
+          </div>
+        )}
         <h1 className="text-center text-lg text-neutral-200 mb-6">
           Preencha os dados para nosso time de programadores gerar o código para você:
         </h1>
@@ -129,9 +180,6 @@ export default function FormularioLiberacaoPage() {
 
           {error && (
             <div className="text-sm text-red-400">{error}</div>
-          )}
-          {success && (
-            <div className="text-sm text-green-400">Enviado com sucesso! Nossa equipe entrará em contato.</div>
           )}
 
           <button

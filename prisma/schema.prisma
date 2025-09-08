@@ -101,3 +101,12 @@ model Purchase {
 
   @@unique([userId, productId])
 }
+
+model FormularioLiberacao {
+  id             String   @id @default(cuid())
+  name           String
+  purchaseEmail  String
+  whatsapp       String
+  accountNumber  String
+  createdAt      DateTime @default(now())
+}

@@ -1,41 +1,16 @@
 'use client';
 
-import { useState, FormEvent, useEffect } from 'react';
+import { useState, FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signIn } from "next-auth/react"
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import AuthLayout from '@/components/AuthLayout';
 
 export default function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [showModal, setShowModal] = useState(false);
-
-  // Target: 8 de setembro às 19:00 (BRT)
-  useEffect(() => {
-    const target = new Date('2025-09-08T19:00:00-03:00');
-
-    const tick = () => {
-      const now = new Date();
-      const diff = target.getTime() - now.getTime();
-      if (diff <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return;
-      }
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-      setTimeLeft({ days, hours, minutes, seconds });
-    };
-
-    tick();
-    const interval = setInterval(tick, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -83,29 +58,7 @@ export default function Login() {
   return (
     <AuthLayout bgClass="bg-zinc-900" showFooter={false}>
       <div className="w-full max-w-sm font-satoshi tracking-[-0.03em]">
-        {/* Countdown */}
-        <div className="mb-8 text-center text-white">
-          <p className="text-sm text-zinc-300 mb-3">Versão 10x será liberada em:</p>
-          <div className="grid grid-cols-4 gap-3">
-            <div className="rounded-2xl border border-zinc-700/60 bg-gradient-to-b from-zinc-800/80 to-zinc-900/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] p-3">
-              <div className="text-3xl font-bold tabular-nums tracking-tight">{String(timeLeft.days).padStart(2, '0')}</div>
-              <div className="text-[10px] uppercase tracking-[0.12em] text-zinc-400 mt-1">DIAS</div>
-            </div>
-            <div className="rounded-2xl border border-zinc-700/60 bg-gradient-to-b from-zinc-800/80 to-zinc-900/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] p-3">
-              <div className="text-3xl font-bold tabular-nums tracking-tight">{String(timeLeft.hours).padStart(2, '0')}</div>
-              <div className="text-[10px] uppercase tracking-[0.12em] text-zinc-400 mt-1">HORAS</div>
-            </div>
-            <div className="rounded-2xl border border-zinc-700/60 bg-gradient-to-b from-zinc-800/80 to-zinc-900/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] p-3">
-              <div className="text-3xl font-bold tabular-nums tracking-tight">{String(timeLeft.minutes).padStart(2, '0')}</div>
-              <div className="text-[10px] uppercase tracking-[0.12em] text-zinc-400 mt-1">MIN</div>
-            </div>
-            <div className="rounded-2xl border border-zinc-700/60 bg-gradient-to-b from-zinc-800/80 to-zinc-900/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] p-3">
-              <div className="text-3xl font-bold tabular-nums tracking-tight">{String(timeLeft.seconds).padStart(2, '0')}</div>
-              <div className="text-[10px] uppercase tracking-[0.12em] text-zinc-400 mt-1">SEG</div>
-            </div>
-          </div>
-          <div className="mt-4 text-xs text-zinc-400">para dia 8 de setembro às 19h</div>
-        </div>
+        
         {/* Mensagem de erro */}
         {error && (
           <div className="mb-6 text-red-500 text-center text-sm">{error}</div>
@@ -146,72 +99,17 @@ export default function Login() {
           </button>
         </form>
 
-        {/* Links */}
-        <div className="max-w-md mx-auto mt-6 flex flex-col items-center space-y-4">
-          <div className="flex items-center gap-4">
-            <Link 
-              href="/register" 
-              className="text-sm text-white hover:text-zinc-300 transition-colors duration-200 flex items-center gap-1"
-              onClick={(e) => { e.preventDefault(); setShowModal(true); }}
-            >
-              Criar conta
-              <ArrowRightIcon className="w-3 h-3" />
-            </Link>
-          </div>
+        {/* Link: Esqueci minha senha */}
+        <div className="max-w-md mx-auto mt-6 flex justify-center">
+          <Link 
+            href="/forgot-password"
+            className="text-sm text-zinc-300 hover:text-white transition-colors duration-200"
+          >
+            Esqueci minha senha
+          </Link>
         </div>
 
-        {/* Modal */}
-        {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-black/70" onClick={() => setShowModal(false)} />
-            <div className="relative z-10 w-full max-w-md rounded-2xl border border-zinc-700 bg-zinc-900 text-white p-6 shadow-xl">
-              <button
-                onClick={() => setShowModal(false)}
-                className="absolute right-3 top-3 text-zinc-400 hover:text-white text-sm"
-                aria-label="Fechar"
-              >
-                Fechar
-              </button>
-
-              <h2 className="text-lg font-semibold mb-2">Versão 10x</h2>
-              <p className="text-sm text-zinc-300 mb-4">
-                Será liberado somente para um grupo seleto de participantes que já instalaram o teste no dia 8 de setembro às 19h.
-              </p>
-
-              <div className="mb-4">
-                <p className="text-xs text-zinc-400 mb-2">Liberado em:</p>
-                <div className="grid grid-cols-4 gap-3">
-                  <div className="rounded-xl border border-zinc-700 bg-zinc-900/70 p-3 shadow-sm">
-                    <div className="text-3xl font-semibold tabular-nums tracking-tight">{String(timeLeft.days).padStart(2, '0')}</div>
-                    <div className="text-[10px] uppercase tracking-[0.14em] text-zinc-500 mt-1">DIAS</div>
-                  </div>
-                  <div className="rounded-xl border border-zinc-700 bg-zinc-900/70 p-3 shadow-sm">
-                    <div className="text-3xl font-semibold tabular-nums tracking-tight">{String(timeLeft.hours).padStart(2, '0')}</div>
-                    <div className="text-[10px] uppercase tracking-[0.14em] text-zinc-500 mt-1">HORAS</div>
-                  </div>
-                  <div className="rounded-xl border border-zinc-700 bg-zinc-900/70 p-3 shadow-sm">
-                    <div className="text-3xl font-semibold tabular-nums tracking-tight">{String(timeLeft.minutes).padStart(2, '0')}</div>
-                    <div className="text-[10px] uppercase tracking-[0.14em] text-zinc-500 mt-1">MIN</div>
-                  </div>
-                  <div className="rounded-xl border border-zinc-700 bg-zinc-900/70 p-3 shadow-sm">
-                    <div className="text-3xl font-semibold tabular-nums tracking-tight">{String(timeLeft.seconds).padStart(2, '0')}</div>
-                    <div className="text-[10px] uppercase tracking-[0.14em] text-zinc-500 mt-1">SEG</div>
-                  </div>
-                </div>
-                <div className="mt-2 text-[11px] text-zinc-400">para dia 8 de setembro às 19h</div>
-              </div>
-
-              <a
-                href="https://chat.whatsapp.com/K6XXjvAaiDx6IJKI60VaLD?mode=ems_copy_c"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-400/60 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-300 hover:bg-emerald-500/15 hover:text-emerald-200 transition"
-              >
-                Entrar no grupo seleto (WhatsApp)
-              </a>
-            </div>
-          </div>
-        )}
+        
       </div>
     </AuthLayout>
   );

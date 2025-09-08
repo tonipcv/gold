@@ -5,15 +5,30 @@ import { sendEmail } from '@/lib/email'
 
 export async function POST(request: Request) {
   try {
-    const { token, password } = await request.json()
+    // Validate body presence
+    if (!request.body) {
+      return NextResponse.json(
+        { error: 'Corpo da requisição inválido' },
+        { status: 400 }
+      )
+    }
+
+    let parsed: any
+    try {
+      parsed = await request.json()
+    } catch {
+      return NextResponse.json(
+        { error: 'JSON inválido' },
+        { status: 400 }
+      )
+    }
+
+    const { token, password } = parsed as { token?: string; password?: string }
 
     if (!token || !password) {
-      return new NextResponse(
-        JSON.stringify({ error: 'Token e senha são obrigatórios' }),
-        { 
-          status: 400,
-          headers: { 'Content-Type': 'application/json' }
-        }
+      return NextResponse.json(
+        { error: 'Token e senha são obrigatórios' },
+        { status: 400 }
       )
     }
 
@@ -27,12 +42,9 @@ export async function POST(request: Request) {
     })
 
     if (!user) {
-      return new NextResponse(
-        JSON.stringify({ error: 'Token inválido ou expirado' }),
-        { 
-          status: 400,
-          headers: { 'Content-Type': 'application/json' }
-        }
+      return NextResponse.json(
+        { error: 'Token inválido ou expirado' },
+        { status: 400 }
       )
     }
 
@@ -58,22 +70,14 @@ export async function POST(request: Request) {
       `
     })
 
-    return new NextResponse(
-      JSON.stringify({ success: true }),
-      { 
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    )
+    return NextResponse.json({ success: true }, { status: 200 })
 
   } catch (error) {
     console.error('Error:', error)
-    return new NextResponse(
-      JSON.stringify({ error: 'Erro ao alterar senha' }),
-      { 
-        status: 500,
-        headers: { 'Content-Type': 'application/json' }
-      }
+    return NextResponse.json(
+      { error: 'Erro ao alterar senha' },
+      { status: 500 }
     )
   }
-} 
+}
+ 

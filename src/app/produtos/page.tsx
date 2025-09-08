@@ -17,6 +17,8 @@ export default async function ProdutosPage() {
   // Verificar acesso aos produtos
   const hasFuturosTechAccess = await hasProductAccess('futurostech')
   const hasCopyTradeAccess = await hasProductAccess('copytrade')
+  // Temporarily unlocked: always allow access to Gold 10x
+  const hasGold10xAccess = true
 
   return (
     <div className="min-h-screen bg-black text-gray-200 font-satoshi tracking-[-0.03em]">
@@ -34,7 +36,7 @@ export default async function ProdutosPage() {
         <div className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto px-4 py-8">
           <h1 className="text-2xl font-bold mb-8 text-[#5a96f4]">Meus Produtos</h1>
           
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* FIP - Formação para Investidor Profissional */}
             <div className={`rounded-lg overflow-hidden shadow-lg border ${hasFuturosTechAccess ? 'bg-gray-800/30 border-gray-700 hover:border-[#5a96f4]' : 'bg-gray-900/20 border-gray-800'} transition-all ${!hasFuturosTechAccess ? 'grayscale' : ''}`}>
               <div className="p-6">
@@ -79,6 +81,31 @@ export default async function ProdutosPage() {
               </div>
             </div>
           </div>
+
+          {/* Gold 10x */}
+          <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className={`rounded-lg overflow-hidden shadow-lg border ${hasGold10xAccess ? 'bg-gray-800/30 border-gray-700 hover:border-[#5a96f4]' : 'bg-gray-900/20 border-gray-800'} transition-all ${!hasGold10xAccess ? 'grayscale' : ''}`}>
+              <div className="p-6">
+                <h2 className={`${hasGold10xAccess ? 'text-xl font-bold text-[#5a96f4]' : 'text-xl font-light text-gray-400'} mb-2`}>Gold 10x</h2>
+                <p className={`${hasGold10xAccess ? 'text-gray-300' : 'text-gray-500 font-light'} mb-4`}>Acesse o plano Gold 10x com conteúdos e recursos exclusivos.</p>
+                <div className="mt-4">
+                  {hasGold10xAccess ? (
+                    <Link 
+                      href="/10x" 
+                      className="inline-block bg-[#5a96f4] text-white font-semibold px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+                    >
+                      Acessar
+                    </Link>
+                  ) : (
+                    <span className="inline-block bg-gray-700 text-gray-400 font-light px-4 py-2 rounded-md cursor-not-allowed">
+                      Indisponível
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </main>
       

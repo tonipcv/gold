@@ -191,7 +191,7 @@ export async function POST(req: Request) {
     console.log('Produtos disponíveis:', allProducts.map(p => ({ id: p.id, name: p.name, guruProductId: p.guruProductId || 'não definido' })));
     
     // Buscar produto pelo guruProductId
-    const localProduct = await prisma.product.findFirst({ 
+    let localProduct = await prisma.product.findFirst({ 
       where: { 
         guruProductId: {
           equals: guruProductId
@@ -201,17 +201,32 @@ export async function POST(req: Request) {
 
     if (!localProduct) {
       console.log(`Produto com guruProductId ${guruProductId} não encontrado`);
-      
-      // Registrar a tentativa de compra mesmo sem encontrar o produto
-      console.log(`Registrando tentativa de compra para email ${email} e produto ID ${guruProductId}`);
-      
-      return NextResponse.json(
-        { 
-          error: 'Produto não encontrado', 
-          message: 'A tentativa de compra foi registrada, mas o produto não foi encontrado no sistema.'
-        },
-        { status: 404 }
-      );
+      // Forçar mapeamento para o produto local 'Gold 10x' quando o nome recebido indicar isso
+      const rawIncomingName = product?.name || body?.items?.[0]?.name || '';
+      const incomingNameLc = String(rawIncomingName).toLowerCase();
+      const isGold10x = incomingNameLc.includes('gold') && incomingNameLc.includes('10x');
+      const targetName = isGold10x ? 'Gold 10x' : rawIncomingName || `Produto ${guruProductId}`;
+
+      console.log(`Tentando resolver por nome forçado: ${targetName}`);
+      const byName = await prisma.product.findFirst({ where: { name: targetName } });
+      if (byName) {
+        console.log(`Produto encontrado por nome (${targetName}). Atualizando guruProductId -> ${guruProductId}`);
+        // Sincronizar guruProductId com o recebido
+        localProduct = await prisma.product.update({
+          where: { id: byName.id },
+          data: { guruProductId: String(guruProductId) },
+        });
+      } else {
+        console.log(`Produto '${targetName}' não existe. Criando automaticamente com guruProductId ${guruProductId}`);
+        localProduct = await prisma.product.create({
+          data: {
+            name: targetName,
+            description: 'Criado automaticamente via webhook',
+            guruProductId: String(guruProductId),
+            accessDurationDays: 365,
+          },
+        });
+      }
     }
     
     console.log(`Produto encontrado: ${localProduct.name} (ID: ${localProduct.id})`);

@@ -153,6 +153,27 @@ export default function AdminUsers() {
     }
   };
 
+  // Reenviar acesso por e-mail (usuário já confirmado)
+  const handleResendAccess = async (email: string) => {
+    try {
+      setError(null);
+      const response = await fetch('/api/admin/resend-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || data.message || 'Falha ao reenviar acesso');
+      }
+      setSuccess(data.message || 'Acesso reenviado com sucesso!');
+      setTimeout(() => setSuccess(null), 3000);
+    } catch (err: any) {
+      setError(err.message || 'Erro ao reenviar acesso');
+      setTimeout(() => setError(null), 4000);
+    }
+  };
+
   const handleAddUser = async () => {
     if (!newUser.name || !newUser.email || !newUser.password) {
       setError('Nome, email e senha são obrigatórios');
@@ -373,6 +394,15 @@ export default function AdminUsers() {
                             <PlusIcon className="h-5 w-5 mr-1" />
                             Adicionar Produto
                           </button>
+                          <div className="mt-2">
+                            <button
+                              onClick={() => handleResendAccess(user.email)}
+                              className="text-green-400 hover:text-green-300 text-sm underline"
+                              title="Reenviar e-mail de acesso confirmado"
+                            >
+                              Reenviar acesso por e-mail
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}

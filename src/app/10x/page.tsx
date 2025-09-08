@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import XLogo from '@/components/XLogo';
 
 export default function Page() {
@@ -19,6 +19,9 @@ export default function Page() {
     }
   }, []);
 
+  // Typed alias to allow using the custom web component in TSX
+  const VturbSmartPlayer = 'vturb-smartplayer' as unknown as React.ElementType;
+
   return (
     <div className="font-montserrat bg-black text-white min-h-screen">
       {/* Header with white logo centered (same style language as planos) */}
@@ -30,10 +33,10 @@ export default function Page() {
       <main className="px-4 py-10">
         <div className="max-w-4xl mx-auto">
           <div className="w-full mx-auto">
-            <vturb-smartplayer
+            <VturbSmartPlayer
               id="vid-68be2a739eb8eabea3030266"
               style={{ display: 'block', margin: '0 auto', width: '100%' }}
-            ></vturb-smartplayer>
+            />
           </div>
         </div>
       </main>

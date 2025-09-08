@@ -1,10 +1,20 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import XLogo from "@/components/XLogo";
 import { useSearchParams } from "next/navigation";
 
+// Page component: provides Suspense boundary
 export default function FormularioLiberacaoPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black text-white flex items-center justify-center">Carregando…</div>}>
+      <FormContent />
+    </Suspense>
+  );
+}
+
+// Child component that uses useSearchParams inside Suspense
+function FormContent() {
   const [form, setForm] = useState({
     name: "",
     purchaseEmail: "",
@@ -14,7 +24,6 @@ export default function FormularioLiberacaoPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-  const [autoSubmitted, setAutoSubmitted] = useState(false);
   const searchParams = useSearchParams();
   const hasAttemptedAuto = useRef(false);
 
@@ -80,7 +89,6 @@ export default function FormularioLiberacaoPage() {
         const data = await res.json();
         if (!res.ok) throw new Error(data?.error || "Erro ao enviar.");
         setSuccess(true);
-        setAutoSubmitted(true);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Erro ao enviar.");
       } finally {

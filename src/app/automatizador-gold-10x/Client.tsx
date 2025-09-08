@@ -3,7 +3,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 // ConverteAI vturb player component (SSR-safe): render placeholder and init on client
@@ -53,6 +52,8 @@ interface Episode {
   title: string
   playerId: string
   duration?: string
+  linkYouTube?: string
+  locked?: boolean
 }
 
 export default function AutomatizadorGold10xClient() {
@@ -80,10 +81,22 @@ export default function AutomatizadorGold10xClient() {
   }, [])
 
   const episodes: Episode[] = [
-    { id: 1, number: 1, title: 'Começando do Absoluto Zero e Instalando a Automação pelo Celular', playerId: '68af32d1c3d8b7bced8ce3db' },
-    { id: 2, number: 2, title: 'Instalando a Estratégia da Automação do Zero', playerId: '68aeeb36040f0b0ec4ad980e' },
-    { id: 3, number: 3, title: 'Ativando a Automação no Celular', playerId: '68aeeb15d03165f25f444b0b' },
-    { id: 4, number: 4, title: 'Como aumentar a perfomance da Automação', playerId: '68af0480d92b07c6d4ea02b0' },
+    { id: 1,  number: 1,  title: 'Começando do Absoluto Zero e Instalando a Automação pelo Celular', playerId: '68af32d1c3d8b7bced8ce3db', linkYouTube: 'https://youtu.be/DL5W6ML54K4' },
+    { id: 2,  number: 2,  title: 'Instalando a Estratégia da Automação do Zero',                       playerId: '68aeeb36040f0b0ec4ad980e', linkYouTube: 'https://youtu.be/r3t6RRTJKI4' },
+    { id: 3,  number: 3,  title: 'Ativando a Automação no Celular',                                     playerId: '68aeeb15d03165f25f444b0b', linkYouTube: 'https://youtu.be/I1grTqIoTN8' },
+    { id: 4,  number: 4,  title: 'Como aumentar a performance da Automação',                            playerId: '68af0480d92b07c6d4ea02b0', linkYouTube: 'https://youtu.be/sBESNmxQzTs' },
+    { id: 5,  number: 5,  title: 'Gerenciamento por banca por conta Cent x Standard (tabela lote x banca)', playerId: '' },
+    { id: 6,  number: 6,  title: 'Como trocar de conta Cent e Standard + VPS',                          playerId: '' },
+    { id: 7,  number: 7,  title: 'Como não pagar VPS',                                                   playerId: '' },
+    { id: 8,  number: 8,  title: 'Horário de funcionamento do mercado',                                 playerId: '' },
+    { id: 9,  number: 9,  title: 'Não fechar operação na mão (por que o resultado muda e o que acontece se fizer isso em várias operações)', playerId: '' },
+    { id: 10, number: 10, title: 'Explicação da estratégia no Ouro (foco em resultado mensal + mostrar resultados mensais)', playerId: '' },
+    { id: 11, number: 11, title: 'VPS + PC (como saber se instalou correto: primeira operação abre sozinha; ajuste de lote via migrar ou botão AlgoTrading verde; como ativar e desativar a automação)', playerId: '', locked: true },
+    { id: 12, number: 12, title: 'Correlação da estratégia com cenário de guerra e macroeconomia',      playerId: '' },
+    { id: 13, number: 13, title: 'Risco zero + alavancagem 10x (retirar valor investido, operar com lucro, aumentar/diminuir lote, estratégia de saque)', playerId: '' },
+    { id: 14, number: 14, title: 'Liberação oficial (formulário, planos e turmas)',                      playerId: '' },
+    { id: 15, number: 15, title: 'Liberação do arquivo oficial', playerId: '', locked: true },
+    { id: 16, number: 16, title: 'Termo de responsabilidade (alerta sobre ganância, lucros passados não garantem futuros, aceitação de riscos da renda variável)', playerId: '' },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!
@@ -91,6 +104,8 @@ export default function AutomatizadorGold10xClient() {
   // Troca de episódio
   const handleEpisodeChange = (id: number) => {
     if (id === activeEpisode) return
+    const target = episodes.find((e) => e.id === id)
+    if (!target || target.locked) return
     setActiveEpisode(id)
   }
 
@@ -107,46 +122,36 @@ export default function AutomatizadorGold10xClient() {
   }, [activeEpisode])
 
   return (
-    <div className="min-h-screen bg-[#111] text-gray-200">
-      {/* Header */}
-      <header className="fixed top-0 w-full bg-[#111]/90 backdrop-blur-sm z-50 px-4 py-3">
-        <div className="flex justify-center lg:justify-start">
-          <div className="flex items-center">
-            <Image src="/ft-icon.png" alt="Futuros Tech Logo" width={40} height={40} className="brightness-0 invert" />
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="pt-14 pb-8">
-        {/* Mobile-only Countdown at Top */}
-        <div className="block md:hidden px-4 mt-2">
-          <section className="bg-gray-900/40 p-3 rounded-lg border border-gray-800">
-            <p className="text-center text-sm text-gray-300 font-semibold mb-3">
-              Versão 10x será liberada em:
-            </p>
-            <div className="grid grid-cols-4 gap-2">
-              {[
-                { label: 'Dias', value: timeLeft.d },
-                { label: 'Horas', value: timeLeft.h },
-                { label: 'Min', value: timeLeft.m },
-                { label: 'Seg', value: timeLeft.s },
-              ].map((item) => (
-                <div key={item.label} className="text-center bg-black/40 rounded-lg py-2 border border-gray-800">
-                  <div className="text-3xl font-bold text-green-400 leading-none">{String(item.value).padStart(2, '0')}</div>
-                  <div className="text-xs uppercase tracking-wide text-gray-400">{item.label}</div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
+    <div className="text-gray-200">
+      {/* Main Content (header e menu já vêm da página pai) */}
+      <main className="pt-4 pb-8">
+        {/* (removido) Countdown mobile */}
         {/* Video Player Section */}
-        <div className="w-full md:w-1/2 lg:w-1/2 md:mx-auto lg:mx-auto px-4 mt-4">
+        <div className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto px-4 mt-2">
           {/* Title above video */}
-          <h2 className="text-lg md:text-xl font-bold text-white text-center mt-5 mb-5 md:mt-8 md:mb-6">{currentEpisode.title}</h2>
-          <div className="bg-black">
-            <VturbPlayer key={currentEpisode.playerId} playerId={currentEpisode.playerId} />
-          </div>
+          <h2 className="text-lg md:text-xl font-bold text-white text-center mt-3 mb-4 md:mt-6 md:mb-5">AULA {currentEpisode.number} - {currentEpisode.title}</h2>
+          {currentEpisode.linkYouTube ? (
+            <div className="rounded-lg border border-gray-800 overflow-hidden bg-black">
+              <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+                <iframe
+                  src={currentEpisode.linkYouTube.replace('youtu.be/', 'www.youtube.com/embed/').replace('watch?v=', 'embed/')} 
+                  title={`AULA ${currentEpisode.number}`}
+                  className="absolute inset-0 w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          ) : currentEpisode.playerId ? (
+            <div className="bg-black rounded-lg border border-gray-800 overflow-hidden">
+              <VturbPlayer key={currentEpisode.playerId} playerId={currentEpisode.playerId} />
+            </div>
+          ) : (
+            <div className="rounded-lg border border-gray-800 bg-gray-900/40 p-6 text-center text-sm text-gray-300">
+              Vídeo ainda não disponível para esta aula.
+            </div>
+          )}
           <div className="px-0 py-4">
             {activeEpisode === 1 && aula1CtaVisible && (
               <div className="mt-4 flex flex-col items-center gap-4">
@@ -193,50 +198,40 @@ export default function AutomatizadorGold10xClient() {
           </div>
         </div>
 
-        {/* Episodes List and Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 md:w-1/2 lg:w-1/2 md:mx-auto lg:mx-auto gap-0">
-          {/* Episodes List */}
-          <div className="md:h-[calc(100vh-11rem)] lg:h-[calc(100vh-11rem)] md:overflow-y-auto lg:overflow-y-auto px-4 pb-2 md:p-4 lg:p-4 episode-list">
+        {/* Episodes List (minimal) */}
+        <div className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto">
+          <div className="px-4 pb-2 md:p-4 lg:p-4 episode-list">
             <div className="space-y-1 lg:space-y-2">
-              {episodes.map((episode) => (
+              {episodes.map((episode) => {
+                const isLocked = !!episode.locked
+                const isActive = activeEpisode === episode.id
+                return (
                 <button
                   key={episode.id}
                   onClick={() => handleEpisodeChange(episode.id)}
-                  className={`w-full flex gap-3 p-3 rounded-lg transition-colors ${
-                    activeEpisode === episode.id ? 'bg-gray-400/30 border-l-4 border-green-300' : 'hover:bg-gray-800'
+                  aria-disabled={isLocked}
+                  disabled={isLocked}
+                  className={`w-full flex items-start gap-3 p-3 rounded-lg transition-colors border ${
+                    isActive
+                      ? 'bg-white/10 border-white/10'
+                      : isLocked
+                        ? 'bg-transparent border-transparent opacity-60 cursor-not-allowed'
+                        : 'bg-transparent hover:bg-white/5 border-transparent cursor-pointer'
                   }`}
                 >
+                  {isLocked && (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 mt-1 text-gray-300">
+                      <path d="M12 1a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm-3 8V6a3 3 0 116 0v3H9z" />
+                    </svg>
+                  )}
                   <div className="flex-1 text-left">
-                    <h3 className="font-semibold text-green-300 text-lg md:text-sm">Aula {episode.number}</h3>
-                    <p className="text-base md:text-xs text-gray-200">{episode.title}</p>
+                    <h3 className={`font-medium ${isLocked ? 'text-gray-300' : 'text-white'} text-sm md:text-base tracking-tight`}>AULA {episode.number} - {episode.title}</h3>
                     {episode.duration && <p className="text-xs text-gray-400 mt-1">{episode.duration}</p>}
                   </div>
                 </button>
-              ))}
+                )
+              })}
             </div>
-          </div>
-
-          {/* Content and Materials */}
-          <div className="hidden md:space-y-4 lg:space-y-4 px-4 md:p-4 lg:p-4 md:block">
-            <section className="bg-gray-900/40 p-3 lg:p-4 rounded-lg border border-gray-800">
-              {/* Countdown only */}
-              <p className="text-center text-sm md:text-base text-gray-300 font-semibold mb-3">
-                Versão 10x será liberada em:
-              </p>
-              <div className="grid grid-cols-4 gap-2">
-                {[
-                  { label: 'Dias', value: timeLeft.d },
-                  { label: 'Horas', value: timeLeft.h },
-                  { label: 'Min', value: timeLeft.m },
-                  { label: 'Seg', value: timeLeft.s },
-                ].map((item) => (
-                  <div key={item.label} className="text-center bg-black/40 rounded-lg py-2 border border-gray-800">
-                    <div className="text-3xl md:text-2xl font-bold text-green-400 leading-none">{String(item.value).padStart(2, '0')}</div>
-                    <div className="text-xs md:text-[10px] uppercase tracking-wide text-gray-400">{item.label}</div>
-                  </div>
-                ))}
-              </div>
-            </section>
           </div>
         </div>
 

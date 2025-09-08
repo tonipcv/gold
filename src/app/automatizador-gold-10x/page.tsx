@@ -18,7 +18,7 @@ export default async function AutomatizadorGold10xPage() {
       <header className="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 px-4 py-3">
         <div className="flex justify-center lg:justify-start items-center">
           <Link href="/" className="flex items-center">
-            <OptimizedImage src="/ft-icone.png" alt="Futuros Tech Logo" width={40} height={40} />
+            <OptimizedImage src="/ft-icone.png" alt="Futuros Tech Logo" width={40} height={40} className="brightness-0 invert" />
           </Link>
         </div>
       </header>

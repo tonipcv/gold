@@ -166,7 +166,13 @@ export default function AdminUsers() {
       if (!response.ok) {
         throw new Error(data.error || data.message || 'Falha ao reenviar acesso');
       }
-      setSuccess(data.message || 'Acesso reenviado com sucesso!');
+      if (data.skipped) {
+        setSuccess(
+          `${data.message} Configure SMTP (.env): SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS, EMAIL_FROM_NAME, EMAIL_FROM_ADDRESS.`
+        );
+      } else {
+        setSuccess(data.message || 'Acesso reenviado com sucesso!');
+      }
       setTimeout(() => setSuccess(null), 3000);
     } catch (err: any) {
       setError(err.message || 'Erro ao reenviar acesso');

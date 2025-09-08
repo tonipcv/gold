@@ -53,6 +53,22 @@ export async function POST(req: Request) {
       </div>
     `
 
+    // Simple in-memory throttle per email (best-effort)
+    const transientCodes = [421, 450, 451, 452, 471]
+    ;(globalThis as any).__resendThrottle = (globalThis as any).__resendThrottle || new Map<string, number>()
+    const throttle = (globalThis as any).__resendThrottle as Map<string, number>
+    const now = Date.now()
+    const last = throttle.get(email) || 0
+    const minIntervalMs = 30_000 // 30s between attempts per email on this instance
+    if (now - last < minIntervalMs) {
+      const wait = Math.ceil((minIntervalMs - (now - last)) / 1000)
+      return NextResponse.json({
+        error: `Muitas tentativas para ${email}. Aguarde ${wait}s e tente novamente.`,
+        retryAfterSeconds: wait,
+      }, { status: 429 })
+    }
+    throttle.set(email, now)
+
     const result = await sendEmail({
       to: email,
       subject: 'Acesso confirmado • Automatizador Gold 10X',
@@ -67,7 +83,16 @@ export async function POST(req: Request) {
     }
 
     if (!(result as any).success) {
-      return NextResponse.json({ error: 'Falha ao enviar e-mail' }, { status: 500 })
+      const code = (result as any).errorCode
+      if (transientCodes.includes(code)) {
+        return NextResponse.json({
+          error: 'Limite do provedor de e-mail atingido. Tente novamente em alguns minutos.',
+          retryAfterSeconds: 120,
+          errorCode: code,
+          attempts: (result as any).attempts,
+        }, { status: 429 })
+      }
+      return NextResponse.json({ error: 'Falha ao enviar e-mail', errorCode: code }, { status: 500 })
     }
 
     return NextResponse.json({ message: `Enviamos a mensagem de primeiro acesso para ${email}.`, success: true })

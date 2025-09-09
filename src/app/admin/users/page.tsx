@@ -58,6 +58,9 @@ export default function AdminUsers() {
   const [setPwdUser, setSetPwdUser] = useState<User | null>(null);
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  // Seleção em massa e ações em lote
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [isBulkSending, setIsBulkSending] = useState(false);
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
@@ -68,6 +71,114 @@ export default function AdminUsers() {
   // Página protegida com senha adicional
   const [accessGranted, setAccessGranted] = useState(false);
   const [adminPassword, setAdminPassword] = useState('');
+
+  // Lista filtrada (por nome/email) usada na tabela e na seleção em massa
+  const filteredUsers = users.filter(user => 
+    user.email.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    (user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  // Helpers para seleção e filtro de "paid"
+  const userIsPaid = (user: User) => {
+    return Array.isArray(user.purchases) && user.purchases.some(p => (p.status || '').toLowerCase() === 'paid');
+  };
+
+  const toggleSelect = (userId: string) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(userId)) next.delete(userId); else next.add(userId);
+      return next;
+    });
+  };
+
+  const selectAllPaidVisible = () => {
+    const allPaidIds = filteredUsers.filter(userIsPaid).map(u => u.id);
+    setSelectedIds(new Set(allPaidIds));
+  };
+
+  const clearSelection = () => setSelectedIds(new Set());
+
+  // Reenvio em massa apenas para usuários com status "paid"
+  const handleBulkResendAccess = async () => {
+    try {
+      setIsBulkSending(true);
+      setError(null);
+      setSuccess(null);
+      const selectedUsers = users.filter(u => selectedIds.has(u.id));
+      const paidUsers = selectedUsers.filter(userIsPaid);
+      if (paidUsers.length === 0) {
+        setError('Nenhum usuário selecionado com status paid.');
+        setTimeout(() => setError(null), 3000);
+        return;
+      }
+
+      let sent = 0;
+      let failures = 0;
+      for (const u of paidUsers) {
+        try {
+          const response = await fetch('/api/admin/resend-access', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: u.email }),
+          });
+          if (!response.ok) {
+            failures++;
+          } else {
+            sent++;
+          }
+          // Intervalo curto para evitar picos no provedor
+          await new Promise(res => setTimeout(res, 200));
+        } catch {
+          failures++;
+        }
+      }
+
+      setSuccess(`Reenvio concluído. Sucesso: ${sent}. Falhas: ${failures}.`);
+      setTimeout(() => setSuccess(null), 4000);
+    } finally {
+      setIsBulkSending(false);
+    }
+  };
+
+  // Reenvio para TODOS os usuários com status "paid" (independente de seleção/filtro)
+  const handleResendAllPaid = async () => {
+    try {
+      setIsBulkSending(true);
+      setError(null);
+      setSuccess(null);
+      const paidUsers = users.filter(userIsPaid);
+      if (paidUsers.length === 0) {
+        setError('Nenhum usuário com status paid encontrado.');
+        setTimeout(() => setError(null), 3000);
+        return;
+      }
+
+      let sent = 0;
+      let failures = 0;
+      for (const u of paidUsers) {
+        try {
+          const response = await fetch('/api/admin/resend-access', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: u.email }),
+          });
+          if (!response.ok) {
+            failures++;
+          } else {
+            sent++;
+          }
+          await new Promise(res => setTimeout(res, 200));
+        } catch {
+          failures++;
+        }
+      }
+
+      setSuccess(`Reenvio (todos paid) concluído. Sucesso: ${sent}. Falhas: ${failures}.`);
+      setTimeout(() => setSuccess(null), 4000);
+    } finally {
+      setIsBulkSending(false);
+    }
+  };
 
   // Carregar usuários e produtos
   useEffect(() => {
@@ -296,10 +407,7 @@ export default function AdminUsers() {
     }
   };
 
-  const filteredUsers = users.filter(user => 
-    user.email.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    (user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  
 
   if (status === 'loading') {
     return <div className="min-h-screen bg-black text-white flex items-center justify-center">Carregando...</div>;
@@ -358,6 +466,36 @@ export default function AdminUsers() {
                   <PlusIcon className="h-5 w-5" />
                   Adicionar Usuário
                 </button>
+                <button
+                  onClick={handleResendAllPaid}
+                  disabled={isBulkSending || users.filter(userIsPaid).length === 0}
+                  className={`flex items-center justify-center gap-1 py-2 px-4 rounded-md transition-colors ${isBulkSending ? 'bg-teal-900 cursor-not-allowed' : 'bg-teal-600 hover:bg-teal-700'} text-white`}
+                  title="Reenviar e-mail de acesso para TODOS os usuários com status paid"
+                >
+                  {isBulkSending ? 'Reenviando...' : 'Reenviar acesso (todos paid)'}
+                </button>
+                <button
+                  onClick={selectAllPaidVisible}
+                  className="flex items-center justify-center gap-1 bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md transition-colors"
+                  title="Selecionar todos os usuários visíveis com status paid"
+                >
+                  Selecionar todos (paid)
+                </button>
+                <button
+                  onClick={clearSelection}
+                  className="flex items-center justify-center gap-1 bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded-md transition-colors"
+                  title="Limpar seleção"
+                >
+                  Limpar seleção
+                </button>
+                <button
+                  onClick={handleBulkResendAccess}
+                  disabled={isBulkSending || users.filter(u => selectedIds.has(u.id) && userIsPaid(u)).length === 0}
+                  className={`flex items-center justify-center gap-1 py-2 px-4 rounded-md transition-colors ${isBulkSending ? 'bg-blue-900 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
+                  title="Reenviar acesso por e-mail para os usuários selecionados que estão paid"
+                >
+                  {isBulkSending ? 'Reenviando...' : 'Reenviar acesso (selecionados paid)'}
+                </button>
                 <div className="w-full md:w-64">
                   <input
                     type="text"
@@ -392,6 +530,9 @@ export default function AdminUsers() {
                   <thead className="bg-gray-700/50">
                     <tr>
                       <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                        Sel.
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                         Usuário
                       </th>
                       <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
@@ -405,6 +546,15 @@ export default function AdminUsers() {
                   <tbody className="divide-y divide-gray-700">
                     {filteredUsers.map((user) => (
                       <tr key={user.id} className="hover:bg-gray-700/30">
+                        <td className="px-4 py-4 align-top">
+                          <input
+                            type="checkbox"
+                            checked={selectedIds.has(user.id)}
+                            onChange={() => toggleSelect(user.id)}
+                            disabled={!userIsPaid(user)}
+                            title={userIsPaid(user) ? 'Selecionar usuário (paid)' : 'Disponível apenas para usuários paid'}
+                          />
+                        </td>
                         <td className="px-4 py-4">
                           <div className="font-medium">{user.name || 'Sem nome'}</div>
                           <div className="text-sm text-gray-400">{user.email}</div>
@@ -417,7 +567,7 @@ export default function AdminUsers() {
                                   <div>
                                     <div className="font-medium">{purchase.product.name}</div>
                                     <div className="text-xs text-gray-400">
-                                      Status: <span className={purchase.status === 'ACTIVE' ? 'text-green-400' : 'text-yellow-400'}>
+                                      Status: <span className={(purchase.status || '').toLowerCase() === 'paid' || purchase.status === 'ACTIVE' ? 'text-green-400' : 'text-yellow-400'}>
                                         {purchase.status}
                                       </span>
                                     </div>

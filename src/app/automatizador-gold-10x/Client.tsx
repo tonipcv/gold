@@ -81,23 +81,24 @@ export default function AutomatizadorGold10xClient() {
   }, [])
 
   const episodes: Episode[] = [
-    { id: 0,  number: 0,  title: 'PARABENS + CRONOGRAMA',                                                playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=c79b5e01-58e6-413c-8451-f3cb792fb6b5' },
+    { id: 0,  number: 0,  title: 'AVISO MUITO IMPORTANTE',                                               playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=c79b5e01-58e6-413c-8451-f3cb792fb6b5' },
     { id: 1,  number: 1,  title: 'CORRETORA',                                                            playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=5d155e09-3f0e-46ec-9b3a-f265f356399e' },
     { id: 2,  number: 2,  title: 'INSTALANDO ESTRATÉGIA',                                                playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=a25ab8a3-1277-4c62-9ee0-5a346eee0230' },
-    { id: 3,  number: 3,  title: 'ATIVANDO VPS',                                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=f907a720-2027-4572-bbb8-fec0719853fa' },
-    { id: 4,  number: 4,  title: 'RELATÓRIO ESTRATÉGIA',                                                 playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=ce792cee-c443-474e-9243-9c22036681de' },
-    { id: 5,  number: 5,  title: 'GERENCIAMENTO',                                                        playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=93523669-fc2c-48d3-9acc-3ba44f6c004d' },
-    { id: 6,  number: 6,  title: 'STANDARD PARA CENT',                                                   playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=a473eb20-3980-45fc-96b9-3900fb93bf33' },
-    { id: 7,  number: 7,  title: 'VPS GRATIS',                                                           playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=871a6c24-eec6-42dc-80a0-39917d630607' },
-    { id: 8,  number: 8,  title: 'NAO FAÇA ISSO',                                                        playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=9e54e191-b306-4608-8cdb-a463c2267036' },
-    { id: 9,  number: 9,  title: 'COMO FUNCIONA A ESTRATEGIA',                                           playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=b68fa2d3-6d23-4828-9595-961d7eedcfd1' },
-    { id: 10, number: 10, title: 'HORARIO DE FUNCIONAMENTO',                                             playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=43328382-6f35-4da1-9b4c-ddae576cf7a4' },
-    { id: 11, number: 11, title: 'FORMULARIO - LIBERAÇÃO OFICIAL',                                       playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=81f18403-cf49-43ae-b2ef-4e9d16c066a3' },
-    { id: 12, number: 12, title: 'SUPORTE WHATSAPP',                                                      playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=52f26f32-066d-4e61-84f9-1f1cf6f99c55' },
-    { id: 13, number: 13, title: 'Liberação Oficial',                                                    playerId: '', locked: true },
-    { id: 14, number: 14, title: '',                                                                     playerId: '', locked: true },
+    { id: 3,  number: 3,  title: 'ESTRATÉGIA NOVA - GOLD X',                                             playerId: '', linkYouTube: 'https://youtu.be/6lI-yyCvblQ' },
+    { id: 4,  number: 4,  title: 'ATIVANDO VPS',                                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=f907a720-2027-4572-bbb8-fec0719853fa' },
+    { id: 5,  number: 5,  title: 'RELATÓRIO ESTRATÉGIA',                                                 playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=ce792cee-c443-474e-9243-9c22036681de' },
+    { id: 6,  number: 6,  title: 'GERENCIAMENTO',                                                        playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=93523669-fc2c-48d3-9acc-3ba44f6c004d' },
+    { id: 7,  number: 7,  title: 'STANDARD PARA CENT',                                                   playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=a473eb20-3980-45fc-96b9-3900fb93bf33' },
+    { id: 8,  number: 8,  title: 'VPS GRATIS',                                                           playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=871a6c24-eec6-42dc-80a0-39917d630607' },
+    { id: 9,  number: 9,  title: 'NAO FAÇA ISSO',                                                        playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=9e54e191-b306-4608-8cdb-a463c2267036' },
+    { id: 10, number: 10, title: 'COMO FUNCIONA A ESTRATEGIA',                                           playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=b68fa2d3-6d23-4828-9595-961d7eedcfd1' },
+    { id: 11, number: 11, title: 'HORARIO DE FUNCIONAMENTO',                                             playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=43328382-6f35-4da1-9b4c-ddae576cf7a4' },
+    { id: 12, number: 12, title: 'FORMULARIO - LIBERAÇÃO OFICIAL',                                       playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=81f18403-cf49-43ae-b2ef-4e9d16c066a3' },
+    { id: 13, number: 13, title: 'SUPORTE WHATSAPP',                                                      playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=52f26f32-066d-4e61-84f9-1f1cf6f99c55' },
+    { id: 14, number: 14, title: 'Liberação Oficial',                                                    playerId: '', locked: true },
     { id: 15, number: 15, title: '',                                                                     playerId: '', locked: true },
     { id: 16, number: 16, title: '',                                                                     playerId: '', locked: true },
+    { id: 17, number: 17, title: '',                                                                     playerId: '', locked: true },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!
@@ -197,7 +198,7 @@ export default function AutomatizadorGold10xClient() {
                 </a>
               </div>
             )}
-            {activeEpisode === 11 && (
+            {activeEpisode === 12 && (
               <div className="mt-4 flex flex-col items-center gap-4">
                 <a
                   href="https://gold.k17.com.br/formulario"
@@ -209,7 +210,7 @@ export default function AutomatizadorGold10xClient() {
                 </a>
               </div>
             )}
-            {activeEpisode === 12 && (
+            {activeEpisode === 13 && (
               <div className="mt-4 flex flex-col items-center gap-4">
                 <a
                   href="https://wa.me/5573991778075"

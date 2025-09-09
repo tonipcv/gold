@@ -1,36 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ChevronDown, ChevronRight, ChevronLeft } from 'lucide-react';
-import Image from 'next/image';
 import * as fbq from '@/lib/fpixel';
-import XLogo from '@/components/XLogo';
 import { OptimizedImage } from '@/app/components/OptimizedImage';
 
 export default function Page() {
-  const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(0);
   const [countdown, setCountdown] = useState(300); // 5 minutos em segundos
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-      setIsMobile(window.innerWidth <= 768);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev < (isMobile ? 4 : 3) ? prev + 1 : 0));
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [isMobile]);
+  // Página não possui carrossel nem elementos dependentes do tamanho da janela
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -50,8 +27,6 @@ export default function Page() {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
-
-  const toggleQuestion = (index: number) => setActiveQuestion(activeQuestion === index ? null : index);
 
   const handleSubscribeClick = (plan: string) => {
     fbq.event('InitiateCheckout', {
@@ -76,22 +51,6 @@ export default function Page() {
     </div>
   );
 
-  // Ensure VTurb player script is loaded
-  useEffect(() => {
-    const id = 'vturb-player-script-68bf26e08b8411c0246b6aff'
-    const existing = document.getElementById(id) as HTMLScriptElement | null
-    if (!existing) {
-      const s = document.createElement('script')
-      s.id = id
-      s.src = 'https://scripts.converteai.net/17e2196c-5794-49ef-bd61-857538a02fa6/players/68bf26e08b8411c0246b6aff/v4/player.js'
-      s.async = true
-      document.head.appendChild(s)
-    }
-  }, [])
-
-  // Typed alias to allow using the custom web component in TSX
-  const VturbSmartPlayer = 'vturb-smartplayer' as unknown as React.ElementType
-
   return (
     <div className="font-montserrat bg-black text-white min-h-screen relative overflow-hidden">
       <div className="relative z-10">
@@ -110,15 +69,6 @@ export default function Page() {
           </div>
           <div className="text-center">
             
-          </div>
-        </div>
-
-        {/* VTurb Player */}
-        <div className="px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="w-full mx-auto">
-              <VturbSmartPlayer id="vid-68bf26e08b8411c0246b6aff" style={{ display: 'block', margin: '0 auto', width: '100%' }} />
-            </div>
           </div>
         </div>
 
@@ -229,7 +179,7 @@ export default function Page() {
 
         <footer className="py-8 px-4 text-center bg-black">
           <p className="text-neutral-400 text-[12px] max-w-3xl mx-auto">
-            Assista o vídeo e libere seu acesso a instalação do GOLD X
+            Liberar acesso à instalação do GOLD X
           </p>
         </footer>
       </div>

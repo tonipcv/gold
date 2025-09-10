@@ -5,6 +5,7 @@ import AutomatizadorGold10xClient from './Client'
 import Link from 'next/link'
 import { OptimizedImage } from '../components/OptimizedImage'
 import { Navigation } from '../components/Navigation'
+import AttentionBanner from './AttentionBanner'
 
 export default async function AutomatizadorGold10xPage() {
   const session = await getServerSession(authOptions)
@@ -24,7 +25,10 @@ export default async function AutomatizadorGold10xPage() {
       </header>
 
       {/* Main Content */}
-      <main className="pt-14 pb-20">
+      <main className="pt-24 pb-20">
+        <div className="mb-4">
+          <AttentionBanner />
+        </div>
         <div className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto px-4 py-4">
           <AutomatizadorGold10xClient />
         </div>

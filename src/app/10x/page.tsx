@@ -25,6 +25,10 @@ export default function Page() {
 
   return (
     <div className="font-montserrat bg-black text-white min-h-screen">
+      {/* Top Red Banner */}
+      <div className="w-full bg-red-600 text-white text-center py-2 px-4 font-semibold tracking-wide">
+        ÚLTIMOS ACESSOS DISPONÍVEIS
+      </div>
       {/* Header with white logo centered (same style language as planos) */}
       <div className="w-full flex justify-center pt-8">
         <OptimizedImage src="/ft-icone.png" alt="FT Logo" width={56} height={56} className="invert brightness-0 md:w-20 md:h-20" />

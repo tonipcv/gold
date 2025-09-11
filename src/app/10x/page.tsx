@@ -70,7 +70,7 @@ export default function Page() {
       {/* Page Title */}
       <div className="px-4 mt-6">
         <h1 className="text-center text-xl md:text-xl font-light bg-gradient-to-r from-neutral-300 to-white bg-clip-text text-transparent tracking-tight">
-          Assista o vídeo e libere seu acesso a instalação do GOLD X
+          Estamos liberando os últimos acessos ao GOLD X, assista o vídeo:
         </h1>
       </div>
 

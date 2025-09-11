@@ -27,7 +27,7 @@ export default function Page() {
     <div className="font-montserrat bg-black text-white min-h-screen">
       {/* Top Red Banner */}
       <div className="w-full bg-red-600 text-white text-center py-2 px-4 font-semibold tracking-wide">
-        ÚLTIMOS ACESSOS DISPONÍVEIS
+        VAGAS ENCERRAM HOJE POR DEFINITIVO!
       </div>
       {/* Header with white logo centered (same style language as planos) */}
       <div className="w-full flex justify-center pt-8">

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import crypto from 'crypto'
 import { sendEmail } from '@/lib/email'
+import { getBaseUrl } from '@/lib/url'
 
 export async function POST(request: Request) {
   try {
@@ -55,9 +56,7 @@ export async function POST(request: Request) {
       }
     })
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 
-                   process.env.NEXTAUTH_URL || 
-                   'https://wallet.k17.com.br'
+    const baseUrl = getBaseUrl(request)
     const resetUrl = `${baseUrl}/reset-password?token=${resetToken}`
 
     await sendEmail({
@@ -69,6 +68,12 @@ export async function POST(request: Request) {
         <a href="${resetUrl}" style="display: inline-block; padding: 12px 24px; background-color: #3b82f6; color: white; text-decoration: none; border-radius: 6px;">
           Redefinir Senha
         </a>
+        <p style="margin-top:12px;color:#111">
+          Se o botão não funcionar, copie e cole este link no seu navegador:
+        </p>
+        <p style="word-break: break-all; background:#f5f5f5; padding:8px 12px; border-radius:6px;">
+          ${resetUrl}
+        </p>
         <p>Se você não solicitou a recuperação de senha, ignore este email.</p>
         <p>Este link é válido por 1 hora.</p>
       `

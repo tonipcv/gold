@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { sendEmail } from '@/lib/email'
+import { getBaseUrl } from '@/lib/url'
 
 export async function POST(req: Request) {
   try {
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
     }
 
     // Enviar e-mail real
-    const base = process.env.NEXT_PUBLIC_BASE_URL || 'https://gold.k17.com.br'
+    const base = getBaseUrl(req)
     const appLink = `${base}/automatizador-gold-10x`
     const passwordLink = `${base}/forgot-password`
     const html = `
@@ -49,6 +50,11 @@ export async function POST(req: Request) {
             Acessar o Automatizador
           </a>
         </p>
+        <div style="font-size:13px;color:#333;margin-top:8px">
+          <p style="margin:6px 0 2px">Se os botões não funcionarem, copie e cole estes links no seu navegador:</p>
+          <p style="margin:0;word-break:break-all;background:#f5f5f5;padding:8px 12px;border-radius:6px"><strong>Alterar senha:</strong> ${passwordLink}</p>
+          <p style="margin:8px 0 0;word-break:break-all;background:#f5f5f5;padding:8px 12px;border-radius:6px"><strong>Acessar app:</strong> ${appLink}</p>
+        </div>
         <p style="font-size:12px;color:#555;margin-top:12px">Se você não solicitou este acesso, ignore este e-mail.</p>
       </div>
     `

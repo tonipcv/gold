@@ -29,6 +29,7 @@ export default function AdminFormulariosPage() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [exporting, setExporting] = useState(false);
 
   const totalPages = useMemo(() => Math.max(1, Math.ceil(total / pageSize)), [total, pageSize]);
 
@@ -80,35 +81,80 @@ export default function AdminFormulariosPage() {
     fetchData({ page: 1, search });
   };
 
-  const exportCSV = () => {
-    const headers = [
-      "ID",
-      "Nome",
-      "Email de Compra",
-      "Whatsapp",
-      "Número de Conta",
-      "Criado Em",
-    ];
-    const rows = items.map((it) => [
-      it.id,
-      it.name,
-      it.purchaseEmail,
-      it.whatsapp,
-      it.accountNumber,
-      new Date(it.createdAt).toLocaleString(),
-    ]);
+  const exportAllCSV = async () => {
+    try {
+      setExporting(true);
+      setError(null);
 
-    const csvContent = [headers, ...rows]
-      .map((row) => row.map((cell) => `"${String(cell ?? "").replace(/"/g, '""')}"`).join(","))
-      .join("\n");
+      // Fetch first page with max pageSize to get total
+      const MAX_PS = 200;
+      const params = new URLSearchParams({ page: String(1), pageSize: String(MAX_PS) });
+      if (search) params.set("search", search);
 
-    const blob = new Blob(["\ufeff" + csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `formularios_${new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-")}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+      const firstRes = await fetch(`/api/formulario-liberacao?${params.toString()}`);
+      if (!firstRes.ok) {
+        const data = await firstRes.json().catch(() => ({}));
+        throw new Error(data?.error || "Falha ao carregar dados para exportação");
+      }
+      const firstData: ApiResponse = await firstRes.json();
+      const allItems: Formulario[] = [...(firstData.items || [])];
+
+      const totalRecords = firstData.total || 0;
+      const totalPagesAll = Math.max(1, Math.ceil(totalRecords / MAX_PS));
+
+      if (totalPagesAll > 1) {
+        // Fetch remaining pages in parallel
+        const fetches = [] as Promise<Response>[];
+        for (let p = 2; p <= totalPagesAll; p++) {
+          const pParams = new URLSearchParams({ page: String(p), pageSize: String(MAX_PS) });
+          if (search) pParams.set("search", search);
+          fetches.push(fetch(`/api/formulario-liberacao?${pParams.toString()}`));
+        }
+        const results = await Promise.all(fetches);
+        for (const res of results) {
+          if (!res.ok) {
+            const data = await res.json().catch(() => ({}));
+            throw new Error(data?.error || "Falha ao carregar dados em uma das páginas");
+          }
+          const data: ApiResponse = await res.json();
+          allItems.push(...(data.items || []));
+        }
+      }
+
+      // Build CSV from allItems
+      const headers = [
+        "ID",
+        "Nome",
+        "Email de Compra",
+        "Whatsapp",
+        "Número de Conta",
+        "Criado Em",
+      ];
+      const rows = allItems.map((it) => [
+        it.id,
+        it.name,
+        it.purchaseEmail,
+        it.whatsapp,
+        it.accountNumber,
+        new Date(it.createdAt).toLocaleString(),
+      ]);
+
+      const csvContent = [headers, ...rows]
+        .map((row) => row.map((cell) => `"${String(cell ?? "").replace(/"/g, '""')}"`).join(","))
+        .join("\n");
+
+      const blob = new Blob(["\ufeff" + csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `formularios_${new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-")}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err: any) {
+      setError(err.message || "Erro ao exportar CSV");
+    } finally {
+      setExporting(false);
+    }
   };
 
   return (
@@ -172,11 +218,11 @@ export default function AdminFormulariosPage() {
                   </button>
                 </form>
                 <button
-                  onClick={exportCSV}
-                  disabled={items.length === 0}
-                  className={`px-4 py-2 rounded-md ${items.length === 0 ? 'bg-gray-800 text-gray-500' : 'bg-green-600 hover:bg-green-700 text-white'}`}
+                  onClick={exportAllCSV}
+                  disabled={exporting || (total === 0 && items.length === 0)}
+                  className={`px-4 py-2 rounded-md ${exporting || (total === 0 && items.length === 0) ? 'bg-gray-800 text-gray-500' : 'bg-green-600 hover:bg-green-700 text-white'}`}
                 >
-                  Exportar CSV
+                  {exporting ? 'Exportando…' : 'Exportar CSV (todos)'}
                 </button>
               </div>
             </div>

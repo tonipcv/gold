@@ -95,10 +95,8 @@ export default function AutomatizadorGold10xClient() {
     { id: 11, number: 11, title: 'HORARIO DE FUNCIONAMENTO',                                             playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=43328382-6f35-4da1-9b4c-ddae576cf7a4' },
     { id: 12, number: 12, title: 'FORMULARIO - LIBERAÇÃO OFICIAL',                                       playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=81f18403-cf49-43ae-b2ef-4e9d16c066a3' },
     { id: 13, number: 13, title: 'SUPORTE WHATSAPP',                                                      playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=52f26f32-066d-4e61-84f9-1f1cf6f99c55' },
-    { id: 14, number: 14, title: 'Liberação Oficial',                                                    playerId: '', locked: true },
-    { id: 15, number: 15, title: '',                                                                     playerId: '', locked: true },
-    { id: 16, number: 16, title: '',                                                                     playerId: '', locked: true },
-    { id: 17, number: 17, title: 'ENCONTRO DE MENTORIA GOLD 10X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=56b8726a-0951-45ce-aaf8-37ce313fb20f' },
+    { id: 14, number: 14, title: 'LIBERAÇÃO OFICIAL',                                                    playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=5f947127-f90c-40e0-a5d9-cd2ff2f3c506' },
+    { id: 15, number: 15, title: 'ENCONTRO DE MENTORIA GOLD 10X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=56b8726a-0951-45ce-aaf8-37ce313fb20f' },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!
@@ -172,6 +170,21 @@ export default function AutomatizadorGold10xClient() {
             </div>
           )}
           <div className="px-0 py-4">
+            {activeEpisode === 14 && (
+              <div className="mt-4 flex flex-col items-center gap-4">
+                <a
+                  href="https://drive.google.com/drive/folders/1PbzjUuy5jZW-9eVLDVs-tNFyl1bs7bjg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border border-green-500 bg-green-700 text-white text-base font-semibold shadow-[0_0_28px_rgba(34,197,94,0.35)] hover:bg-green-600 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                    <path d="M5 20h14v-2H5v2Zm7-3 5-5h-3V4h-4v8H7l5 5Z" />
+                  </svg>
+                  BAIXAR ARQUIVO!
+                </a>
+              </div>
+            )}
             {activeEpisode === 1 && (
               <div className="mt-4 flex flex-col items-center gap-4">
                 <a

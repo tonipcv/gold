@@ -98,7 +98,7 @@ export default function AutomatizadorGold10xClient() {
     { id: 14, number: 14, title: 'Liberação Oficial',                                                    playerId: '', locked: true },
     { id: 15, number: 15, title: '',                                                                     playerId: '', locked: true },
     { id: 16, number: 16, title: '',                                                                     playerId: '', locked: true },
-    { id: 17, number: 17, title: 'Encontro de Mentroria Gold 10x',                                       playerId: '', linkYouTube: 'https://www.youtube.com/watch?v=eLs_rgME3jk' },
+    { id: 17, number: 17, title: '',                                                                     playerId: '', locked: true },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!

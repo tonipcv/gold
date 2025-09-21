@@ -35,10 +35,10 @@ export default function AttentionBanner() {
   return (
     <div className="mx-4 md:mx-auto md:w-3/4 lg:w-3/4">
       <a
-        href="?aula=17"
+        href="?aula=14"
         className="relative block overflow-hidden rounded-xl border border-emerald-500/40 bg-emerald-600/10 text-emerald-100 shadow-[0_0_0_1px_rgba(16,185,129,0.25)] hover:bg-emerald-600/20 transition-colors"
         role="alert"
-        aria-label="Aula de Mentoria disponível. Clique para assistir."
+        aria-label="Liberação oficial do Automatizador. Clique para assistir."
       >
         <div className="p-4 md:p-5">
           <div className="flex items-start gap-3">
@@ -47,11 +47,11 @@ export default function AttentionBanner() {
             </svg>
             <div className="flex-1">
               <div className="text-sm md:text-base">
-                <span className="font-semibold">Atenção:</span> Aula de Mentoria disponível —
+                <span className="font-semibold">Atenção:</span> Liberação oficial do Automatizador —
                 <span className="underline underline-offset-2 ml-1">clique aqui para assistir agora</span>.
               </div>
               <div className="mt-1 text-xs text-emerald-200/80">
-                Se não abrir direto, selecione a "AULA 17 - Encontro de Mentoria Gold 10x" na lista.
+                Se não abrir direto, selecione a "AULA 14 - Liberação Oficial" na lista.
               </div>
             </div>
           </div>

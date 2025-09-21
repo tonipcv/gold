@@ -98,7 +98,7 @@ export default function AutomatizadorGold10xClient() {
     { id: 14, number: 14, title: 'Liberação Oficial',                                                    playerId: '', locked: true },
     { id: 15, number: 15, title: '',                                                                     playerId: '', locked: true },
     { id: 16, number: 16, title: '',                                                                     playerId: '', locked: true },
-    { id: 17, number: 17, title: '',                                                                     playerId: '', locked: true },
+    { id: 17, number: 17, title: 'Encontro de Mentoria Gold 10x',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=56b8726a-0951-45ce-aaf8-37ce313fb20f' },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!

@@ -34,40 +34,32 @@ export default function AttentionBanner() {
 
   return (
     <div className="mx-4 md:mx-auto md:w-3/4 lg:w-3/4">
-      <div className="relative overflow-hidden rounded-xl border border-yellow-500/30 bg-yellow-500/10 text-yellow-100 shadow-[0_0_0_1px_rgba(234,179,8,0.2)]">
+      <a
+        href="?aula=17"
+        className="relative block overflow-hidden rounded-xl border border-emerald-500/40 bg-emerald-600/10 text-emerald-100 shadow-[0_0_0_1px_rgba(16,185,129,0.25)] hover:bg-emerald-600/20 transition-colors"
+        role="alert"
+        aria-label="Aula de Mentoria disponível. Clique para assistir."
+      >
         <div className="p-4 md:p-5">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div className="text-sm md:text-base leading-relaxed">
-              <span className="font-semibold">Atenção:</span> caso esteja entrando hoje ao instalar o Automatizador utilize banca reduzida e assista a <span className="underline">aula 5</span>.
-              Essa contagem regressiva é para a versão ficar 100% otimizada para escala, até <span className="whitespace-nowrap">17/09 às 12h</span>:
-            </div>
-            <div className="flex items-center gap-2 font-mono">
-              <div className="text-center">
-                <div className="text-lg md:text-2xl font-bold">{days}</div>
-                <div className="text-[10px] uppercase tracking-wider opacity-70">dias</div>
+          <div className="flex items-start gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 mt-0.5 text-emerald-300">
+              <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 15h-2v-2h2Zm0-4h-2V7h2Z" />
+            </svg>
+            <div className="flex-1">
+              <div className="text-sm md:text-base">
+                <span className="font-semibold">Atenção:</span> Aula de Mentoria disponível —
+                <span className="underline underline-offset-2 ml-1">clique aqui para assistir agora</span>.
               </div>
-              <div className="text-lg md:text-2xl font-bold">:</div>
-              <div className="text-center">
-                <div className="text-lg md:text-2xl font-bold">{hours}</div>
-                <div className="text-[10px] uppercase tracking-wider opacity-70">horas</div>
-              </div>
-              <div className="text-lg md:text-2xl font-bold">:</div>
-              <div className="text-center">
-                <div className="text-lg md:text-2xl font-bold">{minutes}</div>
-                <div className="text-[10px] uppercase tracking-wider opacity-70">min</div>
-              </div>
-              <div className="text-lg md:text-2xl font-bold">:</div>
-              <div className="text-center">
-                <div className="text-lg md:text-2xl font-bold">{seconds}</div>
-                <div className="text-[10px] uppercase tracking-wider opacity-70">seg</div>
+              <div className="mt-1 text-xs text-emerald-200/80">
+                Dica: se o link não abrir direto, role até a lista de aulas e selecione a "AULA 17 - Encontro de Mentroria Gold 10x".
               </div>
             </div>
           </div>
         </div>
         <div className="absolute inset-0 pointer-events-none" aria-hidden>
-          <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full bg-yellow-400/10 blur-2xl" />
+          <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full bg-emerald-400/10 blur-2xl" />
         </div>
-      </div>
+      </a>
     </div>
   );
 }

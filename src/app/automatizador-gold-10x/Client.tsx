@@ -98,7 +98,7 @@ export default function AutomatizadorGold10xClient() {
     { id: 14, number: 14, title: 'Liberação Oficial',                                                    playerId: '', locked: true },
     { id: 15, number: 15, title: '',                                                                     playerId: '', locked: true },
     { id: 16, number: 16, title: '',                                                                     playerId: '', locked: true },
-    { id: 17, number: 17, title: '',                                                                     playerId: '', locked: true },
+    { id: 17, number: 17, title: 'Encontro de Mentroria Gold 10x',                                       playerId: '', linkYouTube: 'https://www.youtube.com/watch?v=eLs_rgME3jk' },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!
@@ -110,6 +110,23 @@ export default function AutomatizadorGold10xClient() {
     if (!target || target.locked) return
     setActiveEpisode(id)
   }
+
+  // Seleciona episódio via querystring (?aula=17)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    try {
+      const params = new URLSearchParams(window.location.search)
+      const aulaStr = params.get('aula')
+      if (!aulaStr) return
+      const aula = parseInt(aulaStr, 10)
+      if (Number.isNaN(aula)) return
+      const target = episodes.find(e => e.number === aula || e.id === aula)
+      if (target && !target.locked) {
+        setActiveEpisode(target.id)
+      }
+    } catch {}
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   // Show Aula 1 CTA after 30s when Aula 1 is active
   useEffect(() => {

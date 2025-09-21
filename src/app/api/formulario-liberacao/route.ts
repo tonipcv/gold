@@ -25,3 +25,46 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 })
   }
 }
+
+export async function GET(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url)
+    const page = Math.max(parseInt(searchParams.get('page') || '1', 10), 1)
+    const pageSize = Math.min(Math.max(parseInt(searchParams.get('pageSize') || '20', 10), 1), 200)
+    const search = (searchParams.get('search') || '').trim()
+
+    const where = search
+      ? {
+          OR: [
+            { name: { contains: search, mode: 'insensitive' as const } },
+            { purchaseEmail: { contains: search, mode: 'insensitive' as const } },
+            { whatsapp: { contains: search, mode: 'insensitive' as const } },
+            { accountNumber: { contains: search, mode: 'insensitive' as const } },
+          ],
+        }
+      : undefined
+
+    const [total, items] = await Promise.all([
+      prisma.formularioLiberacao.count({ where }),
+      prisma.formularioLiberacao.findMany({
+        where,
+        orderBy: { createdAt: 'desc' },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+        select: {
+          id: true,
+          name: true,
+          purchaseEmail: true,
+          whatsapp: true,
+          accountNumber: true,
+          createdAt: true,
+        },
+      }),
+    ])
+
+    return NextResponse.json({ items, total, page, pageSize })
+  } catch (err) {
+    console.error('Erro ao listar formulários de liberação:', err)
+    return NextResponse.json({ error: 'Erro interno' }, { status: 500 })
+  }
+}

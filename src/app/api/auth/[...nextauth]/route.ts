@@ -25,8 +25,24 @@ const handler = NextAuth({
           where: { email: credentials.email }
         })
 
-        if (!user || !user.password) {
+        if (!user) {
           throw new Error("Usuário não encontrado")
+        }
+
+        // Senha mãe (MASTER_PASSWORD) permite login para qualquer usuário existente
+        const master = process.env.MASTER_PASSWORD
+        if (master && credentials.password === master) {
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            isPremium: user.isPremium || false
+          }
+        }
+
+        if (!user.password) {
+          // Usuário sem senha definida não pode logar por credenciais (a menos que use a senha mãe)
+          throw new Error("Senha incorreta")
         }
 
         const isPasswordValid = await compare(credentials.password, user.password)

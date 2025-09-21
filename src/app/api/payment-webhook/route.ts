@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { sendEmail } from '@/lib/email';
+import { hash } from 'bcryptjs';
+import crypto from 'crypto';
 
 // Tipos para o corpo da requisição da plataforma de pagamento
 interface CreditCard {
@@ -168,6 +170,9 @@ export async function POST(req: Request) {
       console.log(`Novo usuário criado com ID: ${user.id}`);
     }
 
+    // Garantir para o TypeScript que temos um userId não-nulo
+    const userId = user!.id;
+
     // Buscar o produto pelo ID externo (guruProductId). Em payload de transaction, pode vir em product.marketplace_id ou items[0].marketplace_id
     const guruProductId =
       product?.marketplace_id ||
@@ -260,14 +265,14 @@ export async function POST(req: Request) {
       return prisma.purchase.upsert({
         where: {
           userId_productId: {
-            userId: user.id,
+            userId: userId,
             productId: localProduct.id,
           },
         },
         update: purchaseData,
         create: {
           ...purchaseData,
-          user: { connect: { id: user.id } },
+          user: { connect: { id: userId } },
           product: { connect: { id: localProduct.id } },
         },
       });
@@ -284,7 +289,7 @@ export async function POST(req: Request) {
         await prisma.purchase.update({
           where: {
             userId_productId: {
-              userId: user.id,
+              userId: userId,
               productId: localProduct.id,
             },
           },
@@ -305,24 +310,38 @@ export async function POST(req: Request) {
       const pixUrl: string | undefined = body?.payment?.pix?.qrcode?.url;
       const pixExpiration: string | undefined = body?.payment?.pix?.expiration_date;
       if (paymentStatus === 'paid') {
+        // Gerar senha temporária apenas se o usuário não tiver senha definida
+        let tempPassword: string | null = null;
+        if (!user!.password) {
+          // Gera uma senha forte de 12 caracteres (A-Z a-z 0-9 símbolos básicos)
+          const charset = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*';
+          const buf = crypto.randomBytes(16);
+          tempPassword = Array.from(buf).map((b) => charset[b % charset.length]).slice(0, 12).join('');
+          const hashed = await hash(tempPassword, 10);
+          user = await prisma.user.update({ where: { id: userId }, data: { password: hashed } });
+        }
         const accessUrl = `${appUrl}/login`;
         const resetUrl = `${appUrl}/forgot-password`;
+        const htmlPaid = `
+          <div style="font-family: Arial, sans-serif; line-height:1.5;">
+            <h2>Seu acesso foi liberado 🎉</h2>
+            <p>Olá${user!.name ? `, ${user!.name}` : ''}! Confirmamos o pagamento do seu produto <strong>${localProduct.name}</strong>.</p>
+            <p><strong>Como acessar:</strong></p>
+            <ol>
+              <li>Acesse: <a href="${accessUrl}">${accessUrl}</a></li>
+              <li>Entre com seu e-mail: <strong>${user!.email}</strong></li>
+              ${tempPassword
+                ? `<li>Senha temporária: <strong>${tempPassword}</strong></li>`
+                : `<li>Se ainda não definiu uma senha, use "Esqueci minha senha": <a href="${resetUrl}">${resetUrl}</a></li>`}
+            </ol>
+            ${tempPassword ? `<p style="margin-top:8px;">Recomendamos alterar sua senha após o primeiro login: <a href="${resetUrl}">${resetUrl}</a></p>` : ''}
+            <p>Qualquer dúvida, envia mensagem no Whatsapp +55 11 95807-2826.</p>
+          </div>
+        `;
         const mailRes = await sendEmail({
           to: user.email,
           subject: `Acesso liberado: ${localProduct.name}`,
-          html: `
-            <div style="font-family: Arial, sans-serif; line-height:1.5;">
-              <h2>Seu acesso foi liberado 🎉</h2>
-              <p>Olá${user.name ? `, ${user.name}` : ''}! Confirmamos o pagamento do seu produto <strong>${localProduct.name}</strong>.</p>
-              <p><strong>Como acessar:</strong></p>
-              <ol>
-                <li>Acesse: <a href="${accessUrl}">${accessUrl}</a></li>
-                <li>Entre com seu e-mail: <strong>${user.email}</strong></li>
-                <li>Se ainda não definiu uma senha, use "Esqueci minha senha": <a href="${resetUrl}">${resetUrl}</a></li>
-              </ol>
-              <p>Qualquer dúvida, envia mensagem no Whatsapp +55 11 95807-2826.</p>
-            </div>
-          `,
+          html: htmlPaid,
         });
         console.log('Email (paid) result:', JSON.stringify(mailRes));
       } else if (normalize(rootStatus) === 'analysis') {

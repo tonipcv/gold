@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
 import { sendEmail } from '@/lib/email'
+import crypto from 'crypto'
 
 export async function POST(request: Request) {
   try {
@@ -12,7 +13,7 @@ export async function POST(request: Request) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
-    const { currentPassword, newPassword } = await request.json()
+    const { currentPassword } = await request.json()
 
     const user = await prisma.user.findUnique({
       where: { email: session.user.email }
@@ -27,7 +28,11 @@ export async function POST(request: Request) {
       return new NextResponse('Invalid current password', { status: 400 })
     }
 
-    const hashedPassword = await bcrypt.hash(newPassword, 10)
+    // Gerar uma nova senha forte automaticamente (12 caracteres)
+    const charset = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*'
+    const buf = crypto.randomBytes(16)
+    const generatedPassword = Array.from(buf).map((b) => charset[b % charset.length]).slice(0, 12).join('')
+    const hashedPassword = await bcrypt.hash(generatedPassword, 10)
 
     await prisma.user.update({
       where: { email: session.user.email },
@@ -36,11 +41,15 @@ export async function POST(request: Request) {
 
     await sendEmail({
       to: session.user.email,
-      subject: 'Senha alterada com sucesso',
+      subject: 'Sua nova senha foi gerada',
       html: `
-        <h1>Sua senha foi alterada</h1>
-        <p>A senha da sua conta foi alterada com sucesso.</p>
-        <p>Se você não fez esta alteração, entre em contato conosco imediatamente.</p>
+        <div style="font-family: Arial, sans-serif; line-height:1.5;">
+          <h1>Sua senha foi alterada</h1>
+          <p>Geramos automaticamente uma nova senha para sua conta.</p>
+          <p><strong>Nova senha:</strong> ${generatedPassword}</p>
+          <p>Recomendamos alterá-la após o primeiro login.</p>
+          <p>Se você não fez esta solicitação, entre em contato conosco imediatamente.</p>
+        </div>
       `
     })
 

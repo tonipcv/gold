@@ -2,31 +2,20 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import crypto from 'crypto'
 import { sendEmail } from '@/lib/email'
-import { getBaseUrl } from '@/lib/url'
+import bcrypt from 'bcryptjs'
 
 export async function POST(request: Request) {
   try {
-    // Verifica se o corpo da requisição é válido
-    if (!request.body) {
-      return new NextResponse(
-        JSON.stringify({ error: 'Corpo da requisição inválido' }),
-        { 
-          status: 400,
-          headers: { 'Content-Type': 'application/json' }
-        }
-      )
+    // Ler corpo com segurança
+    let body: any = null
+    try {
+      body = await request.json()
+    } catch {
+      return NextResponse.json({ error: 'JSON inválido' }, { status: 400 })
     }
 
-    const body = await request.json()
-    
-    if (!body.email) {
-      return new NextResponse(
-        JSON.stringify({ error: 'Email é obrigatório' }),
-        { 
-          status: 400,
-          headers: { 'Content-Type': 'application/json' }
-        }
-      )
+    if (!body || !body.email) {
+      return NextResponse.json({ error: 'Email é obrigatório' }, { status: 400 })
     }
 
     const { email } = body
@@ -36,69 +25,48 @@ export async function POST(request: Request) {
     })
 
     if (!user) {
-      return new NextResponse(
-        JSON.stringify({ error: 'Usuário não encontrado' }),
-        { 
-          status: 404,
-          headers: { 'Content-Type': 'application/json' }
-        }
-      )
+      return NextResponse.json({ error: 'Usuário não encontrado' }, { status: 404 })
     }
 
-    const resetToken = crypto.randomBytes(32).toString('hex')
-    const resetTokenExpiry = new Date(Date.now() + 3600000) // 1 hora
+    // Gerar nova senha forte automaticamente
+    const charset = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*'
+    const buf = crypto.randomBytes(16)
+    const newPassword = Array.from(buf).map((b) => charset[b % charset.length]).slice(0, 12).join('')
+    const hashed = await bcrypt.hash(newPassword, 10)
 
+    // Atualizar a senha imediatamente e limpar tokens de reset
     await prisma.user.update({
       where: { email },
       data: {
-        passwordResetToken: resetToken,
-        passwordResetExpires: resetTokenExpiry
+        password: hashed,
+        passwordResetToken: null,
+        passwordResetExpires: null,
       }
     })
 
-    const baseUrl = getBaseUrl(request)
-    const resetUrl = `${baseUrl}/reset-password?token=${resetToken}`
-
+    // Enviar e-mail com a nova senha
     await sendEmail({
       to: email,
-      subject: 'Recuperação de Senha',
+      subject: 'Sua nova senha foi gerada',
       html: `
-        <h1>Recuperação de Senha</h1>
-        <p>Você solicitou a recuperação de senha. Clique no link abaixo para definir uma nova senha:</p>
-        <a href="${resetUrl}" style="display: inline-block; padding: 12px 24px; background-color: #3b82f6; color: white; text-decoration: none; border-radius: 6px;">
-          Redefinir Senha
-        </a>
-        <p style="margin-top:12px;color:#111">
-          Se o botão não funcionar, copie e cole este link no seu navegador:
-        </p>
-        <p style="word-break: break-all; background:#f5f5f5; padding:8px 12px; border-radius:6px;">
-          ${resetUrl}
-        </p>
-        <p>Se você não solicitou a recuperação de senha, ignore este email.</p>
-        <p>Este link é válido por 1 hora.</p>
+        <div style="font-family: Arial, sans-serif; line-height:1.5;">
+          <h1>Recuperação de Senha</h1>
+          <p>Geramos automaticamente uma nova senha para sua conta.</p>
+          <p><strong>Nova senha:</strong> ${newPassword}</p>
+          <p>Recomendamos alterá-la após o primeiro login.</p>
+          <p>Se você não solicitou a recuperação de senha, ignore este e‑mail.</p>
+        </div>
       `
     })
 
-    return new NextResponse(
-      JSON.stringify({ success: true }),
-      { 
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    )
+    return NextResponse.json({ success: true }, { status: 200 })
 
   } catch (error) {
     console.error('Error:', error)
-    return new NextResponse(
-      JSON.stringify({ 
-        error: 'Erro ao processar a solicitação',
-        details: error instanceof Error ? error.message : 'Erro desconhecido'
-      }),
-      { 
-        status: 500,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    )
+    return NextResponse.json({ 
+      error: 'Erro ao processar a solicitação',
+      details: error instanceof Error ? error.message : 'Erro desconhecido'
+    }, { status: 500 })
   } finally {
     await prisma.$disconnect()
   }

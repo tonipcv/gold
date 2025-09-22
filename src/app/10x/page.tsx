@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { OptimizedImage } from "@/app/components/OptimizedImage";
 
 const WAITLIST_URL =
-  "https://chat.whatsapp.com/Lql8LbzWpvkEiu6D4Ty5XY?mode=ems_copy_c";
+  "https://chat.whatsapp.com/DNMgPctOQqRIa4eMeEQWHU";
 
 export default function Page() {
   const [seconds, setSeconds] = useState(5);

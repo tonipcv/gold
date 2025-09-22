@@ -3,8 +3,9 @@ import { prisma } from '@/lib/prisma';
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const { liberado } = await req.json();
     
@@ -16,7 +17,7 @@ export async function PATCH(
     }
 
     const updated = await prisma.formularioLiberacao.update({
-      where: { id: params.id },
+      where: { id },
       data: { liberado },
     });
 

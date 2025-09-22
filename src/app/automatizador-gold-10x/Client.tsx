@@ -239,7 +239,9 @@ export default function AutomatizadorGold10xClient() {
                 </a>
                 {/* Outlined green GOLD X button (neon outline) */}
                 <a
-                  href="https://drive.google.com/drive/folders/10Kz1FHj6m9Ys1AgW2JGPhcNIXQYR2trK?usp=sharing"
+                  href={isPremium 
+                    ? "https://drive.google.com/drive/folders/10Kz1FHj6m9Ys1AgW2JGPhcNIXQYR2trK?usp=sharing"
+                    : "https://drive.google.com/drive/folders/1N3GTcskIDYEZTEPYPkcukYk57PIT8egH"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border-2 border-green-500 text-green-200 text-base font-semibold hover:bg-green-600/10 shadow-[0_0_28px_rgba(34,197,94,0.25)] transition-colors"
@@ -254,7 +256,9 @@ export default function AutomatizadorGold10xClient() {
             {activeEpisode === 3 && (
               <div className="mt-4 flex flex-col items-center gap-4">
                 <a
-                  href="https://drive.google.com/drive/folders/10Kz1FHj6m9Ys1AgW2JGPhcNIXQYR2trK?usp=sharing"
+                  href={isPremium 
+                    ? "https://drive.google.com/drive/folders/10Kz1FHj6m9Ys1AgW2JGPhcNIXQYR2trK?usp=sharing"
+                    : "https://drive.google.com/drive/folders/1N3GTcskIDYEZTEPYPkcukYk57PIT8egH"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border-2 border-green-500 text-green-200 text-base font-semibold hover:bg-green-600/10 shadow-[0_0_28px_rgba(34,197,94,0.25)] transition-colors"

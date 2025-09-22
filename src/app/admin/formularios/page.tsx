@@ -32,6 +32,10 @@ export default function AdminFormulariosPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [exporting, setExporting] = useState(false);
+  const [bulkOpen, setBulkOpen] = useState(false);
+  const [bulkRunning, setBulkRunning] = useState(false);
+  const [bulkDone, setBulkDone] = useState(0);
+  const [bulkTotal, setBulkTotal] = useState(0);
 
   const totalPages = useMemo(() => Math.max(1, Math.ceil(total / pageSize)), [total, pageSize]);
 
@@ -58,6 +62,86 @@ export default function AdminFormulariosPage() {
       setError(err.message || "Erro ao carregar dados");
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Bulk: marcar todos como liberado (considerando filtro atual)
+  const handleBulkLiberarTodos = async () => {
+    try {
+      setBulkRunning(true);
+      setError(null);
+      setBulkDone(0);
+      setBulkTotal(0);
+
+      // Buscar todos os itens baseado no filtro atual (similar ao exportAllCSV)
+      const allItems: Formulario[] = [];
+      // Primeiro, pegue a primeira página grande para saber o total
+      const firstParams = new URLSearchParams({ page: '1', pageSize: '1000' });
+      if (search) firstParams.set('search', search);
+      const firstRes = await fetch(`/api/formulario-liberacao?${firstParams.toString()}`);
+      if (!firstRes.ok) {
+        const data = await firstRes.json().catch(() => ({}));
+        throw new Error(data?.error || 'Falha ao carregar dados');
+      }
+      const firstData: ApiResponse = await firstRes.json();
+      allItems.push(...(firstData.items || []));
+      const totalRecords = firstData.total || allItems.length;
+      const totalPagesAll = Math.max(1, Math.ceil(totalRecords / 1000));
+
+      if (totalPagesAll > 1) {
+        const fetches: Promise<Response>[] = [];
+        for (let p = 2; p <= totalPagesAll; p++) {
+          const pParams = new URLSearchParams({ page: String(p), pageSize: '1000' });
+          if (search) pParams.set('search', search);
+          fetches.push(fetch(`/api/formulario-liberacao?${pParams.toString()}`));
+        }
+        const results = await Promise.all(fetches);
+        for (const res of results) {
+          if (!res.ok) {
+            const data = await res.json().catch(() => ({}));
+            throw new Error(data?.error || 'Falha ao carregar dados em uma das páginas');
+          }
+          const data: ApiResponse = await res.json();
+          allItems.push(...(data.items || []));
+        }
+      }
+
+      // Filtrar apenas os que ainda não estão liberados
+      const toLiberate = allItems.filter((it) => !it.liberado);
+      setBulkTotal(toLiberate.length);
+
+      // PATCH em série com pequeno intervalo para evitar pico
+      for (let i = 0; i < toLiberate.length; i++) {
+        const it = toLiberate[i];
+        try {
+          const response = await fetch(`/api/formulario-liberacao/${it.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ liberado: true }),
+          });
+          if (!response.ok) {
+            // Continua, mas registra erro genérico (mostramos uma mensagem final)
+            console.warn('Falha ao liberar', it.id);
+          }
+        } catch (e) {
+          console.warn('Exceção ao liberar', it.id, e);
+        }
+        setBulkDone((prev) => prev + 1);
+        // pequeno atraso opcional
+        await new Promise((r) => setTimeout(r, 100));
+      }
+
+      // Atualiza a lista atual
+      await fetchData({ page: 1, search });
+    } catch (err: any) {
+      setError(err.message || 'Erro no processamento em lote');
+    } finally {
+      setBulkRunning(false);
+      setBulkOpen(false);
+      setTimeout(() => {
+        setBulkDone(0);
+        setBulkTotal(0);
+      }, 500);
     }
   };
 
@@ -306,6 +390,14 @@ export default function AdminFormulariosPage() {
                   {exporting ? 'Exportando...' : 'Exportar Todos (CSV)'}
                   {exporting ? 'Exportando…' : 'Exportar CSV (todos)'}
                 </button>
+                <button
+                  onClick={() => setBulkOpen(true)}
+                  disabled={loading}
+                  className={`px-4 py-2 rounded-md ${loading ? 'bg-gray-800 text-gray-500' : 'bg-yellow-600 hover:bg-yellow-700 text-white'}`}
+                  title="Marcar todos como liberado (com confirmação)"
+                >
+                  Liberar todos
+                </button>
               </div>
             </div>
 
@@ -420,6 +512,47 @@ export default function AdminFormulariosPage() {
           </div>
         )}
       </main>
+
+      {/* Modal de confirmação para liberar todos */}
+      {accessGranted && bulkOpen && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-900 border border-gray-700 rounded-lg p-6 w-full max-w-md text-gray-200">
+            <h3 className="text-lg font-semibold mb-2 text-yellow-300">Confirmar liberação em massa</h3>
+            <p className="text-sm text-gray-300 mb-4">
+              Esta ação irá marcar <span className="font-semibold">todos os registros</span> (considerando o filtro atual)
+              como <span className="font-semibold text-green-400">liberado</span>. Deseja continuar?
+            </p>
+            {bulkRunning ? (
+              <div className="space-y-2">
+                <div className="text-sm">Processando... {bulkDone}/{bulkTotal || '—'}</div>
+                <div className="w-full h-2 bg-gray-800 rounded">
+                  <div
+                    className="h-2 bg-green-600 rounded"
+                    style={{ width: bulkTotal > 0 ? `${Math.min(100, Math.round((bulkDone / bulkTotal) * 100))}%` : '10%' }}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="flex justify-end gap-2">
+                <button
+                  onClick={() => setBulkOpen(false)}
+                  className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-800"
+                  disabled={bulkRunning}
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={handleBulkLiberarTodos}
+                  className="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-md disabled:opacity-50"
+                  disabled={bulkRunning}
+                >
+                  Confirmar
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

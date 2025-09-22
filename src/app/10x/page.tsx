@@ -8,6 +8,7 @@ const WAITLIST_URL =
 
 export default function Page() {
   const [seconds, setSeconds] = useState(5);
+  const [timeLeft, setTimeLeft] = useState("");
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -24,9 +25,37 @@ export default function Page() {
     };
   }, []);
 
+  useEffect(() => {
+    const target = new Date();
+    target.setHours(19, 0, 0, 0);
+
+    const tick = () => {
+      const now = new Date();
+      let diff = Math.max(0, target.getTime() - now.getTime());
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      diff -= days * 24 * 60 * 60 * 1000;
+      const hrs = Math.floor(diff / (1000 * 60 * 60));
+      diff -= hrs * 60 * 60 * 1000;
+      const mins = Math.floor(diff / (1000 * 60));
+      diff -= mins * 60 * 1000;
+      const secs = Math.floor(diff / 1000);
+      const pad = (n: number) => String(n).padStart(2, "0");
+      const padDays = (n: number) => String(n).padStart(2, "0");
+      setTimeLeft(`${padDays(days)}:${pad(hrs)}:${pad(mins)}:${pad(secs)}`);
+    };
+
+    tick();
+    const id = window.setInterval(tick, 1000);
+    return () => window.clearInterval(id);
+  }, []);
+
   return (
     <div className="font-montserrat bg-black text-white min-h-screen flex flex-col">
-      {/* Header with white logo centered (same style language as 10x) */}
+      {/* Top minimal countdown */}
+      <div className="w-full text-center py-2 px-4 border-b border-neutral-800">
+        <span className="font-mono tabular-nums text-base md:text-lg text-neutral-100">{timeLeft}</span>
+      </div>
+      {/* Header with white logo centered */}
       <div className="w-full flex justify-center pt-10">
         <OptimizedImage
           src="/ft-icone.png"
@@ -37,17 +66,11 @@ export default function Page() {
         />
       </div>
 
-      <main className="flex-1 px-6 py-10 flex flex-col items-center text-center gap-4">
-        <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">
-          Vagas Lotadas para o Automatizador Gold X
+      <main className="flex-1 px-6 py-8 flex flex-col items-center text-center gap-3">
+        <h1 className="text-center text-2xl md:text-3xl font-light bg-gradient-to-r from-neutral-300 to-white bg-clip-text text-transparent tracking-tight">
+          FAREMOS AS 30 INSTALAÇÕES RESTANTES HOJE AS 19H
         </h1>
-        <p className="text-neutral-300 text-base md:text-lg">
-          Redirecionando para o Grupo de Espera
-        </p>
-        <p className="text-neutral-400 text-sm md:text-base mt-2">
-          Você será redirecionado em {seconds}s...
-        </p>
-
+        
         <a
           href={WAITLIST_URL}
           target="_blank"

@@ -45,11 +45,14 @@ export async function POST(request: Request) {
     })
 
     // Enviar e-mail com a nova senha
+    const fromName = process.env.EMAIL_FROM_NAME || 'Katsu'
+    const fromAddress = process.env.EMAIL_FROM_ADDRESS || 'oi@k17.com.br'
     await sendEmail({
       to: email,
       subject: 'Sua nova senha foi gerada',
       html: `
         <div style="font-family: Arial, sans-serif; line-height:1.5;">
+          <p style="font-size:12px;color:#555;margin:0 0 8px 0">Remetente: <strong>${fromName}</strong> &lt;${fromAddress}&gt;</p>
           <h1>Recuperação de Senha</h1>
           <p>Geramos automaticamente uma nova senha para sua conta.</p>
           <p><strong>Nova senha:</strong> ${newPassword}</p>

@@ -32,8 +32,11 @@ export async function POST(req: Request) {
     const base = getBaseUrl(req)
     const appLink = `${base}/automatizador-gold-10x`
     const passwordLink = `${base}/forgot-password`
+    const fromName = process.env.EMAIL_FROM_NAME || 'Katsu'
+    const fromAddress = process.env.EMAIL_FROM_ADDRESS || 'oi@k17.com.br'
     const html = `
       <div style="font-family: Arial, sans-serif; line-height:1.6; color:#0b0b0b">
+        <p style="font-size:12px;color:#555;margin:0 0 8px 0">Remetente: <strong>${fromName}</strong> &lt;${fromAddress}&gt;</p>
         <h2 style="margin:0 0 10px 0">Bem-vindo(a) ao Automatizador Gold 10X</h2>
         <p>Seu <strong>primeiro acesso</strong> está pronto. Para entrar com segurança, siga os passos abaixo:</p>
         <ol style="padding-left:18px; margin:10px 0 16px">

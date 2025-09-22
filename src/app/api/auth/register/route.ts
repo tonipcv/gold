@@ -66,10 +66,13 @@ export async function POST(req: Request) {
       const confirmationUrl = `${baseUrl}/verify-email?token=${verificationToken}`;
 
       try {
+        const fromName = process.env.EMAIL_FROM_NAME || 'Katsu'
+        const fromAddress = process.env.EMAIL_FROM_ADDRESS || 'oi@k17.com.br'
         await sendEmail({
           to: email,
           subject: 'Confirme seu email',
           html: `
+            <p style="font-size:12px;color:#555;margin:0 0 8px 0">Remetente: <strong>${fromName}</strong> &lt;${fromAddress}&gt;</p>
             <h1>Bem-vindo ao Katsu!</h1>
             <p>Olá ${name},</p>
             <p>Obrigado por se cadastrar. Por favor, confirme seu email clicando no botão abaixo:</p>

@@ -68,12 +68,14 @@ export default function AttentionBanner() {
       </div>
     );
   } else {
-    // Banner de aviso para usuários não premium
+    // Banner de aviso para usuários não premium (clicável para Aula 6)
     return (
       <div className="mx-4 md:mx-auto md:w-3/4 lg:w-3/4">
-        <div
-          className="relative block overflow-hidden rounded-xl border border-amber-500/40 bg-amber-600/10 text-amber-100 shadow-[0_0_0_1px_rgba(217,119,6,0.25)]"
+        <a
+          href="?aula=6"
+          className="relative block overflow-hidden rounded-xl border border-amber-500/40 bg-amber-600/10 text-amber-100 shadow-[0_0_0_1px_rgba(217,119,6,0.25)] hover:bg-amber-600/20 transition-colors"
           role="alert"
+          aria-label="Aviso importante para não premium. Clique para ir à Aula 6."
         >
           <div className="p-4 md:p-5">
             <div className="flex items-start gap-3">
@@ -87,7 +89,7 @@ export default function AttentionBanner() {
                 <div className="text-sm text-amber-100/90">
                   A versão atualmente liberada não está preparada para operações em grande escala de capital. Nesse início, o ideal é instalar a automação, se familiarizar com o funcionamento e aguardar o encontro de mentoria com o Katsu antes de realizar aportes maiores.
                   <br /><br />
-                  Também é fundamental assistir à Aula 5 completa, pois nela você aprenderá como configurar corretamente todo o processo.
+                  Também é fundamental assistir à Aula 6 completa, pois nela você aprenderá como configurar corretamente todo o processo.
                 </div>
               </div>
             </div>
@@ -95,7 +97,7 @@ export default function AttentionBanner() {
           <div className="absolute inset-0 pointer-events-none" aria-hidden>
             <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full bg-amber-400/10 blur-2xl" />
           </div>
-        </div>
+        </a>
       </div>
     );
   }

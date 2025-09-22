@@ -304,6 +304,8 @@ export async function POST(req: Request) {
 
     // Enviar emails transacionais conforme o status
     try {
+      const fromName = process.env.EMAIL_FROM_NAME || 'Katsu'
+      const fromAddress = process.env.EMAIL_FROM_ADDRESS || 'oi@k17.com.br'
       const appUrl = process.env.APP_URL || `https://${req.headers.get('host') || 'app.seudominio.com'}`;
       // Extrair dados de PIX (se existirem) para mensagens de pagamento pendente
       const pixSignature: string | undefined = body?.payment?.pix?.qrcode?.signature;
@@ -324,6 +326,7 @@ export async function POST(req: Request) {
         const resetUrl = `${appUrl}/forgot-password`;
         const htmlPaid = `
           <div style="font-family: Arial, sans-serif; line-height:1.5;">
+            <p style="font-size:12px;color:#555;margin:0 0 8px 0">Remetente: <strong>${fromName}</strong> &lt;${fromAddress}&gt;</p>
             <h2>Seu acesso foi liberado 🎉</h2>
             <p>Olá${user!.name ? `, ${user!.name}` : ''}! Confirmamos o pagamento do seu produto <strong>${localProduct.name}</strong>.</p>
             <p><strong>Como acessar:</strong></p>
@@ -353,6 +356,7 @@ export async function POST(req: Request) {
           subject: `Pagamento em análise: ${localProduct.name}`,
           html: `
             <div style="font-family: Arial, sans-serif; line-height:1.5;">
+              <p style="font-size:12px;color:#555;margin:0 0 8px 0">Remetente: <strong>${fromName}</strong> &lt;${fromAddress}&gt;</p>
               <h2>Seu pagamento está em análise</h2>
               <p>Olá${user.name ? `, ${user.name}` : ''}! Recebemos o seu pedido para <strong>${localProduct.name}</strong> e o pagamento está <strong>em análise</strong> pela operadora.</p>
               ${brand || last4 ? `<p>Forma de pagamento: ${brand ? brand.toUpperCase() : 'cartão'} ${last4 ? '•••• ' + last4 : ''}</p>` : ''}
@@ -370,6 +374,7 @@ export async function POST(req: Request) {
           subject: `Pagamento pendente: ${localProduct.name}`,
           html: `
             <div style="font-family: Arial, sans-serif; line-height:1.5;">
+              <p style="font-size:12px;color:#555;margin:0 0 8px 0">Remetente: <strong>${fromName}</strong> &lt;${fromAddress}&gt;</p>
               <h2>Estamos aguardando a confirmação do seu pagamento</h2>
               <p>Olá${user.name ? `, ${user.name}` : ''}! Recebemos seu pedido para <strong>${localProduct.name}</strong>, mas o pagamento ainda está <strong>pendente</strong>.</p>
               <p>Para concluir:</p>

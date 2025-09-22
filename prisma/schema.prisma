@@ -108,5 +108,7 @@ model FormularioLiberacao {
   purchaseEmail  String
   whatsapp       String
   accountNumber  String
+  customField    String?  // Novo campo opcional
+  liberado       Boolean  @default(false)  // Indica se o acesso foi liberado
   createdAt      DateTime @default(now())
 }

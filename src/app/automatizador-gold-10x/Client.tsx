@@ -194,6 +194,20 @@ export default function AutomatizadorGold10xClient() {
                 </a>
               </div>
             )}
+            
+            {activeEpisode === 12 && (
+              <div className="mt-4 flex flex-col items-center gap-4">
+                <Link
+                  href={isPremium ? "/formulario" : "/formulario-2"}
+                  className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border border-green-500 bg-green-700 text-white text-base font-semibold shadow-[0_0_28px_rgba(34,197,94,0.35)] hover:bg-green-600 transition-colors w-full max-w-xs"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                    <path d="M5 20h14v-2H5v2Zm7-3 5-5h-3V4h-4v8H7l5 5Z" />
+                  </svg>
+                  {isPremium ? "ACESSAR FORMULÁRIO" : "ACESSAR FORMULÁRIO (TURMA 2)"}
+                </Link>
+              </div>
+            )}
             {activeEpisode === 1 && (
               <div className="mt-4 flex flex-col items-center gap-4">
                 <a

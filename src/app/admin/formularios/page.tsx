@@ -8,6 +8,8 @@ type Formulario = {
   purchaseEmail: string;
   whatsapp: string;
   accountNumber: string;
+  customField?: string;
+  liberado: boolean;
   createdAt: string;
 };
 
@@ -81,32 +83,104 @@ export default function AdminFormulariosPage() {
     fetchData({ page: 1, search });
   };
 
+  const toggleLiberado = async (id: string, currentStatus: boolean) => {
+    try {
+      const response = await fetch(`/api/formulario-liberacao/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ liberado: !currentStatus }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Falha ao atualizar status');
+      }
+
+      // Update local state
+      setItems(items.map(item => 
+        item.id === id ? { ...item, liberado: !currentStatus } : item
+      ));
+    } catch (err) {
+      console.error('Error updating status:', err);
+      setError('Erro ao atualizar status');
+    }
+  };
+
+  const exportUnreleasedCSV = async () => {
+    try {
+      setExporting(true);
+      setError(null);
+
+      // Fetch only unreleased items
+      const params = new URLSearchParams({
+        page: '1',
+        pageSize: '1000', // Large number to get all unreleased
+        search: search || '',
+        liberado: 'false'
+      });
+
+      const response = await fetch(`/api/formulario-liberacao/export?${params.toString()}`);
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data?.error || "Falha ao exportar dados");
+      }
+      
+      const data = await response.json();
+      const itemsToExport = data.items || [];
+
+      if (itemsToExport.length === 0) {
+        setError('Nenhum registro não liberado para exportar');
+        return;
+      }
+
+      // Create CSV content
+      const headers = ['Nome', 'E-mail', 'WhatsApp', 'Número da Conta', 'Turma', 'Data de Criação'];
+      const csvContent = [
+        headers.join(','),
+        ...itemsToExport.map((item: Formulario) => [
+          `"${item.name.replace(/"/g, '""')}"`,
+          `"${item.purchaseEmail}"`,
+          `"${item.whatsapp}"`,
+          `"${item.accountNumber}"`,
+          `"${item.customField || ''}"`,
+          `"${new Date(item.createdAt).toLocaleString()}"`
+        ].join(','))
+      ].join('\n');
+
+      // Create and trigger download
+      const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `formularios_nao_liberados_${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+    } catch (err: any) {
+      setError(err.message || 'Erro ao exportar dados');
+    } finally {
+      setExporting(false);
+    }
+  };
+
   const exportAllCSV = async () => {
     try {
       setExporting(true);
       setError(null);
 
-      // Fetch first page with max pageSize to get total
-      const MAX_PS = 200;
-      const params = new URLSearchParams({ page: String(1), pageSize: String(MAX_PS) });
-      if (search) params.set("search", search);
+      const allItems: Formulario[] = [...items];
 
-      const firstRes = await fetch(`/api/formulario-liberacao?${params.toString()}`);
-      if (!firstRes.ok) {
-        const data = await firstRes.json().catch(() => ({}));
-        throw new Error(data?.error || "Falha ao carregar dados para exportação");
-      }
-      const firstData: ApiResponse = await firstRes.json();
-      const allItems: Formulario[] = [...(firstData.items || [])];
-
-      const totalRecords = firstData.total || 0;
-      const totalPagesAll = Math.max(1, Math.ceil(totalRecords / MAX_PS));
+      const totalRecords = total;
+      const totalPagesAll = Math.max(1, Math.ceil(totalRecords / 1000));
 
       if (totalPagesAll > 1) {
         // Fetch remaining pages in parallel
         const fetches = [] as Promise<Response>[];
         for (let p = 2; p <= totalPagesAll; p++) {
-          const pParams = new URLSearchParams({ page: String(p), pageSize: String(MAX_PS) });
+          const pParams = new URLSearchParams({ page: String(p), pageSize: String(1000) });
           if (search) pParams.set("search", search);
           fetches.push(fetch(`/api/formulario-liberacao?${pParams.toString()}`));
         }
@@ -218,10 +292,18 @@ export default function AdminFormulariosPage() {
                   </button>
                 </form>
                 <button
+                  onClick={exportUnreleasedCSV}
+                  disabled={exporting || loading}
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                >
+                  {exporting ? 'Exportando...' : 'Exportar Não Liberados (CSV)'}
+                </button>
+                <button
                   onClick={exportAllCSV}
                   disabled={exporting || (total === 0 && items.length === 0)}
                   className={`px-4 py-2 rounded-md ${exporting || (total === 0 && items.length === 0) ? 'bg-gray-800 text-gray-500' : 'bg-green-600 hover:bg-green-700 text-white'}`}
                 >
+                  {exporting ? 'Exportando...' : 'Exportar Todos (CSV)'}
                   {exporting ? 'Exportando…' : 'Exportar CSV (todos)'}
                 </button>
               </div>
@@ -242,11 +324,27 @@ export default function AdminFormulariosPage() {
                 <table className="min-w-full bg-gray-800/30 rounded-lg overflow-hidden">
                   <thead className="bg-gray-700/50">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Nome</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Email de Compra</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Whatsapp</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Número de Conta</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Criado Em</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        Nome
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        E-mail
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        WhatsApp
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        Número da Conta
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        Turma
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        Status
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                        Data
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-700">
@@ -257,20 +355,37 @@ export default function AdminFormulariosPage() {
                     ) : (
                       items.map((it) => (
                         <tr key={it.id} className="hover:bg-gray-700/30">
-                          <td className="px-4 py-3 align-top">
-                            <div className="font-medium">{it.name}</div>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-100">{it.name}</div>
                           </td>
-                          <td className="px-4 py-3 align-top">
-                            <div className="text-sm text-gray-200">{it.purchaseEmail}</div>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-100">{it.purchaseEmail}</div>
                           </td>
-                          <td className="px-4 py-3 align-top">
-                            <div className="text-sm text-gray-200">{it.whatsapp}</div>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-100">{it.whatsapp}</div>
                           </td>
-                          <td className="px-4 py-3 align-top">
-                            <div className="text-sm text-gray-200">{it.accountNumber}</div>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-100">{it.accountNumber}</div>
                           </td>
-                          <td className="px-4 py-3 align-top">
-                            <div className="text-xs text-gray-400">{new Date(it.createdAt).toLocaleString()}</div>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-100">{it.customField || '-'}</div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <button
+                              onClick={() => toggleLiberado(it.id, it.liberado)}
+                              className={`px-3 py-1 rounded-full text-xs font-medium ${
+                                it.liberado 
+                                  ? 'bg-green-100 text-green-800' 
+                                  : 'bg-yellow-100 text-yellow-800'
+                              }`}
+                            >
+                              {it.liberado ? 'Liberado' : 'Pendente'}
+                            </button>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-300">
+                              {new Date(it.createdAt).toLocaleString()}
+                            </div>
                           </td>
                         </tr>
                       ))

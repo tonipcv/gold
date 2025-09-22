@@ -82,7 +82,7 @@ export default function AttentionBanner() {
               </svg>
               <div className="flex-1">
                 <div className="text-sm md:text-base font-semibold mb-1">
-                  ⚠️ Aviso Importante
+                  Aviso Importante
                 </div>
                 <div className="text-sm text-amber-100/90">
                   A versão atualmente liberada não está preparada para operações em grande escala de capital. Nesse início, o ideal é instalar a automação, se familiarizar com o funcionamento e aguardar o encontro de mentoria com o Katsu antes de realizar aportes maiores.

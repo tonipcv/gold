@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma'
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { name, purchaseEmail, whatsapp, accountNumber } = body || {}
+    const { name, purchaseEmail, whatsapp, accountNumber, customField = 'turma 2' } = body || {}
 
     if (!name || !purchaseEmail || !whatsapp || !accountNumber) {
       return NextResponse.json({ error: 'Dados incompletos' }, { status: 400 })
@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
         purchaseEmail,
         whatsapp,
         accountNumber,
+        customField,
       },
     })
 
@@ -32,17 +33,24 @@ export async function GET(req: NextRequest) {
     const page = Math.max(parseInt(searchParams.get('page') || '1', 10), 1)
     const pageSize = Math.min(Math.max(parseInt(searchParams.get('pageSize') || '20', 10), 1), 200)
     const search = (searchParams.get('search') || '').trim()
+    const liberado = searchParams.get('liberado')
 
-    const where = search
-      ? {
-          OR: [
-            { name: { contains: search, mode: 'insensitive' as const } },
-            { purchaseEmail: { contains: search, mode: 'insensitive' as const } },
-            { whatsapp: { contains: search, mode: 'insensitive' as const } },
-            { accountNumber: { contains: search, mode: 'insensitive' as const } },
-          ],
-        }
-      : undefined
+    const where: any = {
+      ...(search && {
+        OR: [
+          { name: { contains: search, mode: 'insensitive' as const } },
+          { purchaseEmail: { contains: search, mode: 'insensitive' as const } },
+          { whatsapp: { contains: search, mode: 'insensitive' as const } },
+          { accountNumber: { contains: search, mode: 'insensitive' as const } },
+          { customField: { contains: search, mode: 'insensitive' as const } },
+        ],
+      }),
+    }
+
+    // Filter by status if provided
+    if (liberado === 'true' || liberado === 'false') {
+      where.liberado = liberado === 'true'
+    }
 
     const [total, items] = await Promise.all([
       prisma.formularioLiberacao.count({ where }),
@@ -57,6 +65,8 @@ export async function GET(req: NextRequest) {
           purchaseEmail: true,
           whatsapp: true,
           accountNumber: true,
+          customField: true,
+          liberado: true,
           createdAt: true,
         },
       }),

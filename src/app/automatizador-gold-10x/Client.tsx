@@ -4,6 +4,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
 
 // ConverteAI vturb player component (SSR-safe): render placeholder and init on client
 function VturbPlayer({ playerId }: { playerId: string }) {
@@ -62,6 +63,8 @@ export default function AutomatizadorGold10xClient() {
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 })
   const [aula1CtaVisible, setAula1CtaVisible] = useState(false)
   const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const { data: session } = useSession()
+  const isPremium = session?.user?.isPremium || false
 
   useEffect(() => {
     // Countdown to 08 Sep 2025 19:00 (UTC-3)
@@ -80,6 +83,7 @@ export default function AutomatizadorGold10xClient() {
     return () => clearInterval(id)
   }, [])
 
+  // Definir quais episódios estão bloqueados com base no status premium do usuário
   const episodes: Episode[] = [
     { id: 0,  number: 0,  title: 'AVISO MUITO IMPORTANTE',                                               playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=c79b5e01-58e6-413c-8451-f3cb792fb6b5' },
     { id: 1,  number: 1,  title: 'CORRETORA',                                                            playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=5d155e09-3f0e-46ec-9b3a-f265f356399e' },
@@ -95,8 +99,8 @@ export default function AutomatizadorGold10xClient() {
     { id: 11, number: 11, title: 'HORARIO DE FUNCIONAMENTO',                                             playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=43328382-6f35-4da1-9b4c-ddae576cf7a4' },
     { id: 12, number: 12, title: 'FORMULARIO - LIBERAÇÃO OFICIAL',                                       playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=81f18403-cf49-43ae-b2ef-4e9d16c066a3' },
     { id: 13, number: 13, title: 'SUPORTE WHATSAPP',                                                      playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=52f26f32-066d-4e61-84f9-1f1cf6f99c55' },
-    { id: 14, number: 14, title: 'LIBERAÇÃO OFICIAL',                                                    playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=5f947127-f90c-40e0-a5d9-cd2ff2f3c506' },
-    { id: 15, number: 15, title: 'ENCONTRO DE MENTORIA GOLD 10X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=56b8726a-0951-45ce-aaf8-37ce313fb20f' },
+    { id: 14, number: 14, title: 'LIBERAÇÃO OFICIAL',                                                    playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=5f947127-f90c-40e0-a5d9-cd2ff2f3c506', locked: !isPremium },
+    { id: 15, number: 15, title: 'ENCONTRO DE MENTORIA GOLD 10X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=56b8726a-0951-45ce-aaf8-37ce313fb20f', locked: !isPremium },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!
@@ -119,12 +123,17 @@ export default function AutomatizadorGold10xClient() {
       const aula = parseInt(aulaStr, 10)
       if (Number.isNaN(aula)) return
       const target = episodes.find(e => e.number === aula || e.id === aula)
+      
+      // Verifica se o episódio está bloqueado (aulas 14 e 15 para usuários não premium)
       if (target && !target.locked) {
         setActiveEpisode(target.id)
+      } else if (target && target.locked) {
+        // Se tentar acessar uma aula bloqueada, redireciona para a aula 1
+        setActiveEpisode(1)
       }
     } catch {}
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [isPremium])
 
   // Show Aula 1 CTA after 30s when Aula 1 is active
   useEffect(() => {

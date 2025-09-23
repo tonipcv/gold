@@ -8,8 +8,9 @@ export async function GET(req: NextRequest) {
     const page = parseInt(searchParams.get('page') || '1', 10);
     const pageSize = parseInt(searchParams.get('pageSize') || '1000', 10);
     const liberado = searchParams.get('liberado') === 'true';
+    const custom = (searchParams.get('custom') || '').trim();
 
-    const where = {
+    const where: any = {
       ...(search && {
         OR: [
           { name: { contains: search, mode: 'insensitive' as const } },
@@ -20,6 +21,9 @@ export async function GET(req: NextRequest) {
         ],
       }),
       liberado: false, // Always filter for unreleased items
+      ...(custom && {
+        customField: { contains: custom, mode: 'insensitive' as const },
+      }),
     };
 
     const [items, total] = await Promise.all([

@@ -317,7 +317,7 @@ export default function AutomatizadorGold10xClient() {
                   disabled={isLocked}
                   className={`w-full flex items-start gap-3 p-3 rounded-lg transition-colors border ${
                     isActive
-                      ? 'bg-white/10 border-white/10'
+                      ? 'bg-green-600/10 border-green-500'
                       : isLocked
                         ? 'bg-transparent border-transparent opacity-60 cursor-not-allowed'
                         : 'bg-transparent hover:bg-white/5 border-transparent cursor-pointer'
@@ -329,7 +329,7 @@ export default function AutomatizadorGold10xClient() {
                     </svg>
                   )}
                   <div className="flex-1 text-left">
-                    <h3 className={`font-medium ${isLocked ? 'text-gray-300' : 'text-white'} text-sm md:text-base tracking-tight`}>{label}</h3>
+                    <h3 className={`font-medium ${isActive ? 'text-green-400' : (isLocked ? 'text-gray-300' : 'text-white')} text-sm md:text-base tracking-tight`}>{label}</h3>
                     {episode.duration && <p className="text-xs text-gray-400 mt-1">{episode.duration}</p>}
                   </div>
                 </button>

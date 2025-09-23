@@ -36,6 +36,7 @@ export default function AdminFormulariosPage() {
   const [bulkRunning, setBulkRunning] = useState(false);
   const [bulkDone, setBulkDone] = useState(0);
   const [bulkTotal, setBulkTotal] = useState(0);
+  const [customFilter, setCustomFilter] = useState("");
 
   const totalPages = useMemo(() => Math.max(1, Math.ceil(total / pageSize)), [total, pageSize]);
 
@@ -48,6 +49,7 @@ export default function AdminFormulariosPage() {
       const s = opts?.search ?? search;
       const params = new URLSearchParams({ page: String(p), pageSize: String(ps) });
       if (s) params.set("search", s);
+      if (customFilter) params.set("custom", customFilter);
       const res = await fetch(`/api/formulario-liberacao?${params.toString()}`);
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -78,6 +80,7 @@ export default function AdminFormulariosPage() {
       // Primeiro, pegue a primeira página grande para saber o total
       const firstParams = new URLSearchParams({ page: '1', pageSize: '1000' });
       if (search) firstParams.set('search', search);
+      if (customFilter) firstParams.set('custom', customFilter);
       const firstRes = await fetch(`/api/formulario-liberacao?${firstParams.toString()}`);
       if (!firstRes.ok) {
         const data = await firstRes.json().catch(() => ({}));
@@ -93,6 +96,7 @@ export default function AdminFormulariosPage() {
         for (let p = 2; p <= totalPagesAll; p++) {
           const pParams = new URLSearchParams({ page: String(p), pageSize: '1000' });
           if (search) pParams.set('search', search);
+          if (customFilter) pParams.set('custom', customFilter);
           fetches.push(fetch(`/api/formulario-liberacao?${pParams.toString()}`));
         }
         const results = await Promise.all(fetches);
@@ -203,6 +207,7 @@ export default function AdminFormulariosPage() {
         search: search || '',
         liberado: 'false'
       });
+      if (customFilter) params.set('custom', customFilter);
 
       const response = await fetch(`/api/formulario-liberacao/export?${params.toString()}`);
       if (!response.ok) {
@@ -266,6 +271,7 @@ export default function AdminFormulariosPage() {
         for (let p = 2; p <= totalPagesAll; p++) {
           const pParams = new URLSearchParams({ page: String(p), pageSize: String(1000) });
           if (search) pParams.set("search", search);
+          if (customFilter) pParams.set('custom', customFilter);
           fetches.push(fetch(`/api/formulario-liberacao?${pParams.toString()}`));
         }
         const results = await Promise.all(fetches);
@@ -360,13 +366,20 @@ export default function AdminFormulariosPage() {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-3">
               <h1 className="text-2xl font-bold text-[#5a96f4]">Formulários Recebidos</h1>
               <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto">
-                <form onSubmit={handleSearchSubmit} className="flex gap-2 w-full md:w-auto">
+                <form onSubmit={handleSearchSubmit} className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
                   <input
                     type="text"
                     placeholder="Buscar por nome, email, whatsapp..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className="w-full md:w-80 p-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#5a96f4]"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Filtrar por Custom (ex.: turma 2)"
+                    value={customFilter}
+                    onChange={(e) => setCustomFilter(e.target.value)}
+                    className="w-full md:w-56 p-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#5a96f4]"
                   />
                   <button
                     type="submit"

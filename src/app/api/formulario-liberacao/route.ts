@@ -34,6 +34,7 @@ export async function GET(req: NextRequest) {
     const pageSize = Math.min(Math.max(parseInt(searchParams.get('pageSize') || '20', 10), 1), 200)
     const search = (searchParams.get('search') || '').trim()
     const liberado = searchParams.get('liberado')
+    const custom = (searchParams.get('custom') || '').trim()
 
     const where: any = {
       ...(search && {
@@ -44,6 +45,9 @@ export async function GET(req: NextRequest) {
           { accountNumber: { contains: search, mode: 'insensitive' as const } },
           { customField: { contains: search, mode: 'insensitive' as const } },
         ],
+      }),
+      ...(custom && {
+        customField: { contains: custom, mode: 'insensitive' as const },
       }),
     }
 

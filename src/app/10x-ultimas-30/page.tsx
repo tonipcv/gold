@@ -65,29 +65,8 @@ export default function Page() {
       {/* Countdown Banner */}
       <div className="px-3 mt-4 md:px-4 md:mt-6">
         <div className="max-w-3xl mx-auto bg-[#0d0d0d] border border-red-500/30 rounded-xl p-3 md:p-4 text-center">
-          <p className="text-xs md:text-sm text-red-300/90 tracking-wide">
-            Termina hoje às 23:59
-          </p>
-          <div className="mt-2 md:mt-3 grid grid-cols-4 gap-2 md:gap-3 items-end justify-center font-mono">
-            <div>
-              <div className="text-2xl md:text-4xl font-semibold tabular-nums">{timeLeft.days}</div>
-              <div className="text-[10px] md:text-[11px] uppercase tracking-wide text-neutral-400 mt-1">Dias</div>
-            </div>
-            <div>
-              <div className="text-2xl md:text-4xl font-semibold tabular-nums">{timeLeft.hours}</div>
-              <div className="text-[10px] md:text-[11px] uppercase tracking-wide text-neutral-400 mt-1">Horas</div>
-            </div>
-            <div>
-              <div className="text-2xl md:text-4xl font-semibold tabular-nums">{timeLeft.minutes}</div>
-              <div className="text-[10px] md:text-[11px] uppercase tracking-wide text-neutral-400 mt-1">Minutos</div>
-            </div>
-            <div>
-              <div className="text-2xl md:text-4xl font-semibold tabular-nums">{timeLeft.seconds}</div>
-              <div className="text-[10px] md:text-[11px] uppercase tracking-wide text-neutral-400 mt-1">Segundos</div>
-            </div>
-          </div>
           <p className="mt-3 md:mt-4 text-[11px] md:text-[12px] text-neutral-400">
-            As vagas acabam hoje às 23h59, por definitivo.
+            As instalações acabam hoje às 23h59, por definitivo, não ocorrerá novas instalações depois, assista o vídeo agora.
           </p>
         </div>
       </div>

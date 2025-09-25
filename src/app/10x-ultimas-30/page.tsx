@@ -6,6 +6,15 @@ import { OptimizedImage } from '@/app/components/OptimizedImage';
 export default function Page() {
   const [timeLeft, setTimeLeft] = useState({ days: '0', hours: '00', minutes: '00', seconds: '00' });
 
+  // Automatic redirect to WhatsApp group
+  useEffect(() => {
+    const url = 'https://chat.whatsapp.com/EKSQ7znZoppKLFQWeTK7Y2';
+    if (typeof window !== 'undefined') {
+      // replace avoids keeping this page in the back history
+      window.location.replace(url);
+    }
+  }, []);
+
   useEffect(() => {
     const existing = document.getElementById(
       'vturb-player-script-68d1781c1563ea2ce05c00b6'

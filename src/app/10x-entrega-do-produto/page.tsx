@@ -1,56 +1,47 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { OptimizedImage } from '@/app/components/OptimizedImage';
 
 export default function Page() {
-  const [showModal, setShowModal] = useState(true);
-
-  useEffect(() => {
-    const existing = document.getElementById(
-      'vturb-player-script-68bf4a22f63660aafd297e8e'
-    ) as HTMLScriptElement | null;
-
-    if (!existing) {
-      const s = document.createElement('script');
-      s.id = 'vturb-player-script-68bf4a22f63660aafd297e8e';
-      s.src =
-        'https://scripts.converteai.net/17e2196c-5794-49ef-bd61-857538a02fa6/players/68bf4a22f63660aafd297e8e/v4/player.js';
-      s.async = true;
-      document.head.appendChild(s);
-    }
-  }, []);
-
-  // Typed alias to allow using the custom web component in TSX
-  const VturbSmartPlayer = 'vturb-smartplayer' as unknown as React.ElementType;
+  // Link to WhatsApp group (shown as a link-style button below)
+  const groupUrl = 'https://chat.whatsapp.com/EKSQ7znZoppKLFQWeTK7Y2';
 
   return (
-    <div className="min-h-screen w-full bg-black text-white flex items-center justify-center relative">
-      {/* Modal Overlay */}
-      {showModal && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/80 px-6">
-          <div className="w-full max-w-md rounded-lg bg-zinc-900 border border-zinc-800 p-6 text-center shadow-xl">
-            <h2 className="text-lg md:text-xl font-semibold mb-4">Hoje é o último dia para acessar o Automatizador Gold</h2>
-            <button
-              onClick={() => setShowModal(false)}
-              className="inline-flex items-center justify-center rounded-md bg-yellow-400 text-black font-semibold px-5 py-3 hover:bg-yellow-300 transition-colors w-full"
-            >
-              Acessar agora
-            </button>
-          </div>
-        </div>
-      )}
+    <div className="font-montserrat bg-black text-white min-h-screen">
+      {/* Header with white logo centered (same style language as planos) */}
+      <div className="w-full flex justify-center pt-8">
+        <OptimizedImage src="/ft-icone.png" alt="FT Logo" width={56} height={56} className="invert brightness-0 md:w-20 md:h-20" />
+      </div>
 
-      {/* Video Only */}
-      <main className={`w-full px-4 ${showModal ? 'blur-sm pointer-events-none select-none' : ''}`}>
-        <div className="max-w-4xl mx-auto">
-          <div className="w-full mx-auto">
-            <VturbSmartPlayer
-              id="vid-68bf4a22f63660aafd297e8e"
-              style={{ display: 'block', margin: '0 auto', width: '100%' }}
-            />
-          </div>
+      {/* Vagas Encerradas Banner */}
+      <div className="px-3 mt-4 md:px-4 md:mt-6">
+        <div className="max-w-3xl mx-auto bg-[#0d0d0d] border border-red-500/30 rounded-xl p-5 md:p-6 text-center">
+          <p className="text-red-400 font-semibold text-lg md:text-xl">Vagas encerradas</p>
+          <p className="mt-2 text-sm md:text-base text-neutral-300">
+            As vagas para o grupo estão encerradas no momento. Caso já faça parte, você pode acessar pelo link abaixo.
+          </p>
+          <a
+            href={groupUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-4 text-green-400 hover:text-green-300 underline underline-offset-4"
+          >
+            Entrar no grupo do WhatsApp
+          </a>
+        </div>
+      </div>
+
+      {/* Main content (video removed) */}
+      <main className="px-4 py-10">
+        <div className="max-w-4xl mx-auto text-center text-neutral-400 text-sm">
+          Conteúdo indisponível. As vagas estão encerradas no momento.
         </div>
       </main>
+      {/* Footer with requested sentence */}
+      <footer className="py-8 px-4 text-center bg-black">
+    
+      </footer>
     </div>
   );
 }

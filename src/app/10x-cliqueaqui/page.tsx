@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { OptimizedImage } from '@/app/components/OptimizedImage';
 import { useSearchParams } from 'next/navigation';
 
-export default function Page() {
+function ExclusiveLine() {
   const searchParams = useSearchParams();
   const ex = searchParams?.get('ex') ?? '';
   const formatName = (s: string) =>
@@ -14,6 +14,17 @@ export default function Page() {
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(' ');
   const exName = ex ? formatName(ex) : '';
+
+  if (!exName) return null;
+
+  return (
+    <p className="mt-4 text-center text-sm text-neutral-300">
+      Link exclusivo para <span className="font-semibold text-white">{exName}</span>
+    </p>
+  );
+}
+
+export default function Page() {
   useEffect(() => {
     const existing = document.getElementById(
       'vturb-player-script-68bf4a22f63660aafd297e8e'
@@ -52,11 +63,9 @@ export default function Page() {
               style={{ display: 'block', margin: '0 auto', width: '100%' }}
             />
           </div>
-          {exName && (
-            <p className="mt-4 text-center text-sm text-neutral-300">
-              Link exclusivo para <span className="font-semibold text-white">{exName}</span>
-            </p>
-          )}
+          <Suspense fallback={null}>
+            <ExclusiveLine />
+          </Suspense>
         </div>
       </main>
       {/* Footer with requested sentence */}

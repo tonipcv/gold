@@ -3,6 +3,7 @@ import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import AutomatizadorGold10xClient from './Client'
 import Link from 'next/link'
+import ActiveCouponBanner from './ActiveCouponBanner'
 import { OptimizedImage } from '../components/OptimizedImage'
 import { Navigation } from '../components/Navigation'
 import AttentionBanner from './AttentionBanner'
@@ -26,9 +27,33 @@ export default async function AutomatizadorGold10xPage() {
 
       {/* Main Content */}
       <main className="pt-24 pb-20">
-        <div className="mb-4">
-          <AttentionBanner />
-        </div>
+        {session?.user?.isPremium && (
+          <ActiveCouponBanner />
+        )}
+        {/* Banner verde removido a pedido */}
+        {/* Alert no topo informando sobre a aula bônus no final (somente para premium) */}
+        {session?.user?.isPremium && (
+          <div className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto px-4">
+            <div role="alert" className="mb-4 rounded-md border border-yellow-400/40 bg-yellow-900/20 text-yellow-100 px-3 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+              <div className="flex items-start gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 mt-0.5">
+                  <path fillRule="evenodd" d="M10.29 3.86c.77-1.33 2.65-1.33 3.42 0l7.35 12.7c.77 1.33-.19 3-1.71 3H4.65c-1.52 0-2.48-1.67-1.71-3l7.35-12.7Zm1.71 4.64a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5c0-.41.34-.75.75-.75Zm0 8.25a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Z" clipRule="evenodd" />
+                </svg>
+                <p className="text-sm md:text-base font-semibold">
+                  Parabéns! Você foi selecionado para ganhar até 2 meses grátis de assinatura.
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Link href='/automatizador-gold-10x/aula-16' className="inline-flex items-center px-3 py-1.5 rounded border border-yellow-400/50 text-yellow-100 text-xs md:text-sm">
+                  Ler regulamentos
+                </Link>
+                <Link href='/automatizador-gold-10x/aula-16' className="inline-flex items-center px-3 py-1.5 rounded border border-yellow-400/50 bg-yellow-400/10 hover:bg-yellow-400/15 text-yellow-100 text-xs md:text-sm">
+                  Ir para AULA 16
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto px-4 py-4">
           <AutomatizadorGold10xClient />
         </div>

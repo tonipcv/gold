@@ -26,6 +26,7 @@ model User {
   accounts             Account[]
   sessions             Session[]
   purchases            Purchase[]
+  userCoupons          UserCoupon[]
 }
 
 model Account {
@@ -111,4 +112,39 @@ model FormularioLiberacao {
   customField    String?  // Novo campo opcional
   liberado       Boolean  @default(false)  // Indica se o acesso foi liberado
   createdAt      DateTime @default(now())
+}
+
+model ReferralCoupon {
+  id                 String   @id @default(cuid())
+  name               String
+  purchaseEmail      String
+  whatsapp           String
+  divulgacao         String   // Como fará a divulgação
+  desiredCouponName  String   // Nome do Cupom Desejado
+  createdAt          DateTime @default(now())
+
+  @@index([purchaseEmail])
+}
+
+model ReferralBonusRequest {
+  id            String   @id @default(cuid())
+  name          String
+  purchaseEmail String
+  whatsapp      String
+  friendsCount  Int
+  createdAt     DateTime @default(now())
+
+  @@index([purchaseEmail])
+}
+
+model UserCoupon {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  coupon    String   @unique
+  isActive  Boolean  @default(false)
+  link      String
+  createdAt DateTime @default(now())
+
+  @@index([userId])
 }

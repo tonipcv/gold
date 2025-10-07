@@ -47,9 +47,27 @@ export const authOptions: NextAuthOptions = {
     signIn: '/login',
   },
   callbacks: {
+    async jwt({ token, user }) {
+      // On initial sign-in, user is available
+      if (user) {
+        ;(token as any).isPremium = (user as any).isPremium ?? false
+      } else if (token?.sub) {
+        // On subsequent requests, fetch from DB if not present
+        try {
+          if ((token as any).isPremium === undefined) {
+            const dbUser = await prisma.user.findUnique({ where: { id: token.sub } })
+            ;(token as any).isPremium = dbUser?.isPremium ?? false
+          }
+        } catch {
+          // noop
+        }
+      }
+      return token
+    },
     async session({ session, token }) {
       if (session.user && token.sub) {
         session.user.id = token.sub
+        ;(session.user as any).isPremium = (token as any).isPremium ?? false
       }
       return session
     }

@@ -3,12 +3,12 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 
 // ConverteAI vturb player component (SSR-safe): render placeholder and init on client
-function VturbPlayer({ playerId }: { playerId: string }) {
-  const accountId = '32ff2495-c71e-49ba-811b-00b5b49c517f'
+function VturbPlayer({ playerId, accountId = '32ff2495-c71e-49ba-811b-00b5b49c517f' }: { playerId: string; accountId?: string }) {
   const containerId = `vturb-container-${playerId}`
   
   useEffect(() => {
@@ -55,6 +55,7 @@ interface Episode {
   duration?: string
   linkYouTube?: string
   locked?: boolean
+  accountId?: string
 }
 
 export default function AutomatizadorGold10xClient() {
@@ -65,6 +66,55 @@ export default function AutomatizadorGold10xClient() {
   const [acceptedTerms, setAcceptedTerms] = useState(false)
   const { data: session } = useSession()
   const isPremium = session?.user?.isPremium || false
+  const searchParams = useSearchParams()
+  const aulaParam = searchParams?.get('aula') ?? null
+
+  // Referral form state (AULA 16)
+  const [name, setName] = useState('')
+  const [purchaseEmail, setPurchaseEmail] = useState('')
+  const [whatsapp, setWhatsapp] = useState('')
+  const [friendsCount, setFriendsCount] = useState<number>(1)
+  const [submitting, setSubmitting] = useState(false)
+  const [success, setSuccess] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  const benefitLabel = useMemo(() => {
+    const months = friendsCount * 2
+    const amigoLabel = friendsCount === 1 ? '1 amigo' : `${friendsCount} amigos`
+    return `${amigoLabel} - até ${months} meses grátis`
+  }, [friendsCount])
+
+  const handleSubmitReferral = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitting(true)
+    setSuccess(null)
+    setError(null)
+    try {
+      const res = await fetch('/api/referral-bonus', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, purchaseEmail, whatsapp, friendsCount }),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data?.error || 'Falha ao enviar. Tente novamente.')
+      }
+      setSuccess('Solicitação enviada com sucesso! Redirecionando para o WhatsApp...')
+      try {
+        const phone = '5511958072826'
+        const text = encodeURIComponent('Olá, quero o código de indicacao para ganhar os meses bônus!')
+        window.location.href = `https://wa.me/${phone}?text=${text}`
+      } catch {}
+      setName('')
+      setPurchaseEmail('')
+      setWhatsapp('')
+      setFriendsCount(1)
+    } catch (err: any) {
+      setError(err?.message || 'Erro inesperado')
+    } finally {
+      setSubmitting(false)
+    }
+  }
 
   useEffect(() => {
     // Countdown to 08 Sep 2025 19:00 (UTC-3)
@@ -101,6 +151,7 @@ export default function AutomatizadorGold10xClient() {
     { id: 13, number: 13, title: 'SUPORTE WHATSAPP',                                                      playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=52f26f32-066d-4e61-84f9-1f1cf6f99c55' },
     { id: 14, number: 14, title: 'LIBERAÇÃO OFICIAL',                                                    playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=5f947127-f90c-40e0-a5d9-cd2ff2f3c506', locked: !isPremium },
     { id: 15, number: 15, title: 'ENCONTRO DE MENTORIA GOLD 10X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=56b8726a-0951-45ce-aaf8-37ce313fb20f', locked: !isPremium },
+    // Aula 16 removida da lista (link de indicação agora está na página AULA 16 dedicada)
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!
@@ -115,25 +166,21 @@ export default function AutomatizadorGold10xClient() {
 
   // Seleciona episódio via querystring (?aula=17)
   useEffect(() => {
-    if (typeof window === 'undefined') return
     try {
-      const params = new URLSearchParams(window.location.search)
-      const aulaStr = params.get('aula')
+      const aulaStr = aulaParam
       if (!aulaStr) return
       const aula = parseInt(aulaStr, 10)
       if (Number.isNaN(aula)) return
       const target = episodes.find(e => e.number === aula || e.id === aula)
-      
-      // Verifica se o episódio está bloqueado (aulas 14 e 15 para usuários não premium)
+      // Verifica se o episódio está bloqueado (aulas 14, 15 e 16 para usuários não premium)
       if (target && !target.locked) {
         setActiveEpisode(target.id)
       } else if (target && target.locked) {
-        // Se tentar acessar uma aula bloqueada, redireciona para a aula 1
         setActiveEpisode(1)
       }
     } catch {}
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isPremium])
+  }, [aulaParam, isPremium])
 
   // Show Aula 1 CTA after 30s when Aula 1 is active
   useEffect(() => {
@@ -153,7 +200,7 @@ export default function AutomatizadorGold10xClient() {
       <main className="pt-4 pb-8">
         {/* (removido) Countdown mobile */}
         {/* Video Player Section */}
-        <div className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto px-4 mt-2">
+        <div id="player" className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto px-4 mt-2">
           {/* Title above video */}
           <h2 className="text-lg md:text-xl font-bold text-white text-center mt-3 mb-4 md:mt-6 md:mb-5">AULA {currentEpisode.number} - {currentEpisode.title}</h2>
           {currentEpisode.linkYouTube ? (
@@ -171,7 +218,8 @@ export default function AutomatizadorGold10xClient() {
             </div>
           ) : currentEpisode.playerId ? (
             <div className="bg-black rounded-lg border border-gray-800 overflow-hidden">
-              <VturbPlayer key={currentEpisode.playerId} playerId={currentEpisode.playerId} />
+              <VturbPlayer key={currentEpisode.playerId} playerId={currentEpisode.playerId} accountId={currentEpisode.accountId}
+              />
             </div>
           ) : (
             <div className="rounded-lg border border-gray-800 bg-gray-900/40 p-6 text-center text-sm text-gray-300">
@@ -208,6 +256,7 @@ export default function AutomatizadorGold10xClient() {
                 </Link>
               </div>
             )}
+            {/* Aula 16 removida: formulário não é mais renderizado aqui */}
             {activeEpisode === 1 && (
               <div className="mt-4 flex flex-col items-center gap-4">
                 <a
@@ -310,29 +359,30 @@ export default function AutomatizadorGold10xClient() {
                 const displayTitle = hasTitle ? episode.title : (isLocked ? 'Em breve' : '')
                 const label = `AULA ${episode.number}${displayTitle ? ' - ' + displayTitle : ''}`
                 return (
-                <button
-                  key={episode.id}
-                  onClick={() => handleEpisodeChange(episode.id)}
-                  aria-disabled={isLocked}
-                  disabled={isLocked}
-                  className={`w-full flex items-start gap-3 p-3 rounded-lg transition-colors border ${
-                    isActive
-                      ? 'bg-green-600/10 border-green-500'
-                      : isLocked
-                        ? 'bg-transparent border-transparent opacity-60 cursor-not-allowed'
-                        : 'bg-transparent hover:bg-white/5 border-transparent cursor-pointer'
-                  }`}
-                >
-                  {isLocked && (
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 mt-1 text-gray-300">
-                      <path d="M12 1a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm-3 8V6a3 3 0 116 0v3H9z" />
-                    </svg>
-                  )}
-                  <div className="flex-1 text-left">
-                    <h3 className={`font-medium ${isActive ? 'text-green-400' : (isLocked ? 'text-gray-300' : 'text-white')} text-sm md:text-base tracking-tight`}>{label}</h3>
-                    {episode.duration && <p className="text-xs text-gray-400 mt-1">{episode.duration}</p>}
+                  <div key={episode.id} className="space-y-1">
+                    <button
+                      onClick={() => handleEpisodeChange(episode.id)}
+                      aria-disabled={isLocked}
+                      disabled={isLocked}
+                      className={`w-full flex items-start gap-3 p-3 rounded-lg transition-colors border ${
+                        isActive
+                          ? 'bg-green-600/10 border-green-500'
+                          : isLocked
+                            ? 'bg-transparent border-transparent opacity-60 cursor-not-allowed'
+                            : 'bg-transparent hover:bg-white/5 border-transparent cursor-pointer'
+                      }`}
+                    >
+                      {isLocked && (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 mt-1 text-gray-300">
+                          <path d="M12 1a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm-3 8V6a3 3 0 116 0v3H9z" />
+                        </svg>
+                      )}
+                      <div className="flex-1 text-left">
+                        <h3 className={`font-medium ${isActive ? 'text-green-400' : (isLocked ? 'text-gray-300' : 'text-white')} text-sm md:text-base tracking-tight`}>{label}</h3>
+                        {episode.duration && <p className="text-xs text-gray-400 mt-1">{episode.duration}</p>}
+                      </div>
+                    </button>
                   </div>
-                </button>
                 )
               })}
             </div>

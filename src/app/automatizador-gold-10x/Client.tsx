@@ -151,7 +151,8 @@ export default function AutomatizadorGold10xClient() {
     { id: 13, number: 13, title: 'SUPORTE WHATSAPP',                                                      playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=52f26f32-066d-4e61-84f9-1f1cf6f99c55' },
     { id: 14, number: 14, title: 'LIBERAÇÃO OFICIAL',                                                    playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=5f947127-f90c-40e0-a5d9-cd2ff2f3c506', locked: !isPremium },
     { id: 15, number: 15, title: 'ENCONTRO DE MENTORIA GOLD 10X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=56b8726a-0951-45ce-aaf8-37ce313fb20f', locked: !isPremium },
-    // Aula 16 removida da lista (link de indicação agora está na página AULA 16 dedicada)
+    { id: 16, number: 16, title: 'Estrategia Gold X Power V2',                                           playerId: '', linkYouTube: 'https://www.youtube.com/watch?v=stj_1sriQUE' },
+    // Aula 16 adicionada à lista
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!
@@ -345,6 +346,21 @@ export default function AutomatizadorGold10xClient() {
                 </a>
               </div>
             )}
+            {activeEpisode === 16 && (
+              <div className="mt-4 flex flex-col items-center gap-4">
+                <a
+                  href="https://drive.google.com/drive/folders/1S2lOOzWMgXpZWmrC8D3kwfXbQoBEUG7q?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border border-green-500 bg-green-700 text-white text-base font-semibold shadow-[0_0_28px_rgba(34,197,94,0.35)] hover:bg-green-600 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                    <path d="M5 20h14v-2H5v2Zm7-3 5-5h-3V4h-4v8H7l5 5Z" />
+                  </svg>
+                  BAIXAR
+                </a>
+              </div>
+            )}
           </div>
         </div>
 
@@ -378,7 +394,14 @@ export default function AutomatizadorGold10xClient() {
                         </svg>
                       )}
                       <div className="flex-1 text-left">
-                        <h3 className={`font-medium ${isActive ? 'text-green-400' : (isLocked ? 'text-gray-300' : 'text-white')} text-sm md:text-base tracking-tight`}>{label}</h3>
+                        <div className="flex items-center gap-2">
+                          <h3 className={`font-medium ${isActive ? 'text-green-400' : (isLocked ? 'text-gray-300' : 'text-white')} text-sm md:text-base tracking-tight uppercase`}>{label}</h3>
+                          {episode.number === 16 && (
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] md:text-xs font-semibold border border-amber-400 text-amber-300 bg-amber-500/10">
+                              AULA NOVA
+                            </span>
+                          )}
+                        </div>
                         {episode.duration && <p className="text-xs text-gray-400 mt-1">{episode.duration}</p>}
                       </div>
                     </button>

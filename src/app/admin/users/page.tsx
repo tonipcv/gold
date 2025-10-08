@@ -3,7 +3,7 @@
 import { useState, FormEvent, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { CheckIcon, XMarkIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { CheckIcon, XMarkIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { Navigation } from '../../components/Navigation';
 import { BottomNavigation } from '../../../components/BottomNavigation';
 import Link from 'next/link';
@@ -58,6 +58,10 @@ export default function AdminUsers() {
   const [setPwdUser, setSetPwdUser] = useState<User | null>(null);
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  // Apagar usuário
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteUserTarget, setDeleteUserTarget] = useState<User | null>(null);
+  const [isDeletingUser, setIsDeletingUser] = useState(false);
   // Seleção em massa e ações em lote
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [isBulkSending, setIsBulkSending] = useState(false);
@@ -369,6 +373,38 @@ export default function AdminUsers() {
     setIsSetPasswordOpen(true);
   };
 
+  const openDeleteUserModal = (user: User) => {
+    setDeleteUserTarget(user);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleDeleteUser = async () => {
+    if (!deleteUserTarget) return;
+    try {
+      setIsDeletingUser(true);
+      setError(null);
+      const res = await fetch('/api/admin/delete-user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: deleteUserTarget.id })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Falha ao apagar usuário');
+      }
+      setSuccess('Usuário apagado com sucesso');
+      setIsDeleteModalOpen(false);
+      setDeleteUserTarget(null);
+      fetchUsers();
+      setTimeout(() => setSuccess(null), 3000);
+    } catch (err: any) {
+      setError(err.message || 'Erro ao apagar usuário');
+      setTimeout(() => setError(null), 4000);
+    } finally {
+      setIsDeletingUser(false);
+    }
+  };
+
   const handleSetPassword = async (useDefault = false) => {
     if (!setPwdUser) return;
     if (!useDefault) {
@@ -617,6 +653,16 @@ export default function AdminUsers() {
                               Definir senha
                             </button>
                           </div>
+                          <div className="mt-2">
+                            <button
+                              onClick={() => openDeleteUserModal(user)}
+                              className="flex items-center gap-1 text-red-400 hover:text-red-300 text-sm"
+                              title="Apagar usuário"
+                            >
+                              <TrashIcon className="h-4 w-4" />
+                              Apagar usuário
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -814,6 +860,36 @@ export default function AdminUsers() {
                       title="Usar a senha padrão configurada no servidor"
                     >
                       Usar senha padrão do servidor
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Modal de confirmação para apagar usuário */}
+            {isDeleteModalOpen && deleteUserTarget && (
+              <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+                <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md">
+                  <h2 className="text-xl font-bold mb-4 text-red-400">Apagar usuário</h2>
+                  <p className="text-sm text-gray-300">
+                    Tem certeza que deseja apagar o usuário
+                    <span className="font-semibold"> {deleteUserTarget.email}</span>?
+                    Esta ação é permanente e removerá também os produtos e sessões associados.
+                  </p>
+                  <div className="flex justify-end gap-2 mt-6">
+                    <button
+                      onClick={() => { setIsDeleteModalOpen(false); setDeleteUserTarget(null); }}
+                      className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors"
+                      disabled={isDeletingUser}
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      onClick={handleDeleteUser}
+                      className={`px-4 py-2 rounded-md transition-colors ${isDeletingUser ? 'bg-red-900 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'} text-white flex items-center gap-1`}
+                      disabled={isDeletingUser}
+                    >
+                      <TrashIcon className="h-4 w-4" /> {isDeletingUser ? 'Apagando...' : 'Apagar'}
                     </button>
                   </div>
                 </div>

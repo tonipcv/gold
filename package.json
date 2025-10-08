@@ -10,7 +10,10 @@
     "postinstall": "prisma generate",
     "resend:email": "node scripts/resendAccess.js --email",
     "resend:all-paid": "node scripts/resendAccess.js --all-paid",
-    "premium:update-older-than-7": "node scripts/set-premium-older-than-7-days.js"
+    "premium:update-older-than-7": "node scripts/set-premium-older-than-7-days.js",
+    "dmguru:coupons": "node scripts/dmguru-list-active-coupons.js",
+    "dmguru:coupon": "node scripts/dmguru-get-coupon.js",
+    "dmguru:upload-coupons": "node scripts/dmguru-upload-coupons-from-csv.js"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",

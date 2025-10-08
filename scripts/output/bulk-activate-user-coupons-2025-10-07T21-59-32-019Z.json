@@ -1,0 +1,3789 @@
+{
+  "file": "public/nome-cupom.csv",
+  "ok": 290,
+  "failed": 208,
+  "conflicts": 4,
+  "reassigned": 0,
+  "results": [
+    {
+      "i": 1,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "abdalafonsecanovais@gmail.com",
+      "coupon": "77998540005",
+      "id": "cmggy5keh0001t9m23vesh4ib"
+    },
+    {
+      "i": 2,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "adailtoncosta873@gmail.com",
+      "coupon": "73999008329",
+      "id": "cmggy5l340003t9m2l76p7fi2"
+    },
+    {
+      "i": 3,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "adanbarbosa54@gmail.com",
+      "coupon": "44999329151",
+      "id": "cmggy5ln30005t9m26i6n9cbh"
+    },
+    {
+      "i": 4,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ademarcospereira635@gmail.com",
+      "coupon": "65992437677",
+      "id": "cmggy5m6y0007t9m2n63efe5n"
+    },
+    {
+      "i": 5,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "netocardosomed2017.1@gmail.com",
+      "coupon": "77999859782",
+      "id": "cmggy5mqw0009t9m2vfcj3f95"
+    },
+    {
+      "i": 6,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "adionesdantas110@gmail.com",
+      "coupon": "83981626739",
+      "id": "cmggy5nar000bt9m299hwbcwd"
+    },
+    {
+      "i": 7,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "rol.freitas@hotmail.com",
+      "coupon": "73991562183",
+      "id": "cmggy5nuf000dt9m2i9el4njg"
+    },
+    {
+      "i": 8,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "advafonsodeleon@gmail.com",
+      "coupon": "53999426868",
+      "id": "cmggy5oeg000ft9m23asp5mez"
+    },
+    {
+      "i": 9,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "aiala.araujom@gmail.com",
+      "coupon": "77981507573",
+      "id": "cmggy5oyf000ht9m229k8wt3t"
+    },
+    {
+      "i": 10,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "akincunha111@gmail.com",
+      "coupon": "53991976077",
+      "id": "cmggy5pif000jt9m2tk3dukw5"
+    },
+    {
+      "i": 11,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "alan.guica1@gmail.com",
+      "coupon": "18997331159",
+      "id": "cmggy5q2b000lt9m23dg9f2ox"
+    },
+    {
+      "i": 12,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "alan.rosley@gmail.com",
+      "coupon": "31973420230",
+      "id": "cmggy5qmc000nt9m2z4hrtj11"
+    },
+    {
+      "i": 13,
+      "ok": false,
+      "code": "COUPON_IN_USE",
+      "email": "willianhartz@gmail.com",
+      "coupon": "19998624615",
+      "ownerUserId": "cmfbblya70000jm04vb92adag"
+    },
+    {
+      "i": 14,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "albereshnk@gmail.com",
+      "coupon": "81989418578",
+      "id": "cmggypq480001t9807vkjrffj"
+    },
+    {
+      "i": 15,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ramon_fismed@yahoo.com.br",
+      "coupon": "21988520709",
+      "id": "cmggypqsy0003t9808yil26ol"
+    },
+    {
+      "i": 16,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "alexnilson13@gmail.com",
+      "coupon": "69993883958",
+      "id": "cmggyprdc0005t980kgg3l15n"
+    },
+    {
+      "i": 17,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "alexrodrigues.283@gmail.com",
+      "coupon": "19994278686",
+      "id": "cmggyprxi0007t980h2idqjbp"
+    },
+    {
+      "i": 18,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "alexsolliveira9@gmail.com",
+      "coupon": "21991289638",
+      "id": "cmggypsho0009t980ptyjkycw"
+    },
+    {
+      "i": 19,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "alexandrebarroso136@gmail.com",
+      "coupon": "22997162435",
+      "id": "cmggypt1v000bt98016xcmgke"
+    },
+    {
+      "i": 20,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "rodrigo.hwu1@gmail.com",
+      "coupon": "11982391597",
+      "id": "cmggyptm4000dt980198yxulm"
+    },
+    {
+      "i": 21,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "alexandre1206.ah@gmail.com",
+      "coupon": "99982626651",
+      "id": "cmggypuaz000ft980ogfkxcnu"
+    },
+    {
+      "i": 22,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "claudetetek@hotmail.com",
+      "coupon": "71996441106",
+      "id": "cmggypuv4000ht980g4xe13s0"
+    },
+    {
+      "i": 23,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "allan.inusa@gmail.com",
+      "coupon": "73998293053",
+      "id": "cmggypvfa000jt980luqruxrb"
+    },
+    {
+      "i": 24,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "alvarodanielsilva2@gmail.com",
+      "coupon": "31997511869",
+      "id": "cmggypvzn000lt980b925d4bf"
+    },
+    {
+      "i": 25,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "rhuan_godoi@hotmail.com",
+      "coupon": "11937520223",
+      "id": "cmggqy2pv0003jp04pu48j9rc"
+    },
+    {
+      "i": 26,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "souza.on995@gmail.com",
+      "coupon": "61992967380",
+      "id": "cmggypx4i000nt980um34pg8r"
+    },
+    {
+      "i": 27,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "andersoncrigger@gmail.com",
+      "coupon": "86995229194",
+      "id": "cmggypxok000pt980fyhlmn78"
+    },
+    {
+      "i": 28,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "andrefb123@gmail.com",
+      "coupon": "31992146433",
+      "id": "cmggypy8t000rt9801y4lnur2"
+    },
+    {
+      "i": 29,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "andre13luiz@hotmail.com",
+      "coupon": "47999908615",
+      "id": "cmggypyta000tt980jo5djb8m"
+    },
+    {
+      "i": 30,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "andrerenanp@gmail.com",
+      "coupon": "91981928777",
+      "id": "cmggypzdn000vt980hvcyxs64"
+    },
+    {
+      "i": 31,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ag794307@gmail.com",
+      "coupon": "22998664602",
+      "id": "cmggypzxu000xt980b2cc4kfo"
+    },
+    {
+      "i": 32,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "rikonasa@outlook.com",
+      "coupon": "31995211328",
+      "id": "cmggyq0ic000zt980jvyqdrb7"
+    },
+    {
+      "i": 33,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "lucioptplano@gmail.com",
+      "coupon": "61998006294",
+      "id": "cmggyq12u0011t9804vdhpczu"
+    },
+    {
+      "i": 34,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "antoniovsam@hotmail.com",
+      "coupon": "82981322001",
+      "id": "cmggyq1nd0013t980gpkorfon"
+    },
+    {
+      "i": 35,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "antonyereoficial@gmail.com",
+      "coupon": "77988412400",
+      "id": "cmggyq27y0015t980y4jhwv9h"
+    },
+    {
+      "i": 36,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "arthursilvanoserafim@gmail.com",
+      "coupon": "48984908531",
+      "id": "cmggyq2tm0017t9808v6xosgd"
+    },
+    {
+      "i": 37,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "augustojrmelo@gmail.com",
+      "coupon": "21997215540",
+      "id": "cmggyq3dr0019t980jobeg4mf"
+    },
+    {
+      "i": 38,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "williamkkat@hotmail.com",
+      "coupon": "88998477346",
+      "id": "cmggyq3y7001bt980rzjz2d1j"
+    },
+    {
+      "i": 39,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "bernardopiazzalunga@outlook.com",
+      "coupon": "43996643336",
+      "id": "cmggyq4im001dt980t3i0o0i4"
+    },
+    {
+      "i": 40,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "brendon.zache@gmail.com",
+      "coupon": "27999960272",
+      "id": "cmggyq52s001ft980t01a8njv"
+    },
+    {
+      "i": 41,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "breno.mujo@hotmail.com",
+      "coupon": "21999304030",
+      "id": "cmggyq5rj001ht980q3jn5ryb"
+    },
+    {
+      "i": 42,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "brunoarantesdesousaramos@gmail.com",
+      "coupon": "64992843266",
+      "id": "cmggyq6bx001jt980cqaxtlgu"
+    },
+    {
+      "i": 43,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "bruno.flexpag@gmail.com",
+      "coupon": "71992988220",
+      "id": "cmggyq6w6001lt9802acffcib"
+    },
+    {
+      "i": 44,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "brferreira92@outlook.com",
+      "coupon": "41996903002",
+      "id": "cmggyq7gh001nt980xbeapwft"
+    },
+    {
+      "i": 45,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "bruno_franca10@hotmail.com",
+      "coupon": "11952246014",
+      "id": "cmggyq80v001pt980hqk46ni1"
+    },
+    {
+      "i": 46,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "brunooliveirademoraes@gmail.com",
+      "coupon": "11984306817",
+      "id": "cmggyq8lc001rt9807h4u8ib1"
+    },
+    {
+      "i": 47,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "rodriguesbruno083@gmail.com",
+      "coupon": "21987576279",
+      "id": "cmggyq960001tt980qc5jne6m"
+    },
+    {
+      "i": 48,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "b.rodrigues050dossantos@gmail.com",
+      "coupon": "48984751719",
+      "id": "cmggyq9qf001vt980y24p2vbt"
+    },
+    {
+      "i": 49,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "brunouzeda_04@hotmail.com",
+      "coupon": "71992771789",
+      "id": "cmggyqaao001xt980f8zj2r0q"
+    },
+    {
+      "i": 50,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "bruhdesouza250@gmail.com",
+      "coupon": "47988949731",
+      "id": "cmggyqauy001zt980iuf9e4z3"
+    },
+    {
+      "i": 51,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "brunomgv@gmail.com",
+      "coupon": "67992191310",
+      "id": "cmggyqbfk0021t980ztu1yjp6"
+    },
+    {
+      "i": 52,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "cacaio_15@hotmail.com",
+      "coupon": "24992635864",
+      "id": "cmggyqbzx0023t980e0tpgxh4"
+    },
+    {
+      "i": 53,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "caioch@live.com",
+      "coupon": "19998182980",
+      "id": "cmggyqcke0025t980xqjcnqig"
+    },
+    {
+      "i": 54,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "caiomhl@gmail.com",
+      "coupon": "74999238992",
+      "id": "cmggyqd4o0027t980tfg3tx4m"
+    },
+    {
+      "i": 55,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "max_kiq@hotmail.com",
+      "coupon": "11993509683",
+      "id": "cmggyqdot0029t980h03i8g45"
+    },
+    {
+      "i": 56,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "caarlospereiraa@gmail.com",
+      "coupon": "17996251839",
+      "id": "cmggyqe90002bt98005d1wpui"
+    },
+    {
+      "i": 57,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "massuiaguto@gmail.com",
+      "coupon": "44999365997",
+      "id": "cmggyqeta002dt980r0mhuurn"
+    },
+    {
+      "i": 58,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "carloscdelagamba@hotmail.com",
+      "coupon": "16993352880",
+      "id": "cmggyqfdl002ft980c3ikt8c5"
+    },
+    {
+      "i": 59,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "carlosdanieldasilvamendez60@gmail.com",
+      "coupon": "67991667665",
+      "id": "cmggyqfxr002ht9802upokd1p"
+    },
+    {
+      "i": 60,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "carloskdusaldanha@hotmail.com",
+      "coupon": "11940446421",
+      "id": "cmggyqghr002jt980hp4wk8q9"
+    },
+    {
+      "i": 61,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "carlitos.weck@hotmail.com",
+      "coupon": "47999684503",
+      "id": "cmggyqh1v002lt9804af6ygb6"
+    },
+    {
+      "i": 62,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "carloshenriqueil513@gmail.com",
+      "coupon": "32988319029",
+      "id": "cmggyqhqi002nt980izbsipt6"
+    },
+    {
+      "i": 63,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "chris07zyzz@gmail.com",
+      "coupon": "68984055612",
+      "id": "cmggyqiap002pt980kc42su9m"
+    },
+    {
+      "i": 64,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "claitoneloa@gmail.com",
+      "coupon": "17996708091",
+      "id": "cmggyqiup002rt980svy7js2o"
+    },
+    {
+      "i": 65,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "kakau0909@yahoo.com.br",
+      "coupon": "62996235029",
+      "id": "cmggyqjeu002tt980t26nuzwa"
+    },
+    {
+      "i": 66,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "junior.jno@gmail.com",
+      "coupon": "11969133132",
+      "id": "cmggyqjz3002vt9803m21vjfj"
+    },
+    {
+      "i": 67,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "clebsonkurani@gmail.com",
+      "coupon": "73991779398",
+      "id": "cmggyqkj6002xt980as22sukj"
+    },
+    {
+      "i": 68,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "cleiton.brandemburg@gmail.com",
+      "coupon": "27996917576",
+      "id": "cmggyql33002zt980ytk20z0i"
+    },
+    {
+      "i": 69,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "cleivermagno@gmail.com",
+      "coupon": "71993395756",
+      "id": "cmggyqln30031t980r00lqqiu"
+    },
+    {
+      "i": 70,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "clenyabarros@gmail.com",
+      "coupon": "95991272773",
+      "id": "cmggyqm720033t9806c5ueldz"
+    },
+    {
+      "i": 71,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "cleverson107@gmail.com",
+      "coupon": "66992522102",
+      "id": "cmggyqmqz0035t980ej3cyzod"
+    },
+    {
+      "i": 72,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "c_rodriguees@hotmail.com",
+      "coupon": "11978170451",
+      "id": "cmggyqnb60037t980189bjs5z"
+    },
+    {
+      "i": 73,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "cristianmaffezzoli518@gmail.com",
+      "coupon": "47992387817",
+      "id": "cmggyqnvc0039t980xsah1vp9"
+    },
+    {
+      "i": 74,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "cristianosantiago@hotmail.com",
+      "coupon": "31998884973",
+      "id": "cmggyqofd003bt9804h2kkvx7"
+    },
+    {
+      "i": 75,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "cristianoperreirra007@gmail.com",
+      "coupon": "21992874861",
+      "id": "cmggyqozb003dt980ccgdxi0z"
+    },
+    {
+      "i": 76,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "dailtonm@gmail.com",
+      "coupon": "44998191442",
+      "id": "cmggyqpja003ft980o2rjv8kp"
+    },
+    {
+      "i": 77,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "daltondjesus27@gmail.com",
+      "coupon": "27998564288",
+      "id": "cmggyqq3a003ht980xn0gyr6n"
+    },
+    {
+      "i": 78,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "dalto15@hotmail.com",
+      "coupon": "27999570312",
+      "id": "cmggyqqn9003jt980mz45p2cx"
+    },
+    {
+      "i": 79,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "rlrenan@hotmail.com",
+      "coupon": "41998188396",
+      "id": "cmggyqr7e003lt980ds4rycbo"
+    },
+    {
+      "i": 80,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "daolferro@gmail.com",
+      "coupon": "67984374030",
+      "id": "cmggyqrrh003nt980h44t5fcq"
+    },
+    {
+      "i": 81,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "daniithecs@gmail.com",
+      "coupon": "62981140874",
+      "id": "cmggyqsbm003pt980v2q53un4"
+    },
+    {
+      "i": 82,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "danielpolimeni@gmail.com",
+      "coupon": "48988084568",
+      "id": "cmggyqsvv003rt980fwmrobl4"
+    },
+    {
+      "i": 83,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "bequimad@gmail.com",
+      "coupon": "31983046245",
+      "id": "cmggyqtkm003tt980omrietn0"
+    },
+    {
+      "i": 84,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "danielzyzz28@gmail.com",
+      "coupon": "84999570420",
+      "id": "cmggyqu4o003vt980vpg1btmw"
+    },
+    {
+      "i": 85,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "tavares_domelo@hotmail.com",
+      "coupon": "16991809102",
+      "id": "cmggyquol003xt9800m1iscbw"
+    },
+    {
+      "i": 86,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "daniel_limeira@hotmail.com",
+      "coupon": "71992248935",
+      "id": "cmggyqv8i003zt980sjk065th"
+    },
+    {
+      "i": 87,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "daniel.ferreira.adv@hotmail.com",
+      "coupon": "62991197950",
+      "id": "cmggyqvsm0041t9807bt9raq2"
+    },
+    {
+      "i": 88,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "danieljs10288@gmail.com",
+      "coupon": "19994895360",
+      "id": "cmggyqwcp0043t980fvdbp952"
+    },
+    {
+      "i": 89,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "danilo.planejados@gmail.com",
+      "coupon": "11983416660",
+      "id": "cmggyqwwv0045t980snipe6ab"
+    },
+    {
+      "i": 90,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "danilo_petrol@hotmail.com",
+      "coupon": "84998191142",
+      "id": "cmggyqxh00047t980trkeli33"
+    },
+    {
+      "i": 91,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "daniloinxs@msn.com",
+      "coupon": "11986253457",
+      "id": "cmggyqy110049t980csf5by0l"
+    },
+    {
+      "i": 92,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "daniloslopes@gmail.com",
+      "coupon": "75998429658",
+      "id": "cmggyqyl8004bt980wpin8jo9"
+    },
+    {
+      "i": 93,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "darlan22wendeldasilva@gmail.com",
+      "coupon": "65996695375",
+      "id": "cmggyqz5a004dt980xzv9dh9f"
+    },
+    {
+      "i": 94,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "frazaonegocios16@gmail.com",
+      "coupon": "11984963439",
+      "id": "cmggyqzph004ft9804210lz39"
+    },
+    {
+      "i": 95,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "david.wesley16@gmail.com",
+      "coupon": "11930159894",
+      "id": "cmggyr09f004ht980el7tl3bn"
+    },
+    {
+      "i": 96,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "daylson1999@gmail.com",
+      "coupon": "91998326387",
+      "id": "cmggyr0te004jt980wtqzqzvf"
+    },
+    {
+      "i": 97,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "juninhorios18@gmail.com",
+      "coupon": "84998197068",
+      "id": "cmggyr1dd004lt9808aaqglv8"
+    },
+    {
+      "i": 98,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "diegochaves.cs2210@gmail.com",
+      "coupon": "61985251962",
+      "id": "cmggyr1x9004nt98058s4x5xk"
+    },
+    {
+      "i": 99,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "dhiegodg@hotmail.com",
+      "coupon": "11949963699",
+      "id": "cmggyr2hk004pt980s8f8exa6"
+    },
+    {
+      "i": 100,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "diegonovais10@gmail.com",
+      "coupon": "19996240556",
+      "id": "cmggyr31p004rt980va7tu5sx"
+    },
+    {
+      "i": 101,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "diegofelixeng@gmail.com",
+      "coupon": "35998825759",
+      "id": "cmggyr3lw004tt9803iuk6f69"
+    },
+    {
+      "i": 102,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "mortelenta007@gmail.com",
+      "coupon": "21992253750",
+      "id": "cmggyr466004vt980x9kvdmp4"
+    },
+    {
+      "i": 103,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "diuliano1231@icloud.com",
+      "coupon": "51993882080",
+      "id": "cmggyr4q1004xt980kz8qolus"
+    },
+    {
+      "i": 104,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "djonathan.2704@gmail.com",
+      "coupon": "47997484149",
+      "id": "cmggyr5ek004zt980gekhn22z"
+    },
+    {
+      "i": 105,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "douglas_bf11@hotmail.com",
+      "coupon": "67992326021",
+      "id": "cmggyr5yh0051t9803wnebrha"
+    },
+    {
+      "i": 106,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "doug-ips@hotmail.com",
+      "coupon": "88996969918",
+      "id": "cmggyr6ih0053t980ucst0hz6"
+    },
+    {
+      "i": 107,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "douglas.limadhl@gmail.com",
+      "coupon": "44991589614",
+      "id": "cmggyr72f0055t980yhxi07fn"
+    },
+    {
+      "i": 108,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "douglas22sampaio@gmail.com",
+      "coupon": "11984179770",
+      "id": "8530e4d7-3d16-49da-b57e-fd087f0be444"
+    },
+    {
+      "i": 109,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "douglassolucoes@gmail.com",
+      "coupon": "51996376884",
+      "id": "cmggyr86h0057t980gdbue9up"
+    },
+    {
+      "i": 110,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "douglas789sousa@gmail.com",
+      "coupon": "62991535262",
+      "id": "cmggyr8qi0059t980d9fhq8sn"
+    },
+    {
+      "i": 111,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "edilson_97@icloud.com",
+      "coupon": "84988177128",
+      "id": "cmggyr9ao005bt980zf2h7zlv"
+    },
+    {
+      "i": 112,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "edmopenha@gmail.com",
+      "coupon": "11943700735",
+      "id": "cmggyr9ut005dt9803vwztuwn"
+    },
+    {
+      "i": 113,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "edujesusantos@outlook.com",
+      "coupon": "11972965361",
+      "id": "cmggyraeu005ft980uacotwu8"
+    },
+    {
+      "i": 114,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "eduardo_bji@hotmail.com",
+      "coupon": "22998480363",
+      "id": "cmggyrayx005ht980a6xfdlxl"
+    },
+    {
+      "i": 115,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "esittoni@gmail.com",
+      "coupon": "51982097873",
+      "id": "cmggyrbj3005jt980efdujitu"
+    },
+    {
+      "i": 116,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "eportestj@gmail.com",
+      "coupon": "51984199806",
+      "id": "cmggyrc39005lt980wf4yz5my"
+    },
+    {
+      "i": 117,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "duh-lr@hotmail.com",
+      "coupon": "47997850125",
+      "id": "cmggyrcn8005nt980vziu5f7x"
+    },
+    {
+      "i": 118,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "eduardofelipesalome@gmail.com",
+      "coupon": "19994615820",
+      "id": "cmggyrd7e005pt980rc3o5t22"
+    },
+    {
+      "i": 119,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "eduardo.2904@outlook.com",
+      "coupon": "11947865683",
+      "id": "cmggyrdrg005rt980x6e5f2n2"
+    },
+    {
+      "i": 120,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "eduja7@gmail.com",
+      "coupon": "11983642829",
+      "id": "cmggyrebl005tt98099byddx5"
+    },
+    {
+      "i": 121,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "edwin_barros@icloud.com",
+      "coupon": "97991496675",
+      "id": "cmggyrewq005vt9809xikx8tk"
+    },
+    {
+      "i": 122,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "elissontorquato21@gmail.com",
+      "coupon": "41988914481",
+      "id": "cmggyrfgo005xt980k671oh6a"
+    },
+    {
+      "i": 123,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "eliton.h611@gmail.com",
+      "coupon": "48999616911",
+      "id": "cmggyrg0w005zt9801zzt618w"
+    },
+    {
+      "i": 124,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "emerson.agro1998@gmail.com",
+      "coupon": "17992129058",
+      "id": "cmggyrgl20061t9806ltlnihs"
+    },
+    {
+      "i": 125,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ju.ni.or007@hotmail.com",
+      "coupon": "13992106228",
+      "id": "cmggyrh9t0063t98083pwkjja"
+    },
+    {
+      "i": 126,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "endidias28@gmail.com",
+      "coupon": "55997222201",
+      "id": "cmggyrhtq0065t980nwdy8g9m"
+    },
+    {
+      "i": 127,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "erikson.alves@yahoo.com.br",
+      "coupon": "11983553771",
+      "id": "cmggyridw0067t980cmdo77jl"
+    },
+    {
+      "i": 128,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "eron.raquelle@gmail.com",
+      "coupon": "41992068502",
+      "id": "cmggyrixu0069t9805a4zwkt1"
+    },
+    {
+      "i": 129,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "heronispbs@gmail.com",
+      "coupon": "94991338327",
+      "id": "cmggyrji5006bt9803nl1tsa9"
+    },
+    {
+      "i": 130,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "eryckmoreira@gmail.com",
+      "coupon": "11954428414",
+      "id": "cmggyrk2b006dt980l1i3cflv"
+    },
+    {
+      "i": 131,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "espeditopereira383@gmail.com",
+      "coupon": "85991118733",
+      "id": "cmggyrkmi006ft98015g3ycbc"
+    },
+    {
+      "i": 132,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "evandrogazzettaf@outlook.com",
+      "coupon": "64984064874",
+      "id": "cmggyrl6q006ht980dhgpt01a"
+    },
+    {
+      "i": 133,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ezequiel570@outlook.com",
+      "coupon": "41995001684",
+      "id": "cmggyrlr0006jt9803eswpbo0"
+    },
+    {
+      "i": 134,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "fabianocdelima69@gmail.com",
+      "coupon": "47999872181",
+      "id": "cmggyrmb9006lt980hhdonv9z"
+    },
+    {
+      "i": 135,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ffabiomonteiro_@hotmail.com",
+      "coupon": "11989022822",
+      "id": "cmggyrmvh006nt980appjsbla"
+    },
+    {
+      "i": 136,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "fabio_vendas@ymail.com",
+      "coupon": "51985433135",
+      "id": "cmggyrnfj006pt980b9nq0xwi"
+    },
+    {
+      "i": 137,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "pr.fabioinaciodesousa@gmail.com",
+      "coupon": "11982904384",
+      "id": "cmggyrnzt006rt980h7bnuyye"
+    },
+    {
+      "i": 138,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "fborgesrosa1983.fb@gmail.com",
+      "coupon": "64996438047",
+      "id": "cmggyrok7006tt980yyffh2d2"
+    },
+    {
+      "i": 139,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "fagner_fg12@hotmail.com",
+      "coupon": "31983130405",
+      "id": "cmggyrp49006vt980nleawqaa"
+    },
+    {
+      "i": 140,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "felipefilisbino@hotmail.com",
+      "coupon": "21996610093",
+      "id": "cmggyrpo3006xt98029uawvqe"
+    },
+    {
+      "i": 141,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "felipebarrosaraujo2@gmail.com",
+      "coupon": "64992407309",
+      "id": "cmggyrq81006zt980q92lm0ps"
+    },
+    {
+      "i": 142,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "felipecimino@hotmail.com",
+      "coupon": "11991444644",
+      "id": "cmggyrqs20071t980gg1fqtlx"
+    },
+    {
+      "i": 143,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "felipe.silva0013@gmail.com",
+      "coupon": "11960611750",
+      "id": "cmggyrrce0073t9805qjlvo7x"
+    },
+    {
+      "i": 144,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "felipeoliveiraa1@hotmail.com",
+      "coupon": "11998002960",
+      "id": "cmggyrrwo0075t9801h9cp3fn"
+    },
+    {
+      "i": 145,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "felipe.matukay2026@hotmail.com",
+      "coupon": "11984921249",
+      "id": "cmggyrslb0077t980vpxpu1nz"
+    },
+    {
+      "i": 146,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "fernando-salgado1@hotmail.com",
+      "coupon": "93991038797",
+      "id": "cmggyrt5a0079t980deu6gwnr"
+    },
+    {
+      "i": 147,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "technofer@hotmail.com",
+      "coupon": "32984947727",
+      "id": "cmggyrtpe007bt980wmk68xgy"
+    },
+    {
+      "i": 148,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "flaviakoyama777@gmail.com",
+      "coupon": "67981001714",
+      "id": "cmggyru9h007dt980tcycrkev"
+    },
+    {
+      "i": 149,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "fpvg78@gmail.com",
+      "coupon": "37998647897",
+      "id": "cmggyrutk007ft9809dnut319"
+    },
+    {
+      "i": 150,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "souza.francislaine@gmail.com",
+      "coupon": "11964801196",
+      "id": "cmggyrvds007ht980pft6m5pu"
+    },
+    {
+      "i": 151,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gbshopmix@gmail.com",
+      "coupon": "61999389256",
+      "id": "cmggyrvxt007jt980npr0i0eh"
+    },
+    {
+      "i": 152,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gabriel_camisa99@hotmail.com",
+      "coupon": "17991239739",
+      "id": "cmggyrwhz007lt980n5mevirg"
+    },
+    {
+      "i": 153,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gabrielbiker07@gmail.com",
+      "coupon": "31971318915",
+      "id": "cmggyrx1z007nt98096ztnfbm"
+    },
+    {
+      "i": 154,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gabrielfilipegfs4@gmail.com",
+      "coupon": "31981099272",
+      "id": "cmggyrxm8007pt9807kbqu5pe"
+    },
+    {
+      "i": 155,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gabriel-lisboa@outlook.com.br",
+      "coupon": "33999080239",
+      "id": "cmggyry67007rt9809qxqhmyc"
+    },
+    {
+      "i": 156,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gabriel-valadao@hotmail.com",
+      "coupon": "15996245646",
+      "id": "cmggyryq9007tt9807jlxkyyq"
+    },
+    {
+      "i": 157,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ideacamisetas@hotmail.com",
+      "coupon": "11953638349",
+      "id": "cmggyrzac007vt980r7344nfc"
+    },
+    {
+      "i": 158,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gm91688@gmail.com",
+      "coupon": "21973489431",
+      "id": "cmggyrzux007xt980147zsdsb"
+    },
+    {
+      "i": 159,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gabrielcorteez@yahoo.com.br",
+      "coupon": "21999172293",
+      "id": "cmggys0f2007zt980v0skq796"
+    },
+    {
+      "i": 160,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "geanroni@gmail.com",
+      "coupon": "49989001870",
+      "id": "cmggys0z40081t9806u16fbae"
+    },
+    {
+      "i": 161,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gecione-sampaio23@hotmail.com",
+      "coupon": "65992333318",
+      "id": "cmggys1jb0083t980t6pilwpf"
+    },
+    {
+      "i": 162,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "geisonrad@hotmail.com",
+      "coupon": "71996069551",
+      "id": "cmggys23g0085t980ajfqtew7"
+    },
+    {
+      "i": 163,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gersonb911@gmail.com",
+      "coupon": "11957307193",
+      "id": "cmggys2nh0087t980tr7g1ivl"
+    },
+    {
+      "i": 164,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gersonoboes@hotmail.com",
+      "coupon": "11983037071",
+      "id": "cmggys37g0089t9804pfljlom"
+    },
+    {
+      "i": 165,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gilbertotga29@gmail.com",
+      "coupon": "65984527996",
+      "id": "cmggys3ri008bt9802tygp8ii"
+    },
+    {
+      "i": 166,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "geovanepadilha632@gmail.com",
+      "coupon": "49999791571",
+      "id": "cmggys4g3008dt9802jve1gbk"
+    },
+    {
+      "i": 167,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "giulianofestugattojr@hotmail.com",
+      "coupon": "54996696993",
+      "id": "cmggys504008ft980yemq6cqf"
+    },
+    {
+      "i": 168,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "glksoaresrj@gmail.com",
+      "coupon": "21983627110",
+      "id": "cmggys5ka008ht9800leegk1q"
+    },
+    {
+      "i": 169,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "glecianefreitas90@gmail.com",
+      "coupon": "65993281363",
+      "id": "cmggys64f008jt9808lhwy6i2"
+    },
+    {
+      "i": 170,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gsousa3007@gmail.com",
+      "coupon": "21982839458",
+      "id": "cmggys6oo008lt980skwtyk0a"
+    },
+    {
+      "i": 171,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gui_diaulas@hotmail.com",
+      "coupon": "11993739666",
+      "id": "cmggys793008nt9800ws1dkd9"
+    },
+    {
+      "i": 172,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "pardini99@hotmail.com",
+      "coupon": "11940102801",
+      "id": "cmggys7t4008pt9801c03pmjg"
+    },
+    {
+      "i": 173,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gustavoa30@hotmail.com",
+      "coupon": "31993970495",
+      "id": "cmggys8d5008rt980lhwa7e21"
+    },
+    {
+      "i": 174,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gustavoalves101@hotmail.com",
+      "coupon": "11985892763",
+      "id": "cmggys8xe008tt980vd4puanm"
+    },
+    {
+      "i": 175,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gustavo4848@hotmail.com",
+      "coupon": "84981626565",
+      "id": "cmggys9hf008vt980xgdsyvsc"
+    },
+    {
+      "i": 176,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gustavocarmine2019@icloud.com",
+      "coupon": "92985942072",
+      "id": "cmggysa1j008xt980xwctqzwb"
+    },
+    {
+      "i": 177,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "geraldinipersonal@gmail.com",
+      "coupon": "62992737137",
+      "id": "cmggysalm008zt980nujqkwid"
+    },
+    {
+      "i": 178,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gustagrijo2019@gmail.com",
+      "coupon": "31989011271",
+      "id": "cmggysb5o0091t98026krloii"
+    },
+    {
+      "i": 179,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "tainaratrade113@gmail.com",
+      "coupon": "11963504730",
+      "id": "cmggysbpp0093t9809rsgq28h"
+    },
+    {
+      "i": 180,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "tainaratrade113@gmail.com",
+      "coupon": "11963504730",
+      "id": "cmggysbpp0093t9809rsgq28h"
+    },
+    {
+      "i": 181,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "tainaratrade113@gmail.com",
+      "coupon": "11963504730",
+      "id": "cmggysbpp0093t9809rsgq28h"
+    },
+    {
+      "i": 182,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gustavo17gu@hotmail.com",
+      "coupon": "49998130471",
+      "id": "cmggysddm0095t980g3ls4izw"
+    },
+    {
+      "i": 183,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gustavoseverino90@gmail.com",
+      "coupon": "31983634366",
+      "id": "cmggysdxs0097t9806ubftzgr"
+    },
+    {
+      "i": 184,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "gustavost159@gmail.com",
+      "coupon": "12992211486",
+      "id": "cmggysehx0099t9802pj411x0"
+    },
+    {
+      "i": 185,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "guto_teles@hotmail.com",
+      "coupon": "81985686769",
+      "id": "cmggysf1y009bt9807g8nbfai"
+    },
+    {
+      "i": 186,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "harieloliveira@yahoo.com.br",
+      "coupon": "31995260406",
+      "id": "cmggysfly009dt9809a1lbjpd"
+    },
+    {
+      "i": 187,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "lordelzein175@icloud.com",
+      "coupon": "11933585113",
+      "id": "cmggysgah009ft980kuqvdzb6"
+    },
+    {
+      "i": 188,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "sosheliosuporte@gmail.com",
+      "coupon": "48984228556",
+      "id": "cmggysguy009ht980ytbbcnoa"
+    },
+    {
+      "i": 189,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "helton.cme@gmail.com",
+      "coupon": "11940851875",
+      "id": "cmggyshey009jt980v9zen9jo"
+    },
+    {
+      "i": 190,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "henriquegamers476@gmail.com",
+      "coupon": "62996201549",
+      "id": "cmggyshyx009lt98099b48tlm"
+    },
+    {
+      "i": 191,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "boladosanta@gmail.com",
+      "coupon": "11952274051",
+      "id": "cmggysiiy009nt980ai13ewtx"
+    },
+    {
+      "i": 192,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "henrique123_567@outlook.com",
+      "coupon": "45998250743",
+      "id": "cmggysj2y009pt980l7qcqanl"
+    },
+    {
+      "i": 193,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "heryclessantos@gmail.com",
+      "coupon": "15981717966",
+      "id": "cmggysjmx009rt9804r6p7wfs"
+    },
+    {
+      "i": 194,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "hironoskeeda@hotmail.com",
+      "coupon": "92996061121",
+      "id": "cmggysk6w009tt98001nfkerw"
+    },
+    {
+      "i": 195,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "hugolacerdacm@outlook.com",
+      "coupon": "93991011658",
+      "id": "cmggyskr4009vt980u5ai8p95"
+    },
+    {
+      "i": 196,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "hugoleonardoadmva@gmail.com",
+      "coupon": "88997652499",
+      "id": "cmggyslb3009xt980144cuh72"
+    },
+    {
+      "i": 197,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "vinicius_beletti@hotmail.com",
+      "coupon": "16992354448",
+      "id": "cmggyslv1009zt980tnhbi20p"
+    },
+    {
+      "i": 198,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "mzb_iago@hotmail.com",
+      "coupon": "19992030400",
+      "id": "cmggysmez00a1t9809seyrwcd"
+    },
+    {
+      "i": 199,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "iancleberalves@gmail.com",
+      "coupon": "17991736444",
+      "id": "cmggysmyz00a3t980fjk0556r"
+    },
+    {
+      "i": 200,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "iaralimamed68@gmail.com",
+      "coupon": "68992156756",
+      "id": "cmggysnja00a5t98052gmugfc"
+    },
+    {
+      "i": 201,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "icaromattes@hotmail.com",
+      "coupon": "48999121269",
+      "id": "cmggyso3800a7t980cxjgulz5"
+    },
+    {
+      "i": 202,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "igorferreiraaquino@gmail.com",
+      "coupon": "11939413359",
+      "id": "cmggysona00a9t980tqfeutjd"
+    },
+    {
+      "i": 203,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "igor_hiphop1@hotmail.com",
+      "coupon": "11971010643",
+      "id": "cmggysp7h00abt980jt53lxak"
+    },
+    {
+      "i": 204,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ig.resgate@gmail.com",
+      "coupon": "91981154970",
+      "id": "cmggysprl00adt980ck69s1lg"
+    },
+    {
+      "i": 205,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "igormota144@icloud.com",
+      "coupon": "11960667782",
+      "id": "cmggysqbr00aft980d846ml1a"
+    },
+    {
+      "i": 206,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "igorbarbosa74@hotmail.com",
+      "coupon": "1975856583",
+      "id": "cmggysqvs00aht980cl8bgdam"
+    },
+    {
+      "i": 207,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "netodutraa10@gmail.com",
+      "coupon": "62982876609",
+      "id": "cmggysrfv00ajt980g7uoeqd8"
+    },
+    {
+      "i": 208,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "costaingridoliveira@hotmail.com",
+      "coupon": "93991165189",
+      "id": "cmggyss4f00alt9803ypa888g"
+    },
+    {
+      "i": 209,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ingridsmoura0@gmail.com",
+      "coupon": "98999921037",
+      "id": "cmggyssor00ant980326he7ls"
+    },
+    {
+      "i": 210,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "isaacsilvaneri32@gmail.com",
+      "coupon": "82982279159",
+      "id": "cmggyst8x00apt980edd13lff"
+    },
+    {
+      "i": 211,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "isaaclennon88@gmail.com",
+      "coupon": "85996851877",
+      "id": "cmggystsz00art980swq52z6w"
+    },
+    {
+      "i": 212,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "isaacmoura.eng@gmail.com",
+      "coupon": "88996039840",
+      "id": "cmggysucy00att980g4mmcvps"
+    },
+    {
+      "i": 213,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "isaiasconceicao22@gmail.com",
+      "coupon": "62981147740",
+      "id": "cmggysuws00avt980dia73ex1"
+    },
+    {
+      "i": 214,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "italocorreiafreitas@gmail.com",
+      "coupon": "38997247104",
+      "id": "cmggysvgu00axt980h0r5hl9h"
+    },
+    {
+      "i": 215,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "iuryrvc@gmail.com",
+      "coupon": "84987596381",
+      "id": "cmggysw0x00azt980z85khs5v"
+    },
+    {
+      "i": 216,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ivanei_27@hotmail.com",
+      "coupon": "11990031212",
+      "id": "cmggyswl100b1t980a5ntgjf2"
+    },
+    {
+      "i": 217,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ivanantonio982@gmail.com",
+      "coupon": "11968528344",
+      "id": "cmggysx5500b3t980fzj5tot5"
+    },
+    {
+      "i": 218,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "jacksonsimon@uol.com.br",
+      "coupon": "51981168220",
+      "id": "cmggysxp900b5t980py24tb1t"
+    },
+    {
+      "i": 219,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "jacksonsouzati@gmail.com",
+      "coupon": "77981042607",
+      "id": "cmggysy9c00b7t980kclgrc3u"
+    },
+    {
+      "i": 220,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "jairfernando_xxe@hotmail.com",
+      "coupon": "49988178298",
+      "id": "cmggysyth00b9t980zptnwhjy"
+    },
+    {
+      "i": 221,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "atualize.co@gmail.com",
+      "coupon": "73998409993",
+      "id": "cmggyszdj00bbt980ziyhc0te"
+    },
+    {
+      "i": 222,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "jardelmoreira1997@hotmail.com",
+      "coupon": "11992129661",
+      "id": "cmggyszxm00bdt980xv4rdugl"
+    },
+    {
+      "i": 223,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "hayanne007@hotmail.com",
+      "coupon": "61985315020",
+      "id": "cmggyt0hw00bft980gbcptnk9"
+    },
+    {
+      "i": 224,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "jeancarlosdossantosoliveira17@gmail.com",
+      "coupon": "61998034724",
+      "id": "cmggyt11x00bht980h60wfmnf"
+    },
+    {
+      "i": 225,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "jjeansouzinha2015@gmail.com",
+      "coupon": "11981524440",
+      "id": "cmggyt1ly00bjt980ziirowa3"
+    },
+    {
+      "i": 226,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "jefer_heck@hotmail.com",
+      "coupon": "49991810064",
+      "id": "cmggyt26300blt980l6s1f6v3"
+    },
+    {
+      "i": 227,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "jhemison1998@gmail.com",
+      "coupon": "73991274696",
+      "id": "cmggyt2q000bnt98065qip2q4"
+    },
+    {
+      "i": 228,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jhonatabulhoes161@gmail.com",
+      "coupon": "24992682026"
+    },
+    {
+      "i": 229,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "jhonata.jc.2000@icloud.com",
+      "coupon": "85997331300",
+      "id": "cmgh0l1nm0019jr04ou7rgrb3"
+    },
+    {
+      "i": 230,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jhonatanrsouza95@gmail.com",
+      "coupon": "44991234445"
+    },
+    {
+      "i": 231,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "kingdotrader@gmail.com",
+      "coupon": "18996631200"
+    },
+    {
+      "i": 232,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jcgam3r69@gmail.com",
+      "coupon": "17982026102"
+    },
+    {
+      "i": 233,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "toniiconcept@gmail.com",
+      "coupon": "11976638147"
+    },
+    {
+      "i": 234,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "joaomuciaccia@gmail.com",
+      "coupon": "27998114019"
+    },
+    {
+      "i": 235,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jpbatistainvest@gmail.com",
+      "coupon": "11963670917"
+    },
+    {
+      "i": 236,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jpms.mendes@gmail.com",
+      "coupon": "41988484163"
+    },
+    {
+      "i": 237,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jpbartolodearaujo@hotmail.com",
+      "coupon": "62982226549"
+    },
+    {
+      "i": 238,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "joaopbravos@gmail.com",
+      "coupon": "62995440687"
+    },
+    {
+      "i": 239,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jpcontato04@outlook.com",
+      "coupon": "68999102278"
+    },
+    {
+      "i": 240,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jpcontato04@outlook.com",
+      "coupon": "68999102278"
+    },
+    {
+      "i": 241,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "tonitypebot@gmail.com",
+      "coupon": "11976638147",
+      "id": "e95cf153-9907-42b9-9cd4-7ea9486a7213"
+    },
+    {
+      "i": 242,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "tonitypebot@gmail.com",
+      "coupon": "11976638147",
+      "id": "e95cf153-9907-42b9-9cd4-7ea9486a7213"
+    },
+    {
+      "i": 243,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "tonitypebot@gmail.com",
+      "coupon": "11976638147",
+      "id": "e95cf153-9907-42b9-9cd4-7ea9486a7213"
+    },
+    {
+      "i": 244,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "tonitypebot@gmail.com",
+      "coupon": "11976638147",
+      "id": "e95cf153-9907-42b9-9cd4-7ea9486a7213"
+    },
+    {
+      "i": 245,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "joaodiasxx@gmail.com",
+      "coupon": "61982494964"
+    },
+    {
+      "i": 246,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "victorlopesjoaomarinho@gmail.com",
+      "coupon": "67993490682"
+    },
+    {
+      "i": 247,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "joaovictorpegooliveira@gmail.com",
+      "coupon": "33999909005",
+      "id": "cmgh08qjo000pjr048pg9og8r"
+    },
+    {
+      "i": 248,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "joaoinvestidorurbano@icloud.com",
+      "coupon": "48988802618"
+    },
+    {
+      "i": 249,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jvayres@gmail.com",
+      "coupon": "17991361810"
+    },
+    {
+      "i": 250,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "kevertonjoel615@gmail.com",
+      "coupon": "88988749516"
+    },
+    {
+      "i": 251,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "pires.joelson@gmail.com",
+      "coupon": "28999676546"
+    },
+    {
+      "i": 252,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "johnandersongomes2024@hotmail.com",
+      "coupon": "31990758338"
+    },
+    {
+      "i": 253,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jonatascarlosbarbosa@hotmail.com",
+      "coupon": "11975470443"
+    },
+    {
+      "i": 254,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jonathaassanorimiyagawa@gmail.com",
+      "coupon": "19983086916"
+    },
+    {
+      "i": 255,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "thomazjoga1010@gmail.com",
+      "coupon": "21988537653"
+    },
+    {
+      "i": 256,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jonattanpl@gmail.com",
+      "coupon": "44991219959"
+    },
+    {
+      "i": 257,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jorgejsa07@gmail.com",
+      "coupon": "63985138454"
+    },
+    {
+      "i": 258,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "jorgewitczak14@gmail.com",
+      "coupon": "65996159700"
+    },
+    {
+      "i": 259,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "mirandafelipe040@gmail.com",
+      "coupon": "87999502827"
+    },
+    {
+      "i": 260,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "josemoisesvenancio.santos@gmail.com",
+      "coupon": "11989632367"
+    },
+    {
+      "i": 261,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "lucasleodido@hotmail.com",
+      "coupon": "86981172040"
+    },
+    {
+      "i": 262,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "beto.h4ck@hotmail.com",
+      "coupon": "19993860165"
+    },
+    {
+      "i": 263,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "josicelli@gmail.com",
+      "coupon": "71992149506"
+    },
+    {
+      "i": 264,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "josoelmiranda22@gmail.com",
+      "coupon": "47997062252",
+      "id": "cmgh1jado002jjr04nuabrlcq"
+    },
+    {
+      "i": 265,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "julfachi@yahoo.com.br",
+      "coupon": "51996784203"
+    },
+    {
+      "i": 266,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "julio_cesar_7033@hotmail.com",
+      "coupon": "21996474751"
+    },
+    {
+      "i": 267,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "kaiquematheus0402@outlook.com",
+      "coupon": "79999575212"
+    },
+    {
+      "i": 268,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "kassiakelly2009@hotmail.com",
+      "coupon": "61999074778",
+      "id": "cmggzt9db0009jr04xn0te4ob"
+    },
+    {
+      "i": 269,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "kavacvsantana@gmail.com",
+      "coupon": "71999643363"
+    },
+    {
+      "i": 270,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "legacytechnology95@gmail.com",
+      "coupon": "35997724425"
+    },
+    {
+      "i": 271,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "kauecorreia0@gmail.com",
+      "coupon": "13988518585",
+      "id": "cmgguc9cc0003jo046wde0p32"
+    },
+    {
+      "i": 272,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "kboficial@yahoo.com",
+      "coupon": "31998928661"
+    },
+    {
+      "i": 273,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "kedson.mateus@gmail.com",
+      "coupon": "99984148525"
+    },
+    {
+      "i": 274,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "kennedycruz.dsn@hotmail.com",
+      "coupon": "27997956413"
+    },
+    {
+      "i": 275,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "kevin.hrodrigues01@gmail.com",
+      "coupon": "11988348071"
+    },
+    {
+      "i": 276,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "kleberson.sil2542@gmail.com",
+      "coupon": "41996312542"
+    },
+    {
+      "i": 277,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "laurovaccarezza@gmail.com",
+      "coupon": "71999709059"
+    },
+    {
+      "i": 278,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "leandrosouzza753@gmail.com",
+      "coupon": "79991997436"
+    },
+    {
+      "i": 279,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "leoebano95@gmail.com",
+      "coupon": "11959970097"
+    },
+    {
+      "i": 280,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "corsinileonardo50@gmail.com",
+      "coupon": "48988484719"
+    },
+    {
+      "i": 281,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "leles0712@gmail.com",
+      "coupon": "66992644158"
+    },
+    {
+      "i": 282,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "spd.log2018@gmail.com",
+      "coupon": "77988324803",
+      "id": "cmgh1i2b1002bjr04stpfmfgs"
+    },
+    {
+      "i": 283,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "leonardo.lisboa28@gmail.com",
+      "coupon": "11954496910"
+    },
+    {
+      "i": 284,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "consultorleonardoc@gmail.com",
+      "coupon": "44999955292"
+    },
+    {
+      "i": 285,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "eng.lincoln.correia@gmail.com",
+      "coupon": "21971156002"
+    },
+    {
+      "i": 286,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "lincoln.muniz96@gmail.com",
+      "coupon": "62982914412",
+      "id": "cmggztkjx000bjr04v24tebed"
+    },
+    {
+      "i": 287,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "camposlinconluiz@gmail.com",
+      "coupon": "65999797885"
+    },
+    {
+      "i": 288,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "agenciatvmega@gmail.com",
+      "coupon": "74999276106"
+    },
+    {
+      "i": 289,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "luan.henrique95s@gmail.com",
+      "coupon": "19981238338"
+    },
+    {
+      "i": 290,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "luansuaidtrader@gmail.com",
+      "coupon": "13974071077"
+    },
+    {
+      "i": 291,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "lu.kuc@hotmail.com",
+      "coupon": "41988565858"
+    },
+    {
+      "i": 292,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "luanamuniz38@gmail.com",
+      "coupon": "21986058300"
+    },
+    {
+      "i": 293,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "luana.pads@icloud.com",
+      "coupon": "21968951445"
+    },
+    {
+      "i": 294,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "alvesfab56@outlook.com",
+      "coupon": "84994803360",
+      "id": "cmgh1ktam0005jg0464z3sygy"
+    },
+    {
+      "i": 295,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "lucascabral182@hotmail.com",
+      "coupon": "12996155454"
+    },
+    {
+      "i": 296,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "lucascamposvendas@gmail.com",
+      "coupon": "19998633942",
+      "id": "cmgh0uyss001gjr041pf92wgv"
+    },
+    {
+      "i": 297,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "drlucascardoso@gmail.com",
+      "coupon": "51985947706"
+    },
+    {
+      "i": 298,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "lucasdaluz94@gmail.com",
+      "coupon": "46988116704"
+    },
+    {
+      "i": 299,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "lucasferreiranunes1206@gmail.com",
+      "coupon": "31993174979",
+      "id": "cmgh15ji0001pjr046d6dce5r"
+    },
+    {
+      "i": 300,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "lucasgsj05@gmail.com",
+      "coupon": "51997958979",
+      "id": "cmgh0bjce000xjr04d7qwwlrj"
+    },
+    {
+      "i": 301,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "lucashottamaral@gmail.com",
+      "coupon": "61981477300"
+    },
+    {
+      "i": 302,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "lucasgsj05@gmail.com",
+      "coupon": "51997958979",
+      "id": "cmgh0bjce000xjr04d7qwwlrj"
+    },
+    {
+      "i": 303,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "lkzmtslkz@gmail.com",
+      "coupon": "31993369569"
+    },
+    {
+      "i": 304,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "lucasdanyel74@gmail.com",
+      "coupon": "65981724447",
+      "id": "cmgh01bf0000fjr04bm39631i"
+    },
+    {
+      "i": 305,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "lucaszileide2016@gmail.com",
+      "coupon": "11958965847",
+      "id": "cmgh0kqej0017jr0484psmj7r"
+    },
+    {
+      "i": 306,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "lucaspaulus@outlook.com.br",
+      "coupon": "55997268241"
+    },
+    {
+      "i": 307,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "lucasjacaunasbn@gmail.com",
+      "coupon": "85987128523"
+    },
+    {
+      "i": 308,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "silvadejesuslucas08@icloud.com",
+      "coupon": "11974353845"
+    },
+    {
+      "i": 309,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "lcvillaca@outlook.com",
+      "coupon": "11982960005"
+    },
+    {
+      "i": 310,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "pcheko1995@gmail.com",
+      "coupon": "19983429879"
+    },
+    {
+      "i": 311,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "investimentos231@hotmail.com",
+      "coupon": "17991761900",
+      "id": "cmgh0581m000jjr043meer94x"
+    },
+    {
+      "i": 312,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "lucianosantto@gmail.com",
+      "coupon": "11920026321"
+    },
+    {
+      "i": 313,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "luciano_bc89@hotmail.com",
+      "coupon": "47988221556"
+    },
+    {
+      "i": 314,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "luiseduardobundchen@gmail.com",
+      "coupon": "66984187476"
+    },
+    {
+      "i": 315,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "lpedrotrader@gmail.com",
+      "coupon": "4158585858"
+    },
+    {
+      "i": 316,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "schalluis11@gmail.com",
+      "coupon": "45998050969"
+    },
+    {
+      "i": 317,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "luisgustavo99746561@gmail.com",
+      "coupon": "37991146569"
+    },
+    {
+      "i": 318,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "eng.lhbravos@gmail.com",
+      "coupon": "62994350231"
+    },
+    {
+      "i": 319,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "luidi_xisd@hotmail.com",
+      "coupon": "11974710016"
+    },
+    {
+      "i": 320,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "etraudziul@gmail.com",
+      "coupon": "67992179049"
+    },
+    {
+      "i": 321,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "luizfantunes8@gmail.com",
+      "coupon": "19997979776"
+    },
+    {
+      "i": 322,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "luizguibgs@outlook.com",
+      "coupon": "71981525179"
+    },
+    {
+      "i": 323,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "lzllopess@gmail.com",
+      "coupon": "21998097140"
+    },
+    {
+      "i": 324,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "luluzinho.pv@gmail.com",
+      "coupon": "11949573900",
+      "id": "cmgh1e6cr001tjr04vystynni"
+    },
+    {
+      "i": 325,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "magnocarneiro2222@gmail.com",
+      "coupon": "88998024382"
+    },
+    {
+      "i": 326,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "marceloav.s@hotmail.com",
+      "coupon": "86998116357"
+    },
+    {
+      "i": 327,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ma_correa1522@icloud.com",
+      "coupon": "11956524224",
+      "id": "cmgh0got10015jr04dlqgp9ly"
+    },
+    {
+      "i": 328,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "madrferreira@gmail.com",
+      "coupon": "19984191301",
+      "id": "cmgh091no000rjr04sh2m96c7"
+    },
+    {
+      "i": 329,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "contato.mnazareth@gmail.com",
+      "coupon": "19999309104"
+    },
+    {
+      "i": 330,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "mktmanagerplace@gmail.com",
+      "coupon": "91982751377"
+    },
+    {
+      "i": 331,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "feme.mhc@gmail.com",
+      "coupon": "69993080940"
+    },
+    {
+      "i": 332,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "marcio_comerlatto@hotmail.com",
+      "coupon": "54999496263"
+    },
+    {
+      "i": 333,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "marco.truber@gmail.com",
+      "coupon": "41987477805"
+    },
+    {
+      "i": 334,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "marcoslander012@gmail.com",
+      "coupon": "85981837122"
+    },
+    {
+      "i": 335,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "henriquebmx2011@gmail.com",
+      "coupon": "85996926385"
+    },
+    {
+      "i": 336,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "maarcos.sk9@gmail.com",
+      "coupon": "37999475683"
+    },
+    {
+      "i": 337,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "trindademarcos88@gmail.com",
+      "coupon": "27997932932"
+    },
+    {
+      "i": 338,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "marcosribeiro1654@gmail.com",
+      "coupon": "61998058582",
+      "id": "cmgh011cc000djr04pwoqy0b1"
+    },
+    {
+      "i": 339,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "marcosmarcossilva64@outlook.com",
+      "coupon": "31985600776"
+    },
+    {
+      "i": 340,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "marielvidal74@gmail.com",
+      "coupon": "43999764684"
+    },
+    {
+      "i": 341,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "mariogarciatosta@gmail.com",
+      "coupon": "67996541613",
+      "id": "cmggzt0at0007jr04zucu7o2f"
+    },
+    {
+      "i": 342,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "mateusalbuquerque13@gmail.com",
+      "coupon": "11939231637"
+    },
+    {
+      "i": 343,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "m.silva131415@gmail.com",
+      "coupon": "48992176858"
+    },
+    {
+      "i": 344,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "mateussilvatetu@gmail.com",
+      "coupon": "82987220837"
+    },
+    {
+      "i": 345,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "meiramateus5@gmail.com",
+      "coupon": "11940705383"
+    },
+    {
+      "i": 346,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "mourabezerra15@gmail.com",
+      "coupon": "77999994978"
+    },
+    {
+      "i": 347,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "mateuspane@hotmail.com",
+      "coupon": "16992586119"
+    },
+    {
+      "i": 348,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "mateusbarra1199@gmail.com",
+      "coupon": "11913598337",
+      "id": "cmgh1j9vq002hjr04bsbifu18"
+    },
+    {
+      "i": 349,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "matheus97562017@gmail.com",
+      "coupon": "12991620816",
+      "id": "cmgh1flr0001xjr048nlyfgza"
+    },
+    {
+      "i": 350,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "matheuscunha20018@gmail.com",
+      "coupon": "11995585974",
+      "id": "cmgh0bwet000zjr04bjjbpxkg"
+    },
+    {
+      "i": 351,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "xmatsz@gmail.com",
+      "coupon": "35991523068"
+    },
+    {
+      "i": 352,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "matheusluisbarbosasantos@gmail.com",
+      "coupon": "33988946257"
+    },
+    {
+      "i": 353,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "matheuspereirapimenta@hotmail.com",
+      "coupon": "64999788183"
+    },
+    {
+      "i": 354,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "matheus05arruda@gmail.com",
+      "coupon": "65993407808"
+    },
+    {
+      "i": 355,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "matheusribeiro07@icloud.com",
+      "coupon": "62986230919",
+      "id": "cmgh09q6r000vjr04mmdt9hh3"
+    },
+    {
+      "i": 356,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "matheuszikaoliveira@gmail.com",
+      "coupon": "11972750112",
+      "id": "cmgh1g4hn0021jr0448o8rbt5"
+    },
+    {
+      "i": 357,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "selusnhakimatheus@gmail.com",
+      "coupon": "41995269111"
+    },
+    {
+      "i": 358,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "matthetic@hotmail.com",
+      "coupon": "47996883061",
+      "id": "cmgh07cn3000ljr0476z1xwjx"
+    },
+    {
+      "i": 359,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "mautablet@gmail.com",
+      "coupon": "13991913023"
+    },
+    {
+      "i": 360,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "mau.pereira@hotmail.com",
+      "coupon": "54999129445"
+    },
+    {
+      "i": 361,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "mauriciolummertz@hotmail.com",
+      "coupon": "48988294280"
+    },
+    {
+      "i": 362,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "mayckassisrocha@gmail.com",
+      "coupon": "27995814092"
+    },
+    {
+      "i": 363,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "mayconbarroscorinthiano@gmail.com",
+      "coupon": "15998181835"
+    },
+    {
+      "i": 364,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "maykobroch22@hotmail.com",
+      "coupon": "49988396620"
+    },
+    {
+      "i": 365,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "michaelmagalhaes2010@gmail.com",
+      "coupon": "21996021618"
+    },
+    {
+      "i": 366,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "mikaelnunes56@gmail.com",
+      "coupon": "51994728450",
+      "id": "cmgh08fk8000njr04yw11v7ru"
+    },
+    {
+      "i": 367,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "massabusiness888@gmail.com",
+      "coupon": "91985843569"
+    },
+    {
+      "i": 368,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "murillopucci88@gmail.com",
+      "coupon": "91985786048"
+    },
+    {
+      "i": 369,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "souzamilhas@gmail.com",
+      "coupon": "18996462139"
+    },
+    {
+      "i": 370,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "murilog007@outlook.com",
+      "coupon": "31994940843"
+    },
+    {
+      "i": 371,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "nattyjorda1209@gmail.com",
+      "coupon": "62986350143"
+    },
+    {
+      "i": 372,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "nayara.anacreto.8@gmail.com",
+      "coupon": "61999721368"
+    },
+    {
+      "i": 373,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "nelluana@yahoo.com",
+      "coupon": "41988435447"
+    },
+    {
+      "i": 374,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "nicolasnickn04@gmail.com",
+      "coupon": "65993009861",
+      "id": "cmgh01lnl000hjr04s292r78x"
+    },
+    {
+      "i": 375,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "niedsonrenan85@gmail.com",
+      "coupon": "84988078774",
+      "id": "cmggz57370005jf04q3ea5zx7"
+    },
+    {
+      "i": 376,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "bachmann675@gmail.com",
+      "coupon": "47997563703"
+    },
+    {
+      "i": 377,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "ozeiasplay16@gmail.com",
+      "coupon": "21983858217"
+    },
+    {
+      "i": 378,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "pablosantosdaconceicao@gmail.com",
+      "coupon": "71982966097"
+    },
+    {
+      "i": 379,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "patrickcoutobd@gmail.com",
+      "coupon": "37999232604"
+    },
+    {
+      "i": 380,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "patricksousaoliveira@gmail.com",
+      "coupon": "21969492471"
+    },
+    {
+      "i": 381,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "paulozoiomancha@gmail.com",
+      "coupon": "11988162541",
+      "id": "cmggz3r3y0001jf04v2ah1gzu"
+    },
+    {
+      "i": 382,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "paulo.silva0510@hotmail.com",
+      "coupon": "34991271383"
+    },
+    {
+      "i": 383,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "paulo_tescaro@hotmail.com",
+      "coupon": "15991744702"
+    },
+    {
+      "i": 384,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "borgespaulosouza@hotmail.com",
+      "coupon": "11988511190",
+      "id": "cmgh1icsr002djr049iygz3a2"
+    },
+    {
+      "i": 385,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "pedroxida@hotmail.com",
+      "coupon": "81987787878"
+    },
+    {
+      "i": 386,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "pedrodeoliveirajr@live.com",
+      "coupon": "92982007007"
+    },
+    {
+      "i": 387,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "pedroh.boaventura@yahoo.com.br",
+      "coupon": "62981599010"
+    },
+    {
+      "i": 388,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "phedro-henry@hotmail.com",
+      "coupon": "16999989628"
+    },
+    {
+      "i": 389,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "phsilva.adv.rj@gmail.com",
+      "coupon": "21999691601",
+      "id": "cmgh1gw280025jr04fldkd7fe"
+    },
+    {
+      "i": 390,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ph.lopes3121@gmail.com",
+      "coupon": "74991051923",
+      "id": "cmgh0ft7o0013jr04onyky6li"
+    },
+    {
+      "i": 391,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "patrickesteevan@gmail.com",
+      "coupon": "18981292040"
+    },
+    {
+      "i": 392,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "phelype0109@gmail.com",
+      "coupon": "99999999999",
+      "id": "cmgh35v4q000djg0440l5s33j"
+    },
+    {
+      "i": 393,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "mauricio.morhy@gmail.com",
+      "coupon": "11946280025"
+    },
+    {
+      "i": 394,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "r.a.piscinas2@gmail.com",
+      "coupon": "64992092199"
+    },
+    {
+      "i": 395,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "rafael.breck@hotmail.com",
+      "coupon": "95991463600"
+    },
+    {
+      "i": 396,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "rafaelge8734@gmail.com",
+      "coupon": "24992828239"
+    },
+    {
+      "i": 397,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "pithsp@gmail.com",
+      "coupon": "11951494908"
+    },
+    {
+      "i": 398,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "rafaelconcalvesnunes8@gmail.com",
+      "coupon": "61991520333"
+    },
+    {
+      "i": 399,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "ravicmodas@hotmail.com",
+      "coupon": "13974135030"
+    },
+    {
+      "i": 400,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "silvarailson5@gmail.com",
+      "coupon": "94991218337",
+      "id": "cmgh14jwu001ljr044lckqfu1"
+    },
+    {
+      "i": 401,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "raizacp18@gmail.com",
+      "coupon": "34992359348"
+    },
+    {
+      "i": 402,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "ramonzinhofreitastoledo@gmail.com",
+      "coupon": "27998768486"
+    },
+    {
+      "i": 403,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "faelgames00@gmail.com",
+      "coupon": "31973000859"
+    },
+    {
+      "i": 404,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "jociellyraquel@gmail.com",
+      "coupon": "31992040526",
+      "id": "cmgh1h3it0027jr04206v14h5"
+    },
+    {
+      "i": 405,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "renancoutinho_123@hotmail.com",
+      "coupon": "21998858291"
+    },
+    {
+      "i": 406,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "renatokaio@icloud.com",
+      "coupon": "66999096490",
+      "id": "cmgh1j82d002fjr04tigwcs3v"
+    },
+    {
+      "i": 407,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "rnt025sousa@gmail.com",
+      "coupon": "11933929774"
+    },
+    {
+      "i": 408,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "ricardosemifra@gmail.com",
+      "coupon": "11951574897"
+    },
+    {
+      "i": 409,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ricardoluisvilasboas@gmail.com",
+      "coupon": "41988687514",
+      "id": "cmgh1kj350003jg04copx7axl"
+    },
+    {
+      "i": 410,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "ricardoramos10@live.com",
+      "coupon": "11951077023"
+    },
+    {
+      "i": 411,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "richardxptolazzari@gmail.com",
+      "coupon": "42988545358"
+    },
+    {
+      "i": 412,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "robert.bryan3010@gmail.com",
+      "coupon": "11988697408"
+    },
+    {
+      "i": 413,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "robertocaldeiradelara@gmail.com",
+      "coupon": "65981524819"
+    },
+    {
+      "i": 414,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "roberto.xploud1@gmail.com",
+      "coupon": "64992973614"
+    },
+    {
+      "i": 415,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "investidoramericano@gmail.com",
+      "coupon": "11961828555"
+    },
+    {
+      "i": 416,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "robsantosdejesus@gmail.com",
+      "coupon": "11958842040"
+    },
+    {
+      "i": 417,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "rcastrobrasileiro@gmail.com",
+      "coupon": "85999660112"
+    },
+    {
+      "i": 418,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "rodrigo.grillo@hotmail.com",
+      "coupon": "11976369244",
+      "id": "cmgh0dqos0011jr04299su42f"
+    },
+    {
+      "i": 419,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "cup@gmail.com",
+      "coupon": "54996563464"
+    },
+    {
+      "i": 420,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "rodrigo.guedes.df@gmail.com",
+      "coupon": "61981423170"
+    },
+    {
+      "i": 421,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "rodrigochallal@gmail.com",
+      "coupon": "48999733778",
+      "id": "cmgh37elu000jjg04dgky15sk"
+    },
+    {
+      "i": 422,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "rodrigo.silvasoares414@gmail.com",
+      "coupon": "11970525407"
+    },
+    {
+      "i": 423,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "rogerioalves0897@gmail.com",
+      "coupon": "81998980596"
+    },
+    {
+      "i": 424,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "rogeriosilva.lider1@gmail.com",
+      "coupon": "93981158279"
+    },
+    {
+      "i": 425,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "rsacamamu@gmail.com",
+      "coupon": "73982322900"
+    },
+    {
+      "i": 426,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "romarciaaraujo@gmail.com",
+      "coupon": "11966741474"
+    },
+    {
+      "i": 427,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "romulodrop25@gmail.com",
+      "coupon": "71986341822",
+      "id": "cmgh34f810007jg04cwyaxgh7"
+    },
+    {
+      "i": 428,
+      "ok": false,
+      "code": "COUPON_IN_USE",
+      "email": "techmusiplay0@gmail.com",
+      "coupon": "99991075869",
+      "ownerUserId": "cmfzqzm6j0001ic04zu3vily9"
+    },
+    {
+      "i": 429,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "ronaldooh9@gmail.com",
+      "coupon": "62996929096"
+    },
+    {
+      "i": 430,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "ronybarber07@gmail.com",
+      "coupon": "77999512897"
+    },
+    {
+      "i": 431,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "matheus.trader2004@gmail.com",
+      "coupon": "98991125540",
+      "id": "cmgh14416001jjr04wroc3bb1"
+    },
+    {
+      "i": 432,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "saimontiagosbrito@hotmail.com",
+      "coupon": "71999089320"
+    },
+    {
+      "i": 433,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "samukka.fr@gmail.com",
+      "coupon": "73991457587"
+    },
+    {
+      "i": 434,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "silasdepaula142@gmail.com",
+      "coupon": "16999959462"
+    },
+    {
+      "i": 435,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "freitassolangetrader@gmail.com",
+      "coupon": "92991048947",
+      "id": "cmggzh0aw0001jr044hnmg1qu"
+    },
+    {
+      "i": 436,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "gomesstefany53@outlook.com",
+      "coupon": "11914181023"
+    },
+    {
+      "i": 437,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "suellen.ohana@gmail.com",
+      "coupon": "31993427860"
+    },
+    {
+      "i": 438,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "brizzasolution@gmail.com",
+      "coupon": "3333333333"
+    },
+    {
+      "i": 439,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "talescruzeiro20016@gmail.com",
+      "coupon": "33984086496"
+    },
+    {
+      "i": 440,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "tales_cavararo@hotmail.com",
+      "coupon": "22999970232"
+    },
+    {
+      "i": 441,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "krxlabs@gmail.com",
+      "coupon": "1176638147"
+    },
+    {
+      "i": 442,
+      "ok": false,
+      "code": "COUPON_IN_USE",
+      "email": "toniiconcept@gmail.com",
+      "coupon": "11976638147",
+      "ownerUserId": "cmfbblya70000jm04vb92adag"
+    },
+    {
+      "i": 443,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "thaliasantos99@gmail.com",
+      "coupon": "41996669062",
+      "id": "cmgh0mppo001cjr04mg23p28x"
+    },
+    {
+      "i": 444,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "thalitamasson@gmail.com",
+      "coupon": "34996684890"
+    },
+    {
+      "i": 445,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "thayj2503@hotmail.com",
+      "coupon": "32998604542",
+      "id": "cmgh365nq000fjg04p9hb0am8"
+    },
+    {
+      "i": 446,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "theoliveiragestaodetrafego@gmail.com",
+      "coupon": "38991449698"
+    },
+    {
+      "i": 447,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "thiagocamargo985@gmail.com",
+      "coupon": "11994650161",
+      "id": "cmgh09cf0000tjr04k17bhij8"
+    },
+    {
+      "i": 448,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "bcthiagosouza2018@gmail.com",
+      "coupon": "87991507252"
+    },
+    {
+      "i": 449,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "se7erec@gmail.com",
+      "coupon": "22999172322"
+    },
+    {
+      "i": 450,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "thiagosantos5467@gmail.com",
+      "coupon": "31982551377"
+    },
+    {
+      "i": 451,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "tiago_zanelli@hotmail.com",
+      "coupon": "21971663541",
+      "id": "cmgh1f91v001vjr04skt8xtsk"
+    },
+    {
+      "i": 452,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "ticianoteles27@gmail.com",
+      "coupon": "75991624128"
+    },
+    {
+      "i": 453,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "tonyr.nasc90@gmail.com",
+      "coupon": "82981060607",
+      "id": "cmgh1k1ox0001jg04ospplxmv"
+    },
+    {
+      "i": 454,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "tuliotomaz177@gmail.com",
+      "coupon": "87992007696"
+    },
+    {
+      "i": 455,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "uarlenlima@hotmail.com",
+      "coupon": "21990344920",
+      "id": "b505a153-4e16-4501-a0b5-efdc04fd3ffc"
+    },
+    {
+      "i": 456,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "financaslee@gmail.com",
+      "coupon": "11949784882"
+    },
+    {
+      "i": 457,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "ulisses.saes.volpe@hotmail.com",
+      "coupon": "47997312818"
+    },
+    {
+      "i": 458,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "ulissessilva202028@gmail.com",
+      "coupon": "34996407417",
+      "id": "cmgh14ze3001njr04uyz629t1"
+    },
+    {
+      "i": 459,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "vagnervilelac53@gmail.com",
+      "coupon": "11910006813"
+    },
+    {
+      "i": 460,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "valdezsilvasoares@yahoo.com.br",
+      "coupon": "83981022576",
+      "id": "cmgh1gnuw0023jr04oqz2miou"
+    },
+    {
+      "i": 461,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "vandyy.rsilva@gmail.com",
+      "coupon": "77981109594",
+      "id": "cmgh37tpg000ljg0411ki00g5"
+    },
+    {
+      "i": 462,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "vituags@gmail.com",
+      "coupon": "99988191470",
+      "id": "cmgh0uk4n001ejr045l648oac"
+    },
+    {
+      "i": 463,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "victorcarlossconceicao@gmail.com",
+      "coupon": "11960596695",
+      "id": "cmgh1fwa8001zjr04ko11sycx"
+    },
+    {
+      "i": 464,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "victor.ferreira427@gmail.com",
+      "coupon": "92981833317"
+    },
+    {
+      "i": 465,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "vitoo_28@hotmail.com",
+      "coupon": "11983437549",
+      "id": "cmgh1dkoa001rjr04p2gj0de8"
+    },
+    {
+      "i": 466,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "victormesquita.99.energy@gmail.com",
+      "coupon": "11964232520",
+      "id": "cmgh34nt20009jg04kcxq5q7k"
+    },
+    {
+      "i": 467,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "victornunes1305@hotmail.com",
+      "coupon": "19987017556"
+    },
+    {
+      "i": 468,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "victorp.iq31@gmail.com",
+      "coupon": "17996419947"
+    },
+    {
+      "i": 469,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "victorromaoes@gmail.com",
+      "coupon": "28999140102"
+    },
+    {
+      "i": 470,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "victor199688@gmail.com",
+      "coupon": "71997028592"
+    },
+    {
+      "i": 471,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "campos.carvalho@gmail.com",
+      "coupon": "32984265405"
+    },
+    {
+      "i": 472,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "vinicius.souza.assis@gmail.com",
+      "coupon": "11949101064"
+    },
+    {
+      "i": 473,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "viniciusfagundes760@gmail.com",
+      "coupon": "66999338014"
+    },
+    {
+      "i": 474,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "v.fidelischaves@gmail.com",
+      "coupon": "11953838803",
+      "id": "cmggz4ckd0003jf0499ubxgls"
+    },
+    {
+      "i": 475,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "vinicius_nm126@hotmail.com",
+      "coupon": "11989096010"
+    },
+    {
+      "i": 476,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "viniciuspereira025@icloud.com",
+      "coupon": "41995714424"
+    },
+    {
+      "i": 477,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "vratrader@gmail.com",
+      "coupon": "11954800987",
+      "id": "cmgh1hr1c0029jr04uxoa5pdq"
+    },
+    {
+      "i": 478,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "veigavitor92@gmail.com",
+      "coupon": "19982220268"
+    },
+    {
+      "i": 479,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "vh5284737@gmail.com",
+      "coupon": "11949009896",
+      "id": "cmgh375hh000hjg04dckaf50r"
+    },
+    {
+      "i": 480,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "vihh.penteado@gmail.com",
+      "coupon": "19999152749"
+    },
+    {
+      "i": 481,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "artsseg@gmail.com",
+      "coupon": "61984234001"
+    },
+    {
+      "i": 482,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "washingtoncosta2316@gmail.com",
+      "coupon": "37999839874"
+    },
+    {
+      "i": 483,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "wellingtondossantos902@gmail.com",
+      "coupon": "24992135600"
+    },
+    {
+      "i": 484,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "wellington5020@outlook.com",
+      "coupon": "14996100911"
+    },
+    {
+      "i": 485,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "werikgalves@gmail.com",
+      "coupon": "62981538146"
+    },
+    {
+      "i": 486,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "wesleibarboza3@gmail.com",
+      "coupon": "69984539800"
+    },
+    {
+      "i": 487,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "wborgesresendes@hotmail.com",
+      "coupon": "47984748576"
+    },
+    {
+      "i": 488,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "weslleygarcia567@gmail.com",
+      "coupon": "44991791500"
+    },
+    {
+      "i": 489,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "weesley2310@gmail.com",
+      "coupon": "16991550832"
+    },
+    {
+      "i": 490,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "wi_gs@hotmail.com",
+      "coupon": "11985841809"
+    },
+    {
+      "i": 491,
+      "ok": true,
+      "code": "UPDATED",
+      "email": "oliveirasouzawill@gmail.com",
+      "coupon": "24992134813",
+      "id": "cmggzr09b0005jr04hr1olc06"
+    },
+    {
+      "i": 492,
+      "ok": false,
+      "code": "COUPON_IN_USE",
+      "email": "wds-19@hotmail.com",
+      "coupon": "43996573668",
+      "ownerUserId": "cmfl7k7f30000ju04o87iouhf"
+    },
+    {
+      "i": 493,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "evandronogueiradacosta021@gmail.com",
+      "coupon": "11977958384"
+    },
+    {
+      "i": 494,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "wsdrocha@gmail.com",
+      "coupon": "54999855838"
+    },
+    {
+      "i": 495,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "w.santos.m@icloud.com",
+      "coupon": "21964144449"
+    },
+    {
+      "i": 496,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "wilsonkennedysemedo2018@gmail.com",
+      "coupon": "53969733282"
+    },
+    {
+      "i": 497,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "yuurilouse@hotmail.com",
+      "coupon": "21964048573"
+    },
+    {
+      "i": 498,
+      "ok": false,
+      "code": "NO_USER_COUPON",
+      "email": "yurix3d@gmail.com",
+      "coupon": "16991091699"
+    }
+  ]
+}

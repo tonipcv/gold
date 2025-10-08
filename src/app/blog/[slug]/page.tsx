@@ -178,8 +178,9 @@ const blogPosts: Record<string, BlogPost> = {
 };
 
 export default function BlogPostPage() {
-  const params = useParams();
-  const slug = typeof params.slug === 'string' ? params.slug : '';
+  const params = useParams() as (Record<string, string | string[]>) | null;
+  const rawSlug = params?.slug;
+  const slug = Array.isArray(rawSlug) ? (rawSlug[0] ?? '') : (rawSlug ?? '');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

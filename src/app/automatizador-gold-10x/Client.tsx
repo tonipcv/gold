@@ -349,7 +349,7 @@ export default function AutomatizadorGold10xClient() {
             {activeEpisode === 16 && (
               <div className="mt-4 flex flex-col items-center gap-4">
                 <a
-                  href="https://drive.google.com/file/d/1OO-VRRSuapFco-b77OkJN6OWgyAG1cXV/view?usp=sharing"
+                  href="https://drive.google.com/drive/folders/1S2lO0zWMgXpZWmrC8D3kwfXbQoBEUG7q?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border border-green-500 bg-green-700 text-white text-base font-semibold shadow-[0_0_28px_rgba(34,197,94,0.35)] hover:bg-green-600 transition-colors"

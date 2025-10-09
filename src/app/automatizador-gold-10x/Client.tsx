@@ -47,6 +47,8 @@ function VturbPlayer({ playerId, accountId = '32ff2495-c71e-49ba-811b-00b5b49c51
   return <div id={containerId} className="w-full" />
 }
 
+// Aula 9 now uses PandaVideo via linkYouTube path; dedicated component removed
+
 interface Episode {
   id: number
   number: number
@@ -144,7 +146,7 @@ export default function AutomatizadorGold10xClient() {
     { id: 6,  number: 6,  title: 'GERENCIAMENTO',                                                        playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=93523669-fc2c-48d3-9acc-3ba44f6c004d' },
     { id: 7,  number: 7,  title: 'STANDARD PARA CENT',                                                   playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=a473eb20-3980-45fc-96b9-3900fb93bf33' },
     { id: 8,  number: 8,  title: 'VPS GRATIS',                                                           playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=871a6c24-eec6-42dc-80a0-39917d630607' },
-    { id: 9,  number: 9,  title: 'NAO FAÇA ISSO',                                                        playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=9e54e191-b306-4608-8cdb-a463c2267036' },
+    { id: 9,  number: 9,  title: 'ATIVANDO VPS GRATUITO',                                                playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=65160928-92e0-4e9b-9941-57639cc185df' },
     { id: 10, number: 10, title: 'COMO FUNCIONA A ESTRATEGIA',                                           playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=b68fa2d3-6d23-4828-9595-961d7eedcfd1' },
     { id: 11, number: 11, title: 'HORARIO DE FUNCIONAMENTO',                                             playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=43328382-6f35-4da1-9b4c-ddae576cf7a4' },
     { id: 12, number: 12, title: 'FORMULARIO - LIBERAÇÃO OFICIAL',                                       playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=81f18403-cf49-43ae-b2ef-4e9d16c066a3' },
@@ -217,9 +219,12 @@ export default function AutomatizadorGold10xClient() {
               </div>
             </div>
           ) : currentEpisode.playerId ? (
-            <div className="bg-black rounded-lg border border-gray-800 overflow-hidden">
-              <VturbPlayer key={currentEpisode.playerId} playerId={currentEpisode.playerId} accountId={currentEpisode.accountId}
-              />
+            <div className="rounded-lg border border-gray-800 overflow-hidden bg-black">
+              <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+                <div className="absolute inset-0">
+                  <VturbPlayer key={currentEpisode.playerId} playerId={currentEpisode.playerId} accountId={currentEpisode.accountId} />
+                </div>
+              </div>
             </div>
           ) : (
             <div className="rounded-lg border border-gray-800 bg-gray-900/40 p-6 text-center text-sm text-gray-300">
@@ -380,9 +385,9 @@ export default function AutomatizadorGold10xClient() {
                       <div className="flex-1 text-left">
                         <div className="flex items-center gap-2">
                           <h3 className={`font-medium ${isActive ? 'text-green-400' : (isLocked ? 'text-gray-300' : 'text-white')} text-sm md:text-base tracking-tight uppercase`}>{label}</h3>
-                          {episode.number === 16 && (
+                          {(episode.number === 9 || episode.number === 14) && (
                             <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] md:text-xs font-semibold border border-amber-400 text-amber-300 bg-amber-500/10">
-                              AULA NOVA
+                              NOVO
                             </span>
                           )}
                         </div>

@@ -66,8 +66,8 @@ export default function GrupoAutomacaoV2() {
         </div>
         
         {/* Text Content */}
-        <div className="text-center mb-12">
-          <h1 className={`text-2xl md:text-3xl font-semibold tracking-wide mb-6 text-gray-100`}>
+        <div className="text-center mb-8">
+          <h1 className={`text-base md:text-lg font-medium tracking-normal mb-3 text-gray-100`}>
             GRUPO DE TESTE GRATUITO DE AUTOMAÇÃO NO MERCADO INTERNACIONAL
           </h1>
         </div>

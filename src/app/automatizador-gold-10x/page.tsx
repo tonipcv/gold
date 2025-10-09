@@ -44,11 +44,11 @@ export default async function AutomatizadorGold10xPage() {
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                <Link href='/automatizador-gold-10x/aula-16' className="inline-flex items-center px-3 py-1.5 rounded border border-yellow-400/50 text-yellow-100 text-xs md:text-sm">
+                <Link href='/automatizador-gold-10x/aula-14' className="inline-flex items-center px-3 py-1.5 rounded border border-yellow-400/50 text-yellow-100 text-xs md:text-sm">
                   Ler regulamentos
                 </Link>
-                <Link href='/automatizador-gold-10x/aula-16' className="inline-flex items-center px-3 py-1.5 rounded border border-yellow-400/50 bg-yellow-400/10 hover:bg-yellow-400/15 text-yellow-100 text-xs md:text-sm">
-                  Ir para AULA 16
+                <Link href='/automatizador-gold-10x/aula-14' className="inline-flex items-center px-3 py-1.5 rounded border border-yellow-400/50 bg-yellow-400/10 hover:bg-yellow-400/15 text-yellow-100 text-xs md:text-sm">
+                  Ir para AULA 14
                 </Link>
               </div>
             </div>

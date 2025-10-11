@@ -3,6 +3,7 @@ import path from 'path'
 import Link from 'next/link'
 import Script from 'next/script'
 import { OptimizedImage } from '../components/OptimizedImage'
+import { Gallery } from './Gallery'
 
 // Local JSX declaration to ensure TS recognizes the custom web component during build
 declare global {
@@ -69,27 +70,9 @@ export default async function GaleriaPage() {
             strategy="afterInteractive"
           />
         </div>
-        {images.length === 0 ? (
-          <p className="text-gray-300">Nenhuma imagem encontrada em <code>public/geral/</code>.</p>
-        ) : (
-          <div className="grid grid-cols-3 gap-4">
-            {images.map((src) => (
-              <div key={src} className="group">
-                <Link href={src} target="_blank" rel="noopener noreferrer" className="block">
-                  <div className="relative w-full overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900 aspect-[6/13]">
-                    {/* Using native img to avoid needing explicit dimensions */}
-                    <img
-                      src={src}
-                      alt={src.split('/').pop() || 'Imagem da galeria'}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
-        )}
+
+        {/* Galeria: 3 imagens por vez + Ver mais */}
+        <Gallery images={images} batch={3} />
       </main>
       {/* Floating WhatsApp button */}
       <a

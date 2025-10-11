@@ -4,6 +4,18 @@ import Link from 'next/link'
 import Script from 'next/script'
 import { OptimizedImage } from '../components/OptimizedImage'
 
+// Local JSX declaration to ensure TS recognizes the custom web component during build
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'vturb-smartplayer': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+        id?: string
+        style?: React.CSSProperties
+      }
+    }
+  }
+}
+
 // Ensure this runs on the server and revalidates when rebuilt
 export const dynamic = 'force-static'
 

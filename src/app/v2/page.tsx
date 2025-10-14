@@ -3,6 +3,7 @@ import path from 'path'
 import Link from 'next/link'
 import Script from 'next/script'
 import { OptimizedImage } from '../components/OptimizedImage'
+import { Countdown } from './Countdown'
 import { Gallery } from './Gallery'
 
 // Local JSX declaration to ensure TS recognizes the custom web component during build
@@ -56,6 +57,13 @@ export default async function GaleriaPage() {
       </header>
 
       <main className="px-4 pt-24 pb-10 mx-auto max-w-7xl">
+        {/* Countown section for TESTE GRATUITO do Robô V2 */}
+        <section className="mb-10 text-center">
+          <Countdown
+            target="2025-10-22T12:00:00-03:00"
+            label="Contagem regressiva para a liberação do Teste Gratuito do V2"
+          />
+        </section>
         {/* Video embed (vturb) at the top */}
         <div className="mb-10">
           {/* Custom element provided by vturb */}

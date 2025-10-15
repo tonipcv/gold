@@ -84,7 +84,7 @@ export default async function GaleriaPage() {
       </main>
       {/* Floating WhatsApp button */}
       <a
-        href="https://chat.whatsapp.com/FBia4FCrw5c6bcDjcLYxcL?mode=wwc"
+        href="https://chat.whatsapp.com/I5jrVyC0SPm2PWiQgT1SNu?mode=wwc"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Entrar no grupo do WhatsApp"

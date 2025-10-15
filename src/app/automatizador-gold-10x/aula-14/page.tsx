@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { OptimizedImage } from '../../components/OptimizedImage'
 import { Navigation } from '../../components/Navigation'
-import A16Client from '../aula-16/A16Client'
+ 
 
 export default async function Aula14Page() {
   const session = await getServerSession(authOptions)
@@ -33,7 +33,19 @@ export default async function Aula14Page() {
       {/* Main */}
       <main className="pt-24 pb-20">
         <div className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto px-4 py-4">
-          <A16Client />
+          <div id="player" className="bg-black rounded-lg border border-gray-800 overflow-hidden">
+            <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/h77uIIwLABI?rel=0"
+                title="Aula 14 - Estratégia Nova GOLD X V2"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+          </div>
         </div>
       </main>
 

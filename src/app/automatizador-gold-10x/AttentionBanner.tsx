@@ -56,7 +56,7 @@ export default function AttentionBanner() {
                   <span className="underline underline-offset-2 ml-1">clique aqui para assistir agora</span>.
                 </div>
                 <div className="mt-1 text-xs text-emerald-200/80">
-                  Se não abrir direto, selecione a "AULA 14 - Liberação Oficial" na lista.
+                  Se não abrir direto, selecione a "AULA 14 - ESTRATÉGIA NOVA GOLD X V2" na lista.
                 </div>
               </div>
             </div>

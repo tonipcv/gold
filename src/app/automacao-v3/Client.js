@@ -75,7 +75,7 @@ export default function GrupoAutomacaoV2() {
         {/* WhatsApp Button */}
         <div className="mb-16">
           <a 
-            href="https://chat.whatsapp.com/I5jrVyC0SPm2PWiQgT1SNu?mode=wwc"
+            href="https://chat.whatsapp.com/GKvWWKI4IkK3Bol6NSV2cR?mode=wwc"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-gradient-to-r from-green-400 to-emerald-600 hover:from-green-500 hover:to-emerald-700 text-white font-medium py-3 px-8 rounded-full flex items-center transition-all duration-300 shadow-lg shadow-emerald-600/30"

@@ -32,7 +32,7 @@ export default function GrupoAutomacaoV2() {
   }, [maxIndex]);
   
   // Manual navigation
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     const clamped = Math.max(0, Math.min(index, maxIndex));
     setCurrentSlide(clamped);
   };
@@ -42,7 +42,7 @@ export default function GrupoAutomacaoV2() {
   };
   
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev <= 0 ? maxIndex : prev - 1));
+    setCurrentSlide((prev) => (prev <= 0 ? maxIndex : prev + 1));
   };
   
   return (
@@ -66,8 +66,8 @@ export default function GrupoAutomacaoV2() {
         </div>
         
         {/* Text Content */}
-        <div className="text-center mb-8">
-          <h1 className={`text-base md:text-lg font-medium tracking-normal mb-3 text-gray-100`}>
+        <div className="text-center mb-12">
+          <h1 className={`text-2xl md:text-3xl font-semibold tracking-wide mb-6 text-gray-100`}>
             GRUPO DE TESTE GRATUITO DE AUTOMAÇÃO NO MERCADO INTERNACIONAL
           </h1>
         </div>
@@ -75,7 +75,7 @@ export default function GrupoAutomacaoV2() {
         {/* WhatsApp Button */}
         <div className="mb-16">
           <a 
-            href="https://chat.whatsapp.com/I5jrVyC0SPm2PWiQgT1SNu?mode=wwc"
+            href="https://chat.whatsapp.com/GKvWWKI4IkK3Bol6NSV2cR?mode=wwc"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-gradient-to-r from-green-400 to-emerald-600 hover:from-green-500 hover:to-emerald-700 text-white font-medium py-3 px-8 rounded-full flex items-center transition-all duration-300 shadow-lg shadow-emerald-600/30"

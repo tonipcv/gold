@@ -15,12 +15,21 @@ export default function FacebookPixel() {
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('init', '1203701254882500');
+          fbq('init', '1949495485896177');
           fbq('track', 'PageView');
         `}
       </Script>
       <noscript>
         <Image
           src="https://www.facebook.com/tr?id=1203701254882500&ev=PageView&noscript=1"
+          alt=""
+          width={1}
+          height={1}
+          style={{ display: 'none' }}
+          unoptimized
+        />
+        <Image
+          src="https://www.facebook.com/tr?id=1949495485896177&ev=PageView&noscript=1"
           alt=""
           width={1}
           height={1}

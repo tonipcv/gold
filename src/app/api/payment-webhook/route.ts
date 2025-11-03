@@ -311,6 +311,9 @@ export async function POST(req: Request) {
       const pixSignature: string | undefined = body?.payment?.pix?.qrcode?.signature;
       const pixUrl: string | undefined = body?.payment?.pix?.qrcode?.url;
       const pixExpiration: string | undefined = body?.payment?.pix?.expiration_date;
+      // Nome exibido padronizado para e-mails
+      const nameLc = String(localProduct.name || '').toLowerCase();
+      const productDisplayName = (nameLc.includes('gold') && nameLc.includes('10x')) ? 'Automatizador Premium' : localProduct.name;
       if (paymentStatus === 'paid') {
         // Gerar senha temporária apenas se o usuário não tiver senha definida
         let tempPassword: string | null = null;
@@ -328,7 +331,7 @@ export async function POST(req: Request) {
           <div style="font-family: Arial, sans-serif; line-height:1.5;">
             <p style="font-size:12px;color:#555;margin:0 0 8px 0">Remetente: <strong>${fromName}</strong> &lt;${fromAddress}&gt;</p>
             <h2>Seu acesso foi liberado 🎉</h2>
-            <p>Olá${user!.name ? `, ${user!.name}` : ''}! Confirmamos o pagamento do seu produto <strong>${localProduct.name}</strong>.</p>
+            <p>Olá${user!.name ? `, ${user!.name}` : ''}! Confirmamos o pagamento do seu produto <strong>${productDisplayName}</strong>.</p>
             <p><strong>Como acessar:</strong></p>
             <ol>
               <li>Acesse: <a href="${accessUrl}">${accessUrl}</a></li>
@@ -343,7 +346,7 @@ export async function POST(req: Request) {
         `;
         const mailRes = await sendEmail({
           to: user.email,
-          subject: `Acesso liberado: ${localProduct.name}`,
+          subject: `Acesso liberado: ${productDisplayName}`,
           html: htmlPaid,
         });
         console.log('Email (paid) result:', JSON.stringify(mailRes));
@@ -353,12 +356,12 @@ export async function POST(req: Request) {
         const last4 = body?.payment?.credit_card?.last_digits;
         const mailRes = await sendEmail({
           to: user.email,
-          subject: `Pagamento em análise: ${localProduct.name}`,
+          subject: `Pagamento em análise: ${productDisplayName}`,
           html: `
             <div style="font-family: Arial, sans-serif; line-height:1.5;">
               <p style="font-size:12px;color:#555;margin:0 0 8px 0">Remetente: <strong>${fromName}</strong> &lt;${fromAddress}&gt;</p>
               <h2>Seu pagamento está em análise</h2>
-              <p>Olá${user.name ? `, ${user.name}` : ''}! Recebemos o seu pedido para <strong>${localProduct.name}</strong> e o pagamento está <strong>em análise</strong> pela operadora.</p>
+              <p>Olá${user.name ? `, ${user.name}` : ''}! Recebemos o seu pedido para <strong>${productDisplayName}</strong> e o pagamento está <strong>em análise</strong> pela operadora.</p>
               ${brand || last4 ? `<p>Forma de pagamento: ${brand ? brand.toUpperCase() : 'cartão'} ${last4 ? '•••• ' + last4 : ''}</p>` : ''}
               <p>Isso é normal e pode levar alguns minutos. Assim que for aprovado, seu acesso será liberado automaticamente e você receberá outro e‑mail.</p>
               <p>Se preferir acompanhar ou refazer o pagamento, acesse: <a href="${checkoutUrl}">${checkoutUrl}</a></p>
@@ -371,12 +374,12 @@ export async function POST(req: Request) {
         const checkoutUrl = body?.checkout_url || appUrl;
         const mailRes = await sendEmail({
           to: user.email,
-          subject: `Pagamento pendente: ${localProduct.name}`,
+          subject: `Pagamento pendente: ${productDisplayName}`,
           html: `
             <div style="font-family: Arial, sans-serif; line-height:1.5;">
               <p style="font-size:12px;color:#555;margin:0 0 8px 0">Remetente: <strong>${fromName}</strong> &lt;${fromAddress}&gt;</p>
               <h2>Estamos aguardando a confirmação do seu pagamento</h2>
-              <p>Olá${user.name ? `, ${user.name}` : ''}! Recebemos seu pedido para <strong>${localProduct.name}</strong>, mas o pagamento ainda está <strong>pendente</strong>.</p>
+              <p>Olá${user.name ? `, ${user.name}` : ''}! Recebemos seu pedido para <strong>${productDisplayName}</strong>, mas o pagamento ainda está <strong>pendente</strong>.</p>
               <p>Para concluir:</p>
               <ol>
                 <li>Finalize o pagamento no seu checkout.</li>

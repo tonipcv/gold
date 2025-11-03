@@ -83,7 +83,7 @@ export default function Page() {
                   <ProgressBar percentage={60} />
                 </div>
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Gold X (10x) por 30 dias</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Power V2 (Versão Premium) por 30 dias</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">1 mês de acompanhamento individual</span></li>
@@ -111,7 +111,7 @@ export default function Page() {
                   <ProgressBar percentage={73} color="red" />
                 </div>
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Gold X (10x) por 3 meses</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Power V2 (Versão Premium) por 3 meses</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">1 mês de acompanhamento individual</span></li>
@@ -140,7 +140,7 @@ export default function Page() {
                   <ProgressBar percentage={85} color="red" />
                 </div>
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Gold X (10x) por 6 meses</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Power V2 (Versão Premium) por 6 meses</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">2 meses de acompanhamento individual</span></li>

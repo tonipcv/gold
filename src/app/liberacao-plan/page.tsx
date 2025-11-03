@@ -278,7 +278,7 @@ export default function Page() {
                 </div>
                 
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso por 3 anos à Automação Gold X (10x)</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso por 3 anos à Automação Power V2 (Versão Premium)</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">2 encontros de mentoria em grupo</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">3 meses de acompanhamento individualizado</span></li>
@@ -314,7 +314,7 @@ export default function Page() {
                 </div>
                 
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">1 ano de acesso à Automação Gold X (10x)</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">1 ano de acesso à Automação Power V2 (Versão Premium)</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">2 encontros de mentoria em grupo</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">3 meses de acompanhamento individual</span></li>
@@ -350,7 +350,7 @@ export default function Page() {
                 </div>
                 
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Gold X (10x) por 3 meses</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Power V2 (Versão Premium) por 3 meses</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">2 encontros de mentoria em grupo</span></li>
                   <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">1 mês de acompanhamento individual</span></li>

@@ -44,7 +44,7 @@ export default function Page() {
           />
         </div>
       </main>
-      <div className="fixed bottom-0 inset-x-0 z-50 px-3 py-2 text-[10px] md:text-xs text-neutral-300 bg-red-500/25 backdrop-blur border-t border-neutral-800 text-center">
+      <div className="fixed bottom-0 inset-x-0 z-50 px-3 py-2 text-[10px] md:text-xs text-neutral-300 bg-black backdrop-blur border-t border-neutral-800 text-center">
         Atualização para Aumentar a Performance e o prazo de acesso, pela alta demanda não conseguiremos atender todos.
       </div>
     </div>

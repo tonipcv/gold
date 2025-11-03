@@ -22,7 +22,7 @@ export default function Page() {
   return (
     <div className="font-montserrat bg-black text-white min-h-screen flex flex-col">
       {/* Header with white logo centered */}
-      <div className="w-full flex justify-center pt-2 md:pt-6 mb-4 md:mb-6">
+      <div className="w-full flex justify-center pt-12 md:pt-10 mb-8 md:mb-6">
         <OptimizedImage
           src="/ft-icone.png"
           alt="FT Logo"
@@ -33,7 +33,7 @@ export default function Page() {
       </div>
 
       <main className="flex-1 px-6 pt-0 md:pt-2 flex flex-col items-stretch justify-start text-left gap-3 pb-16 md:pb-0">
-        <h1 className="mx-auto max-w-3xl text-left text-xl md:text-xxl font-light bg-gradient-to-r from-neutral-300 to-white bg-clip-text text-transparent tracking-tight">
+        <h1 className="mx-auto max-w-3xl text-center md:text-center text-large md:text-xl font-light bg-gradient-to-r from-neutral-300 to-white bg-clip-text text-transparent tracking-tight">
           Assista o vídeo e atualize seu Robô V2 para a Versão Oficial Hoje!
         </h1>
 

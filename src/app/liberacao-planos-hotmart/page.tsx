@@ -179,7 +179,7 @@ export default function Page() {
 
         <footer className="py-8 px-4 text-center bg-black">
           <p className="text-neutral-400 text-[12px] max-w-3xl mx-auto">
-            Liberar acesso à instalação do GOLD X
+            Liberar acesso à instalação do V2
           </p>
         </footer>
       </div>

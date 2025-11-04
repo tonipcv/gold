@@ -311,6 +311,21 @@ export default function AutomatizadorGold10xClient() {
                 </a>
               </div>
             )}
+            {activeEpisode === 4 && (
+              <div className="mt-4 flex flex-col items-center gap-4">
+                <a
+                  href="https://drive.google.com/drive/folders/10Kz1FHj6m9Ys1AgW2JGPhcNIXQYR2trK?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border-2 border-green-500 text-green-200 text-base font-semibold hover:bg-green-600/10 shadow-[0_0_28px_rgba(34,197,94,0.25)] transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                    <path d="M8 5v14l11-7L8 5Z" />
+                  </svg>
+                  DOWNLOAD
+                </a>
+              </div>
+            )}
             {activeEpisode === 12 && (
               <div className="mt-4 flex flex-col items-center gap-4">
                 <a

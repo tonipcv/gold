@@ -37,34 +37,15 @@ export default function Page() {
           Assista o vídeo e atualize seu Robô V2 para a Versão Oficial Hoje!
         </h1>
 
-        {false && (
-          <div className="w-full max-w-3xl mx-auto mt-4 md:mt-6">
-            <SmartPlayer
-              id="vid-690898ee44fd1362986a4795"
-              style={{ display: "block", margin: "0 auto", width: "100%" }}
-            />
-          </div>
-        )}
+        <div className="w-full max-w-3xl mx-auto mt-4 md:mt-6">
+          <SmartPlayer
+            id="vid-690898ee44fd1362986a4795"
+            style={{ display: "block", margin: "0 auto", width: "100%" }}
+          />
+        </div>
       </main>
       <div className="fixed bottom-0 inset-x-0 z-50 px-3 py-2 text-[10px] md:text-xs text-neutral-300 bg-black backdrop-blur border-t border-neutral-800 text-center">
         Atualização para Aumentar a Performance e o prazo de acesso, pela alta demanda não conseguiremos atender todos.
-      </div>
-      <div
-        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="licencas-title"
-        aria-describedby="licencas-desc"
-      >
-        <div className="w-full max-w-md bg-[#0b0b0b] border border-neutral-800 rounded-2xl shadow-2xl p-5">
-          <h2 id="licencas-title" className="text-lg md:text-xl font-semibold text-white tracking-tight text-center">
-            Licenças de Instalação Encerradas
-          </h2>
-          <p id="licencas-desc" className="mt-3 text-sm md:text-base text-neutral-300 text-center leading-relaxed">
-            Devido à alta demanda, as licenças de instalação foram encerradas temporariamente. Estamos aguardando novas
-            serem disponibilizadas. Avisaremos no grupo assim que houver liberação.
-          </p>
-        </div>
       </div>
     </div>
   );

@@ -154,6 +154,8 @@ export default function AutomatizadorGold10xClient() {
     { id: 16, number: 14, title: 'ESTRATÉGIA NOVA GOLD X V2',                                            playerId: '', linkYouTube: 'https://youtu.be/h77uIIwLABI', locked: !isPremium },
     { id: 15, number: 15, title: 'ENCONTRO DE MENTORIA GOLD 10X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=56b8726a-0951-45ce-aaf8-37ce313fb20f', locked: !isPremium },
     // Aula 16 adicionada à lista
+    // Última aula adicionada
+    { id: 17, number: 16, title: 'ESTRATÉGIA ATUALIZADA',                                                  playerId: '690a7938cb5344d7fad2af7b', accountId: '17e2196c-5794-49ef-bd61-857538a02fa6' },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!
@@ -362,6 +364,32 @@ export default function AutomatizadorGold10xClient() {
                     <path d="M5 20h14v-2H5v2Zm7-3 5-5h-3V4h-4v8H7l5 5Z" />
                   </svg>
                   BAIXAR
+                </a>
+              </div>
+            )}
+            {currentEpisode.number === 16 && (
+              <div className="mt-4 flex flex-col items-center gap-4">
+                <a
+                  href="https://drive.google.com/drive/folders/1Qpt8TUWtXXzD4QfAgiYnWrq0rHRa5CvR?usp=drive_link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border border-green-500 bg-green-700 text-white text-base font-semibold shadow-[0_0_28px_rgba(34,197,94,0.35)] hover:bg-green-600 transition-colors w-full max-w-xs"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                    <path d="M5 20h14v-2H5v2Zm7-3 5-5h-3V4h-4v8H7l5 5Z" />
+                  </svg>
+                  GOLD X ATUALIZADA
+                </a>
+                <a
+                  href="https://drive.google.com/drive/folders/1pOO316l0Myp1cxK8pr2P6IdPtTN8Jf1T?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border-2 border-green-500 text-green-200 text-base font-semibold hover:bg-green-600/10 shadow-[0_0_28px_rgba(34,197,94,0.25)] transition-colors w-full max-w-xs"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                    <path d="M8 5v14l11-7L8 5Z" />
+                  </svg>
+                  X2 - ATUALIZADA
                 </a>
               </div>
             )}

@@ -43,9 +43,9 @@ export default function Login() {
       
       // Forçar um hard redirect se o router.push não funcionar
       if (result?.ok) {
-        window.location.href = '/automatizador-gold-10x';
+        window.location.href = '/marketplace';
       } else {
-        router.push('/automatizador-gold-10x');
+        router.push('/marketplace');
       }
     } catch (err) {
       console.error('Login error:', err);
@@ -56,12 +56,12 @@ export default function Login() {
   };
 
   return (
-    <AuthLayout bgClass="bg-zinc-900" showFooter={false}>
-      <div className="w-full max-w-sm font-satoshi tracking-[-0.03em]">
+    <AuthLayout bgClass="bg-white" showFooter={false}>
+      <div className="w-full max-w-sm font-satoshi tracking-[-0.03em]" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans'" }}>
         
         {/* Mensagem de erro */}
         {error && (
-          <div className="mb-6 text-red-500 text-center text-sm">{error}</div>
+          <div className="mb-6 text-red-600 text-center text-sm">{error}</div>
         )}
         
         {/* Formulário */}
@@ -74,7 +74,7 @@ export default function Login() {
               placeholder="E-mail"
               required
               autoComplete="off"
-              className="w-full px-3 py-2 text-sm bg-black border border-zinc-700 rounded-xl focus:ring-1 focus:ring-white focus:border-white transition-colors duration-200 placeholder-zinc-500"
+              className="w-full px-4 py-3 text-sm bg-white text-zinc-900 border border-zinc-300 rounded-xl focus:ring-2 focus:ring-black/20 focus:border-black transition-colors duration-200 placeholder-zinc-500"
             />
           </div>
           
@@ -86,13 +86,13 @@ export default function Login() {
               placeholder="Senha"
               required
               autoComplete="new-password"
-              className="w-full px-3 py-2 text-sm bg-black border border-zinc-700 rounded-xl focus:ring-1 focus:ring-white focus:border-white transition-colors duration-200 placeholder-zinc-500"
+              className="w-full px-4 py-3 text-sm bg-white text-zinc-900 border border-zinc-300 rounded-xl focus:ring-2 focus:ring-black/20 focus:border-black transition-colors duration-200 placeholder-zinc-500"
             />
           </div>
 
           <button 
             type="submit" 
-            className="w-full px-4 py-2 text-sm font-medium text-white bg-black border border-white rounded-xl hover:border-opacity-80 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-200"
+            className="w-full h-11 text-sm font-medium text-white bg-black rounded-full hover:bg-black/90 transition-colors duration-200 shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Entrando...' : 'Entrar'}
@@ -103,9 +103,18 @@ export default function Login() {
         <div className="max-w-md mx-auto mt-6 flex justify-center">
           <Link 
             href="/forgot-password"
-            className="text-sm text-zinc-300 hover:text-white transition-colors duration-200"
+            className="text-sm text-zinc-700 hover:text-zinc-900 transition-colors duration-200"
           >
             Esqueci minha senha
+          </Link>
+        </div>
+
+        <div className="max-w-md mx-auto mt-3 flex justify-center">
+          <Link 
+            href="/register"
+            className="text-sm text-zinc-700 hover:text-zinc-900 transition-colors duration-200"
+          >
+            Criar conta
           </Link>
         </div>
 
@@ -114,4 +123,3 @@ export default function Login() {
     </AuthLayout>
   );
 }
-

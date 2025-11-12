@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     const checkUser = async () => {
       if (session) {
-        router.push('/automatizador-gold-10x');
+        router.push('/marketplace');
       } else {
         router.push('/login');
       }

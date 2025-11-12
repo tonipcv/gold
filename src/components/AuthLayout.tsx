@@ -4,14 +4,15 @@ interface AuthLayoutProps {
   children: React.ReactNode;
   bgClass?: string;
   showFooter?: boolean;
+  logoInvert?: boolean;
 }
 
-export default function AuthLayout({ children, bgClass = 'bg-black', showFooter = true }: AuthLayoutProps) {
+export default function AuthLayout({ children, bgClass = 'bg-black', showFooter = true, logoInvert = false }: AuthLayoutProps) {
   return (
     <div className={`min-h-screen flex flex-col items-center justify-center ${bgClass} px-4`}>
       <div className="w-full max-w-sm space-y-6">
         <div className="flex justify-center">
-          <XLogo />
+          <XLogo invert={logoInvert} />
         </div>
         {children}
       </div>

@@ -60,7 +60,7 @@ interface Episode {
   accountId?: string
 }
 
-export default function AutomatizadorGold10xClient() {
+export default function AutomatizadorGold10xClient({ variant = 'dark', mode = 'full', customTitle }: { variant?: 'dark' | 'light'; mode?: 'full' | 'playerOnly'; customTitle?: string }) {
   const [activeEpisode, setActiveEpisode] = useState<number>(1)
   const [showDownloadModal, setShowDownloadModal] = useState(false)
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 })
@@ -139,7 +139,7 @@ export default function AutomatizadorGold10xClient() {
   const episodes: Episode[] = [
     { id: 0,  number: 0,  title: 'AVISO MUITO IMPORTANTE',                                               playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=c79b5e01-58e6-413c-8451-f3cb792fb6b5' },
     { id: 1,  number: 1,  title: 'CORRETORA',                                                            playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=5d155e09-3f0e-46ec-9b3a-f265f356399e' },
-    { id: 2,  number: 2,  title: 'INSTALANDO ESTRATÉGIA',                                                playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=a25ab8a3-1277-4c62-9ee0-5a346eee0230' },
+    { id: 2,  number: 2,  title: 'INSTALANDO ESTRATÉGIA GOLD X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=a25ab8a3-1277-4c62-9ee0-5a346eee0230' },
     { id: 3,  number: 3,  title: 'ESTRATÉGIA NOVA - GOLD X',                                             playerId: '', linkYouTube: 'https://youtu.be/6lI-yyCvblQ' },
     { id: 4,  number: 4,  title: 'ATIVANDO VPS',                                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=f907a720-2027-4572-bbb8-fec0719853fa' },
     { id: 5,  number: 5,  title: 'RELATÓRIO ESTRATÉGIA',                                                 playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=ce792cee-c443-474e-9243-9c22036681de' },
@@ -151,11 +151,11 @@ export default function AutomatizadorGold10xClient() {
     { id: 11, number: 11, title: 'HORARIO DE FUNCIONAMENTO',                                             playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=43328382-6f35-4da1-9b4c-ddae576cf7a4' },
     { id: 12, number: 12, title: 'FORMULARIO - LIBERAÇÃO OFICIAL',                                       playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=81f18403-cf49-43ae-b2ef-4e9d16c066a3' },
     { id: 13, number: 13, title: 'SUPORTE WHATSAPP',                                                      playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=52f26f32-066d-4e61-84f9-1f1cf6f99c55' },
-    { id: 16, number: 14, title: 'ESTRATÉGIA NOVA GOLD X V2',                                            playerId: '', linkYouTube: 'https://youtu.be/h77uIIwLABI', locked: !isPremium },
+    { id: 16, number: 14, title: 'ESTRATÉGIA GOLD POWER V2',                                             playerId: '', linkYouTube: 'https://youtu.be/h77uIIwLABI', locked: !isPremium },
     { id: 15, number: 15, title: 'ENCONTRO DE MENTORIA GOLD 10X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=56b8726a-0951-45ce-aaf8-37ce313fb20f', locked: !isPremium },
     // Aula 16 adicionada à lista
     // Última aula adicionada
-    { id: 17, number: 16, title: 'ESTRATÉGIA ATUALIZADA',                                                  playerId: '690a7938cb5344d7fad2af7b', accountId: '17e2196c-5794-49ef-bd61-857538a02fa6', locked: !isPremium },
+    { id: 17, number: 16, title: 'ESTRATÉGIA COM TRAVA',                                                  playerId: '690a7938cb5344d7fad2af7b', accountId: '17e2196c-5794-49ef-bd61-857538a02fa6', locked: !isPremium },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!
@@ -198,15 +198,21 @@ export default function AutomatizadorGold10xClient() {
     }
   }, [activeEpisode])
 
+  const baseText = variant === 'light' ? 'text-zinc-900' : 'text-gray-200'
+  const titleText = variant === 'light' ? 'text-zinc-900' : 'text-white'
+  const mutedText = variant === 'light' ? 'text-zinc-600' : 'text-gray-400'
+
   return (
-    <div className="text-gray-200">
+    <div className={`${baseText}`}>
       {/* Main Content (header e menu já vêm da página pai) */}
       <main className="pt-4 pb-8">
         {/* (removido) Countdown mobile */}
         {/* Video Player Section */}
         <div id="player" className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto px-4 mt-2">
           {/* Title above video */}
-          <h2 className="text-lg md:text-xl font-bold text-white text-center mt-3 mb-4 md:mt-6 md:mb-5">AULA {currentEpisode.number} - {currentEpisode.title}</h2>
+          <h2 className={`text-lg md:text-xl font-bold ${titleText} text-center mt-3 mb-4 md:mt-6 md:mb-5`}>
+            {customTitle ? customTitle : (<>AULA {currentEpisode.number} - {currentEpisode.title}</>)}
+          </h2>
           {currentEpisode.linkYouTube ? (
             <div className="rounded-lg border border-gray-800 overflow-hidden bg-black">
               <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
@@ -233,6 +239,7 @@ export default function AutomatizadorGold10xClient() {
               Vídeo ainda não disponível para esta aula.
             </div>
           )}
+          {mode === 'full' && (
           <div className="px-0 py-4">
             
             {activeEpisode === 12 && (
@@ -394,57 +401,59 @@ export default function AutomatizadorGold10xClient() {
               </div>
             )}
           </div>
+          )}
         </div>
-
-        {/* Episodes List (minimal) */}
-        <div className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto">
-          <div className="px-4 pb-2 md:p-4 lg:p-4 episode-list">
-            <div className="space-y-1 lg:space-y-2">
-              {episodes.map((episode) => {
-                const isLocked = !!episode.locked
-                const isActive = activeEpisode === episode.id
-                const hasTitle = !!episode.title && episode.title.trim().length > 0
-                const displayTitle = hasTitle ? episode.title : (isLocked ? 'Em breve' : '')
-                const label = `AULA ${episode.number}${displayTitle ? ' - ' + displayTitle : ''}`
-                return (
-                  <div key={episode.id} className="space-y-1">
-                    <button
-                      onClick={() => handleEpisodeChange(episode.id)}
-                      aria-disabled={isLocked}
-                      disabled={isLocked}
-                      className={`w-full flex items-start gap-3 p-3 rounded-lg transition-colors border ${
-                        isActive
-                          ? 'bg-green-600/10 border-green-500'
-                          : isLocked
-                            ? 'bg-transparent border-transparent opacity-60 cursor-not-allowed'
-                            : 'bg-transparent hover:bg-white/5 border-transparent cursor-pointer'
-                      }`}
-                    >
-                      {isLocked && (
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 mt-1 text-gray-300">
-                          <path d="M12 1a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm-3 8V6a3 3 0 116 0v3H9z" />
-                        </svg>
-                      )}
-                      <div className="flex-1 text-left">
-                        <div className="flex items-center gap-2">
-                          <h3 className={`font-medium ${isActive ? 'text-green-400' : (isLocked ? 'text-gray-300' : 'text-white')} text-sm md:text-base tracking-tight uppercase`}>{label}</h3>
-                          {(episode.number === 9 || episode.number === 14) && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] md:text-xs font-semibold border border-amber-400 text-amber-300 bg-amber-500/10">
-                              NOVO
-                            </span>
+        {mode === 'full' && (
+          <>
+            {/* Episodes List (minimal) */}
+            <div className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto">
+              <div className="px-4 pb-2 md:p-4 lg:p-4 episode-list">
+                <div className="space-y-1 lg:space-y-2">
+                  {episodes.map((episode) => {
+                    const isLocked = !!episode.locked
+                    const isActive = activeEpisode === episode.id
+                    const hasTitle = !!episode.title && episode.title.trim().length > 0
+                    const displayTitle = hasTitle ? episode.title : (isLocked ? 'Em breve' : '')
+                    const label = `AULA ${episode.number}${displayTitle ? ' - ' + displayTitle : ''}`
+                    return (
+                      <div key={episode.id} className="space-y-1">
+                        <button
+                          onClick={() => handleEpisodeChange(episode.id)}
+                          aria-disabled={isLocked}
+                          disabled={isLocked}
+                          className={`w-full flex items-start gap-3 p-3 rounded-lg transition-colors border ${
+                            isActive
+                              ? 'bg-green-600/10 border-green-500'
+                              : isLocked
+                                ? 'bg-transparent border-transparent opacity-60 cursor-not-allowed'
+                                : 'bg-transparent hover:bg-white/5 border-transparent cursor-pointer'
+                          }`}
+                        >
+                          {isLocked && (
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 mt-1 text-gray-300">
+                              <path d="M12 1a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm-3 8V6a3 3 0 116 0v3H9z" />
+                            </svg>
                           )}
-                        </div>
-                        {episode.duration && <p className="text-xs text-gray-400 mt-1">{episode.duration}</p>}
+                          <div className="flex-1 text-left">
+                            <div className="flex items-center gap-2">
+                              <h3 className={`font-medium ${isActive ? 'text-green-600' : (isLocked ? (variant === 'light' ? 'text-zinc-500' : 'text-gray-300') : (variant === 'light' ? 'text-zinc-900' : 'text-white'))} text-sm md:text-base tracking-tight uppercase`}>{label}</h3>
+                              {(episode.number === 9 || episode.number === 14) && (
+                                <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] md:text-xs font-semibold border border-amber-400 text-amber-300 bg-amber-500/10">
+                                  NOVO
+                                </span>
+                              )}
+                            </div>
+                            {episode.duration && <p className={`text-xs ${mutedText} mt-1`}>{episode.duration}</p>}
+                          </div>
+                        </button>
                       </div>
-                    </button>
-                  </div>
-                )
-              })}
+                    )
+                  })}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        {/* Fixed Bottom Actions removed */}
+          </>
+        )}
 
         {/* Download Terms Modal */}
         {showDownloadModal && (

@@ -139,7 +139,7 @@ export default function AutomatizadorGold10xClient() {
   const episodes: Episode[] = [
     { id: 0,  number: 0,  title: 'AVISO MUITO IMPORTANTE',                                               playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=c79b5e01-58e6-413c-8451-f3cb792fb6b5' },
     { id: 1,  number: 1,  title: 'CORRETORA',                                                            playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=5d155e09-3f0e-46ec-9b3a-f265f356399e' },
-    { id: 2,  number: 2,  title: 'INSTALANDO ESTRATÉGIA',                                                playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=a25ab8a3-1277-4c62-9ee0-5a346eee0230' },
+    { id: 2,  number: 2,  title: 'INSTALANDO ESTRATÉGIA GOLD X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=a25ab8a3-1277-4c62-9ee0-5a346eee0230' },
     { id: 3,  number: 3,  title: 'ESTRATÉGIA NOVA - GOLD X',                                             playerId: '', linkYouTube: 'https://youtu.be/6lI-yyCvblQ' },
     { id: 4,  number: 4,  title: 'ATIVANDO VPS',                                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=f907a720-2027-4572-bbb8-fec0719853fa' },
     { id: 5,  number: 5,  title: 'RELATÓRIO ESTRATÉGIA',                                                 playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=ce792cee-c443-474e-9243-9c22036681de' },
@@ -151,11 +151,11 @@ export default function AutomatizadorGold10xClient() {
     { id: 11, number: 11, title: 'HORARIO DE FUNCIONAMENTO',                                             playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=43328382-6f35-4da1-9b4c-ddae576cf7a4' },
     { id: 12, number: 12, title: 'FORMULARIO - LIBERAÇÃO OFICIAL',                                       playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=81f18403-cf49-43ae-b2ef-4e9d16c066a3' },
     { id: 13, number: 13, title: 'SUPORTE WHATSAPP',                                                      playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=52f26f32-066d-4e61-84f9-1f1cf6f99c55' },
-    { id: 16, number: 14, title: 'ESTRATÉGIA NOVA GOLD X V2',                                            playerId: '', linkYouTube: 'https://youtu.be/h77uIIwLABI', locked: !isPremium },
+    { id: 16, number: 14, title: 'ESTRATÉGIA GOLD POWER V2',                                             playerId: '', linkYouTube: 'https://youtu.be/h77uIIwLABI', locked: false },
     { id: 15, number: 15, title: 'ENCONTRO DE MENTORIA GOLD 10X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=56b8726a-0951-45ce-aaf8-37ce313fb20f', locked: !isPremium },
     // Aula 16 adicionada à lista
     // Última aula adicionada
-    { id: 17, number: 16, title: 'ESTRATÉGIA ATUALIZADA',                                                  playerId: '690a7938cb5344d7fad2af7b', accountId: '17e2196c-5794-49ef-bd61-857538a02fa6', locked: !isPremium },
+    { id: 17, number: 16, title: 'ESTRATÉGIA COM TRAVA',                                                  playerId: '690a7938cb5344d7fad2af7b', accountId: '17e2196c-5794-49ef-bd61-857538a02fa6', locked: !isPremium },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!

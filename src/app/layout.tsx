@@ -9,8 +9,8 @@ import { Providers } from './providers'
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'KTS Plataforma',
-  description: 'Plataforma Exclusiva',
+  title: 'Automatizador V2',
+  description: 'Automatizador V2: tecnologia de estratégia automatizada para otimizar suas operações.',
 };
 
 export default function RootLayout({

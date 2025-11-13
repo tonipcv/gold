@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'KTS - Login',
-  description: 'Faça login na sua conta KTS',
+  title: 'Automação Gold - Login',
+  description: 'Faça login na sua conta Automação Gold',
   robots: {
     index: false,
   },

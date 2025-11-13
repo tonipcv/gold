@@ -1,10 +1,14 @@
 'use client';
 
 import { useEffect, useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
 function ConfirmEmailContent() {
+  const searchParams = useSearchParams();
+  const email = searchParams?.get('email') || '';
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#111] px-4">
       <div className="max-w-md w-full space-y-8 bg-black p-8 rounded-lg border border-zinc-800">
@@ -23,8 +27,12 @@ function ConfirmEmailContent() {
             Verifique seu e-mail
           </h2>
           
-          <p className="text-gray-300 mb-6">
-            Enviamos um link de confirmação para o seu e-mail.
+          <p className="text-gray-300 mb-2">
+            Enviamos um link de confirmação para:
+          </p>
+          
+          <p className="text-white font-medium mb-6">
+            {email}
           </p>
           
           <p className="text-gray-400 text-sm mb-8">

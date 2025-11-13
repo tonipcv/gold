@@ -4,7 +4,6 @@ import { useState, FormEvent, ChangeEvent } from 'react';
 import Link from 'next/link';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation';
-import { signIn } from 'next-auth/react';
 import AuthLayout from '@/components/AuthLayout';
 
 // Hook personalizado para máscara de telefone
@@ -81,17 +80,8 @@ export default function Register() {
         throw new Error(data?.message || 'Erro desconhecido ao processar resposta');
       }
 
-      const result = await signIn('credentials', {
-        email,
-        password,
-        redirect: false,
-      });
-      await new Promise((r) => setTimeout(r, 100));
-      if (result?.ok) {
-        window.location.href = '/marketplace';
-      } else {
-        router.push('/marketplace');
-      }
+      // Redirecionar para confirmação de email
+      router.push('/confirm-email?email=' + encodeURIComponent(email));
     } catch (err) {
       console.error('Unexpected error:', err);
       setError(err instanceof Error ? err.message : 'Ocorreu um erro inesperado');
@@ -101,18 +91,16 @@ export default function Register() {
   };
 
   return (
-    <AuthLayout bgClass="bg-white" showFooter={false}>
-      <div className="w-full max-w-md mx-auto" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans'" }}>
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-semibold text-zinc-900">Crie sua conta</h1>
-        </div>
+    <AuthLayout>
+      <div className="w-full max-w-sm">
+        {/* Mensagem de erro */}
+        {error && (
+          <div className="mb-6 text-red-500 text-center text-sm">{error}</div>
+        )}
 
-        <div className="rounded-2xl border border-zinc-200 bg-white p-6 md:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
-          {error && (
-            <div className="mb-6 text-red-600 text-center text-sm">{error}</div>
-          )}
-
-          <form onSubmit={handleSubmit} className="grid gap-4" autoComplete="off">
+        {/* Formulário */}
+        <form onSubmit={handleSubmit} className="space-y-4" autoComplete="off">
+          <div>
             <input 
               type="text" 
               id="name" 
@@ -120,18 +108,22 @@ export default function Register() {
               placeholder="Nome completo"
               required 
               autoComplete="off"
-              className="w-full px-4 py-3 text-sm bg-white text-zinc-900 border border-zinc-300 rounded-xl focus:ring-2 focus:ring-black/20 focus:border-black transition-colors duration-200 placeholder-zinc-500"
+              className="w-full px-3 py-2 text-sm bg-black border border-zinc-700 rounded-xl focus:ring-1 focus:ring-white focus:border-white transition-colors duration-200 placeholder-zinc-500"
             />
+          </div>
 
+          <div>
             <input 
               type="email" 
               id="email" 
               name="email" 
               placeholder="E-mail"
               required 
-              className="w-full px-4 py-3 text-sm bg-white text-zinc-900 border border-zinc-300 rounded-xl focus:ring-2 focus:ring-black/20 focus:border-black transition-colors duration-200 placeholder-zinc-500"
+              className="w-full px-3 py-2 text-sm bg-black border border-zinc-700 rounded-xl focus:ring-1 focus:ring-white focus:border-white transition-colors duration-200 placeholder-zinc-500"
             />
+          </div>
 
+          <div>
             <input 
               type="tel" 
               id="phone" 
@@ -139,48 +131,51 @@ export default function Register() {
               placeholder="Telefone"
               required 
               onChange={handlePhoneChange}
-              className="w-full px-4 py-3 text-sm bg-white text-zinc-900 border border-zinc-300 rounded-xl focus:ring-2 focus:ring-black/20 focus:border-black transition-colors duration-200 placeholder-zinc-500"
+              className="w-full px-3 py-2 text-sm bg-black border border-zinc-700 rounded-xl focus:ring-1 focus:ring-white focus:border-white transition-colors duration-200 placeholder-zinc-500"
             />
+          </div>
 
+          <div>
             <input 
               type="password" 
               id="password" 
               name="password" 
               placeholder="Senha"
               required 
-              className="w-full px-4 py-3 text-sm bg-white text-zinc-900 border border-zinc-300 rounded-xl focus:ring-2 focus:ring-black/20 focus:border-black transition-colors duration-200 placeholder-zinc-500"
+              className="w-full px-3 py-2 text-sm bg-black border border-zinc-700 rounded-xl focus:ring-1 focus:ring-white focus:border-white transition-colors duration-200 placeholder-zinc-500"
             />
+          </div>
 
+          <div>
             <input 
               type="password" 
               id="confirmPassword" 
               name="confirmPassword" 
               placeholder="Confirmar senha"
               required 
-              className="w-full px-4 py-3 text-sm bg-white text-zinc-900 border border-zinc-300 rounded-xl focus:ring-2 focus:ring-black/20 focus:border-black transition-colors duration-200 placeholder-zinc-500"
+              className="w-full px-3 py-2 text-sm bg-black border border-zinc-700 rounded-xl focus:ring-1 focus:ring-white focus:border-white transition-colors duration-200 placeholder-zinc-500"
             />
-
-            <button 
-              type="submit" 
-              className="w-full h-11 text-sm font-medium text-white bg-black rounded-full hover:bg-black/90 transition-colors duration-200 shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Cadastrando...' : 'Criar conta'}
-            </button>
-          </form>
-
-          <div className="mt-6 text-center">
-            <span className="text-xs text-zinc-600">Já tem uma conta? </span>
-            <Link 
-              href="/login" 
-              className="text-xs font-medium text-zinc-900 hover:text-black transition-colors duration-200 inline-flex items-center gap-1"
-            >
-              Entrar
-            </Link>
           </div>
-        </div>
 
-        
+          <button 
+            type="submit" 
+            className="w-full px-4 py-2 text-sm font-medium text-black bg-white rounded-xl hover:bg-gray-100 transition-all duration-200 shadow-sm"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Cadastrando...' : 'Criar conta'}
+          </button>
+        </form>
+
+        {/* Link para login */}
+        <div className="mt-6 text-center">
+          <Link 
+            href="/login" 
+            className="text-sm text-zinc-400 hover:text-white transition-colors duration-200 inline-flex items-center gap-1"
+          >
+            <ArrowLeftIcon className="w-3 h-3" />
+            Voltar para login
+          </Link>
+        </div>
       </div>
     </AuthLayout>
   );

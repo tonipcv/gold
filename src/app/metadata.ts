@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'KTS',
-  description: 'Bem-vindo à plataforma KTS — tecnologia para estratégias automatizadas e alto desempenho.',
-  keywords: ['KTS', 'automação', 'estratégias', 'investimentos', 'mercado financeiro'],
+  title: 'Automação Gold - Página Inicial',
+  description: 'Bem-vindo à plataforma Automação Gold — sua tecnologia para estratégias automatizadas e alto desempenho.',
+  keywords: ['Automação Gold', 'automação', 'estratégias 10x', 'investimentos', 'mercado financeiro'],
 };

@@ -63,7 +63,6 @@ const handler = NextAuth({
   pages: {
     signIn: '/login',
     error: '/auth/error',
-    signOut: '/auth/signout',
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -85,14 +84,14 @@ const handler = NextAuth({
         const finalUrl = isRelative ? new URL(url, baseUrl).toString() : (isSameOrigin ? url : baseUrl)
 
         const parsed = new URL(finalUrl)
-        // Normalize legacy destinations to the marketplace
+        // Normalize legacy destinations to the automatizador
         if (parsed.pathname === '/produtos' || parsed.pathname === '/' || parsed.pathname === '/login') {
-          return `${baseUrl}/marketplace`
+          return `${baseUrl}/automatizador-gold-10x`
         }
 
         return parsed.toString()
       } catch {
-        return `${baseUrl}/marketplace`
+        return `${baseUrl}/automatizador-gold-10x`
       }
     }
   },

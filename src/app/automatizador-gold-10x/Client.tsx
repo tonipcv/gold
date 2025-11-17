@@ -155,7 +155,7 @@ export default function AutomatizadorGold10xClient() {
     { id: 15, number: 15, title: 'ENCONTRO DE MENTORIA GOLD 10X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=56b8726a-0951-45ce-aaf8-37ce313fb20f', locked: !isPremium },
     // Aula 16 adicionada à lista
     // Última aula adicionada
-    { id: 17, number: 16, title: 'ESTRATÉGIA COM TRAVA',                                                  playerId: '690a7938cb5344d7fad2af7b', accountId: '17e2196c-5794-49ef-bd61-857538a02fa6', locked: !isPremium },
+    { id: 17, number: 16, title: 'ESTRATÉGIA COM TRAVA',                                                  playerId: '690a7938cb5344d7fad2af7b', accountId: '17e2196c-5794-49ef-bd61-857538a02fa6', locked: false },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!

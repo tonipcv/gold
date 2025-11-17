@@ -12,12 +12,6 @@ export default async function Aula16Page() {
     redirect('/login')
   }
 
-  // Somente Premium
-  // @ts-ignore - propriedade injetada no callback da sessão
-  const isPremium = session?.user?.isPremium === true
-  if (!isPremium) {
-    redirect('/automatizador-gold-10x')
-  }
 
   return (
     <div className="min-h-screen bg-black text-gray-200 font-satoshi tracking-[-0.03em]">

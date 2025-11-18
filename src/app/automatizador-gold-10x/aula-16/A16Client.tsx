@@ -3,43 +3,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSession } from 'next-auth/react'
 
-function VturbPlayer({ playerId, accountId }: { playerId: string; accountId: string }) {
-  const containerId = `vturb-container-${playerId}`
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    const container = document.getElementById(containerId)
-    if (!container) return
-
-    container.innerHTML = ''
-    const playerEl = document.createElement('vturb-smartplayer') as any
-    playerEl.id = `vid-${playerId}`
-    ;(playerEl as HTMLElement).style.display = 'block'
-    ;(playerEl as HTMLElement).style.margin = '0 auto'
-    ;(playerEl as HTMLElement).style.width = '100%'
-    container.appendChild(playerEl)
-
-    // remove previous scripts for this playerId
-    try {
-      const prev = Array.from(document.querySelectorAll(`script[data-vturb-player="${playerId}"]`))
-      prev.forEach((n) => n.parentElement?.removeChild(n))
-    } catch {}
-
-    const s = document.createElement('script')
-    s.src = `https://scripts.converteai.net/${accountId}/players/${playerId}/v4/player.js`
-    s.async = true
-    s.setAttribute('data-vturb-player', playerId)
-    document.head.appendChild(s)
-
-    return () => {
-      try { document.head.removeChild(s) } catch {}
-      try { container.innerHTML = '' } catch {}
-    }
-  }, [playerId, accountId, containerId])
-
-  return <div id={containerId} className="w-full" />
-}
-
 export default function A16Client() {
   const { data: session } = useSession()
   const email = (session?.user as any)?.email as string | undefined
@@ -132,7 +95,14 @@ export default function A16Client() {
       <div id="player" className="bg-black rounded-lg border border-gray-800 overflow-hidden">
         <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
           <div className="absolute inset-0">
-            <VturbPlayer accountId="70b43777-e359-4c77-af2c-366de25a153d" playerId="691cb68bad98c48e19a519b8" />
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/wmH2bPIJpbI?rel=0&modestbranding=1"
+              title="YouTube video player"
+              frameBorder={0}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
           </div>
         </div>
       </div>

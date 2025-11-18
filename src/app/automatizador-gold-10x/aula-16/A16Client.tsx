@@ -132,7 +132,7 @@ export default function A16Client() {
       <div id="player" className="bg-black rounded-lg border border-gray-800 overflow-hidden">
         <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
           <div className="absolute inset-0">
-            <VturbPlayer accountId="17e2196c-5794-49ef-bd61-857538a02fa6" playerId="68e459139fccd82203a3275b" />
+            <VturbPlayer accountId="70b43777-e359-4c77-af2c-366de25a153d" playerId="691cb68bad98c48e19a519b8" />
           </div>
         </div>
       </div>

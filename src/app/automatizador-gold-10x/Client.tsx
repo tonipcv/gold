@@ -156,6 +156,8 @@ export default function AutomatizadorGold10xClient() {
     // Aula 16 adicionada à lista
     // Última aula adicionada
     { id: 17, number: 16, title: 'ESTRATÉGIA COM TRAVA',                                                  playerId: '', linkYouTube: 'https://youtu.be/wmH2bPIJpbI', locked: false },
+    // Aula 17 - última aula (Falcon Bit)
+    { id: 18, number: 17, title: 'ESTRATÉGIA FALCON BIT',                                                 playerId: '6920e8ba813dc92a81d622d3', accountId: '70b43777-e359-4c77-af2c-366de25a153d', locked: false },
   ]
 
   const currentEpisode = episodes.find((e) => e.id === activeEpisode)!
@@ -390,6 +392,21 @@ export default function AutomatizadorGold10xClient() {
                     <path d="M8 5v14l11-7L8 5Z" />
                   </svg>
                   V2 - ATUALIZADA
+                </a>
+              </div>
+            )}
+            {currentEpisode.number === 17 && (
+              <div className="mt-4 flex flex-col items-center gap-4">
+                <a
+                  href="https://drive.google.com/drive/folders/1uaN5F57mOnm2JIunnWEZTPIwunFu7HwJ?usp=drive_link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 justify-center px-6 py-3 rounded-xl border border-green-500 bg-green-700 text-white text-base font-semibold shadow-[0_0_28px_rgba(34,197,94,0.35)] hover:bg-green-600 transition-colors w-full max-w-xs"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                    <path d="M5 20h14v-2H5v2Zm7-3 5-5h-3V4h-4v8H7l5 5Z" />
+                  </svg>
+                  BAIXAR FALCON BIT
                 </a>
               </div>
             )}

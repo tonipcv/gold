@@ -445,7 +445,7 @@ export default function AutomatizadorGold10xClient() {
                       <div className="flex-1 text-left">
                         <div className="flex items-center gap-2">
                           <h3 className={`font-medium ${isActive ? 'text-green-400' : (isLocked ? 'text-gray-300' : 'text-white')} text-sm md:text-base tracking-tight uppercase`}>{label}</h3>
-                          {(episode.number === 9 || episode.number === 14) && (
+                          {episode.number === 17 && (
                             <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] md:text-xs font-semibold border border-amber-400 text-amber-300 bg-amber-500/10">
                               NOVO
                             </span>

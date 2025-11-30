@@ -20,6 +20,7 @@ function FormContent() {
     purchaseEmail: "",
     whatsapp: "",
     accountNumber: "",
+    customField: "turma 4",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -47,14 +48,14 @@ function FormContent() {
       const res = await fetch("/api/formulario-liberacao", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, customField: "turma 4" }),
       });
       const data = await res.json();
       if (!res.ok) {
         throw new Error(data?.error || "Erro ao enviar.");
       }
       setSuccess(true);
-      setForm({ name: "", purchaseEmail: "", whatsapp: "", accountNumber: "" });
+      setForm({ name: "", purchaseEmail: "", whatsapp: "", accountNumber: "", customField: "turma 4" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erro ao enviar.");
     } finally {
@@ -71,6 +72,7 @@ function FormContent() {
       purchaseEmail: searchParams.get("purchaseEmail")?.toString() || "",
       whatsapp: searchParams.get("whatsapp")?.toString() || "",
       accountNumber: searchParams.get("accountNumber")?.toString() || "",
+      customField: "turma 4",
     };
 
     const allPresent = qp.name && qp.purchaseEmail && qp.whatsapp && qp.accountNumber;
@@ -84,7 +86,7 @@ function FormContent() {
         const res = await fetch("/api/formulario-liberacao", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(qp),
+          body: JSON.stringify({ ...qp, customField: "turma 4" }),
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data?.error || "Erro ao enviar.");

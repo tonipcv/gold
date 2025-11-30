@@ -13,9 +13,7 @@ const nextConfig = {
     unoptimized: true,
   },
   reactStrictMode: true,
-  experimental: {
-    serverExternalPackages: ['@prisma/client'],
-  },
+  serverExternalPackages: ['@prisma/client'],
   eslint: {
     ignoreDuringBuilds: true,
   },

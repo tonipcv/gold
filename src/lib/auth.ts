@@ -70,6 +70,18 @@ export const authOptions: NextAuthOptions = {
         ;(session.user as any).isPremium = (token as any).isPremium ?? false
       }
       return session
+    },
+    async redirect({ url, baseUrl }) {
+      try {
+        // If redirecting to a relative path, always land on /cursos
+        if (url.startsWith('/')) return `${baseUrl}/cursos`
+
+        const parsed = new URL(url)
+        // Same-origin absolute URL -> send to /cursos
+        if (parsed.origin === baseUrl) return `${baseUrl}/cursos`
+      } catch {}
+      // Fallback
+      return `${baseUrl}/cursos`
     }
   }
 } 

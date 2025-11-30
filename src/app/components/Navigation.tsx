@@ -7,6 +7,7 @@ import { signOut } from 'next-auth/react';
 import {
   BookOpenIcon,
   ArrowRightOnRectangleIcon,
+  FilmIcon,
 } from '@heroicons/react/24/outline';
 
 export function Navigation() {
@@ -16,8 +17,8 @@ export function Navigation() {
 
   const navigationItems = [
     {
-      href: '/produtos',
-      icon: BookOpenIcon,
+      href: '/cursos',
+      icon: FilmIcon,
     }
   ];
 

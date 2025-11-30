@@ -127,14 +127,26 @@ export default function ModuloClient() {
             </a>
           )}
           {currentAula.number === 5 && (
-            <a
-              href={isPremium ? "/formulario-2" : "/formulario"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full max-w-xs text-center px-4 py-2 rounded-full text-xs font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
-            >
-              Formulário de liberação
-            </a>
+            <>
+              <a
+                href={isPremium ? "/formulario-2" : "/formulario"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full max-w-xs text-center px-4 py-2 rounded-full text-xs font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
+              >
+                Formulário de liberação
+              </a>
+              {isPremium && (
+                <a
+                  href="https://wa.me/5573917778075"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full max-w-xs text-center px-4 py-2 rounded-full text-xs font-semibold bg-[#25D366] hover:bg-[#1ebe57] text-white border border-[#1ebe57]/60"
+                >
+                  Falar no WhatsApp
+                </a>
+              )}
+            </>
           )}
           {currentAula.number === 6 && (
             <a

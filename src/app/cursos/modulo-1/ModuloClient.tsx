@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Aula {
   id: number
@@ -56,6 +56,23 @@ const aulas: Aula[] = [
 
 export default function ModuloClient() {
   const [activeAula, setActiveAula] = useState<number>(0)
+  const [isPremium, setIsPremium] = useState<boolean | null>(null)
+  useEffect(() => {
+    let mounted = true
+    async function load() {
+      try {
+        const res = await fetch('/api/user/premium-status')
+        const data = await res.json()
+        if (mounted) setIsPremium(!!data?.isPremium)
+      } catch {
+        if (mounted) setIsPremium(false)
+      }
+    }
+    load()
+    return () => {
+      mounted = false
+    }
+  }, [])
   const currentAula = aulas.find((a) => a.id === activeAula)!
 
   const handleAulaChange = (id: number) => {
@@ -111,7 +128,7 @@ export default function ModuloClient() {
           )}
           {currentAula.number === 5 && (
             <a
-              href="https://gold.k17.com.br/formulario"
+              href={isPremium ? "/formulario-2" : "/formulario"}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full max-w-xs text-center px-4 py-2 rounded-full text-xs font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"

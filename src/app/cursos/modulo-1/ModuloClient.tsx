@@ -14,7 +14,7 @@ const aulas: Aula[] = [
     id: 0,
     number: 0,
     title: 'Introdução do Modulo',
-    videoUrl: 'https://www.youtube.com/embed/Eg8SjSXQtAw'
+    videoUrl: 'https://www.youtube.com/embed/ipUBFkb1qE0'
   },
   {
     id: 1,

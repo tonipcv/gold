@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { verifyAdminToken } from '@/utils/auth';
 import { prisma } from '@/lib/prisma';
 
-export async function PATCH(request: Request, { params }: { params: { id: string } }) {
+export async function PATCH(request: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
     const authHeader = request.headers.get('Authorization');
     if (!verifyAdminToken(authHeader)) {
@@ -14,8 +14,10 @@ export async function PATCH(request: Request, { params }: { params: { id: string
       return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
     }
 
+    const { id } = await context.params;
+
     const user = await prisma.user.update({
-      where: { id: params.id },
+      where: { id },
       data: { isPremium },
       select: { id: true, isPremium: true },
     });

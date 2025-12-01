@@ -197,7 +197,7 @@ export default async function CursosPage() {
 
       {/* Floating WhatsApp button */}
       <a
-        href="/whatsapp"
+        href="/whatsapp-cliqueaqui"
         aria-label="Abrir WhatsApp"
         className="fixed bottom-20 right-5 z-50 inline-flex items-center justify-center w-14 h-14 rounded-full bg-green-600 hover:bg-green-500 text-white shadow-xl border border-green-500/70 transition-all hover:scale-110"
       >

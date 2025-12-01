@@ -71,7 +71,7 @@ export default async function AutomatizadorGold10xPage() {
 
       {/* Floating WhatsApp button (only on this page) */}
       <a
-        href="/whatsapp"
+        href="/whatsapp-cliqueaqui"
         aria-label="Abrir WhatsApp"
         className="fixed bottom-5 right-5 z-50 inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-600 hover:bg-green-500 text-white shadow-xl border border-green-500/70"
       >

@@ -107,6 +107,19 @@ export default function ModuloClient() {
             ) : null}
           </div>
         </div>
+        {/* Botão para Aula 1 */}
+        {currentAula.number === 1 && (
+          <div className="mt-4 flex flex-col items-center gap-2">
+            <a
+              href="https://one.exnessonelink.com/a/jo986i1iel?platform=mobile"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full max-w-xs text-center px-4 py-2 rounded-full text-xs font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
+            >
+              Baixar app
+            </a>
+          </div>
+        )}
         {/* Botões para Aula 2 */}
         {currentAula.number === 2 && (
           <div className="mt-4 flex flex-col items-center gap-2">

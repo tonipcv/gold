@@ -7,7 +7,7 @@ import { useState } from "react";
 // Metadata deve ser movida para um arquivo layout.tsx ou removida do componente client
 
 export default function SucessoInscricaoPage() {
-  const whatsappHref = "https://wa.me/5511958072826";
+  const whatsappHref = "/whatsapp-cliqueaqui";
   const [copied, setCopied] = useState(false);
   const tempPassword = "R8!kZ3wq@7fLpN2";
   

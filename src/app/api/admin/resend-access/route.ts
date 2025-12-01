@@ -59,6 +59,7 @@ export async function POST(req: Request) {
           <p style="margin:8px 0 0;word-break:break-all;background:#f5f5f5;padding:8px 12px;border-radius:6px"><strong>Acessar app:</strong> ${appLink}</p>
         </div>
         <p style="font-size:12px;color:#555;margin-top:12px">Se você não solicitou este acesso, ignore este e-mail.</p>
+  <p style="font-size:12px;color:#555;margin-top:8px">Dúvidas? Fale no WhatsApp: <a href="${base}/whatsapp-cliqueaqui" target="_blank" rel="noopener noreferrer">(73) 9177‑8075</a></p>
       </div>
     `
 

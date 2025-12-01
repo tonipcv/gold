@@ -341,7 +341,7 @@ export async function POST(req: Request) {
                 : `<li>Se ainda não definiu uma senha, use "Esqueci minha senha": <a href="${resetUrl}">${resetUrl}</a></li>`}
             </ol>
             ${tempPassword ? `<p style="margin-top:8px;">Recomendamos alterar sua senha após o primeiro login: <a href="${resetUrl}">${resetUrl}</a></p>` : ''}
-            <p>Qualquer dúvida, envia mensagem no Whatsapp +55 11 95807-2826.</p>
+            <p>Qualquer dúvida, fale no WhatsApp <a href="${appUrl}/whatsapp-cliqueaqui" target="_blank" rel="noopener noreferrer">(73) 9177‑8075</a>.</p>
           </div>
         `;
         const mailRes = await sendEmail({
@@ -365,7 +365,7 @@ export async function POST(req: Request) {
               ${brand || last4 ? `<p>Forma de pagamento: ${brand ? brand.toUpperCase() : 'cartão'} ${last4 ? '•••• ' + last4 : ''}</p>` : ''}
               <p>Isso é normal e pode levar alguns minutos. Assim que for aprovado, seu acesso será liberado automaticamente e você receberá outro e‑mail.</p>
               <p>Se preferir acompanhar ou refazer o pagamento, acesse: <a href="${checkoutUrl}">${checkoutUrl}</a></p>
-              <p>Qualquer dúvida, responda este e‑mail.</p>
+              <p>Qualquer dúvida, fale no WhatsApp <a href="${appUrl}/whatsapp-cliqueaqui" target="_blank" rel="noopener noreferrer">(73) 9177‑8075</a>.</p>
             </div>
           `,
         });
@@ -385,7 +385,7 @@ export async function POST(req: Request) {
                 <li>Finalize o pagamento no seu checkout.</li>
                 <li>Após a confirmação, seu acesso será liberado automaticamente e você receberá outro e‑mail.</li>
               </ol>
-              <p style="margin-top:8px;">Dúvidas? Fale no WhatsApp: <strong>(11) 95807-2826</strong></p>
+              <p style="margin-top:8px;">Dúvidas? Fale no WhatsApp: <a href="${appUrl}/whatsapp-cliqueaqui" target="_blank" rel="noopener noreferrer">(73) 9177‑8075</a></p>
               ${pixUrl || pixSignature ? `
                 <div style="margin-top:16px;padding:12px;border:1px solid #eee;border-radius:8px;">
                   <p><strong>Pagar via PIX</strong></p>
@@ -395,7 +395,7 @@ export async function POST(req: Request) {
                 </div>
               ` : ''}
               <p>Se já pagou, aguarde alguns minutos — o sistema atualizará automaticamente.</p>
-              <p>Qualquer dúvida, responda este e-mail.</p>
+              <p>Qualquer dúvida, responda este e-mail ou fale no WhatsApp <a href="${appUrl}/whatsapp-cliqueaqui" target="_blank" rel="noopener noreferrer">(73) 9177‑8075</a>.</p>
             </div>
           `,
         });

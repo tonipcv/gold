@@ -14,19 +14,19 @@ const aulas: Aula[] = [
     id: 0,
     number: 0,
     title: 'Introdução do Modulo',
-    videoUrl: 'https://www.youtube.com/embed/vwXvoqT37Vo'
+    videoUrl: 'https://www.youtube.com/embed/Eg8SjSXQtAw'
   },
   {
     id: 1,
     number: 1,
     title: 'Criando conta no app',
-    videoUrl: 'https://www.youtube.com/embed/lKKINz8kZLc'
+    videoUrl: 'https://www.youtube.com/embed/FLXjkZHkBgo'
   },
   {
     id: 2,
     number: 2,
     title: 'MT5 + COMO INSTALAR ESTRATEGIA + VPS',
-    videoUrl: 'https://www.youtube.com/embed/2GkO885pGJk'
+    videoUrl: 'https://www.youtube.com/embed/GoWmwvZR2IA'
   },
   {
     id: 3,
@@ -44,13 +44,13 @@ const aulas: Aula[] = [
     id: 5,
     number: 5,
     title: 'FORMULARIO - LIBERAÇÃO OFICIAL',
-    videoUrl: 'https://www.youtube.com/embed/KEvUwgK5Y_w'
+    videoUrl: 'https://www.youtube.com/embed/ZTPiKa0PsOo'
   },
   {
     id: 6,
     number: 6,
     title: 'SUPORTE INDIVIDUAL',
-    videoUrl: 'https://www.youtube.com/embed/M0xSmEBvvx8'
+    videoUrl: 'https://www.youtube.com/embed/sw9N6-JrUHU'
   }
 ]
 

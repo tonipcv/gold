@@ -85,6 +85,27 @@ export default function AdminDashboard() {
     }
   };
 
+  const updatePremium = async (userId: string, isPremium: boolean) => {
+    try {
+      const savedToken = localStorage.getItem('admin_token');
+      const res = await fetch(`/api/admin/users/${userId}/premium`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${savedToken}`
+        },
+        body: JSON.stringify({ isPremium })
+      });
+      if (res.ok) {
+        await fetchStats();
+      } else if (res.status === 401) {
+        handleLogout();
+      }
+    } catch (e) {
+      console.error('Failed to update premium', e);
+    }
+  };
+
   const fetchStats = async () => {
     try {
       const savedToken = localStorage.getItem('admin_token');
@@ -244,6 +265,23 @@ export default function AdminDashboard() {
                     </TableCell>
                     <TableCell className={`text-gray-300 ${fontStyles.secondary}`}>
                       {new Date(user.createdAt).toLocaleDateString('pt-BR')}
+                    </TableCell>
+                    <TableCell>
+                      {user.isPremium ? (
+                        <button
+                          onClick={() => updatePremium(user.id, false)}
+                          className={`px-3 py-1.5 rounded-lg text-xs bg-[#1A1A1A] hover:bg-[#222222] text-gray-300 border border-[#2a2a2a] ${fontStyles.secondary}`}
+                        >
+                          Remover Premium
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => updatePremium(user.id, true)}
+                          className={`px-3 py-1.5 rounded-lg text-xs bg-highlight hover:bg-highlight-light text-white ${fontStyles.primary}`}
+                        >
+                          Tornar Premium
+                        </button>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}

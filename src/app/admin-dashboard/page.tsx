@@ -50,6 +50,8 @@ export default function AdminDashboard() {
   const [userStats, setUserStats] = useState<UserStats | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState('');
+  const [sending, setSending] = useState<Record<string, boolean>>({});
+  const [sentMsg, setSentMsg] = useState<Record<string, string>>({});
   const router = useRouter();
 
   useEffect(() => {
@@ -83,6 +85,34 @@ export default function AdminDashboard() {
       setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const resendAccess = async (email: string) => {
+    try {
+      setSending((s) => ({ ...s, [email]: true }));
+      setSentMsg((m) => ({ ...m, [email]: '' }));
+      const savedToken = localStorage.getItem('admin_token');
+      const res = await fetch('/api/admin/resend-access', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(savedToken ? { 'Authorization': `Bearer ${savedToken}` } : {}),
+        },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        setSentMsg((m) => ({ ...m, [email]: 'Enviado' }));
+      } else if (res.status === 401) {
+        handleLogout();
+      } else {
+        const t = await res.text();
+        setSentMsg((m) => ({ ...m, [email]: t || 'Falha ao reenviar' }));
+      }
+    } catch (e) {
+      setSentMsg((m) => ({ ...m, [email]: 'Erro de rede' }));
+    } finally {
+      setSending((s) => ({ ...s, [email]: false }));
     }
   };
 
@@ -262,6 +292,7 @@ export default function AdminDashboard() {
                   <TableHead className={`text-gray-400 ${fontStyles.secondary}`}>Telefone</TableHead>
                   <TableHead className={`text-gray-400 ${fontStyles.secondary}`}>Status</TableHead>
                   <TableHead className={`text-gray-400 ${fontStyles.secondary}`}>Data</TableHead>
+                  <TableHead className={`text-gray-400 ${fontStyles.secondary}`}>Acesso</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -286,6 +317,23 @@ export default function AdminDashboard() {
                     </TableCell>
                     <TableCell className={`text-gray-300 ${fontStyles.secondary}`}>
                       {new Date(user.createdAt).toLocaleDateString('pt-BR')}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => resendAccess(user.email)}
+                          disabled={!!sending[user.email]}
+                          className={`px-3 py-1.5 rounded-lg text-xs ${sending[user.email] ? 'opacity-60 cursor-wait' : ''} bg-[#1A1A1A] hover:bg-[#222222] text-gray-300 border border-[#2a2a2a] ${fontStyles.secondary}`}
+                          title="Reenviar e-mail de acesso"
+                        >
+                          {sending[user.email] ? 'Enviando...' : 'Reenviar acesso'}
+                        </button>
+                        {sentMsg[user.email] && (
+                          <span className={`text-xs ${sentMsg[user.email] === 'Enviado' ? 'text-green-500' : 'text-gray-400'} ${fontStyles.secondary}`}>
+                            {sentMsg[user.email]}
+                          </span>
+                        )}
+                      </div>
                     </TableCell>
                     <TableCell>
                       {user.isPremium ? (

@@ -132,7 +132,7 @@ export default function Page() {
       </div>
       <div className="h-2 bg-neutral-800 rounded-full overflow-hidden">
         <div
-          className={`h-full ${color === 'red' ? 'bg-red-500' : color === 'white' ? 'bg-white' : 'bg-green-500'} rounded-full transition-all duration-500`}
+          className={`h-full ${color === 'red' ? 'bg-red-400' : color === 'white' ? 'bg-white' : 'bg-green-500'} rounded-full transition-all duration-500`}
           style={{ width: `${percentage}%` }}
         />
       </div>
@@ -224,7 +224,7 @@ export default function Page() {
   }
 
   return (
-    <div className="font-montserrat bg-black text-white min-h-screen relative overflow-hidden">
+    <div className="font-sans bg-black text-white min-h-screen relative overflow-hidden">
       <div className="relative z-10">
         {/* Logo Section */}
         <div className="w-full flex justify-center pt-8">
@@ -244,7 +244,7 @@ export default function Page() {
           {/* Warning Text */}
           <div className="text-center">
             <p className="text-sm md:text-base text-neutral-300 leading-relaxed max-w-3xl mx-auto">
-              Este link é único e garante sua vaga com os bônus e acesso a versão mais completa da Automação V2. Se sair da página, poderá perder os bônus e terá que assistir o vídeo novamente.
+              Este link é único e garante sua vaga com todos os automatizadores liberados e acesso à versão otimizada para melhor performance.
             </p>
           </div>
         </div>
@@ -255,20 +255,19 @@ export default function Page() {
             {/* Grid de Planos */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Plano Vitalício (transformado do antigo Mensal) */}
-              <div className="order-3 md:order-3 border border-neutral-800/50 rounded-2xl p-8 bg-black/30 backdrop-blur-sm hover:border-neutral-700 transition-all duration-300">
+              <div className="order-3 md:order-3 border border-neutral-800 rounded-2xl p-8 bg-transparent transition-all duration-200">
                 <div className="text-center mb-6">
                   <h3 className="text-lg font-medium text-white">PLANO VITALÍCIO (Exclusivo)</h3>
                   <div className="mt-2 text-xs text-neutral-400">5 vagas</div>
-                  <ProgressBar percentage={65} color="white" />
+                  <ProgressBar percentage={65} color="red" />
                 </div>
                 
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Acesso vitalício à Automação Power V2 (Versão Premium)</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Acesso ao Automatizador para Sempre.</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Suporte prioritário direto com Daniel Katsu.</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Comunidade exclusiva dos vitalícios</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Acesso Vitalício à Versão Otimizada</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Todos: GOLD X 10x, POWER V2, FALCON BIT liberados.</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Atualizações Futuras Inclusas</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Suporte Prioritário</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-white/70 mt-1">✓</span><span className="text-white">Comunidade Vitalícia</span></li>
                 </ul>
 
                 <div className="text-center pt-6 border-t border-neutral-800/30">
@@ -280,18 +279,18 @@ export default function Page() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSubscribeClick('lifetime')}
-                      className="w-full inline-flex justify-center px-6 py-3 bg-white hover:bg-neutral-200 rounded-xl text-black font-medium transition-all duration-200"
+                      className="w-full inline-flex justify-center px-6 py-3 bg-transparent hover:bg-white/5 border border-neutral-700 rounded-xl text-white font-medium transition-all duration-150"
                     >
-                      PEGAR MINHA VAGA VITALÍCIA
+                      GARANTIR ACESSO VITALÍCIO AGORA
                     </a>
                   </div>
                 </div>
               </div>
 
               {/* Plano Semestral */}
-              <div className="order-1 md:order-1 relative border border-neutral-800/50 rounded-2xl p-8 bg-black/30 backdrop-blur-sm hover:border-neutral-700 transition-all duration-300">
+              <div className="order-1 md:order-1 relative border border-neutral-800 rounded-2xl p-8 bg-transparent transition-all duration-200">
                 {/* Badge Recomendado */}
-                <span className="absolute -top-3 right-4 text-[10px] px-2 py-1 rounded-full bg-green-600 text-white border border-green-500/70 shadow">Recomendado</span>
+                <span className="absolute -top-3 right-4 text-[10px] px-2 py-1 rounded-full bg-neutral-900 text-neutral-300 border border-neutral-800">Recomendado</span>
                 <div className="text-center mb-6">
                   <h3 className="text-lg font-medium text-white">PLANO SEMESTRAL</h3>
                   <div className="mt-2 text-xs text-neutral-400">43 vagas</div>
@@ -299,10 +298,11 @@ export default function Page() {
                 </div>
                 
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Power V2 (Versão Premium) por 6 meses</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Suporte dedicado</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Versão Otimizada (Melhor Performance)</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Todos: GOLD X 10x, POWER V2, FALCON BIT liberados.</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Instalação Guiada + Suporte Individual</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exclusivo</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Atualizações Inclusas Durante o Período</span></li>
                 </ul>
 
                 <div className="text-center pt-6 border-t border-neutral-800/30">
@@ -314,7 +314,7 @@ export default function Page() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSubscribeClick('semiannual')}
-                      className="w-full inline-flex justify-center px-6 py-3 bg-green-500 hover:bg-green-600 rounded-xl text-white font-medium transition-all duration-200"
+                      className="w-full inline-flex justify-center px-6 py-3 bg-green-400 hover:bg-green-500 rounded-xl text-white font-medium transition-all duration-150"
                     >
                       COMEÇAR AGORA
                     </a>
@@ -323,7 +323,7 @@ export default function Page() {
               </div>
 
               {/* Plano Trimestral */}
-              <div className="order-2 md:order-2 border border-neutral-800/50 rounded-2xl p-8 bg-black/30 backdrop-blur-sm hover:border-neutral-700 transition-all duration-300">
+              <div className="order-2 md:order-2 border border-neutral-800 rounded-2xl p-8 bg-transparent transition-all duration-200">
                 <div className="text-center mb-6">
                   <h3 className="text-lg font-medium text-white">PLANO TRIMESTRAL</h3>
                   <div className="mt-2 text-xs text-neutral-400">80 vagas</div>
@@ -331,10 +331,11 @@ export default function Page() {
                 </div>
                 
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Automação Power V2 (Versão Premium) por 3 meses</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Estratégias Exclusivas Versão 10x</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exlusivo e Fechado com Daniel Katsu</span></li>
-                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Suporte especializado</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Acesso à Versão Otimizada (Melhor Performance)</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Todos: GOLD X 10x, POWER V2, FALCON BIT liberados.</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Instalação Guiada + Suporte Individual</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Encontro de Mentoria Exclusivo</span></li>
+                  <li className="flex items-start gap-3 text-sm"><span className="text-green-400 mt-1">✓</span><span className="text-white">Atualizações Inclusas Durante o Período</span></li>
                 </ul>
 
                 <div className="text-center pt-6 border-t border-neutral-800/30">
@@ -346,7 +347,7 @@ export default function Page() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSubscribeClick('quarterly')}
-                      className="w-full inline-flex justify-center px-6 py-3 bg-green-500 hover:bg-green-600 rounded-xl text-white font-medium transition-all duration-200"
+                      className="w-full inline-flex justify-center px-6 py-3 bg-green-400 hover:bg-green-500 rounded-xl text-white font-medium transition-all duration-150"
                     >
                       COMEÇAR AGORA
                     </a>

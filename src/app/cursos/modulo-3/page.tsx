@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { OptimizedImage } from '@/app/components/OptimizedImage'
 import { Navigation } from '@/app/components/Navigation'
+import ModuloClient from './ModuloClient'
 
 export default async function Modulo3Page() {
   const session = await getServerSession(authOptions)
@@ -32,37 +33,7 @@ export default async function Modulo3Page() {
       {/* Main Content */}
       <main className="pt-24 pb-20">
         <div className="w-full md:w-3/4 lg:w-3/4 md:mx-auto lg:mx-auto px-4 py-4">
-          <div className="text-gray-200">
-            {/* Header do Módulo */}
-            <div className="mb-6">
-              <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">MÓDULO 3 - POWER V2</h1>
-              <p className="text-gray-400">Estratégia Power V2</p>
-            </div>
-
-            {/* Conteúdo do Módulo */}
-            <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-8 md:p-12 flex flex-col items-center text-center">
-              <div className="w-20 h-20 rounded-full bg-green-500/10 flex items-center justify-center mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 text-green-500">
-                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4c-1.48 0-2.85.43-4.01 1.17l1.46 1.46a5.5 5.5 0 0 1 8.05 4.87v.5h1.5c1.66 0 3 1.34 3 3s-1.34 3-3 3H13v2h6c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM11 13H5c-1.66 0-3-1.34-3-3s1.34-3 3-3l.14.01C5.58 5.59 7.62 4 10 4c.46 0 .91.07 1.34.18L9.89 5.64C9.6 5.56 9.3 5.5 9 5.5c-1.93 0-3.5 1.57-3.5 3.5H5c-1.1 0-2 .9-2 2s.9 2 2 2h6v2zm0 7l-3.5-3.5L9 15l2 2V11h2v6l2-2 1.5 1.5L13 20z"/>
-                </svg>
-              </div>
-              <h2 className="text-2xl font-bold text-white mb-3">MÓDULO - POWER V2</h2>
-              <p className="text-gray-300 mb-6 max-w-md">
-                Acesse os arquivos e materiais do módulo Power V2
-              </p>
-              <a
-                href="https://drive.google.com/drive/folders/1S2lO0zWMgXpZWmrC8D3kwfXbQoBEUG7q?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full max-w-xs px-6 py-3 rounded-full text-sm font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60 transition-all inline-flex items-center justify-center gap-2"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4c-1.48 0-2.85.43-4.01 1.17l1.46 1.46a5.5 5.5 0 0 1 8.05 4.87v.5h1.5c1.66 0 3 1.34 3 3s-1.34 3-3 3H13v2h6c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM11 13H5c-1.66 0-3-1.34-3-3s1.34-3 3-3l.14.01C5.58 5.59 7.62 4 10 4c.46 0 .91.07 1.34.18L9.89 5.64C9.6 5.56 9.3 5.5 9 5.5c-1.93 0-3.5 1.57-3.5 3.5H5c-1.1 0-2 .9-2 2s.9 2 2 2h6v2zm0 7l-3.5-3.5L9 15l2 2V11h2v6l2-2 1.5 1.5L13 20z"/>
-                </svg>
-                POWER V2
-              </a>
-            </div>
-          </div>
+          <ModuloClient />
         </div>
       </main>
 

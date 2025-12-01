@@ -49,6 +49,7 @@ export default function AdminDashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [userStats, setUserStats] = useState<UserStats | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -134,8 +135,19 @@ export default function AdminDashboard() {
     router.push('/');
   };
 
-  const totalPages = Math.ceil((userStats?.users?.length || 0) / ITEMS_PER_PAGE);
-  const paginatedUsers = userStats?.users?.slice(
+  const normalized = (s: string | null | undefined) => (s || '').toLowerCase();
+  const users = userStats?.users || [];
+  const filteredUsers = users.filter((u) => {
+    if (!search) return true;
+    const q = search.toLowerCase();
+    return (
+      normalized(u.name).includes(q) ||
+      normalized(u.email).includes(q) ||
+      normalized(u.phone).includes(q)
+    );
+  });
+  const totalPages = Math.max(1, Math.ceil(filteredUsers.length / ITEMS_PER_PAGE));
+  const paginatedUsers = filteredUsers.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
@@ -226,11 +238,20 @@ export default function AdminDashboard() {
 
         {/* Users Table */}
         <div className="bg-[#111111] rounded-xl overflow-hidden">
-          <div className="p-6 border-b border-[#222222] flex items-center justify-between">
+          <div className="p-6 border-b border-[#222222] flex items-center justify-between gap-4">
             <h2 className={`text-lg font-medium text-white ${fontStyles.primary}`}>Usuários</h2>
-            <span className={`text-sm text-gray-400 ${fontStyles.secondary}`}>
-              Total: {userStats?.users?.length || 0}
-            </span>
+            <div className="flex items-center gap-3">
+              <span className={`hidden sm:inline text-sm text-gray-400 ${fontStyles.secondary}`}>
+                Total: {filteredUsers.length}
+              </span>
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
+                placeholder="Buscar por nome, email ou telefone"
+                className={`w-64 max-w-[60vw] px-3 py-2 bg-[#0f0f0f] text-white rounded-lg border border-[#222222] focus:outline-none focus:border-highlight focus:ring-1 focus:ring-highlight/40 text-sm ${fontStyles.secondary}`}
+              />
+            </div>
           </div>
           <div className="overflow-x-auto">
             <Table>

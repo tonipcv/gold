@@ -72,16 +72,9 @@ export default function ModuloClient() {
   const currentAula = aulas.find((a) => a.id === activeAula)!
 
   const [ack, setAck] = useState(false)
-  useEffect(() => {
-    try {
-      const v = typeof window !== 'undefined' ? localStorage.getItem('mod5_ack') : null
-      if (v === '1') setAck(true)
-    } catch {}
-  }, [])
 
   const handleAck = () => {
     setAck(true)
-    try { localStorage.setItem('mod5_ack', '1') } catch {}
   }
 
   const handleAulaChange = (id: number) => {

@@ -22,7 +22,7 @@ const aulas: Aula[] = [
     id: 2,
     number: 2,
     title: 'VERSÃO CELULAR PART 2',
-    playerId: '69279cc39498a1dd3a4f1aa8',
+    playerId: '692f2e5e532f54020692de9b',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   }
 ]

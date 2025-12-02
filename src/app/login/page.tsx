@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signIn } from "next-auth/react"
@@ -10,17 +10,54 @@ export default function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  
+  const [showModal, setShowModal] = useState(false);
+  const [pendingEmail, setPendingEmail] = useState<string>('');
+  const [pendingPassword, setPendingPassword] = useState<string>('');
+
+  useEffect(() => {
+    try {
+      if (showModal) {
+        const prev = document.body.style.overflow;
+        document.body.setAttribute('data-prev-overflow', prev);
+        document.body.style.overflow = 'hidden';
+      } else {
+        const prev = document.body.getAttribute('data-prev-overflow') || '';
+        document.body.style.overflow = prev;
+        document.body.removeAttribute('data-prev-overflow');
+      }
+    } catch {}
+    return () => {
+      try {
+        const prev = document.body.getAttribute('data-prev-overflow') || '';
+        document.body.style.overflow = prev;
+        document.body.removeAttribute('data-prev-overflow');
+      } catch {}
+    };
+  }, [showModal]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsSubmitting(true);
     setError(null);
 
     const formData = new FormData(event.currentTarget);
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
 
+    try {
+      const ack = typeof window !== 'undefined' ? localStorage.getItem('login_ack') : null;
+      if (ack === '1') {
+        await performSignIn(email, password);
+        return;
+      }
+    } catch {}
+
+    setPendingEmail(email);
+    setPendingPassword(password);
+    setShowModal(true);
+  };
+
+  const performSignIn = async (email: string, password: string) => {
+    setIsSubmitting(true);
     try {
       const result = await signIn('credentials', {
         email,
@@ -53,6 +90,18 @@ export default function Login() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleConfirm = async () => {
+    try {
+      localStorage.setItem('login_ack', '1');
+    } catch {}
+    setShowModal(false);
+    await performSignIn(pendingEmail, pendingPassword);
+  };
+
+  const handleCancel = () => {
+    setShowModal(false);
   };
 
   return (
@@ -109,9 +158,37 @@ export default function Login() {
           </Link>
         </div>
 
+        {showModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+            <div className="relative z-10 w-full max-w-lg rounded-xl border border-white/10 bg-neutral-900/95 p-6 shadow-2xl">
+              <h2 className="text-lg md:text-xl font-semibold text-white tracking-tight mb-3">Atenção</h2>
+              <div className="text-sm text-gray-200 space-y-3 mb-6">
+                <p>As estratégias da plataforma são ferramentas automatizadas que o próprio usuário configura. Elas só funcionam depois que o usuário conecta sua conta e define todos os parâmetros, como stop diário e regras de operação.</p>
+                <p>Cada estratégia trabalha com ativos diferentes e a escolha ou diversificação é feita exclusivamente pelo usuário. A plataforma não escolhe ativos, não orienta decisões e não executa nada sozinha sem pré configuração.</p>
+                <p>Não oferecemos recomendação de investimento. O software apenas executa automaticamente aquilo que o usuário configurou na sua própria conta. Toda responsabilidade sobre escolhas, ajustes e resultados é do usuário.</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={handleCancel}
+                  className="flex-1 text-center px-4 py-2 rounded-full text-sm font-medium border border-white/30 text-white hover:bg-white/10"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  onClick={handleConfirm}
+                  className="flex-1 text-center px-4 py-2 rounded-full text-sm font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
+                >
+                  Entendi
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
         
       </div>
     </AuthLayout>
   );
 }
-

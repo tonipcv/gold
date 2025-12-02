@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface Aula {
   id: number
@@ -21,6 +21,37 @@ const aulas: Aula[] = [
 export default function ModuloClient() {
   const [activeAula, setActiveAula] = useState<number>(1)
   const currentAula = aulas.find((a) => a.id === activeAula)!
+  const [showModal, setShowModal] = useState(false)
+
+  const tempUrl = 'https://drive.google.com/drive/folders/18OlHm2D4H3EgxkZ7joPgGei4BwmZ5R_p?usp=sharing'
+
+  const openModal = () => setShowModal(true)
+  const closeModal = () => setShowModal(false)
+  const confirmAndGo = () => {
+    setShowModal(false)
+    window.open(tempUrl, '_blank', 'noopener,noreferrer')
+  }
+
+  useEffect(() => {
+    try {
+      if (showModal) {
+        const prev = document.body.style.overflow
+        document.body.setAttribute('data-prev-overflow', prev)
+        document.body.style.overflow = 'hidden'
+      } else {
+        const prev = document.body.getAttribute('data-prev-overflow') || ''
+        document.body.style.overflow = prev
+        document.body.removeAttribute('data-prev-overflow')
+      }
+    } catch {}
+    return () => {
+      try {
+        const prev = document.body.getAttribute('data-prev-overflow') || ''
+        document.body.style.overflow = prev
+        document.body.removeAttribute('data-prev-overflow')
+      } catch {}
+    }
+  }, [showModal])
 
   return (
     <div className="text-gray-200">
@@ -53,14 +84,13 @@ export default function ModuloClient() {
         </div>
         {/* Botões abaixo do vídeo (empilhados e arredondados) */}
         <div className="mt-4 flex flex-col items-center justify-center gap-2">
-          <a
-            href="https://drive.google.com/drive/folders/18OlHm2D4H3EgxkZ7joPgGei4BwmZ5R_p?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={openModal}
             className="w-full max-w-xs text-center px-4 py-2 rounded-full text-xs font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
           >
             GOLD X - Temporário
-          </a>
+          </button>
           <button
             type="button"
             disabled
@@ -99,6 +129,37 @@ export default function ModuloClient() {
           })}
         </div>
       </div>
+
+      {/* Modal overlay for GOLD X Temporário */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+          <div className="relative z-10 w-full max-w-lg rounded-xl border border-white/10 bg-neutral-900/95 p-6 shadow-2xl">
+            <h2 className="text-lg md:text-xl font-semibold text-white tracking-tight mb-3">Atenção</h2>
+            <div className="text-sm text-gray-200 space-y-3 mb-6">
+              <p>Você será redirecionado para o arquivo de instalação, mas antes é fundamental compreender todos os fundamentos e etapas de configuração.</p>
+              <p>Embora a estratégia seja automatizada, você é quem define os parâmetros, como o STOP diário e demais ajustes, além de escolher os ativos, já que cada estratégia opera em um ativo diferente.</p>
+              <p>Ao clicar no botão abaixo, você confirma que entendeu todas as orientações e já está ciente de todas as informações apresentadas na aula.</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={closeModal}
+                className="flex-1 text-center px-4 py-2 rounded-full text-sm font-medium border border-white/30 text-white hover:bg-white/10"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={confirmAndGo}
+                className="flex-1 text-center px-4 py-2 rounded-full text-sm font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
+              >
+                Entendi
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

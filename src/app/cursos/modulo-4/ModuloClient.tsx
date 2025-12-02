@@ -123,7 +123,7 @@ export default function ModuloClient() {
             <h2 className="text-lg md:text-xl font-semibold text-white tracking-tight mb-3">Atenção</h2>
             <div className="text-sm text-gray-200 space-y-3 mb-6">
               <p>Você será redirecionado para o arquivo de instalação, mas antes é fundamental compreender todos os fundamentos e etapas de configuração.</p>
-              <p>Embora a estratégia seja automatizada, você é quem define os parâmetros, como o STOP diário e demais ajustes, além de escolher os ativos, já que cada estratégia opera em um ativo diferente.</p>
+              <p>Assista o vídeo para aprender a fazer sua instalação antes pois é você que define os parâmetros, como o STOP diário e demais ajustes, além de escolher os ativos, já que cada estratégia opera em um ativo diferente.</p>
               <p>Ao clicar no botão abaixo, você confirma que entendeu todas as orientações e já está ciente de todas as informações apresentadas na aula.</p>
             </div>
             <div className="flex items-center gap-3">

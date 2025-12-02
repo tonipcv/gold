@@ -71,9 +71,43 @@ export default function ModuloClient() {
   const [activeAula, setActiveAula] = useState<number>(1)
   const currentAula = aulas.find((a) => a.id === activeAula)!
 
+  const [ack, setAck] = useState(false)
+  useEffect(() => {
+    try {
+      const v = typeof window !== 'undefined' ? localStorage.getItem('mod5_ack') : null
+      if (v === '1') setAck(true)
+    } catch {}
+  }, [])
+
+  const handleAck = () => {
+    setAck(true)
+    try { localStorage.setItem('mod5_ack', '1') } catch {}
+  }
+
   const handleAulaChange = (id: number) => {
     setActiveAula(id)
   }
+
+  useEffect(() => {
+    try {
+      if (!ack) {
+        const prev = document.body.style.overflow
+        document.body.setAttribute('data-prev-overflow', prev)
+        document.body.style.overflow = 'hidden'
+      } else {
+        const prev = document.body.getAttribute('data-prev-overflow') || ''
+        document.body.style.overflow = prev
+        document.body.removeAttribute('data-prev-overflow')
+      }
+    } catch {}
+    return () => {
+      try {
+        const prev = document.body.getAttribute('data-prev-overflow') || ''
+        document.body.style.overflow = prev
+        document.body.removeAttribute('data-prev-overflow')
+      } catch {}
+    }
+  }, [ack])
 
   return (
     <div className="text-gray-200">
@@ -107,7 +141,6 @@ export default function ModuloClient() {
             ) : null}
           </div>
         </div>
-        {/* Botão para Aula 1 */}
         {currentAula.number === 1 && (
           <div className="mt-4 flex flex-col items-center gap-2">
             <a
@@ -120,7 +153,6 @@ export default function ModuloClient() {
             </a>
           </div>
         )}
-        {/* Botões para Aula 2 */}
         {currentAula.number === 2 && (
           <div className="mt-4 flex flex-col items-center gap-2">
             <a
@@ -178,6 +210,28 @@ export default function ModuloClient() {
           })}
         </div>
       </div>
+
+      {/* Modal overlay */}
+      {!ack && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+          <div className="relative z-10 w-full max-w-md rounded-xl border border-white/10 bg-neutral-900/95 p-6 shadow-2xl">
+            <h2 className="text-lg md:text-xl font-semibold text-white tracking-tight mb-3">Atenção</h2>
+            <p className="text-sm text-gray-300 mb-3">
+              O Módulo 5 é opcional. Antes de prosseguir, é essencial que você defina seu STOP diário, faça todas as configurações corretamente e se tiver dúvidas não inicie com valor real.
+            </p>
+            <p className="text-sm text-gray-300 mb-5">
+              A escolha dos ativos também é extremamente importante e deve ser feita com cuidado por você.
+            </p>
+            <button
+              onClick={handleAck}
+              className="w-full text-center px-4 py-2 rounded-full text-sm font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
+            >
+              Entendo
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

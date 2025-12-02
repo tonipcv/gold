@@ -65,12 +65,8 @@ export default async function CursosPage() {
     redirect('/login')
   }
 
-  // Derive which modules should appear locked for non-premium users
-  const displayedModules = modules.map((module) => {
-    const isPremium = !!session?.user?.isPremium
-    const shouldLock = !isPremium && (module.title.includes('Power V2') || module.title.includes('Falcon Bit'))
-    return { ...module, locked: shouldLock }
-  })
+  // All modules are unlocked and accessible to every logged-in user
+  const displayedModules = modules.map((module) => ({ ...module, locked: false }))
 
   return (
     <div className="min-h-screen bg-black text-gray-200 font-satoshi tracking-[-0.03em]">
@@ -127,63 +123,35 @@ export default async function CursosPage() {
           <div id="modulos" className="mb-12">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {displayedModules.map((module) => (
-                module.locked ? (
-                  <div
-                    key={module.id}
-                    aria-disabled
-                    className="relative aspect-[2/3] rounded-lg overflow-hidden bg-gray-900 border border-gray-800 opacity-70 cursor-not-allowed"
-                  >
-                    <OptimizedImage
-                      src={module.image}
-                      alt={module.title}
-                      fill
-                      className="object-cover grayscale"
-                    />
-                    <div className="absolute inset-0 bg-black/50" />
+                <Link
+                  key={module.id}
+                  href={module.href}
+                  className="group relative aspect-[2/3] rounded-lg overflow-hidden bg-gray-900 hover:ring-2 hover:ring-green-500 transition-all transform hover:scale-105"
+                >
+                  <OptimizedImage
+                    src={module.image}
+                    alt={module.title}
+                    fill
+                    className="object-cover group-hover:opacity-80 transition-opacity"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform">
+                    <h3 className="text-white font-bold text-sm mb-1">{module.title}</h3>
+                    <p className="text-gray-300 text-xs mb-2">{module.description}</p>
+                    {module.badge && (
+                      <span className="inline-block px-2 py-1 bg-green-600 text-white text-[10px] font-bold rounded">
+                        {module.badge}
+                      </span>
+                    )}
+                  </div>
+                  {module.badge && (
                     <div className="absolute top-2 right-2">
-                      <span className="inline-flex items-center gap-1 px-2 py-1 bg-black/80 text-gray-300 text-[10px] font-bold rounded backdrop-blur-sm border border-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
-                          <path d="M12 1a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm-3 8V6a3 3 0 116 0v3H9z" />
-                        </svg>
-                        BLOQUEADO
+                      <span className="inline-block px-2 py-1 bg-black/80 text-green-400 text-[10px] font-bold rounded backdrop-blur-sm">
+                        {module.badge}
                       </span>
                     </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h3 className="text-white font-bold text-sm mb-1">{module.title}</h3>
-                      <p className="text-gray-300 text-xs">{module.description}</p>
-                    </div>
-                  </div>
-                ) : (
-                  <Link
-                    key={module.id}
-                    href={module.href}
-                    className="group relative aspect-[2/3] rounded-lg overflow-hidden bg-gray-900 hover:ring-2 hover:ring-green-500 transition-all transform hover:scale-105"
-                  >
-                    <OptimizedImage
-                      src={module.image}
-                      alt={module.title}
-                      fill
-                      className="object-cover group-hover:opacity-80 transition-opacity"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform">
-                      <h3 className="text-white font-bold text-sm mb-1">{module.title}</h3>
-                      <p className="text-gray-300 text-xs mb-2">{module.description}</p>
-                      {module.badge && (
-                        <span className="inline-block px-2 py-1 bg-green-600 text-white text-[10px] font-bold rounded">
-                          {module.badge}
-                        </span>
-                      )}
-                    </div>
-                    {module.badge && (
-                      <div className="absolute top-2 right-2">
-                        <span className="inline-block px-2 py-1 bg-black/80 text-green-400 text-[10px] font-bold rounded backdrop-blur-sm">
-                          {module.badge}
-                        </span>
-                      </div>
-                    )}
-                  </Link>
-                )
+                  )}
+                </Link>
               ))}
             </div>
           </div>

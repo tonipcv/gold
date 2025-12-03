@@ -362,9 +362,13 @@ export default function Page() {
 
         {/* FAQ removido */}
 
-        {/* Footer */}
-        <footer className="py-8 px-4 text-center bg-black">
-          <p className="text-neutral-500 text-xs">Automação Gold - Todos os direitos reservados</p>
+        {/* Footer (same texto do login, não fixo) */}
+        <footer className="px-4 py-6 text-center bg-black">
+          <div className="max-w-md mx-auto">
+            <p className="text-[10px] leading-relaxed text-zinc-400">
+              Este software não opera por você: todas as configurações de risco, stop e seleção de ativos são responsabilidade exclusiva do usuário. A Provedora não acessa sua conta, não executa ordens e não realiza qualquer gestão ou recomendação de investimento. O usuário reconhece que pode perder parte ou todo o capital investido e que exemplos de performance apresentados são meramente ilustrativos, não representando garantia de resultados futuros.
+            </p>
+          </div>
         </footer>
       </div>
     </div>

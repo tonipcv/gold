@@ -258,8 +258,8 @@ export default function Page() {
               <div className="order-3 md:order-3 border border-neutral-800 rounded-2xl p-8 bg-transparent transition-all duration-200">
                 <div className="text-center mb-6">
                   <h3 className="text-lg font-medium text-white">PLANO VITALÍCIO (Exclusivo)</h3>
-                  <div className="mt-2 text-xs text-neutral-400">5 vagas</div>
-                  <ProgressBar percentage={65} color="red" />
+                  <div className="mt-2 text-xs text-neutral-400">Indisponível</div>
+                  <ProgressBar percentage={100} color="red" />
                 </div>
                 
                 <ul className="space-y-4 mb-8">
@@ -274,15 +274,12 @@ export default function Page() {
                   <div className="text-2xl font-light text-white">12x R$1.578,50</div>
                   
                   <div className="mt-6">
-                    <a
-                      href="https://checkout.k17.com.br/pay/vitalicio-10x"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => handleSubscribeClick('lifetime')}
-                      className="w-full inline-flex justify-center px-6 py-3 bg-transparent hover:bg-white/5 border border-neutral-700 rounded-xl text-white font-medium transition-all duration-150"
+                    <button
+                      aria-disabled
+                      className="w-full inline-flex justify-center px-6 py-3 bg-neutral-900 border border-neutral-800 rounded-xl text-neutral-500 font-medium cursor-not-allowed"
                     >
-                      GARANTIR ACESSO VITALÍCIO AGORA
-                    </a>
+                      INDISPONÍVEL
+                    </button>
                   </div>
                 </div>
               </div>

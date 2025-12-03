@@ -1,12 +1,15 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import VturbEmbed from '@/app/cursos/VturbEmbed'
 
 interface Aula {
   id: number
   number: number
   title: string
-  videoUrl: string
+  videoUrl?: string
+  playerId?: string
+  accountId?: string
 }
 
 const aulas: Aula[] = [
@@ -14,43 +17,50 @@ const aulas: Aula[] = [
     id: 0,
     number: 0,
     title: 'Introdução do Modulo',
-    videoUrl: 'https://www.youtube.com/embed/ipUBFkb1qE0'
+    playerId: '692d8c3deb369a2bdb7d3959',
+    accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 1,
     number: 1,
     title: 'Criando conta no app',
-    videoUrl: 'https://www.youtube.com/embed/FLXjkZHkBgo'
+    playerId: '692b575565e5bf391987b91e',
+    accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 2,
     number: 2,
     title: 'MT5 + COMO INSTALAR ESTRATEGIA + VPS',
-    videoUrl: 'https://www.youtube.com/embed/GoWmwvZR2IA'
+    playerId: '692b5b144fd612d7bf33f369',
+    accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 3,
     number: 3,
     title: 'VPS GRATUITO',
-    videoUrl: 'https://www.youtube.com/embed/nO999jJuq1Y'
+    playerId: '692f3874f26024a7a679a7b3',
+    accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 4,
     number: 4,
     title: 'STANDARD PARA CENT',
-    videoUrl: 'https://www.youtube.com/embed/4Xx2-KrjYpU'
+    playerId: '692f38a91fe8f267645f0472',
+    accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 5,
     number: 5,
     title: 'FORMULARIO - LIBERAÇÃO OFICIAL',
-    videoUrl: 'https://www.youtube.com/embed/ZTPiKa0PsOo'
+    playerId: '692b5544f0b2d76420cb3894',
+    accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 6,
     number: 6,
     title: 'SUPORTE INDIVIDUAL',
-    videoUrl: 'https://www.youtube.com/embed/sw9N6-JrUHU'
+    playerId: '692b557eda6a2d3096ffb3dd',
+    accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   }
 ]
 
@@ -95,14 +105,20 @@ export default function ModuloClient() {
       <div className="w-full mb-6 max-w-xl md:max-w-2xl mx-auto">
         <div className="rounded-lg border border-gray-800 overflow-hidden bg-black">
           <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
-            <iframe
-              src={currentAula.videoUrl}
-              title={`AULA ${currentAula.number}`}
-              className="absolute inset-0 w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
+            {currentAula.videoUrl ? (
+              <iframe
+                src={currentAula.videoUrl}
+                title={`AULA ${currentAula.number}`}
+                className="absolute inset-0 w-full h-full"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            ) : currentAula.playerId ? (
+              <div className="absolute inset-0">
+                <VturbEmbed key={currentAula.playerId} playerId={currentAula.playerId} accountId={currentAula.accountId} />
+              </div>
+            ) : null}
           </div>
         </div>
         <div className="mt-4 flex flex-col items-center gap-2">

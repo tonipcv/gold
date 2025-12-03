@@ -1,12 +1,15 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import VturbEmbed from '@/app/cursos/VturbEmbed'
 
 interface Aula {
   id: number
   number: number
   title: string
-  videoUrl: string
+  videoUrl?: string
+  playerId?: string
+  accountId?: string
 }
 
 const aulas: Aula[] = [
@@ -14,7 +17,8 @@ const aulas: Aula[] = [
     id: 1,
     number: 1,
     title: 'INSTALANDO GOLD X',
-    videoUrl: 'https://www.youtube.com/embed/dL93pESVFMg'
+    playerId: '692f43308f8686608181541c',
+    accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   }
 ]
 
@@ -72,14 +76,20 @@ export default function ModuloClient() {
         </h2>
         <div className="rounded-lg border border-gray-800 overflow-hidden bg-black">
           <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
-            <iframe
-              src={currentAula.videoUrl}
-              title={`AULA ${currentAula.number}`}
-              className="absolute inset-0 w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
+            {currentAula.videoUrl ? (
+              <iframe
+                src={currentAula.videoUrl}
+                title={`AULA ${currentAula.number}`}
+                className="absolute inset-0 w-full h-full"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            ) : currentAula.playerId ? (
+              <div className="absolute inset-0">
+                <VturbEmbed key={currentAula.playerId} playerId={currentAula.playerId} accountId={currentAula.accountId} />
+              </div>
+            ) : null}
           </div>
         </div>
         {/* Botões abaixo do vídeo (empilhados e arredondados) */}

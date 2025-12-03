@@ -105,7 +105,7 @@ export default function Login() {
   };
 
   return (
-    <AuthLayout bgClass="bg-zinc-900" showFooter={false}>
+    <AuthLayout bgClass="bg-zinc-900">
       <div className="w-full max-w-sm font-satoshi tracking-[-0.03em]">
         
         {/* Mensagem de erro */}

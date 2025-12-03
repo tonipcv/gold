@@ -37,6 +37,14 @@ export default async function Modulo4Page() {
         </div>
       </main>
 
+      <div className="px-4 pb-24">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-[11px] md:text-xs leading-relaxed text-gray-400 border-t border-white/10 pt-4">
+            Este software não opera por você: todas as configurações de risco, stop e seleção de ativos são responsabilidade exclusiva do usuário. A Provedora não acessa sua conta, não executa ordens e não realiza qualquer gestão ou recomendação de investimento. O usuário reconhece que pode perder parte ou todo o capital investido e que exemplos de performance apresentados são meramente ilustrativos, não representando garantia de resultados futuros.
+          </p>
+        </div>
+      </div>
+
       {/* Bottom Navigation */}
       <Navigation />
 

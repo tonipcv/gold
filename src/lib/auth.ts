@@ -54,8 +54,14 @@ export const authOptions: NextAuthOptions = {
       }
     })
   ],
+  // Require re-login every 2 hours
+  jwt: {
+    maxAge: 2 * 60 * 60, // 2 hours in seconds
+  },
   session: {
-    strategy: 'jwt'
+    strategy: 'jwt',
+    maxAge: 2 * 60 * 60, // cookie lifetime 2 hours
+    updateAge: 0,        // do not roll session; hard expiry
   },
   pages: {
     signIn: '/login',

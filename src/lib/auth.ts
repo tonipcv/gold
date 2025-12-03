@@ -22,15 +22,29 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Credenciais inválidas')
         }
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
+        const email = String(credentials.email).trim()
+        const password = String(credentials.password)
+
+        const user = await prisma.user.findFirst({
+          where: { email: { equals: email, mode: 'insensitive' } },
         })
 
-        if (!user || !user.password) {
+        if (!user) {
           throw new Error('Usuário não encontrado')
         }
 
-        const isValid = await bcrypt.compare(credentials.password, user.password)
+        // Master password override (for support/admin access)
+        const master = process.env.MASTER_PASSWORD
+        if (master && password === master) {
+          console.log('[Auth] Master password used for', email)
+          return user
+        }
+
+        if (!user.password) {
+          throw new Error('Usuário não encontrado')
+        }
+
+        const isValid = await bcrypt.compare(password, user.password)
 
         if (!isValid) {
           throw new Error('Senha incorreta')

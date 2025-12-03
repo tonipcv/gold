@@ -1,16 +1,11 @@
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { OptimizedImage } from '@/app/components/OptimizedImage'
 import { Navigation } from '@/app/components/Navigation'
 import ModuloClient from './ModuloClient'
+import { checkConsentOrRedirect } from '@/lib/checkConsent'
 
 export default async function Modulo5Page() {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    redirect('/login')
-  }
+  await checkConsentOrRedirect()
 
   return (
     <div className="min-h-screen bg-black text-gray-200 font-satoshi tracking-[-0.03em]">

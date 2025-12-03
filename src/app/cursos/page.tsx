@@ -1,10 +1,9 @@
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { OptimizedImage } from '../components/OptimizedImage'
 import { Navigation } from '../components/Navigation'
 import VturbEmbed from './VturbEmbed'
+import ConsentGate from '@/components/ConsentGate'
+import { getConsentStatus } from '@/lib/getConsentStatus'
 
 interface Module {
   id: number
@@ -60,9 +59,28 @@ const modules: Module[] = [
 ]
 
 export default async function CursosPage() {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    redirect('/login')
+  const consent = await getConsentStatus('v3.0')
+  if (!consent.ok) {
+    return (
+      <div className="min-h-screen bg-black text-gray-200 font-satoshi tracking-[-0.03em]">
+        <header className="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 px-4 py-3">
+          <div className="flex justify-center lg:justify-start items-center">
+            <div className="flex items-center">
+              <OptimizedImage 
+                src="/ft-icone.png" 
+                alt="Futuros Tech Logo" 
+                width={40} 
+                height={40} 
+                className="brightness-0 invert" 
+              />
+            </div>
+          </div>
+        </header>
+        <main className="pt-20">
+          <ConsentGate />
+        </main>
+      </div>
+    )
   }
 
   // All modules are unlocked and accessible to every logged-in user

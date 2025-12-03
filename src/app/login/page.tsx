@@ -1,39 +1,25 @@
 'use client';
 
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, useRef, FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signIn } from "next-auth/react"
 import AuthLayout from '@/components/AuthLayout';
+// Consent is handled on the cursos page; no modal here
 
 export default function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const [showModal, setShowModal] = useState(false);
+  const [showConsent, setShowConsent] = useState(false);
   const [pendingEmail, setPendingEmail] = useState<string>('');
   const [pendingPassword, setPendingPassword] = useState<string>('');
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    try {
-      if (showModal) {
-        const prev = document.body.style.overflow;
-        document.body.setAttribute('data-prev-overflow', prev);
-        document.body.style.overflow = 'hidden';
-      } else {
-        const prev = document.body.getAttribute('data-prev-overflow') || '';
-        document.body.style.overflow = prev;
-        document.body.removeAttribute('data-prev-overflow');
-      }
-    } catch {}
-    return () => {
-      try {
-        const prev = document.body.getAttribute('data-prev-overflow') || '';
-        document.body.style.overflow = prev;
-        document.body.removeAttribute('data-prev-overflow');
-      } catch {}
-    };
-  }, [showModal]);
+    // No consent logic on login page
+  }, []);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,20 +29,10 @@ export default function Login() {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
 
-    try {
-      const ack = typeof window !== 'undefined' ? localStorage.getItem('login_ack') : null;
-      if (ack === '1') {
-        await performSignIn(email, password);
-        return;
-      }
-    } catch {}
-
-    setPendingEmail(email);
-    setPendingPassword(password);
-    setShowModal(true);
+    await performSignIn(email, password);
   };
 
-  const performSignIn = async (email: string, password: string) => {
+  const performSignIn = async (email: string, password: string, recordConsent = false) => {
     setIsSubmitting(true);
     try {
       const result = await signIn('credentials', {
@@ -75,15 +51,53 @@ export default function Login() {
         throw new Error(errorMessages[result.error] || result.error);
       }
 
-      // Aguardar um momento antes de redirecionar
-      await new Promise(resolve => setTimeout(resolve, 100));
-      
-      // Forçar um hard redirect se o router.push não funcionar
-      if (result?.ok) {
-        window.location.href = '/cursos';
-      } else {
-        router.push('/cursos');
+      if (!result?.ok) {
+        throw new Error('Login falhou');
       }
+
+      // Record consent in database after successful login
+      if (recordConsent) {
+        console.log('[Login] Recording consent after successful login');
+        try {
+          // Ensure session cookie is available client-side before posting consent
+          await fetch('/api/auth/session', { cache: 'no-store' });
+          
+          const res = await fetch('/api/consents', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              consentType: 'terms-of-use',
+              text:
+                'Ao prosseguir, declaro que:\n' +
+                'compreendo que esta plataforma oferece apenas tecnologia de automação e não presta gestão, análise ou recomendação de investimentos;\n' +
+                'reconheço que todas as ordens são executadas exclusivamente pela corretora, e que a empresa não acessa, controla ou movimenta minha conta de negociação;\n' +
+                'tenho ciência de que operações financeiras envolvem risco elevado e posso perder parte ou todo o capital investido;\n' +
+                'entendo que a escolha das estratégias e dos ativos a serem utilizados, bem como a definição de stop, risco, limites e demais parâmetros operacionais, será realizada exclusivamente por mim no momento da ativação;\n' +
+                'declaro ainda que todas as configurações na minha conta da corretora são feitas por mim, sob minha total responsabilidade.\n' +
+                'Leia os termos completos em test.k17.com.br/termos-de-uso.',
+              textVersion: 'v2.0',
+            }),
+          });
+          
+          if (!res.ok) {
+            const data = await res.json().catch(() => ({}));
+            console.error('[Login] Consent POST failed:', res.status, data);
+            // Don't throw - fallback will create record on /cursos page
+          } else {
+            console.log('[Login] Consent recorded successfully');
+          }
+        } catch (e) {
+          console.error('[Login] Failed to record consent:', e);
+          // Don't throw - fallback will create record on /cursos page
+        }
+      }
+
+      // Aguardar para garantir que o consentimento foi processado
+      await new Promise(resolve => setTimeout(resolve, 200));
+      
+      console.log('[Login] Redirecting to /cursos');
+      // Forçar um hard redirect
+      window.location.href = '/cursos';
     } catch (err) {
       console.error('Login error:', err);
       setError(err instanceof Error ? err.message : 'Erro ao fazer login');
@@ -92,17 +106,7 @@ export default function Login() {
     }
   };
 
-  const handleConfirm = async () => {
-    try {
-      localStorage.setItem('login_ack', '1');
-    } catch {}
-    setShowModal(false);
-    await performSignIn(pendingEmail, pendingPassword);
-  };
-
-  const handleCancel = () => {
-    setShowModal(false);
-  };
+  // No consent handler on login
 
   return (
     <AuthLayout bgClass="bg-zinc-900">
@@ -123,6 +127,7 @@ export default function Login() {
               placeholder="E-mail"
               required
               autoComplete="off"
+              ref={emailRef}
               className="w-full px-3 py-2 text-sm bg-black border border-zinc-700 rounded-xl focus:ring-1 focus:ring-white focus:border-white transition-colors duration-200 placeholder-zinc-500"
             />
           </div>
@@ -135,13 +140,14 @@ export default function Login() {
               placeholder="Senha"
               required
               autoComplete="new-password"
+              ref={passwordRef}
               className="w-full px-3 py-2 text-sm bg-black border border-zinc-700 rounded-xl focus:ring-1 focus:ring-white focus:border-white transition-colors duration-200 placeholder-zinc-500"
             />
           </div>
 
           <button 
             type="submit" 
-            className="w-full px-4 py-2 text-sm font-medium text-white bg-black border border-white rounded-xl hover:border-opacity-80 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-200"
+            className={`w-full px-4 py-2 text-sm font-medium text-white border rounded-xl transition-all duration-200 bg-black border-white hover:border-opacity-80 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)]`}
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Entrando...' : 'Entrar'}
@@ -158,35 +164,7 @@ export default function Login() {
           </Link>
         </div>
 
-        {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
-            <div className="relative z-10 w-full max-w-lg rounded-xl border border-white/10 bg-neutral-900/95 p-6 shadow-2xl">
-              <h2 className="text-lg md:text-xl font-semibold text-white tracking-tight mb-3">Atenção</h2>
-              <div className="text-sm text-gray-200 space-y-3 mb-6">
-                <p>As estratégias da plataforma são ferramentas automatizadas que o próprio usuário configura. Elas só funcionam depois que o usuário conecta sua conta e define todos os parâmetros, como stop diário e regras de operação.</p>
-                <p>Cada estratégia trabalha com ativos diferentes e a escolha ou diversificação é feita exclusivamente pelo usuário. A plataforma não escolhe ativos, não orienta decisões e não executa nada sozinha sem pré configuração.</p>
-                <p>Não oferecemos recomendação de investimento. O software apenas executa automaticamente aquilo que o usuário configurou na sua própria conta. Toda responsabilidade sobre escolhas, ajustes e resultados é do usuário.</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={handleCancel}
-                  className="flex-1 text-center px-4 py-2 rounded-full text-sm font-medium border border-white/30 text-white hover:bg-white/10"
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="button"
-                  onClick={handleConfirm}
-                  className="flex-1 text-center px-4 py-2 rounded-full text-sm font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
-                >
-                  Entendi
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Consent modal removed from login. Gate appears in cursos page. */}
         
       </div>
     </AuthLayout>

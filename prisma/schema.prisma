@@ -27,6 +27,8 @@ model User {
   sessions             Session[]
   purchases            Purchase[]
   userCoupons          UserCoupon[]
+  consentLogs          ConsentLog[]
+  actionLogs           ActionLog[]
 }
 
 model Account {
@@ -147,4 +149,34 @@ model UserCoupon {
   createdAt DateTime @default(now())
 
   @@index([userId])
+}
+
+model ConsentLog {
+  id              String   @id @default(cuid())
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
+  consentType     String
+  textVersion     String?
+  textHash        String
+  text            String
+  acceptedAt      DateTime @default(now())
+  ip              String?
+  userAgent       String?
+  screenshotUrl   String?
+  configSnapshot  Json?
+
+  @@index([userId, consentType])
+}
+
+model ActionLog {
+  id              String   @id @default(cuid())
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
+  action          String
+  configSnapshot  Json?
+  ip              String?
+  userAgent       String?
+  createdAt       DateTime @default(now())
+
+  @@index([userId, action])
 }

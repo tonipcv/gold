@@ -16,14 +16,14 @@ const aulas: Aula[] = [
     id: 1,
     number: 1,
     title: 'AUTOMAÇÃO CELULAR',
-    playerId: '692f4635e5f771ce86948567',
+    playerId: '693098cc1fe8f267646089bf',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 2,
     number: 2,
     title: 'AUTOMAÇÃO CELULAR PARTE 2',
-    playerId: '69279cc39498a1dd3a4f1aa8',
+    playerId: '693098b1974fc1d67459b081',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   }
 ]

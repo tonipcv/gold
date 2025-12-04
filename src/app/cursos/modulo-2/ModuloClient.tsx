@@ -17,7 +17,7 @@ const aulas: Aula[] = [
     id: 1,
     number: 1,
     title: 'INSTALANDO GOLD X',
-    playerId: '692f43308f8686608181541c',
+    playerId: '693091d8484a138d00bd5fdc',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   }
 ]

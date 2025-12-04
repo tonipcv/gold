@@ -17,49 +17,49 @@ const aulas: Aula[] = [
     id: 0,
     number: 0,
     title: 'Introdução do Modulo',
-    playerId: '692d8c3deb369a2bdb7d3959',
+    playerId: '69307aa78f86866081829d7d',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 1,
     number: 1,
     title: 'Criando conta no app',
-    playerId: '692b575565e5bf391987b91e',
+    playerId: '69307b5a532f54020694488a',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 2,
     number: 2,
     title: 'MT5 + COMO INSTALAR ESTRATEGIA + VPS',
-    playerId: '692b5b144fd612d7bf33f369',
+    playerId: '69307ba6f26024a7a67b0012',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 3,
     number: 3,
     title: 'VPS GRATUITO',
-    playerId: '692f3874f26024a7a679a7b3',
+    playerId: '69308038f18bc19b7f3d1f92',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 4,
     number: 4,
     title: 'STANDARD PARA CENT',
-    playerId: '692f38a91fe8f267645f0472',
+    playerId: '69308088532f540206944ed7',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 5,
     number: 5,
     title: 'FORMULARIO - LIBERAÇÃO OFICIAL',
-    playerId: '692b5544f0b2d76420cb3894',
+    playerId: '693082a4f8c552246af8a7cc',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {
     id: 6,
     number: 6,
     title: 'SUPORTE INDIVIDUAL',
-    playerId: '692b557eda6a2d3096ffb3dd',
+    playerId: '69307a9d1fe8f26764605e57',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   }
 ]

@@ -1,17 +1,20 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import VturbEmbed from '@/app/cursos/VturbEmbed'
 
 interface Aula {
   id: number
   number: number
   title: string
-  videoUrl: string
+  videoUrl?: string
+  playerId?: string
+  accountId?: string
 }
 
 const aulas: Aula[] = [
-  { id: 1, number: 1, title: 'ESTRATEGIA FALCON BIT', videoUrl: 'https://www.youtube.com/embed/CxQ47pxnHQU' },
-  { id: 2, number: 2, title: 'ESTRATEGIAS SIMULTANEAS', videoUrl: 'https://www.youtube.com/embed/DYBmM3ix7XE' },
+  { id: 1, number: 1, title: 'ESTRATEGIA FALCON BIT', playerId: '69309f67484a138d00bd721a', accountId: '70b43777-e359-4c77-af2c-366de25a153d' },
+  { id: 2, number: 2, title: 'ESTRATEGIAS SIMULTANEAS', playerId: '69309ac48f8686608182c8dd', accountId: '70b43777-e359-4c77-af2c-366de25a153d' },
 ]
 
 export default function ModuloClient() {
@@ -65,14 +68,20 @@ export default function ModuloClient() {
       <div className="w-full mb-6 max-w-xl md:max-w-2xl mx-auto">
         <div className="rounded-lg border border-gray-800 overflow-hidden bg-black">
           <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
-            <iframe
-              src={currentAula.videoUrl}
-              title={`AULA ${currentAula.number}`}
-              className="absolute inset-0 w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
+            {currentAula.videoUrl ? (
+              <iframe
+                src={currentAula.videoUrl}
+                title={`AULA ${currentAula.number}`}
+                className="absolute inset-0 w-full h-full"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            ) : currentAula.playerId ? (
+              <div className="absolute inset-0">
+                <VturbEmbed key={currentAula.playerId} playerId={currentAula.playerId} accountId={currentAula.accountId} />
+              </div>
+            ) : null}
           </div>
         </div>
         {/* Botão de Materiais com confirmação */}

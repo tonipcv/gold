@@ -131,7 +131,7 @@ export default async function CursosPage() {
             <div className="rounded-lg border border-gray-800 overflow-hidden bg-black">
               <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
                 <div className="absolute inset-0">
-                  <VturbEmbed playerId="6930a50c8f8686608182d6d5" accountId="70b43777-e359-4c77-af2c-366de25a153d" />
+                  <VturbEmbed playerId="69335a3ba9b4b605fd3261ae" accountId="70b43777-e359-4c77-af2c-366de25a153d" />
                 </div>
               </div>
             </div>

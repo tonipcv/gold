@@ -16,7 +16,18 @@ export default function Page() {
   ];
 
   // Inject VTurb script for the provided player ID
-  // VTurb video removido enquanto vagas estão lotadas
+  useEffect(() => {
+    const scriptId = 'vturb-player-script-69305ad8484a138d00bd18a8';
+    const existing = document.getElementById(scriptId) as HTMLScriptElement | null;
+
+    if (!existing) {
+      const s = document.createElement('script');
+      s.id = scriptId;
+      s.src = 'https://scripts.converteai.net/70b43777-e359-4c77-af2c-366de25a153d/players/69305ad8484a138d00bd18a8/v4/player.js';
+      s.async = true;
+      document.head.appendChild(s);
+    }
+  }, []);
 
   // Tick countdown to today at 23:59 local time (same behavior as reference)
   useEffect(() => {
@@ -50,7 +61,7 @@ export default function Page() {
   }, []);
 
   // Typed alias to allow using the custom web component in TSX
-  // Video removido: sem player enquanto vagas estão lotadas
+  const VturbSmartPlayer = 'vturb-smartplayer' as unknown as React.ElementType;
 
   return (
     <div className="font-montserrat bg-black text-white min-h-screen">
@@ -62,17 +73,24 @@ export default function Page() {
         </div>
         <div className="max-w-3xl mx-auto bg-[#0d0d0d] border border-red-500/30 rounded-xl p-4 md:p-6 text-center">
           <p className="text-base md:text-lg text-neutral-200 font-semibold">
-            Vagas estão lotadas no momento.
+            Todos os automatizadores foram liberados para acesso imediato.
           </p>
           <p className="mt-1 md:mt-2 text-xs md:text-sm text-neutral-400">
-            Em breve avisaremos quando novas vagas forem abertas.
+            Assista o vídeo e finalize sua instalação hoje pois temos limite de acesso.
           </p>
         </div>
       </div>
 
-      {/* Main content (vídeo removido) */}
+      {/* Main content with centered player */}
       <main className="px-4 py-10">
-        <div className="max-w-4xl mx-auto" />
+        <div className="max-w-4xl mx-auto">
+          <div className="w-full mx-auto">
+            <VturbSmartPlayer
+              id="vid-69305ad8484a138d00bd18a8"
+              style={{ display: 'block', margin: '0 auto', width: '100%' }}
+            />
+          </div>
+        </div>
       </main>
 
       {/* Locked Modules Grid (like cursos, all blocked) */}

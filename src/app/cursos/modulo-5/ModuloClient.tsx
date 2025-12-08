@@ -13,6 +13,13 @@ interface Aula {
 
 const aulas: Aula[] = [
   {
+    id: 0,
+    number: 0,
+    title: 'INFORMAÇÕES IMPORTANTES ANTES DA UTILIZAÇÃO',
+    playerId: '6936e38a62cebd25172bf985',
+    accountId: '70b43777-e359-4c77-af2c-366de25a153d'
+  },
+  {
     id: 1,
     number: 1,
     title: 'AUTOMAÇÃO CELULAR',
@@ -69,7 +76,7 @@ function VturbPlayer({ playerId, accountId = '70b43777-e359-4c77-af2c-366de25a15
 }
 
 export default function ModuloClient() {
-  const [activeAula, setActiveAula] = useState<number>(1)
+  const [activeAula, setActiveAula] = useState<number>(0)
   const currentAula = aulas.find((a) => a.id === activeAula)!
 
   const [ack, setAck] = useState(false)
@@ -114,6 +121,8 @@ export default function ModuloClient() {
         <p className="mt-1 text-sm text-gray-400">Aprenda a operar pelo celular</p>
         <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent" />
       </div>
+
+      
 
       {/* Video Player Section */}
       <div className="w-full mb-6 max-w-xl md:max-w-2xl mx-auto">

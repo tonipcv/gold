@@ -30,7 +30,7 @@ const aulas: Aula[] = [
     id: 2,
     number: 2,
     title: 'AUTOMAÇÃO CELULAR PARTE 2',
-    playerId: '69370454c5639aae3427289c',
+    playerId: '69373abc199d124a45527963',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   }
 ]

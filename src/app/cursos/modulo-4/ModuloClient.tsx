@@ -13,7 +13,7 @@ interface Aula {
 }
 
 const aulas: Aula[] = [
-  { id: 1, number: 1, title: 'ESTRATEGIA FALCON BIT', playerId: '69371c289491786676f11ebe', accountId: '70b43777-e359-4c77-af2c-366de25a153d' },
+  { id: 1, number: 1, title: 'ESTRATEGIA FALCON BIT', playerId: '693726fd2d43d777bf1c1e09', accountId: '70b43777-e359-4c77-af2c-366de25a153d' },
   { id: 2, number: 2, title: 'ESTRATEGIAS SIMULTANEAS', playerId: '69309ac48f8686608182c8dd', accountId: '70b43777-e359-4c77-af2c-366de25a153d' },
 ]
 

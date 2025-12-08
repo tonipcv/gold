@@ -13,7 +13,7 @@ interface Aula {
 }
 
 const aulas: Aula[] = [
-  { id: 1, number: 1, title: 'ESTRATEGIA POWER V2', playerId: '69370a848561d5e93fdcaacf', accountId: '70b43777-e359-4c77-af2c-366de25a153d' },
+  { id: 1, number: 1, title: 'ESTRATEGIA POWER V2', playerId: '693734578561d5e93fdce227', accountId: '70b43777-e359-4c77-af2c-366de25a153d' },
   { id: 2, number: 2, title: 'ESTRATEGIAS SIMULTANEAS', playerId: '69309ac48f8686608182c8dd', accountId: '70b43777-e359-4c77-af2c-366de25a153d' },
 ]
 

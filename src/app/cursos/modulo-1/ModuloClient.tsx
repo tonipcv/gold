@@ -24,7 +24,7 @@ const aulas: Aula[] = [
     id: 1,
     number: 1,
     title: 'Criando conta no app',
-    playerId: '69307b5a532f54020694488a',
+    playerId: '69373180c5639aae342763a4',
     accountId: '70b43777-e359-4c77-af2c-366de25a153d'
   },
   {

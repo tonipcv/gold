@@ -17,13 +17,13 @@ export default function Page() {
 
   // Inject VTurb script for the provided player ID
   useEffect(() => {
-    const scriptId = 'vturb-player-script-69305ad8484a138d00bd18a8';
+    const scriptId = 'vturb-player-script-693756a7992bdc63457f5142';
     const existing = document.getElementById(scriptId) as HTMLScriptElement | null;
 
     if (!existing) {
       const s = document.createElement('script');
       s.id = scriptId;
-      s.src = 'https://scripts.converteai.net/70b43777-e359-4c77-af2c-366de25a153d/players/69305ad8484a138d00bd18a8/v4/player.js';
+      s.src = 'https://scripts.converteai.net/70b43777-e359-4c77-af2c-366de25a153d/players/693756a7992bdc63457f5142/v4/player.js';
       s.async = true;
       document.head.appendChild(s);
     }
@@ -86,7 +86,7 @@ export default function Page() {
         <div className="max-w-4xl mx-auto">
           <div className="w-full mx-auto">
             <VturbSmartPlayer
-              id="vid-69305ad8484a138d00bd18a8"
+              id="vid-693756a7992bdc63457f5142"
               style={{ display: 'block', margin: '0 auto', width: '100%' }}
             />
           </div>

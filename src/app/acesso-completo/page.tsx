@@ -126,7 +126,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="py-8 px-4 text-center bg-black">
         <p className="max-w-5xl mx-auto text-[11px] leading-relaxed text-neutral-500">

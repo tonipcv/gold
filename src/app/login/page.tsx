@@ -164,6 +164,15 @@ export default function Login() {
           </Link>
         </div>
 
+        {/* Footer minimal links */}
+        <div className="max-w-md mx-auto mt-10 pt-4 border-t border-white/10">
+          <div className="flex items-center justify-center gap-4 text-xs text-zinc-400">
+            <Link href="/como-funciona" className="hover:text-white transition-colors">Como funciona</Link>
+            <span className="text-zinc-700">•</span>
+            <Link href="/duvidas-frequentes" className="hover:text-white transition-colors">Dúvidas frequentes</Link>
+          </div>
+        </div>
+
         {/* Consent modal removed from login. Gate appears in cursos page. */}
         
       </div>

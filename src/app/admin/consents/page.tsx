@@ -1,8 +1,10 @@
 import { prisma } from '@/lib/prisma'
+import { requireAdmin } from '@/lib/adminAuth'
 
 const REQUIRED_VERSION = 'v3.0'
 
 export default async function AdminConsentsPage() {
+  await requireAdmin()
   const users = await prisma.user.findMany({
     orderBy: { createdAt: 'desc' },
     include: {

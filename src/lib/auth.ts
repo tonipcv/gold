@@ -71,12 +71,14 @@ export const authOptions: NextAuthOptions = {
       // On initial sign-in, user is available
       if (user) {
         ;(token as any).isPremium = (user as any).isPremium ?? false
+        ;(token as any).isAdmin = (user as any).isAdmin ?? false
       } else if (token?.sub) {
         // On subsequent requests, fetch from DB if not present
         try {
-          if ((token as any).isPremium === undefined) {
+          if ((token as any).isPremium === undefined || (token as any).isAdmin === undefined) {
             const dbUser = await prisma.user.findUnique({ where: { id: token.sub } })
             ;(token as any).isPremium = dbUser?.isPremium ?? false
+            ;(token as any).isAdmin = dbUser?.isAdmin ?? false
           }
         } catch {
           // noop
@@ -88,6 +90,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user && token.sub) {
         session.user.id = token.sub
         ;(session.user as any).isPremium = (token as any).isPremium ?? false
+        ;(session.user as any).isAdmin = (token as any).isAdmin ?? false
       }
       return session
     },

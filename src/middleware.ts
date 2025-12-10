@@ -6,6 +6,14 @@ export default withAuth(
   async function middleware(req) {
     const token = req.nextauth.token
     
+    // Proteção de rotas admin - CRÍTICO
+    if (req.nextUrl.pathname.startsWith('/admin')) {
+      if (!(token as any)?.isAdmin) {
+        console.warn('[Security] Unauthorized admin access attempt:', token?.email)
+        return NextResponse.redirect(new URL('/cursos', req.url))
+      }
+    }
+    
     // Rotas premium e suas versões restritas
     const premiumRoutes = {
       '/chat': '/chat-restrito',
@@ -36,6 +44,7 @@ export default withAuth(
 // Configurar quais rotas devem ser protegidas
 export const config = {
   matcher: [
+    '/admin/:path*',
     '/chat',
     '/chat-restrito',
     '/series',

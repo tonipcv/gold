@@ -218,19 +218,39 @@ export default function ModuloClient() {
       {!ack && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
-          <div className="relative z-10 w-full max-w-md rounded-xl border border-white/10 bg-neutral-900/95 p-6 shadow-2xl">
+          <div className="relative z-10 w-full max-w-2xl rounded-xl border border-white/10 bg-neutral-900/95 p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
             <h2 className="text-lg md:text-xl font-semibold text-white tracking-tight mb-3">Atenção</h2>
-            <p className="text-sm text-gray-300 mb-3">
-              O Módulo 5 é opcional. Antes de prosseguir, é essencial que você defina seu STOP diário, faça todas as configurações corretamente e se tiver dúvidas não inicie com valor real.
-            </p>
-            <p className="text-sm text-gray-300 mb-5">
-              A escolha dos ativos também é extremamente importante e deve ser feita com cuidado por você.
-            </p>
+            <div className="text-sm text-gray-200 space-y-3 mb-6">
+              <p>Este módulo é somente para usuários que não têm acesso ao computador.</p>
+              <p>O recurso de copy possui limitações técnicas e permite alterar apenas parâmetros básicos de segurança, como stop diário, stop loss e stop win.</p>
+              <p>A personalização completa da estratégia só pode ser feita pelo computador.</p>
+              <p>Antes de continuar, é essencial que você:</p>
+              <ul className="list-disc list-inside pl-2 space-y-1">
+                <li>já tenha definido seu STOP diário,</li>
+                <li>entendido como funciona o gerenciamento de risco,</li>
+                <li>e configurado todas as travas de segurança corretamente.</li>
+              </ul>
+              <p className="font-semibold text-amber-400">Se você ainda tiver dúvidas, não opere com dinheiro real.</p>
+              <p>A escolha dos ativos é sempre responsabilidade exclusiva do usuário e deve ser feita com atenção, analisando seu próprio perfil de risco.</p>
+              <p>Para utilizar o copy com segurança, você precisa entender como montar sua estratégia personalizada.</p>
+              <p>Se você já sabe personalizar e configurar tudo corretamente e deseja utilizar algum dos Templates Técnicos (presets) como ponto de partida, pode prosseguir para o Módulo 5.</p>
+              <p className="font-semibold">Lembre-se:</p>
+              <ul className="list-disc list-inside pl-2 space-y-1">
+                <li>Os presets são apenas referências técnicas e opcionais, criados para demonstrar funcionamento.</li>
+                <li>Eles não representam recomendação de investimento, nem indicação de ativo ou estratégia.</li>
+              </ul>
+              <p className="font-semibold mt-4">Ao avançar, você declara que:</p>
+              <ul className="list-disc list-inside pl-2 space-y-1">
+                <li>compreende as limitações do copy,</li>
+                <li>assume total responsabilidade por suas escolhas,</li>
+                <li>e está ciente de que o software apenas executa o que você configurou.</li>
+              </ul>
+            </div>
             <button
               onClick={handleAck}
               className="w-full text-center px-4 py-2 rounded-full text-sm font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
             >
-              Entendo
+              Li e compreendo todas as orientações
             </button>
           </div>
         </div>

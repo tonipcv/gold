@@ -13,8 +13,8 @@ interface Aula {
 }
 
 const aulas: Aula[] = [
-  { id: 1, number: 1, title: 'ESTRATEGIA POWER V2', playerId: '693734578561d5e93fdce227', accountId: '70b43777-e359-4c77-af2c-366de25a153d' },
-  { id: 2, number: 2, title: 'ESTRATEGIAS SIMULTANEAS', playerId: '69309ac48f8686608182c8dd', accountId: '70b43777-e359-4c77-af2c-366de25a153d' },
+  { id: 1, number: 1, title: 'PRESET POWER V2', playerId: '693734578561d5e93fdce227', accountId: '70b43777-e359-4c77-af2c-366de25a153d' },
+  { id: 2, number: 2, title: 'PRESETS SIMULTÂNEOS', playerId: '69309ac48f8686608182c8dd', accountId: '70b43777-e359-4c77-af2c-366de25a153d' },
 ]
 
 export default function ModuloClient() {
@@ -59,8 +59,8 @@ export default function ModuloClient() {
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/15 bg-white/5 text-[11px] md:text-xs uppercase tracking-wide text-gray-200">
           Módulo 3
         </div>
-        <h1 className="mt-3 text-2xl md:text-[28px] font-semibold text-white tracking-tight">Power V2</h1>
-        <p className="mt-1 text-sm text-gray-400">Estratégia Power V2</p>
+        <h1 className="mt-3 text-2xl md:text-[28px] font-semibold text-white tracking-tight">Preset Power V2</h1>
+        <p className="mt-1 text-sm text-gray-400">Preset Power V2</p>
         <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent" />
       </div>
 
@@ -91,7 +91,7 @@ export default function ModuloClient() {
             onClick={openModal}
             className="w-full max-w-xs text-center px-4 py-2 rounded-full text-xs font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
           >
-            Materiais do módulo
+            Baixar Power V2
           </button>
         </div>
       </div>
@@ -131,24 +131,25 @@ export default function ModuloClient() {
           <div className="relative z-10 w-full max-w-lg rounded-xl border border-white/10 bg-neutral-900/95 p-6 shadow-2xl">
             <h2 className="text-lg md:text-xl font-semibold text-white tracking-tight mb-3">Atenção</h2>
             <div className="text-sm text-gray-200 space-y-3 mb-6">
-              <p>Você será redirecionado para o arquivo de instalação, mas antes é fundamental compreender todos os fundamentos e etapas de configuração.</p>
-              <p>Assista o vídeo para aprender a fazer sua instalação antes pois é você que define os parâmetros, como o STOP diário e demais ajustes, além de escolher os ativos, já que cada estratégia opera em um ativo diferente.</p>
-              <p>Ao clicar no botão abaixo, você confirma que entendeu todas as orientações e já está ciente de todas as informações apresentadas na aula.</p>
+              <p>Antes de baixar o arquivo de instalação, é essencial que você assista à aula completa de personalização e backtesting.</p>
+              <p>Somente após entender esses fundamentos você conseguirá configurar a automação do seu jeito, definindo todos os parâmetros como risco, stop diário, ativos, horários e demais ajustes técnicos.</p>
+              <p>Na plataforma, você também encontrará Templates Técnicos opcionais criados pelo Daniel, que servem apenas como ponto de partida educacional para demonstrar como o sistema funciona.</p>
+              <p>Você pode utilizá-los caso queira, mas a configuração final e todas as decisões são exclusivamente suas, incluindo personalização de ativo, risco, horários e níveis de segurança.</p>
+              <p>Ao clicar no botão abaixo, você confirma que: compreendeu todas as orientações apresentadas nas aulas, está ciente de que a personalização é totalmente sua responsabilidade, e que qualquer template é apenas uma referência técnica opcional, não uma recomendação financeira.</p>
             </div>
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={closeModal}
+            <div className="flex flex-col sm:flex-row items-stretch gap-3">
+              <a
+                href="/cursos/modulo-6"
                 className="flex-1 text-center px-4 py-2 rounded-full text-sm font-medium border border-white/30 text-white hover:bg-white/10"
               >
-                Cancelar
-              </button>
+                Assistir personalização completa
+              </a>
               <button
                 type="button"
                 onClick={confirmAndGo}
                 className="flex-1 text-center px-4 py-2 rounded-full text-sm font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
               >
-                Entendi
+                Baixar Preset Power V2
               </button>
             </div>
           </div>

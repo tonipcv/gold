@@ -26,24 +26,24 @@ const modules: Module[] = [
   },
   {
     id: 2,
-    title: 'Módulo 2 - Gold X',
-    description: 'Estratégia Gold X',
+    title: 'Módulo 2 - Preset Gold X',
+    description: 'Instalação e configuração do Preset Gold X',
     image: '/modulos/2.png',
     href: '/cursos/modulo-2',
     badge: 'INTERMEDIÁRIO'
   },
   {
     id: 3,
-    title: 'Módulo 3 - Power V2',
-    description: 'Estratégia Power V2',
+    title: 'Módulo 3 - Preset Power V2',
+    description: 'Instalação e configuração do Preset Power V2',
     image: '/modulos/3.png',
     href: '/cursos/modulo-3',
     badge: 'AVANÇADO'
   },
   {
     id: 4,
-    title: 'Módulo 4 - Falcon Bit',
-    description: 'Estratégia Falcon Bit',
+    title: 'Módulo 4 - Preset Falcon Bit',
+    description: 'Instalação e configuração do Preset Falcon Bit',
     image: '/modulos/4.png',
     href: '/cursos/modulo-4',
     badge: 'EXPERT'
@@ -55,6 +55,14 @@ const modules: Module[] = [
     image: '/modulos/5.png',
     href: '/cursos/modulo-5',
     badge: 'PREMIUM'
+  },
+  {
+    id: 6,
+    title: 'Módulo 6',
+    description: 'Em breve',
+    image: '/modulos/6.png',
+    href: '/cursos/modulo-6',
+    badge: 'MUITO IMPORTANTE'
   }
 ]
 
@@ -139,7 +147,7 @@ export default async function CursosPage() {
 
           {/* Módulos Section */}
           <div id="modulos" className="mb-12">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
               {displayedModules.map((module) => (
                 <Link
                   key={module.id}

@@ -68,17 +68,24 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      // On initial sign-in, user is available
+      // On initial sign-in, 'user' is available from the authorize() flow
       if (user) {
         ;(token as any).isPremium = (user as any).isPremium ?? false
-        ;(token as any).isAdmin = (user as any).isAdmin ?? false
+        // Hotfix: do NOT rely on DB 'isAdmin' column (may not exist in prod yet)
+        ;(token as any).isAdmin = false
       } else if (token?.sub) {
-        // On subsequent requests, fetch from DB if not present
+        // Subsequent requests: fetch only known-safe fields from DB
         try {
-          if ((token as any).isPremium === undefined || (token as any).isAdmin === undefined) {
-            const dbUser = await prisma.user.findUnique({ where: { id: token.sub } })
+          if ((token as any).isPremium === undefined) {
+            const dbUser = await prisma.user.findUnique({
+              where: { id: token.sub },
+              select: { isPremium: true }, // Hotfix: only select existing column
+            })
             ;(token as any).isPremium = dbUser?.isPremium ?? false
-            ;(token as any).isAdmin = dbUser?.isAdmin ?? false
+          }
+          // Ensure isAdmin is set even if DB lacks the column
+          if ((token as any).isAdmin === undefined) {
+            ;(token as any).isAdmin = false
           }
         } catch {
           // noop

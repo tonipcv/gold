@@ -11,7 +11,10 @@ export async function checkConsentOrRedirect() {
   }
 
   // Verify consent exists in database
-  const user = await prisma.user.findUnique({ where: { email: session.user.email } })
+  const user = await prisma.user.findUnique({ 
+    where: { email: session.user.email },
+    select: { id: true, email: true, name: true, isPremium: true }
+  })
   if (!user) {
     redirect('/login?needConsent=1')
   }

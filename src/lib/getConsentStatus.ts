@@ -8,7 +8,10 @@ export async function getConsentStatus(requiredVersion = 'v3.0') {
     return { ok: false, reason: 'no-session' as const }
   }
 
-  const user = await prisma.user.findUnique({ where: { email: session.user.email } })
+  const user = await prisma.user.findUnique({ 
+    where: { email: session.user.email },
+    select: { id: true, email: true, name: true, isPremium: true }
+  })
   if (!user) {
     return { ok: false, reason: 'no-user' as const }
   }

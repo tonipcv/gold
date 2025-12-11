@@ -17,7 +17,9 @@ export async function hasProductAccess(productName: string): Promise<boolean> {
   // Busca o usuário pelo email com todas as compras
   const user = await prisma.user.findUnique({
     where: { email: session.user.email },
-    include: {
+    select: {
+      id: true,
+      email: true,
       purchases: {
         include: {
           product: true

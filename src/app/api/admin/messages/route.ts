@@ -1,12 +1,16 @@
 import { NextResponse } from 'next/server';
-import { verifyAdminToken } from '@/utils/auth';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 export async function GET(request: Request) {
   try {
-    const authHeader = request.headers.get('Authorization');
-    if (!verifyAdminToken(authHeader)) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
+    }
+    if (!(session.user as any).isAdmin) {
+      return NextResponse.json({ error: 'Acesso negado' }, { status: 403 });
     }
 
     // Buscar estatísticas de usuários por período

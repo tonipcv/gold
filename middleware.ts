@@ -1,59 +1,94 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-import { getToken } from 'next-auth/jwt'
+// middleware.ts
+import { withAuth } from "next-auth/middleware"
+import { NextResponse } from "next/server"
 
-export async function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl
+export default withAuth(
+  async function middleware(req) {
+    const token = req.nextauth.token
+    
+    // Proteção de rotas admin - CRÍTICO (Edge-safe)
+    if (req.nextUrl.pathname.startsWith('/admin')) {
+      console.log('[Middleware] Admin route access attempt')
+      console.log('[Middleware] Email:', token?.email)
+      console.log('[Middleware] Token isAdmin:', (token as any)?.isAdmin)
+      console.log('[Middleware] Token isPremium:', (token as any)?.isPremium)
 
-  if (pathname.startsWith('/cursos')) {
-    // Verify user is authenticated (DB consent check happens server-side in pages)
-    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
-    if (!token?.email) {
-      const url = new URL('/login', req.url)
-      return NextResponse.redirect(url)
-    }
-  }
+      const pathname = req.nextUrl.pathname
+      const host = req.headers.get('host') ?? ''
+      const proto = req.headers.get('x-forwarded-proto') ?? ''
+      const cookieHeader = req.headers.get('cookie') ?? ''
+      const hasSessionCookie = /(?:__Secure-)?next-auth\.session-token=/.test(cookieHeader)
+      console.log('[AuthEdge]', JSON.stringify({ path: pathname, host, proto, hasToken: !!token, email: token?.email, isAdmin: (token as any)?.isAdmin, hasSessionCookie }))
 
-  if (pathname.startsWith('/admin')) {
-    // Protect all /admin routes behind a simple Basic Auth using ADMIN_TOKEN
-    const adminToken = process.env.ADMIN_TOKEN
-    const auth = req.headers.get('authorization') || ''
-
-    const unauthorized = () => {
-      const realm = `Admin-${Date.now()}` // dynamic realm to avoid credential reuse
-      return new NextResponse('Unauthorized', {
-        status: 401,
-        headers: { 'WWW-Authenticate': `Basic realm="${realm}"` },
-      })
-    }
-
-    if (!adminToken) {
-      // If no token configured, deny access by default
-      return unauthorized()
-    }
-
-    if (!auth.startsWith('Basic ')) {
-      return unauthorized()
-    }
-
-    try {
-      const base64 = auth.slice(6)
-      // atob is available in the Edge runtime
-      const decoded = atob(base64)
-      // format is username:password, we only validate password equals ADMIN_TOKEN
-      const idx = decoded.indexOf(':')
-      const password = idx >= 0 ? decoded.slice(idx + 1) : ''
-      if (password !== adminToken) {
-        return unauthorized()
+      // Edge: não é permitido usar Prisma aqui. Se isAdmin ainda não está no token,
+      // deixe passar para que o JWT callback/população do servidor resolva.
+      const isAdmin = (token as any)?.isAdmin
+      if (isAdmin === false) {
+        console.warn('[Security] Unauthorized admin access attempt:', token?.email)
+        const res = NextResponse.redirect(new URL('/cursos', req.url))
+        res.headers.set('X-Auth-Reason', 'NON_ADMIN')
+        res.headers.set('X-Auth-Email', String(token?.email ?? ''))
+        res.headers.set('X-Auth-HasToken', String(!!token))
+        res.headers.set('X-Auth-HasSessionCookie', String(hasSessionCookie))
+        return res
       }
-    } catch {
-      return unauthorized()
+      // isAdmin === true -> permitido; isAdmin === undefined -> permitir e deixar o server validar
+      console.log('[Middleware] Pass-through (isAdmin:', isAdmin, ') for:', token?.email)
     }
+    
+    // Rotas premium e suas versões restritas
+    const premiumRoutes = {
+      '/chat': '/chat-restrito',
+      '/series': '/series-restrito',
+      '/grafico': '/grafico-restrito'
+    }
+
+    // Verifica acesso premium
+    if (premiumRoutes[req.nextUrl.pathname as keyof typeof premiumRoutes]) {
+      if (!token?.isPremium) {
+        const restrictedRoute = premiumRoutes[req.nextUrl.pathname as keyof typeof premiumRoutes]
+        const res = NextResponse.redirect(new URL(restrictedRoute, req.url))
+        res.headers.set('X-Auth-Reason', 'PREMIUM_REQUIRED')
+        res.headers.set('X-Auth-Email', String(token?.email ?? ''))
+        res.headers.set('X-Auth-HasToken', String(!!token))
+        return res
+      }
+    }
+
+    return NextResponse.next()
+  },
+  {
+    callbacks: {
+      authorized: ({ token }) => {
+        const has = !!token
+        if (!has) {
+          try {
+            // Minimal diagnostics when no token is present
+            // Note: cannot set headers here, only log
+            console.warn('[AuthEdge] No token in authorized()')
+          } catch {}
+        }
+        return has
+      }
+    },
+    pages: {
+      signIn: '/login',
+    },
   }
+)
 
-  return NextResponse.next()
-}
-
+// Configurar quais rotas devem ser protegidas
 export const config = {
-  matcher: ['/cursos/:path*', '/admin/:path*'],
+  matcher: [
+    '/cursos/:path*',
+    '/admin/:path*',
+    '/chat',
+    '/chat-restrito',
+    '/series',
+    '/series-restrito',
+    '/grafico',
+    '/grafico-restrito',
+    '/assinatura',
+    '/relatorio'
+  ]
 }

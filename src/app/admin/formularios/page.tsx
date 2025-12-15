@@ -21,8 +21,6 @@ type ApiResponse = {
 };
 
 export default function AdminFormulariosPage() {
-  const [accessGranted, setAccessGranted] = useState(false);
-  const [adminPassword, setAdminPassword] = useState("");
 
   const [items, setItems] = useState<Formulario[]>([]);
   const [total, setTotal] = useState(0);
@@ -150,21 +148,11 @@ export default function AdminFormulariosPage() {
   };
 
   useEffect(() => {
-    if (accessGranted) {
-      fetchData({ page: 1 });
-    }
+    fetchData({ page: 1 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessGranted]);
+  }, []);
 
-  const handlePasswordVerification = (e: FormEvent) => {
-    e.preventDefault();
-    if (adminPassword === "admin123") {
-      setAccessGranted(true);
-      setError(null);
-    } else {
-      setError("Senha incorreta para acesso à área de administração");
-    }
-  };
+  // Password gate removed: access requires admin via middleware/server checks only
 
   const handleSearchSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -335,33 +323,6 @@ export default function AdminFormulariosPage() {
       </header>
 
       <main className="pt-16 pb-20 px-4">
-        {!accessGranted ? (
-          <div className="max-w-md mx-auto mt-10 p-6 bg-gray-800/30 rounded-lg border border-gray-700">
-            <h2 className="text-xl font-bold mb-4 text-[#5a96f4]">Acesso Restrito</h2>
-            <form onSubmit={handlePasswordVerification}>
-              <div className="mb-4">
-                <label htmlFor="adminPassword" className="block text-sm font-medium mb-1">
-                  Senha de Administrador
-                </label>
-                <input
-                  type="password"
-                  id="adminPassword"
-                  value={adminPassword}
-                  onChange={(e) => setAdminPassword(e.target.value)}
-                  className="w-full p-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#5a96f4]"
-                  required
-                />
-              </div>
-              {error && <div className="mb-4 text-red-500 text-sm">{error}</div>}
-              <button
-                type="submit"
-                className="w-full bg-[#5a96f4] text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors"
-              >
-                Acessar
-              </button>
-            </form>
-          </div>
-        ) : (
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-3">
               <h1 className="text-2xl font-bold text-[#5a96f4]">Formulários Recebidos</h1>
@@ -523,11 +484,10 @@ export default function AdminFormulariosPage() {
               </div>
             </div>
           </div>
-        )}
       </main>
 
       {/* Modal de confirmação para liberar todos */}
-      {accessGranted && bulkOpen && (
+      {bulkOpen && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
           <div className="bg-gray-900 border border-gray-700 rounded-lg p-6 w-full max-w-md text-gray-200">
             <h3 className="text-lg font-semibold mb-2 text-yellow-300">Confirmar liberação em massa</h3>

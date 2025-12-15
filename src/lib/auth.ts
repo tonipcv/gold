@@ -33,6 +33,7 @@ export const authOptions: NextAuthOptions = {
             name: true,
             password: true,
             isPremium: true,
+            isAdmin: true,
             image: true,
             emailVerified: true
           }
@@ -77,29 +78,45 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      // On initial sign-in, 'user' is available from the authorize() flow
+      // On initial sign-in, 'user' is available from the authorize() or provider flow
       if (user) {
+        console.log('[JWT] Initial sign-in for:', (user as any).email)
+        console.log('[JWT] User object isAdmin:', (user as any).isAdmin)
         ;(token as any).isPremium = (user as any).isPremium ?? false
-        // Hotfix: do NOT rely on DB 'isAdmin' column (may not exist in prod yet)
-        ;(token as any).isAdmin = false
+        // Only set isAdmin if the user object includes it; otherwise keep undefined to trigger DB fetch next
+        if ((user as any).isAdmin !== undefined) {
+          ;(token as any).isAdmin = (user as any).isAdmin
+          console.log('[JWT] Set isAdmin from user object:', (token as any).isAdmin)
+        } else {
+          // ensure undefined so the subsequent branch fetches from DB
+          delete (token as any).isAdmin
+          console.log('[JWT] isAdmin not in user object, will fetch from DB')
+        }
       } else if (token?.sub) {
-        // Subsequent requests: fetch only known-safe fields from DB
+        // Subsequent requests: fetch from DB if not present
         try {
-          if ((token as any).isPremium === undefined) {
+          if ((token as any).isPremium === undefined || (token as any).isAdmin === undefined) {
+            console.log('[JWT] Fetching from DB for user:', token.email)
             const dbUser = await prisma.user.findUnique({
               where: { id: token.sub },
-              select: { isPremium: true }, // Hotfix: only select existing column
+              select: { isPremium: true, isAdmin: true },
             })
+            console.log('[JWT] DB returned isAdmin:', dbUser?.isAdmin)
             ;(token as any).isPremium = dbUser?.isPremium ?? false
+            ;(token as any).isAdmin = dbUser?.isAdmin ?? false
           }
-          // Ensure isAdmin is set even if DB lacks the column
+        } catch (err) {
+          console.error('[JWT] Error fetching from DB:', err)
+          // noop - if error, keep existing values or default to false
+          if ((token as any).isPremium === undefined) {
+            ;(token as any).isPremium = false
+          }
           if ((token as any).isAdmin === undefined) {
             ;(token as any).isAdmin = false
           }
-        } catch {
-          // noop
         }
       }
+      console.log('[JWT] Final token isAdmin:', (token as any).isAdmin, 'for:', token.email)
       return token
     },
     async session({ session, token }) {

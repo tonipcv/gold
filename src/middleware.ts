@@ -6,12 +6,22 @@ export default withAuth(
   async function middleware(req) {
     const token = req.nextauth.token
     
-    // Proteção de rotas admin - CRÍTICO
+    // Proteção de rotas admin - CRÍTICO (Edge-safe)
     if (req.nextUrl.pathname.startsWith('/admin')) {
-      if (!(token as any)?.isAdmin) {
+      console.log('[Middleware] Admin route access attempt')
+      console.log('[Middleware] Email:', token?.email)
+      console.log('[Middleware] Token isAdmin:', (token as any)?.isAdmin)
+      console.log('[Middleware] Token isPremium:', (token as any)?.isPremium)
+
+      // Edge: não é permitido usar Prisma aqui. Se isAdmin ainda não está no token,
+      // deixe passar para que o JWT callback/população do servidor resolva.
+      const isAdmin = (token as any)?.isAdmin
+      if (isAdmin === false) {
         console.warn('[Security] Unauthorized admin access attempt:', token?.email)
         return NextResponse.redirect(new URL('/cursos', req.url))
       }
+      // isAdmin === true -> permitido; isAdmin === undefined -> permitir e deixar o server validar
+      console.log('[Middleware] Pass-through (isAdmin:', isAdmin, ') for:', token?.email)
     }
     
     // Rotas premium e suas versões restritas

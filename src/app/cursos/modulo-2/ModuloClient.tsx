@@ -27,13 +27,13 @@ export default function ModuloClient() {
   const currentAula = aulas.find((a) => a.id === activeAula)!
   const [showModal, setShowModal] = useState(false)
 
-  const tempUrl = 'https://drive.google.com/drive/folders/18OlHm2D4H3EgxkZ7joPgGei4BwmZ5R_p?usp=sharing'
+  const officialUrl = 'https://drive.google.com/drive/folders/1PbzjUuy5jZW-9eVLDVs-tNFyl1bs7bjg?usp=sharing'
 
   const openModal = () => setShowModal(true)
   const closeModal = () => setShowModal(false)
   const confirmAndGo = () => {
     setShowModal(false)
-    window.open(tempUrl, '_blank', 'noopener,noreferrer')
+    window.open(officialUrl, '_blank', 'noopener,noreferrer')
   }
 
   useEffect(() => {
@@ -99,15 +99,7 @@ export default function ModuloClient() {
             onClick={openModal}
             className="w-full max-w-xs text-center px-4 py-2 rounded-full text-xs font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
           >
-            Baixar Preset Gold X
-          </button>
-          <button
-            type="button"
-            disabled
-            className="w-full max-w-xs px-4 py-2 rounded-full text-xs font-semibold bg-gray-700 text-gray-300 border border-gray-600 cursor-not-allowed"
-            title="Disponível em 15/12"
-          >
-            Preset Gold X - Oficial (15/12)
+            Preset Gold X - Oficial
           </button>
         </div>
       </div>
@@ -165,7 +157,7 @@ export default function ModuloClient() {
                 onClick={confirmAndGo}
                 className="flex-1 text-center px-4 py-2 rounded-full text-sm font-semibold bg-green-600 hover:bg-green-500 text-white border border-green-500/60"
               >
-                Baixar Preset Gold X
+                Preset Gold X - Oficial
               </button>
             </div>
           </div>

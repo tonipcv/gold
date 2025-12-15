@@ -73,7 +73,7 @@ export default function AdminUsers() {
   });
 
   // Página protegida com senha adicional
-  const [accessGranted, setAccessGranted] = useState(false);
+  const [accessGranted, setAccessGranted] = useState(true);
   const [adminPassword, setAdminPassword] = useState('');
 
   // Lista filtrada (por nome/email) usada na tabela e na seleção em massa

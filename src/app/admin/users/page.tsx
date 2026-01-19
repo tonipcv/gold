@@ -62,6 +62,10 @@ export default function AdminUsers() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteUserTarget, setDeleteUserTarget] = useState<User | null>(null);
   const [isDeletingUser, setIsDeletingUser] = useState(false);
+  // Editar email
+  const [isEditEmailOpen, setIsEditEmailOpen] = useState(false);
+  const [editEmailUser, setEditEmailUser] = useState<User | null>(null);
+  const [newEmailValue, setNewEmailValue] = useState('');
   // Seleção em massa e ações em lote
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [isBulkSending, setIsBulkSending] = useState(false);
@@ -269,6 +273,46 @@ export default function AdminUsers() {
       }, 3000);
     } catch (err: any) {
       setError(err.message);
+    }
+  };
+
+  // Abrir modal para editar email
+  const openEditEmailModal = (user: User) => {
+    setEditEmailUser(user);
+    setNewEmailValue(user.email);
+    setIsEditEmailOpen(true);
+  };
+
+  // Atualizar email do usuário
+  const handleUpdateEmail = async () => {
+    if (!editEmailUser || !newEmailValue) {
+      setError('Email é obrigatório');
+      return;
+    }
+
+    try {
+      setError(null);
+      const response = await fetch('/api/admin/update-user-email', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          userId: editEmailUser.id, 
+          newEmail: newEmailValue 
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Falha ao atualizar email');
+      }
+      setSuccess('Email atualizado com sucesso!');
+      setIsEditEmailOpen(false);
+      setEditEmailUser(null);
+      setNewEmailValue('');
+      fetchUsers();
+      setTimeout(() => setSuccess(null), 3000);
+    } catch (err: any) {
+      setError(err.message || 'Erro ao atualizar email');
+      setTimeout(() => setError(null), 4000);
     }
   };
 
@@ -637,6 +681,15 @@ export default function AdminUsers() {
                           </button>
                           <div className="mt-2">
                             <button
+                              onClick={() => openEditEmailModal(user)}
+                              className="text-blue-400 hover:text-blue-300 text-sm underline"
+                              title="Editar email do usuário"
+                            >
+                              Editar email
+                            </button>
+                          </div>
+                          <div className="mt-2">
+                            <button
                               onClick={() => handleResendAccess(user.email)}
                               className="text-green-400 hover:text-green-300 text-sm underline"
                               title="Reenviar e-mail de acesso confirmado"
@@ -860,6 +913,49 @@ export default function AdminUsers() {
                       title="Usar a senha padrão configurada no servidor"
                     >
                       Usar senha padrão do servidor
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Modal para editar email */}
+            {isEditEmailOpen && editEmailUser && (
+              <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+                <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md">
+                  <h2 className="text-xl font-bold mb-4 text-blue-400">
+                    Editar email de {editEmailUser.name || 'usuário'}
+                  </h2>
+                  <div className="mb-4">
+                    <label htmlFor="newEmail" className="block text-sm font-medium mb-1">
+                      Novo email
+                    </label>
+                    <input
+                      id="newEmail"
+                      type="email"
+                      value={newEmailValue}
+                      onChange={(e) => setNewEmailValue(e.target.value)}
+                      className="w-full p-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      placeholder="usuario@dominio.com"
+                    />
+                    <p className="text-xs text-gray-400 mt-1">Email atual: {editEmailUser.email}</p>
+                  </div>
+                  <div className="flex justify-end space-x-2">
+                    <button
+                      onClick={() => {
+                        setIsEditEmailOpen(false);
+                        setEditEmailUser(null);
+                        setNewEmailValue('');
+                      }}
+                      className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      onClick={handleUpdateEmail}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                    >
+                      Salvar
                     </button>
                   </div>
                 </div>

@@ -6,7 +6,11 @@ import { getBaseUrl } from '@/lib/url'
 
 export async function POST(req: Request) {
   try {
+    console.log('[resend-access] Iniciando requisição...')
+    
     const session = await getServerSession(authOptions as any)
+    console.log('[resend-access] Sessão obtida:', session ? 'OK' : 'NULL')
+    
     if (!session) {
       return NextResponse.json({ error: 'Não autenticado' }, { status: 401 })
     }
@@ -20,16 +24,31 @@ export async function POST(req: Request) {
     try {
       const body = await req.json()
       email = body?.email
-    } catch {
+      console.log('[resend-access] Email recebido:', email)
+    } catch (e) {
+      console.error('[resend-access] Erro ao parsear JSON:', e)
       return NextResponse.json({ error: 'JSON inválido' }, { status: 400 })
     }
 
     if (!email || typeof email !== 'string') {
+      console.error('[resend-access] Email inválido ou ausente')
       return NextResponse.json({ error: 'Email é obrigatório' }, { status: 400 })
     }
 
+    // Validar formato de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      console.error('[resend-access] Formato de email inválido:', email)
+      return NextResponse.json({ 
+        error: `Formato de email inválido: "${email}". Use um email válido como usuario@dominio.com` 
+      }, { status: 400 })
+    }
+
     // Enviar e-mail real
+    console.log('[resend-access] Obtendo base URL...')
     const base = getBaseUrl(req)
+    console.log('[resend-access] Base URL:', base)
+    
     const appLink = `${base}/automatizador-gold-10x`
     const passwordLink = `${base}/forgot-password`
     const fromName = process.env.EMAIL_FROM_NAME || 'Katsu'
@@ -82,13 +101,16 @@ export async function POST(req: Request) {
       throttle.set(email, now)
     }
 
+    console.log('[resend-access] Enviando email para:', email)
     const result = await sendEmail({
       to: email,
       subject: 'Acesso confirmado • Automatizador Gold 10X',
       html,
     })
+    console.log('[resend-access] Resultado do envio:', JSON.stringify(result, null, 2))
 
     if ((result as any).skipped) {
+      console.log('[resend-access] Email pulado (SMTP não configurado)')
       return NextResponse.json({
         message: `SMTP não configurado. Simulando reenvio para ${email}.`,
         skipped: true,
@@ -97,6 +119,9 @@ export async function POST(req: Request) {
 
     if (!(result as any).success) {
       const code = (result as any).errorCode
+      const errorDetails = (result as any).error
+      console.error('[resend-access] Falha ao enviar email. Code:', code, 'Error:', errorDetails)
+      
       if (transientCodes.includes(code)) {
         return NextResponse.json({
           error: 'Limite do provedor de e-mail atingido. Tente novamente em alguns minutos.',
@@ -105,11 +130,22 @@ export async function POST(req: Request) {
           attempts: (result as any).attempts,
         }, { status: 429 })
       }
-      return NextResponse.json({ error: 'Falha ao enviar e-mail', errorCode: code }, { status: 500 })
+      
+      return NextResponse.json({ 
+        error: 'Falha ao enviar e-mail', 
+        errorCode: code,
+        details: errorDetails?.message || String(errorDetails)
+      }, { status: 500 })
     }
 
+    console.log('[resend-access] Email enviado com sucesso!')
     return NextResponse.json({ message: `Enviamos a mensagem de primeiro acesso para ${email}.`, success: true })
   } catch (err: any) {
-    return NextResponse.json({ error: err?.message || 'Erro interno' }, { status: 500 })
+    console.error('[resend-access] EXCEÇÃO CAPTURADA:', err)
+    console.error('[resend-access] Stack trace:', err?.stack)
+    return NextResponse.json({ 
+      error: err?.message || 'Erro interno',
+      details: err?.stack || String(err)
+    }, { status: 500 })
   }
 }

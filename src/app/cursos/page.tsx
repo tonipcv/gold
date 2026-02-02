@@ -92,7 +92,10 @@ export default async function CursosPage() {
   }
 
   // All modules are unlocked and accessible to every logged-in user
-  const displayedModules = modules.map((module) => ({ ...module, locked: false }))
+  // Hide Module 5 (Celular) on all devices by filtering it out
+  const displayedModules = modules
+    .filter((module) => module.id !== 5)
+    .map((module) => ({ ...module, locked: false }))
 
   return (
     <div className="min-h-screen bg-black text-gray-200 font-satoshi tracking-[-0.03em]">
@@ -147,7 +150,7 @@ export default async function CursosPage() {
 
           {/* Módulos Section */}
           <div id="modulos" className="mb-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 lg:max-w-5xl lg:mx-auto">
               {displayedModules.map((module) => (
                 <Link
                   key={module.id}

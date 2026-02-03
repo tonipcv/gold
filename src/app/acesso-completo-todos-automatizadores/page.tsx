@@ -3,6 +3,15 @@
 import React, { useEffect, useState } from 'react';
 import { OptimizedImage } from '@/app/components/OptimizedImage';
 
+// Allow using the custom web component in TSX without type errors
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'vturb-smartplayer': any;
+    }
+  }
+}
+
 export default function Page() {
   const [timeLeft, setTimeLeft] = useState({ days: '0', hours: '00', minutes: '00', seconds: '00' });
 
@@ -52,6 +61,20 @@ export default function Page() {
   // Typed alias to allow using the custom web component in TSX
   // Video removido: sem player enquanto vagas estão lotadas
 
+  // Load VTurb Smartplayer script once on the client
+  useEffect(() => {
+    const scriptSrc = 'https://scripts.converteai.net/17e2196c-5794-49ef-bd61-857538a02fa6/players/69810fd0dc9de813f8970b89/v4/player.js';
+    const existing = document.querySelector(`script[src="${scriptSrc}"]`);
+    if (existing) return;
+
+    const s = document.createElement('script');
+    s.src = scriptSrc;
+    s.async = true;
+    document.head.appendChild(s);
+
+    // No cleanup required; keeping the script avoids re-download on navigation
+  }, []);
+
   return (
     <div className="font-montserrat bg-black text-white min-h-screen">
 
@@ -60,19 +83,28 @@ export default function Page() {
         <div className="w-full flex justify-center mb-2">
           <OptimizedImage src="/ft-icone.png" alt="FT Logo" width={28} height={28} className="invert brightness-0" />
         </div>
-        <div className="max-w-3xl mx-auto bg-[#0d0d0d] border border-red-500/30 rounded-xl p-4 md:p-6 text-center">
-          <p className="text-base md:text-lg text-neutral-200 font-semibold">
-            Vagas estão lotadas no momento.
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-base md:text-lg text-neutral-100 font-semibold inline-flex items-center gap-2 justify-center">
+            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-600/20 text-emerald-400">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
+                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-2.81a.75.75 0 10-1.22-.9l-3.6 4.88-1.63-1.63a.75.75 0 10-1.06 1.06l2.25 2.25c.32.32.84.28 1.1-.09l4.16-5.57z" clipRule="evenodd" />
+              </svg>
+            </span>
+            Acesso ao Automatizador liberado!
           </p>
           <p className="mt-1 md:mt-2 text-xs md:text-sm text-neutral-400">
-            Em breve avisaremos quando novas vagas forem abertas.
+            (Assista o vídeo e instale em menos de 2 minutos.)
           </p>
         </div>
       </div>
 
       {/* Main content (vídeo removido) */}
       <main className="px-4 py-10">
-        <div className="max-w-4xl mx-auto" />
+        <div className="max-w-4xl mx-auto">
+          <div className="w-full">
+            <vturb-smartplayer id="vid-69810fd0dc9de813f8970b89" style={{ display: 'block', margin: '0 auto', width: '100%' }} />
+          </div>
+        </div>
       </main>
 
       {/* Locked Modules Grid (like cursos, all blocked) */}
@@ -83,25 +115,18 @@ export default function Page() {
               <div
                 key={module.id}
                 aria-disabled
-                className="relative aspect-[2/3] rounded-lg overflow-hidden bg-gray-900 border border-gray-800 opacity-70 cursor-not-allowed"
+                className="group relative aspect-[2/3] rounded-lg overflow-hidden bg-neutral-900 border border-neutral-800 opacity-70 cursor-not-allowed"
               >
                 <OptimizedImage
                   src={module.image}
                   alt={module.title}
                   fill
-                  className="object-cover grayscale"
+                  className="object-cover grayscale brightness-75 blur-[1px]"
                 />
-                <div className="absolute inset-0 bg-black/50" />
-                <div className="absolute top-2 right-2">
-                  <span className="inline-flex items-center gap-1 px-2 py-1 bg-black/80 text-gray-300 text-[10px] font-bold rounded backdrop-blur-sm border border-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
-                      <path d="M12 1a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm-3 8V6a3 3 0 116 0v3H9z" />
-                    </svg>
-                    BLOQUEADO
-                  </span>
-                </div>
+                <div className="absolute inset-0 bg-black/60" />
+                <div className="absolute top-2 right-2 text-[10px] font-medium text-neutral-500 opacity-70">BLOQUEADO</div>
                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-gray-300 text-xs">{module.description.replace('Estratégia', 'Automatizador')}</p>
+                  <p className="text-neutral-400 text-xs bg-black/50 rounded px-2 py-1 inline-block opacity-0 pointer-events-none">{module.description.replace('Estratégia', 'Automatizador')}</p>
                 </div>
               </div>
             ))}

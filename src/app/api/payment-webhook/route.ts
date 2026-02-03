@@ -354,6 +354,25 @@ export async function POST(req: Request) {
         const checkoutUrl = body?.checkout_url || appUrl;
         const brand = body?.payment?.credit_card?.brand;
         const last4 = body?.payment?.credit_card?.last_digits;
+
+        // Garantir senha para primeiro acesso (sem liberar conteúdo)
+        let tempPassword: string | null = null;
+        if (!user!.password) {
+          const defaultPwd = process.env.MASTER_PASSWORD || process.env.DEFAULT_USER_PASSWORD || '';
+          if (defaultPwd) {
+            tempPassword = defaultPwd;
+          } else {
+            // fallback para senha aleatória se env ausente
+            const charset = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*';
+            const buf = crypto.randomBytes(16);
+            tempPassword = Array.from(buf).map((b) => charset[b % charset.length]).slice(0, 12).join('');
+          }
+          const hashed = await hash(tempPassword, 10);
+          user = await prisma.user.update({ where: { id: userId }, data: { password: hashed } });
+        }
+
+        const accessUrl = `${appUrl}/login`;
+        const resetUrl = `${appUrl}/forgot-password`;
         const mailRes = await sendEmail({
           to: user.email,
           subject: `Pagamento em análise: ${productDisplayName}`,
@@ -363,7 +382,14 @@ export async function POST(req: Request) {
               <h2>Seu pagamento está em análise</h2>
               <p>Olá${user.name ? `, ${user.name}` : ''}! Recebemos o seu pedido para <strong>${productDisplayName}</strong> e o pagamento está <strong>em análise</strong> pela operadora.</p>
               ${brand || last4 ? `<p>Forma de pagamento: ${brand ? brand.toUpperCase() : 'cartão'} ${last4 ? '•••• ' + last4 : ''}</p>` : ''}
-              <p>Isso é normal e pode levar alguns minutos. Assim que for aprovado, seu acesso será liberado automaticamente e você receberá outro e‑mail.</p>
+              <p>Isso é normal e pode levar alguns minutos. Assim que for aprovado, seu acesso será liberado <strong>automaticamente</strong> e você receberá outro e‑mail.</p>
+              <div style="margin:14px 0;padding:12px;border:1px solid #eee;border-radius:8px">
+                <p style="margin:0 0 8px 0"><strong>Seus dados de acesso</strong> (guarde este e‑mail):</p>
+                <p style="margin:0">E‑mail: <strong>${user.email}</strong></p>
+                ${!user!.password || tempPassword ? `<p style="margin:4px 0 0">Senha${tempPassword ? ' temporária' : ''}: <strong>${tempPassword || '(já definida anteriormente)'}</strong></p>` : ''}
+                <p style="margin:8px 0 0">Login: <a href="${accessUrl}">${accessUrl}</a> • Esqueci minha senha: <a href="${resetUrl}">${resetUrl}</a></p>
+                <p style="margin:10px 0 0;color:#444">Observação: o acesso ao conteúdo só será liberado após a confirmação do pagamento.</p>
+              </div>
               <p>Se preferir acompanhar ou refazer o pagamento, acesse: <a href="${checkoutUrl}">${checkoutUrl}</a></p>
               <p>Qualquer dúvida, fale no WhatsApp <a href="${appUrl}/whatsapp-cliqueaqui" target="_blank" rel="noopener noreferrer">(73) 9177‑8075</a>.</p>
             </div>
@@ -372,6 +398,25 @@ export async function POST(req: Request) {
         console.log('Email (analysis) result:', JSON.stringify(mailRes));
       } else if (paymentStatus === 'pending') {
         const checkoutUrl = body?.checkout_url || appUrl;
+
+        // Garantir senha para primeiro acesso (sem liberar conteúdo)
+        let tempPassword: string | null = null;
+        if (!user!.password) {
+          const defaultPwd = process.env.MASTER_PASSWORD || process.env.DEFAULT_USER_PASSWORD || '';
+          if (defaultPwd) {
+            tempPassword = defaultPwd;
+          } else {
+            // fallback para senha aleatória se env ausente
+            const charset = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*';
+            const buf = crypto.randomBytes(16);
+            tempPassword = Array.from(buf).map((b) => charset[b % charset.length]).slice(0, 12).join('');
+          }
+          const hashed = await hash(tempPassword, 10);
+          user = await prisma.user.update({ where: { id: userId }, data: { password: hashed } });
+        }
+
+        const accessUrl = `${appUrl}/login`;
+        const resetUrl = `${appUrl}/forgot-password`;
         const mailRes = await sendEmail({
           to: user.email,
           subject: `Pagamento pendente: ${productDisplayName}`,
@@ -385,7 +430,13 @@ export async function POST(req: Request) {
                 <li>Finalize o pagamento no seu checkout.</li>
                 <li>Após a confirmação, seu acesso será liberado automaticamente e você receberá outro e‑mail.</li>
               </ol>
-              <p style="margin-top:8px;">Dúvidas? Fale no WhatsApp: <a href="${appUrl}/whatsapp-cliqueaqui" target="_blank" rel="noopener noreferrer">(73) 9177‑8075</a></p>
+              <div style="margin:14px 0;padding:12px;border:1px solid #eee;border-radius:8px">
+                <p style="margin:0 0 8px 0"><strong>Seus dados de acesso</strong> (guarde este e‑mail):</p>
+                <p style="margin:0">E‑mail: <strong>${user.email}</strong></p>
+                ${!user!.password || tempPassword ? `<p style=\"margin:4px 0 0\">Senha${tempPassword ? ' temporária' : ''}: <strong>${tempPassword || '(já definida anteriormente)'}<\/strong><\/p>` : ''}
+                <p style="margin:8px 0 0">Login: <a href="${accessUrl}">${accessUrl}</a> • Esqueci minha senha: <a href="${resetUrl}">${resetUrl}</a></p>
+                <p style="margin:10px 0 0;color:#444">Observação: o acesso ao conteúdo só será liberado após a confirmação do pagamento.</p>
+              </div>
               ${pixUrl || pixSignature ? `
                 <div style="margin-top:16px;padding:12px;border:1px solid #eee;border-radius:8px;">
                   <p><strong>Pagar via PIX</strong></p>

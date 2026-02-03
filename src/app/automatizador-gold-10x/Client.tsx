@@ -155,7 +155,7 @@ export default function AutomatizadorGold10xClient() {
     { id: 15, number: 15, title: 'ENCONTRO DE MENTORIA GOLD 10X',                                         playerId: '', linkYouTube: 'https://player-vz-7b6cf9e4-8bf.tv.pandavideo.com.br/embed/?v=56b8726a-0951-45ce-aaf8-37ce313fb20f', locked: !isPremium },
     // Aula 16 adicionada à lista
     // Última aula adicionada
-    { id: 17, number: 16, title: 'ESTRATÉGIA COM TRAVA',                                                  playerId: '', linkYouTube: 'https://youtu.be/wmH2bPIJpbI', locked: false },
+    { id: 17, number: 16, title: 'ESTRATÉGIA COM TRAVA',                                                  playerId: '', linkYouTube: 'https://youtu.be/wmH2bPIJpbI', locked: !isPremium },
     // Aula 17 - última aula (Falcon Bit)
     { id: 18, number: 17, title: 'ESTRATÉGIA FALCON BIT',                                                 playerId: '6920e8ba813dc92a81d622d3', accountId: '70b43777-e359-4c77-af2c-366de25a153d', locked: false },
   ]

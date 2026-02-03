@@ -3,14 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { OptimizedImage } from '@/app/components/OptimizedImage';
 
-// Allow using the custom web component in TSX without type errors
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'vturb-smartplayer': any;
-    }
-  }
-}
+ 
 
 export default function Page() {
   const [timeLeft, setTimeLeft] = useState({ days: '0', hours: '00', minutes: '00', seconds: '00' });

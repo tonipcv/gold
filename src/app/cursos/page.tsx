@@ -4,6 +4,8 @@ import { Navigation } from '../components/Navigation'
 import VturbEmbed from './VturbEmbed'
 import ConsentGate from '@/components/ConsentGate'
 import { getConsentStatus } from '@/lib/getConsentStatus'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
 interface Module {
   id: number
@@ -91,11 +93,19 @@ export default async function CursosPage() {
     )
   }
 
-  // All modules are unlocked and accessible to every logged-in user
+  // Detect premium status to decide visibility of modules 2 and 3
+  const session = await getServerSession(authOptions)
+  // @ts-ignore injected in auth callback
+  const isPremium = session?.user?.isPremium === true
+
   // Hide Module 5 (Celular) on all devices by filtering it out
+  // Block Module 2 (Preset Gold X) and Module 3 (Preset Power V2) only when not premium
   const displayedModules = modules
     .filter((module) => module.id !== 5)
-    .map((module) => ({ ...module, locked: false }))
+    .map((module) => ({
+      ...module,
+      locked: (!isPremium) && (module.id === 2 || module.id === 3),
+    }))
 
   return (
     <div className="min-h-screen bg-black text-gray-200 font-satoshi tracking-[-0.03em]">
@@ -152,35 +162,59 @@ export default async function CursosPage() {
           <div id="modulos" className="mb-12">
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 lg:max-w-5xl lg:mx-auto">
               {displayedModules.map((module) => (
-                <Link
-                  key={module.id}
-                  href={module.href}
-                  className="group relative aspect-[2/3] rounded-lg overflow-hidden bg-gray-900 hover:ring-2 hover:ring-green-500 transition-all transform hover:scale-105"
-                >
-                  <OptimizedImage
-                    src={module.image}
-                    alt={module.title}
-                    fill
-                    className="object-cover group-hover:opacity-80 transition-opacity"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform">
-                    <h3 className="text-white font-bold text-sm mb-1">{module.title}</h3>
-                    <p className="text-gray-300 text-xs mb-2">{module.description}</p>
-                    {module.badge && (
-                      <span className="inline-block px-2 py-1 bg-green-600 text-white text-[10px] font-bold rounded">
-                        {module.badge}
-                      </span>
-                    )}
-                  </div>
-                  {module.badge && (
+                module.locked ? (
+                  <div
+                    key={module.id}
+                    aria-disabled="true"
+                    className="group relative aspect-[2/3] rounded-lg overflow-hidden bg-gray-900 border border-gray-800 opacity-60 cursor-not-allowed"
+                  >
+                    <OptimizedImage
+                      src={module.image}
+                      alt={module.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h3 className="text-white font-bold text-sm">Em breve</h3>
+                    </div>
                     <div className="absolute top-2 right-2">
-                      <span className="inline-block px-2 py-1 bg-black/80 text-green-400 text-[10px] font-bold rounded backdrop-blur-sm">
-                        {module.badge}
+                      <span className="inline-block px-2 py-1 bg-black/80 text-gray-300 text-[10px] font-bold rounded backdrop-blur-sm">
+                        EM BREVE
                       </span>
                     </div>
-                  )}
-                </Link>
+                  </div>
+                ) : (
+                  <Link
+                    key={module.id}
+                    href={module.href}
+                    className="group relative aspect-[2/3] rounded-lg overflow-hidden bg-gray-900 hover:ring-2 hover:ring-green-500 transition-all transform hover:scale-105"
+                  >
+                    <OptimizedImage
+                      src={module.image}
+                      alt={module.title}
+                      fill
+                      className="object-cover group-hover:opacity-80 transition-opacity"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform">
+                      <h3 className="text-white font-bold text-sm mb-1">{module.title}</h3>
+                      <p className="text-gray-300 text-xs mb-2">{module.description}</p>
+                      {module.badge && (
+                        <span className="inline-block px-2 py-1 bg-green-600 text-white text-[10px] font-bold rounded">
+                          {module.badge}
+                        </span>
+                      )}
+                    </div>
+                    {module.badge && (
+                      <div className="absolute top-2 right-2">
+                        <span className="inline-block px-2 py-1 bg-black/80 text-green-400 text-[10px] font-bold rounded backdrop-blur-sm">
+                          {module.badge}
+                        </span>
+                      </div>
+                    )}
+                  </Link>
+                )
               ))}
             </div>
           </div>

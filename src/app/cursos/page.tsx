@@ -101,10 +101,9 @@ export default async function CursosPage() {
   // Hide Module 5 (Celular) on all devices by filtering it out
   // Block Module 2 (Preset Gold X) and Module 3 (Preset Power V2) only when not premium
   const displayedModules = modules
-    .filter((module) => module.id !== 5)
     .map((module) => ({
       ...module,
-      locked: (!isPremium) && (module.id === 2 || module.id === 3),
+      locked: false,
     }))
 
   return (
